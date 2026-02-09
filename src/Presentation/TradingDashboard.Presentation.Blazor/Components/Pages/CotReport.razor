@@ -1,0 +1,60 @@
+@page "/cot/{InstrumentSlug}"
+
+@using Microsoft.AspNetCore.Components
+
+<PageTitle>COT Report</PageTitle>
+
+<MudStack Spacing="3">
+    <CotBreadcrumb CurrentPageTitle="@GetBreadcrumbTitle()" />
+
+    <MudPaper Class="pa-6">
+        <MudStack AlignItems="AlignItems.Center" Spacing="2">
+            <MudText Typo="Typo.h3" Align="Align.Center">
+                COT Report: @GetDisplayName(InstrumentSlug)
+            </MudText>
+
+            <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+                <MudText Typo="Typo.h4">Futures Only Positions as of 2026-02-03</MudText>
+                <MudButton Variant="Variant.Filled" Color="Color.Success">View Historical Data</MudButton>
+            </MudStack>
+
+            <MudText Typo="Typo.body1" Align="Align.Left" Class="mt-4">
+                Below is the Commitments of Traders (COT) report for @GetDisplayName(InstrumentSlug)
+                (@GetModelDescription()) with COT charts.
+            </MudText>
+        </MudStack>
+    </MudPaper>
+</MudStack>
+
+@code {
+    [Parameter]
+    public string InstrumentSlug { get; set; } = string.Empty;
+
+    [SupplyParameterFromQuery(Name = "model")]
+    public string? Model { get; set; }
+
+    private string GetBreadcrumbTitle()
+    {
+        return string.Equals(Model, "CotLegacy", StringComparison.OrdinalIgnoreCase)
+            ? "COT Legacy Report: Futures Only"
+            : "Futures Only";
+    }
+
+    private string GetModelDescription()
+    {
+        return string.Equals(Model, "CotLegacy", StringComparison.OrdinalIgnoreCase)
+            ? "COT legacy report, futures only"
+            : "futures only";
+    }
+
+    private static string GetDisplayName(string slug)
+    {
+        if (string.IsNullOrWhiteSpace(slug))
+        {
+            return "UNKNOWN INSTRUMENT";
+        }
+
+        return string.Join(' ', slug.Split('-', StringSplitOptions.RemoveEmptyEntries))
+            .ToUpperInvariant();
+    }
+}

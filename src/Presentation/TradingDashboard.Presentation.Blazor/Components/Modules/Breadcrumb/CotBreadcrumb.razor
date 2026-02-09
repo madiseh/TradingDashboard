@@ -1,0 +1,12 @@
+<MudText Typo="Typo.body1" Class="mb-4">
+    <MudLink Href="@RoutePaths.Ui.Home" Color="Color.Success">Home</MudLink>
+    <span class="mx-2">/</span>
+    <MudLink Href="@RoutePaths.Ui.CotReports" Color="Color.Success">COT Reports</MudLink>
+    <span class="mx-2">/</span>
+    <span>@CurrentPageTitle</span>
+</MudText>
+
+@code {
+    [Parameter]
+    public string CurrentPageTitle { get; set; } = "Futures Only";
+}
