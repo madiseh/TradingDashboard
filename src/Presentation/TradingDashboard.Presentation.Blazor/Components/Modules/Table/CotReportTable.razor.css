@@ -1,0 +1,47 @@
+.cot-table-shell {
+    overflow-x: auto;
+}
+
+.cot-grid {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 960px;
+}
+
+.cot-grid th,
+.cot-grid td {
+    border: 1px solid #d3d3d3;
+    padding: 10px;
+    vertical-align: top;
+    background-color: #efefef;
+}
+
+.cot-grid th {
+    text-align: center;
+    font-size: 1.05rem;
+}
+
+.cot-grid td {
+    font-size: 1rem;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    color: #fff;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.pill.positive {
+    background-color: #66b99c;
+}
+
+.pill.negative {
+    background-color: #e68383;
+}

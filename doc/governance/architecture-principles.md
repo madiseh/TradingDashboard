@@ -59,6 +59,13 @@
 - Every interface method must include XML documentation summary.
 - Interface responsibilities and method names must also be documented in related feature Markdown files.
 
+## Razor Component Structure Rule
+
+- Every Blazor component must use split files: `<Component>.razor` and `<Component>.razor.cs`.
+- UI markup must stay in `.razor`.
+- Parameters, state, and methods must stay in `.razor.cs`.
+- Inline `@code` blocks should not be used in `.razor` files.
+
 Example:
 
 ```csharp
