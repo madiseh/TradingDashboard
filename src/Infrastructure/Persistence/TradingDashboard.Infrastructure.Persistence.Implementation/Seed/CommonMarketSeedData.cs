@@ -1,8 +1,14 @@
+using TradingDashboard.Application.Common.Models;
+
 namespace TradingDashboard.Infrastructure.Persistence.Implementation.Seed;
 
 public static class CommonMarketSeedData
 {
-    private static readonly string[] BothModels = ["CotLegacy", "Cot"];
+    private static readonly string[] BothModels =
+    [
+        CotReportModel.CotLegacy.ToContractValue(),
+        CotReportModel.Cot.ToContractValue()
+    ];
 
     public static IReadOnlyCollection<MarketDirectorySeedItem> Markets =>
     [

@@ -3,7 +3,7 @@ namespace TradingDashboard.Presentation.Blazor.Components.Modules.Table;
 public partial class CotReportTable
 {
     [Parameter]
-    public string? Model { get; set; }
+    public CotReportModel Model { get; set; } = CotReportModel.Cot;
 
-    private bool IsLegacy => string.Equals(Model, "CotLegacy", StringComparison.OrdinalIgnoreCase);
+    private bool IsLegacy => Model == CotReportModel.CotLegacy;
 }

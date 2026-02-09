@@ -29,8 +29,8 @@
                         <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
                             <MudText Typo="Typo.h5">@group.Type</MudText>
                             <MudStack Row="true" Spacing="2">
-                                <MudLink Href="@BuildMarketsLink(group.Type, "CotLegacy")">More in COT Legacy »</MudLink>
-                                <MudLink Href="@BuildMarketsLink(group.Type, "Cot")">More in COT »</MudLink>
+                                <MudLink Href="@BuildMarketsLink(group.Type, CotReportModel.CotLegacy)">More in COT Legacy »</MudLink>
+                                <MudLink Href="@BuildMarketsLink(group.Type, CotReportModel.Cot)">More in COT »</MudLink>
                             </MudStack>
                         </MudStack>
 
@@ -48,15 +48,15 @@
                                     <tr>
                                         <td>@item.Name</td>
                                         <td class="text-center">
-                                            @if (HasModel(item, "CotLegacy"))
+                                            @if (HasModel(item, CotReportModel.CotLegacy))
                                             {
-                                                <MudLink Href="@BuildCotLink(item.Slug, "CotLegacy")">COT Legacy</MudLink>
+                                                <MudLink Href="@BuildCotLink(item.Slug, CotReportModel.CotLegacy)">COT Legacy</MudLink>
                                             }
                                         </td>
                                         <td class="text-center">
-                                            @if (HasModel(item, "Cot"))
+                                            @if (HasModel(item, CotReportModel.Cot))
                                             {
-                                                <MudLink Href="@BuildCotLink(item.Slug, "Cot")">COT</MudLink>
+                                                <MudLink Href="@BuildCotLink(item.Slug, CotReportModel.Cot)">COT</MudLink>
                                             }
                                         </td>
                                     </tr>
@@ -101,18 +101,19 @@
         }
     }
 
-    private static bool HasModel(TradingDashboard.Presentation.Blazor.Features.Common.Contracts.MarketItemDto item, string model)
+    private static bool HasModel(TradingDashboard.Presentation.Blazor.Features.Common.Contracts.MarketItemDto item, CotReportModel model)
     {
-        return item.AvailableModels.Any(x => string.Equals(x, model, StringComparison.OrdinalIgnoreCase));
+        var expectedValue = model.ToContractValue();
+        return item.AvailableModels.Any(x => string.Equals(x, expectedValue, StringComparison.OrdinalIgnoreCase));
     }
 
-    private static string BuildCotLink(string slug, string model)
+    private static string BuildCotLink(string slug, CotReportModel model)
     {
-        return $"{RoutePaths.Ui.Cot}/{slug}?model={model}";
+        return $"{RoutePaths.Ui.Cot}/{slug}?model={model.ToContractValue()}";
     }
 
-    private static string BuildMarketsLink(string type, string model)
+    private static string BuildMarketsLink(string type, CotReportModel model)
     {
-        return $"{RoutePaths.Ui.Markets}/{type}?model={model}";
+        return $"{RoutePaths.Ui.Markets}/{type}?model={model.ToContractValue()}";
     }
 }

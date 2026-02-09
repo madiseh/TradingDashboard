@@ -8,16 +8,21 @@ public partial class CotReport
     [SupplyParameterFromQuery(Name = "model")]
     public string? Model { get; set; }
 
+    private CotReportModel ReportModel =>
+        CotReportModelExtensions.TryParse(Model, out CotReportModel parsed)
+            ? parsed
+            : CotReportModel.Cot;
+
     private string GetBreadcrumbTitle()
     {
-        return string.Equals(Model, "CotLegacy", StringComparison.OrdinalIgnoreCase)
+        return ReportModel == CotReportModel.CotLegacy
             ? "COT Legacy Report: Futures Only"
             : "Futures Only";
     }
 
     private string GetModelDescription()
     {
-        return string.Equals(Model, "CotLegacy", StringComparison.OrdinalIgnoreCase)
+        return ReportModel == CotReportModel.CotLegacy
             ? "COT legacy report, futures only"
             : "futures only";
     }
