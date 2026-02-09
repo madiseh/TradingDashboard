@@ -62,5 +62,6 @@ src/Infrastructure/Persistence/TradingDashboard.Infrastructure.Persistence.Imple
 - No implementation project is created yet.
 - Naming follows `TradingDashboard.<Layer>` convention.
 - Blazor UI consumes data from `TradingDashboard.Presentation.Api` only.
+- Blazor presentation stack uses `MudBlazor`.
 - `TradingDashboard.Domain.Abstraction` is a dedicated project for shared base domain types.
 - Persistence is split into `Infrastructure.Persistence.Common` and `Infrastructure.Persistence.Implementation`.

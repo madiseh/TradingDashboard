@@ -23,12 +23,15 @@
 4. Presentation
 - API or UI endpoints.
 - Depends on Application contracts only.
+- Blazor UI must use MudBlazor as the component library.
 
 ## Dependency Rule
 
 - Dependencies always point inward.
 - Domain never depends on outer layers.
 - Application never depends directly on Infrastructure.
+- IoC/DI registrations must be centralized in dedicated `*IocRegistration` files and invoked from `Program.cs`.
+- New service registrations must not be scattered inside `Program.cs`; they must be added to the relevant IoC registration file.
 
 ## Microservice Readiness
 

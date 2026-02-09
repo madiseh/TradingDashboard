@@ -1,7 +1,54 @@
-﻿@page "/"
+@page "/"
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Trading Dashboard</PageTitle>
 
-<h1>Hello, world!</h1>
+<MudStack Spacing="3">
+    <MudPaper Class="pa-4" Elevation="1">
+        <MudText Typo="Typo.h4">COT Dashboard</MudText>
+        <MudText Typo="Typo.body1" Class="mt-2">
+            Presentation layer is built with MudBlazor and consumes data through Web API only.
+        </MudText>
+        <MudAlert Severity="Severity.Info" Dense="true" Class="mt-3">
+            Supported models: COT, COT Legacy | UI stack: MudBlazor
+        </MudAlert>
+    </MudPaper>
 
-Welcome to your new app.
+    <MudGrid>
+        <MudItem xs="12" md="4">
+            <MudCard>
+                <MudCardContent>
+                    <MudText Typo="Typo.subtitle1">Instruments</MudText>
+                    <MudText Typo="Typo.h5">0</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" md="4">
+            <MudCard>
+                <MudCardContent>
+                    <MudText Typo="Typo.subtitle1">Available Dates</MudText>
+                    <MudText Typo="Typo.h5">0</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" md="4">
+            <MudCard>
+                <MudCardContent>
+                    <MudText Typo="Typo.subtitle1">Report Model</MudText>
+                    <MudSelect T="string" Label="Select Model" Dense="true" Value="_selectedModel" ValueChanged="OnModelChanged">
+                        <MudSelectItem T="string" Value="@("Cot")">COT</MudSelectItem>
+                        <MudSelectItem T="string" Value="@("CotLegacy")">COT Legacy</MudSelectItem>
+                    </MudSelect>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</MudStack>
+
+@code {
+    private string _selectedModel = "Cot";
+
+    private void OnModelChanged(string value)
+    {
+        _selectedModel = value;
+    }
+}

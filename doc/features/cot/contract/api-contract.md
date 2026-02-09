@@ -295,16 +295,18 @@ Common codes:
 
 ## Blazor Consumption Notes
 
-1. On instrument/model change:
+1. UI components and layout are implemented with `MudBlazor`.
+
+2. On instrument/model change:
 - call `available-dates`
 - set date picker enabled dates
 - pick `latestDate` by default
 
-2. Initial page load:
+3. Initial page load:
 - call `overview`
 - render header, table, and summary cards
 
-3. Date or range change:
+4. Date or range change:
 - call `latest` or `series` depending on interaction
 
-4. Do not query database directly from Blazor.
+5. Do not query database directly from Blazor.
