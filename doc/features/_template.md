@@ -1,50 +1,20 @@
-# Feature: <name>
+# Feature Template
 
-## Objective
+All features must be documented using this template and folder structure.
 
-Describe what user value this feature creates.
+## Required Structure
 
-## In Scope
+- `contract/`: Feature spec and API contract.
+- `domain/`: Domain and abstraction contracts.
+- `usecase/`: Application use cases and flows.
+- `frd/`: Functional Requirement Documents.
 
-- 
+## Required Files (Minimum)
 
-## Out of Scope
+- `contract/<feature>-contract.md`
+- `domain/<feature>-domain.md`
+- `usecase/<feature>-usecase.md`
+- `frd/<feature>-frd.md`
 
-- 
+## Feature: <name>
 
-## User Stories
-
-- As a <role>, I want <capability>, so that <benefit>.
-
-## Functional Requirements
-
-1. 
-
-## Non-Functional Requirements
-
-- Performance:
-- Security:
-- Observability:
-
-## Data Requirements
-
-- Inputs:
-- Outputs:
-- Storage:
-
-## API/UI Notes
-
-- Expose required data through Web API.
-- If Blazor UI exists, it must request data from Web API (no direct storage access).
-
-## Dependencies
-
-- 
-
-## Risks
-
-- 
-
-## Acceptance Criteria
-
-1. 
