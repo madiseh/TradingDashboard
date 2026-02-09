@@ -15,9 +15,12 @@ Define shared listing APIs used by multiple pages, including Home directory.
 - `Currencies`
 - `Grains`
 - `Cryptocurrencies`
+- `Indexes`
+- `Treasuries and Rates`
 - `Metals`
 - `Energies`
-- `Livestock`
+- `Livestock & Dairy`
+- `Softs`
 
 ## Endpoints
 
@@ -32,7 +35,13 @@ Response `200`:
   "items": [
     "Currencies",
     "Grains",
-    "Cryptocurrencies"
+    "Cryptocurrencies",
+    "Indexes",
+    "Treasuries and Rates",
+    "Energies",
+    "Livestock & Dairy",
+    "Metals",
+    "Softs"
   ]
 }
 ```
