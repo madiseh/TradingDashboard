@@ -28,6 +28,7 @@ TradingDashboard/
 ## Notes
 
 - Project folders under `src` and `test` are placeholders for now.
+- Documentation folders under `doc` are organized into `governance`, `features`, and `uiComponent`.
 - No implementation project is created yet.
 - Naming follows `TradingDashboard.<Layer>` convention.
 - Blazor UI consumes data from `TradingDashboard.Presentation.Api` only.

@@ -4,6 +4,8 @@ public static class RoutePaths
 {
     public static class Ui
     {
+        public const string Home = "/";
+        public const string CotReports = Home;
         public const string Markets = "/markets";
         public const string Cot = "/cot";
     }
