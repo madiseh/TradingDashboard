@@ -31,13 +31,22 @@ TradingDashboard/
         |-- _template.md
         `-- cot/
             |-- contract/
-            |   `-- api-contract.md
+            |   `-- cot-contract.md
             |-- domain/
-            |   `-- domain-contract.md
+            |   `-- cot-domain.md
             |-- frd/
-            |   `-- frd-spec.md
+            |   `-- cot-frd.md
             `-- usecase/
-                `-- cot-usecases.md
+                `-- cot-usecase.md
+        `-- common/
+            |-- contract/
+            |   `-- common-contract.md
+            |-- domain/
+            |   `-- common-domain.md
+            |-- frd/
+            |   `-- common-frd.md
+            `-- usecase/
+                `-- common-usecase.md
 ```
 
 ## Persistence Implementation Internal Structure

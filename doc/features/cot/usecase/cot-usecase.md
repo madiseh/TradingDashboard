@@ -72,8 +72,9 @@ Define application-level use cases for COT dashboard and API.
 
 ## Blazor Flow
 
-1. Load `instruments` and `models`.
-2. On selection change, load `available-dates`.
-3. Select `latestDate` by default.
-4. Load `overview`.
-5. On chart interactions, call `series` with selected range/group.
+1. User navigates from Common directory to instrument route.
+2. Load `instruments` and `models` as needed.
+3. On selection change, load `available-dates`.
+4. Select `latestDate` by default.
+5. Load `overview`.
+6. On chart interactions, call `series` with selected range/group.

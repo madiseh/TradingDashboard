@@ -112,6 +112,7 @@ Response `200`:
 }
 ```
 
+
 ### 2) Get Supported Models
 
 - `GET /api/v1/cot/models`
