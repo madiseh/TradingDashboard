@@ -47,6 +47,11 @@
 - Seed classes should be static (e.g., `*SeedData`).
 - `Program.cs` may call seed classes but should not embed seed records directly.
 
+## Simulated Data Rule
+
+- JSON-based fake repositories must live in `Infrastructure.Persistence.SimulatedData`.
+- EF Core repositories remain in persistence implementation projects and represent real database access.
+
 ## Global Usings Standard
 
 - Every project must include a `GlobalUsings.cs` file.

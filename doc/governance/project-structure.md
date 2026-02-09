@@ -15,7 +15,8 @@ TradingDashboard/
 |   |   |   `-- TradingDashboard.Infrastructure/
 |   |   `-- Persistence/
 |   |       |-- TradingDashboard.Infrastructure.Persistence.Common/
-|   |       `-- TradingDashboard.Infrastructure.Persistence.Implementation/
+|   |       |-- TradingDashboard.Infrastructure.Persistence.Implementation/
+|   |       `-- TradingDashboard.Infrastructure.Persistence.SimulatedData/
 |   `-- Presentation/
 |       |-- Common/
 |       |   `-- TradingDashboard.Presentation.Common/
@@ -35,4 +36,5 @@ TradingDashboard/
 - Blazor presentation stack uses `MudBlazor`.
 - `TradingDashboard.Domain.Abstraction` is a dedicated project for shared base domain types.
 - Persistence is split into `Infrastructure.Persistence.Common` and `Infrastructure.Persistence.Implementation`.
+- `Infrastructure.Persistence.SimulatedData` contains fake/json-backed repositories for development and local simulation.
 - Seed data belongs to `Infrastructure.Persistence.Implementation/Seed` and should be provided through static seed classes.
