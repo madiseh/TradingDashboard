@@ -24,6 +24,7 @@
 - API or UI endpoints.
 - Depends on Application contracts only.
 - Blazor UI must use MudBlazor as the component library.
+- Shared presentation contracts (e.g., route constants) must live in `TradingDashboard.Presentation.Common`.
 
 ## Dependency Rule
 
@@ -40,11 +41,23 @@
 - Define explicit contracts per module.
 - Use integration boundaries that can be extracted later.
 
+## Seed Data Rule
+
+- Seed data must be defined in `Infrastructure.Persistence.Implementation`.
+- Seed classes should be static (e.g., `*SeedData`).
+- `Program.cs` may call seed classes but should not embed seed records directly.
+
 ## Global Usings Standard
 
 - Every project must include a `GlobalUsings.cs` file.
 - `GlobalUsings.cs` must contain a `#region System` block.
 - All shared `using System...` directives must be placed inside that region.
+
+## Interface Documentation Rule
+
+- Every interface must include XML documentation summary (`/// <summary> ... </summary>`).
+- Every interface method must include XML documentation summary.
+- Interface responsibilities and method names must also be documented in related feature Markdown files.
 
 Example:
 

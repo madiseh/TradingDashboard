@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Application\TradingDashboard.Application\TradingDashboard.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Implementation\TradingDashboard.Infrastructure\TradingDashboard.Infrastructure.csproj" />
+    <ProjectReference Include="..\Common\TradingDashboard.Presentation.Common\TradingDashboard.Presentation.Common.csproj" />
   </ItemGroup>
 
 </Project>

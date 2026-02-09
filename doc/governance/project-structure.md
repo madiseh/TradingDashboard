@@ -17,53 +17,13 @@ TradingDashboard/
 |   |       |-- TradingDashboard.Infrastructure.Persistence.Common/
 |   |       `-- TradingDashboard.Infrastructure.Persistence.Implementation/
 |   `-- Presentation/
+|       |-- Common/
+|       |   `-- TradingDashboard.Presentation.Common/
 |       |-- TradingDashboard.Presentation.Api/
 |       `-- TradingDashboard.Presentation.Blazor/
 |-- test/
 |   |-- TradingDashboard.UnitTests/
 |   `-- TradingDashboard.IntegrationTests/
-`-- doc/
-    |-- README.md
-    |-- governance/
-    |   |-- architecture-principles.md
-    |   `-- project-structure.md
-    `-- features/
-        |-- _template.md
-        `-- cot/
-            |-- contract/
-            |   `-- cot-contract.md
-            |-- domain/
-            |   `-- cot-domain.md
-            |-- frd/
-            |   `-- cot-frd.md
-            `-- usecase/
-                `-- cot-usecase.md
-        `-- common/
-            |-- contract/
-            |   `-- common-contract.md
-            |-- domain/
-            |   `-- common-domain.md
-            |-- frd/
-            |   `-- common-frd.md
-            `-- usecase/
-                `-- common-usecase.md
-```
-
-## Persistence Implementation Internal Structure
-
-```text
-src/Infrastructure/Persistence/TradingDashboard.Infrastructure.Persistence.Implementation/
-|-- Configuration/
-|   |-- BaseAuditableEntityConfiguration.cs
-|   `-- BaseEntityConfiguration.cs
-|-- Migrations/
-|   |-- BaseDataMigration.cs
-|   |-- BaseMigration.cs
-|   `-- BaseSchemaMigration.cs
-|-- Repositories/
-|   `-- GenericRepository.cs
-`-- GlobalUsings.cs
-```
 
 ## Notes
 
@@ -74,3 +34,4 @@ src/Infrastructure/Persistence/TradingDashboard.Infrastructure.Persistence.Imple
 - Blazor presentation stack uses `MudBlazor`.
 - `TradingDashboard.Domain.Abstraction` is a dedicated project for shared base domain types.
 - Persistence is split into `Infrastructure.Persistence.Common` and `Infrastructure.Persistence.Implementation`.
+- Seed data belongs to `Infrastructure.Persistence.Implementation/Seed` and should be provided through static seed classes.

@@ -30,3 +30,12 @@ Describe shared listing use cases for directory pages.
 2. Hide model links not included in `availableModels`.
 3. Hide empty groups on UI if configured.
 4. Show non-blocking error when directory APIs fail.
+
+## Presentation Client Interface
+
+### `ICommonDirectoryClient`
+
+- Responsibility: UI-side typed client for common directory endpoints.
+
+Methods:
+- `GetMarketsDirectoryAsync`: loads grouped market directory for Home page rendering.

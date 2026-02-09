@@ -1,54 +1,118 @@
 @page "/"
+@inject TradingDashboard.Presentation.Blazor.Features.Common.Services.ICommonDirectoryClient CommonDirectoryClient
 
-<PageTitle>Trading Dashboard</PageTitle>
+<PageTitle>Home Directory</PageTitle>
 
 <MudStack Spacing="3">
-    <MudPaper Class="pa-4" Elevation="1">
-        <MudText Typo="Typo.h4">COT Dashboard</MudText>
-        <MudText Typo="Typo.body1" Class="mt-2">
-            Presentation layer is built with MudBlazor and consumes data through Web API only.
-        </MudText>
-        <MudAlert Severity="Severity.Info" Dense="true" Class="mt-3">
-            Supported models: COT, COT Legacy | UI stack: MudBlazor
-        </MudAlert>
-    </MudPaper>
+    <MudText Typo="Typo.h4">Markets Directory</MudText>
 
-    <MudGrid>
-        <MudItem xs="12" md="4">
-            <MudCard>
-                <MudCardContent>
-                    <MudText Typo="Typo.subtitle1">Instruments</MudText>
-                    <MudText Typo="Typo.h5">0</MudText>
-                </MudCardContent>
-            </MudCard>
-        </MudItem>
-        <MudItem xs="12" md="4">
-            <MudCard>
-                <MudCardContent>
-                    <MudText Typo="Typo.subtitle1">Available Dates</MudText>
-                    <MudText Typo="Typo.h5">0</MudText>
-                </MudCardContent>
-            </MudCard>
-        </MudItem>
-        <MudItem xs="12" md="4">
-            <MudCard>
-                <MudCardContent>
-                    <MudText Typo="Typo.subtitle1">Report Model</MudText>
-                    <MudSelect T="string" Label="Select Model" Dense="true" Value="_selectedModel" ValueChanged="OnModelChanged">
-                        <MudSelectItem T="string" Value="@("Cot")">COT</MudSelectItem>
-                        <MudSelectItem T="string" Value="@("CotLegacy")">COT Legacy</MudSelectItem>
-                    </MudSelect>
-                </MudCardContent>
-            </MudCard>
-        </MudItem>
-    </MudGrid>
+    @if (_isLoading)
+    {
+        <MudPaper Class="pa-6 d-flex justify-center">
+            <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+        </MudPaper>
+    }
+    else if (!string.IsNullOrWhiteSpace(_errorMessage))
+    {
+        <MudAlert Severity="Severity.Error" Dense="true">
+            @_errorMessage
+            <MudButton Class="ml-2" Variant="Variant.Outlined" Size="Size.Small" OnClick="LoadDirectoryAsync">Retry</MudButton>
+        </MudAlert>
+    }
+    else
+    {
+        <MudGrid>
+            @foreach (var group in _groups)
+            {
+                <MudItem xs="12" md="6">
+                    <MudPaper Class="pa-3" Elevation="1">
+                        <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+                            <MudText Typo="Typo.h5">@group.Type</MudText>
+                            <MudStack Row="true" Spacing="2">
+                                <MudLink Href="@BuildMarketsLink(group.Type, "CotLegacy")">More in COT Legacy »</MudLink>
+                                <MudLink Href="@BuildMarketsLink(group.Type, "Cot")">More in COT »</MudLink>
+                            </MudStack>
+                        </MudStack>
+
+                        <MudSimpleTable Dense="true" Class="mt-2">
+                            <thead>
+                                <tr>
+                                    <th>Instrument</th>
+                                    <th class="text-center">COT Legacy</th>
+                                    <th class="text-center">COT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in group.Items)
+                                {
+                                    <tr>
+                                        <td>@item.Name</td>
+                                        <td class="text-center">
+                                            @if (HasModel(item, "CotLegacy"))
+                                            {
+                                                <MudLink Href="@BuildCotLink(item.Slug, "CotLegacy")">COT Legacy</MudLink>
+                                            }
+                                        </td>
+                                        <td class="text-center">
+                                            @if (HasModel(item, "Cot"))
+                                            {
+                                                <MudLink Href="@BuildCotLink(item.Slug, "Cot")">COT</MudLink>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </MudSimpleTable>
+                    </MudPaper>
+                </MudItem>
+            }
+        </MudGrid>
+    }
 </MudStack>
 
 @code {
-    private string _selectedModel = "Cot";
+    private bool _isLoading = true;
+    private string? _errorMessage;
+    private IReadOnlyList<TradingDashboard.Presentation.Blazor.Features.Common.Contracts.MarketGroupDto> _groups = [];
 
-    private void OnModelChanged(string value)
+    protected override async Task OnInitializedAsync()
     {
-        _selectedModel = value;
+        await LoadDirectoryAsync();
+    }
+
+    private async Task LoadDirectoryAsync()
+    {
+        _isLoading = true;
+        _errorMessage = null;
+
+        try
+        {
+            var response = await CommonDirectoryClient.GetMarketsDirectoryAsync();
+            _groups = response?.Groups ?? [];
+        }
+        catch
+        {
+            _errorMessage = "Failed to load market directory from API.";
+            _groups = [];
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+
+    private static bool HasModel(TradingDashboard.Presentation.Blazor.Features.Common.Contracts.MarketItemDto item, string model)
+    {
+        return item.AvailableModels.Any(x => string.Equals(x, model, StringComparison.OrdinalIgnoreCase));
+    }
+
+    private static string BuildCotLink(string slug, string model)
+    {
+        return $"{RoutePaths.Ui.Cot}/{slug}?model={model}";
+    }
+
+    private static string BuildMarketsLink(string type, string model)
+    {
+        return $"{RoutePaths.Ui.Markets}/{type}?model={model}";
     }
 }

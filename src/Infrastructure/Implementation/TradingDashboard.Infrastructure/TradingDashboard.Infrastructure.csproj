@@ -4,6 +4,7 @@
     <ProjectReference Include="..\..\..\Application\TradingDashboard.Application\TradingDashboard.Application.csproj" />
     <ProjectReference Include="..\..\..\Domain\TradingDashboard.Domain\TradingDashboard.Domain.csproj" />
     <ProjectReference Include="..\..\..\Domain\TradingDashboard.Domain.Abstraction\TradingDashboard.Domain.Abstraction.csproj" />
+    <ProjectReference Include="..\..\Persistence\TradingDashboard.Infrastructure.Persistence.Implementation\TradingDashboard.Infrastructure.Persistence.Implementation.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
