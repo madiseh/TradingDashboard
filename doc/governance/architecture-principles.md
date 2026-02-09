@@ -36,3 +36,19 @@
 - Avoid shared mutable state across modules.
 - Define explicit contracts per module.
 - Use integration boundaries that can be extracted later.
+
+## Global Usings Standard
+
+- Every project must include a `GlobalUsings.cs` file.
+- `GlobalUsings.cs` must contain a `#region System` block.
+- All shared `using System...` directives must be placed inside that region.
+
+Example:
+
+```csharp
+#region System
+global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+#endregion
+```

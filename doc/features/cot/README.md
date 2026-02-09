@@ -14,5 +14,4 @@ This folder is organized by concern.
 - `contract/api-contract.md`
 - `domain/domain-contract.md`
 - `usecase/cot-usecases.md`
-- `frd/README.md`
 - `frd/frd-spec.md`

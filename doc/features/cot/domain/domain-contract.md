@@ -8,6 +8,8 @@ Define domain building blocks for COT module and shared abstraction layer.
 
 - `TradingDashboard.Domain.Abstraction`
 - `TradingDashboard.Domain`
+- `TradingDashboard.Infrastructure.Persistence.Common`
+- `TradingDashboard.Infrastructure.Persistence.Implementation`
 
 ## `TradingDashboard.Domain.Abstraction`
 
@@ -93,3 +95,23 @@ This is a separate project used by all domain modules.
 - `TradingDashboard.Domain.Cot.Enums`
 - `TradingDashboard.Domain.Cot.Repositories`
 - `TradingDashboard.Domain.Cot.Services`
+
+## Persistence Projects (Expected)
+
+### `TradingDashboard.Infrastructure.Persistence.Common`
+
+- Shared persistence contracts and cross-cutting persistence helpers.
+- Base abstractions used by implementation project.
+
+### `TradingDashboard.Infrastructure.Persistence.Implementation`
+
+- `Configuration/`
+- `BaseAuditableEntityConfiguration.cs`
+- `BaseEntityConfiguration.cs`
+- `Migrations/`
+- `BaseDataMigration.cs`
+- `BaseMigration.cs`
+- `BaseSchemaMigration.cs`
+- `Repositories/`
+- `GenericRepository.cs`
+- `GlobalUsings.cs`

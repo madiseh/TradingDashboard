@@ -5,35 +5,54 @@ TradingDashboard/
 |-- TradingDashboard.sln
 |-- .gitignore
 |-- src/
-|   |-- TradingDashboard.Domain.Abstraction/
-|   |-- TradingDashboard.Domain/
-|   |-- TradingDashboard.Application/
-|   |-- TradingDashboard.Infrastructure/
-|   |-- TradingDashboard.Presentation.Api/
-|   `-- TradingDashboard.Presentation.Blazor/
+|   |-- Domain/
+|   |   |-- TradingDashboard.Domain.Abstraction/
+|   |   `-- TradingDashboard.Domain/
+|   |-- Application/
+|   |   `-- TradingDashboard.Application/
+|   |-- Infrastructure/
+|   |   |-- TradingDashboard.Infrastructure/
+|   |   `-- Persistence/
+|   |       |-- TradingDashboard.Infrastructure.Persistence.Common/
+|   |       `-- TradingDashboard.Infrastructure.Persistence.Implementation/
+|   `-- Presentation/
+|       |-- TradingDashboard.Presentation.Api/
+|       `-- TradingDashboard.Presentation.Blazor/
 |-- test/
 |   |-- TradingDashboard.UnitTests/
 |   `-- TradingDashboard.IntegrationTests/
 `-- doc/
     |-- README.md
     |-- governance/
-    |   |-- README.md
-    |   |-- project-structure.md
-    |   `-- architecture-principles.md
+    |   |-- architecture-principles.md
+    |   `-- project-structure.md
     `-- features/
-        |-- README.md
         |-- _template.md
         `-- cot/
-            |-- README.md
             |-- contract/
             |   `-- api-contract.md
             |-- domain/
             |   `-- domain-contract.md
             |-- frd/
-            |   |-- README.md
             |   `-- frd-spec.md
             `-- usecase/
                 `-- cot-usecases.md
+```
+
+## Persistence Implementation Internal Structure
+
+```text
+src/Infrastructure/Persistence/TradingDashboard.Infrastructure.Persistence.Implementation/
+|-- Configuration/
+|   |-- BaseAuditableEntityConfiguration.cs
+|   `-- BaseEntityConfiguration.cs
+|-- Migrations/
+|   |-- BaseDataMigration.cs
+|   |-- BaseMigration.cs
+|   `-- BaseSchemaMigration.cs
+|-- Repositories/
+|   `-- GenericRepository.cs
+`-- GlobalUsings.cs
 ```
 
 ## Notes
@@ -43,3 +62,4 @@ TradingDashboard/
 - Naming follows `TradingDashboard.<Layer>` convention.
 - Blazor UI consumes data from `TradingDashboard.Presentation.Api` only.
 - `TradingDashboard.Domain.Abstraction` is a dedicated project for shared base domain types.
+- Persistence is split into `Infrastructure.Persistence.Common` and `Infrastructure.Persistence.Implementation`.
