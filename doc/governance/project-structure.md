@@ -11,7 +11,8 @@ TradingDashboard/
 |   |-- Application/
 |   |   `-- TradingDashboard.Application/
 |   |-- Infrastructure/
-|   |   |-- TradingDashboard.Infrastructure/
+|   |   |-- Implementation/
+|   |   |   `-- TradingDashboard.Infrastructure/
 |   |   `-- Persistence/
 |   |       |-- TradingDashboard.Infrastructure.Persistence.Common/
 |   |       `-- TradingDashboard.Infrastructure.Persistence.Implementation/

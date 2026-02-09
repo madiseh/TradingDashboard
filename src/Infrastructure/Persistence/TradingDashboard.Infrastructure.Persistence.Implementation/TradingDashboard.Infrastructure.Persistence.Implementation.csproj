@@ -7,6 +7,10 @@
     <ProjectReference Include="..\..\..\Domain\TradingDashboard.Domain.Abstraction\TradingDashboard.Domain.Abstraction.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.5" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
