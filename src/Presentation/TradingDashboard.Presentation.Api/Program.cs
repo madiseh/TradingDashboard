@@ -3,6 +3,7 @@ using TradingDashboard.Infrastructure.Persistence.Implementation.Seed;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
@@ -12,6 +13,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.MapHealthChecks(RoutePaths.Api.Health);
 
 var markets = CommonMarketSeedData.Markets;
 var marketTypes = markets
