@@ -7,4 +7,4 @@ global using System.Linq;
 global using TradingDashboard.Application.Common.Models;
 global using TradingDashboard.Application.Repository.Base;
 global using TradingDashboard.Application.Repository.Cot;
-global using TradingDashboard.Domain.Cot.Entities;
+global using TradingDashboard.Domain.Entities;
