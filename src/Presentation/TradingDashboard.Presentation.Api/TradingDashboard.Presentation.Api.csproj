@@ -8,11 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Application\TradingDashboard.Application\TradingDashboard.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Implementation\TradingDashboard.Infrastructure\TradingDashboard.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Persistence\TradingDashboard.Infrastructure.Persistence.SimulatedData\TradingDashboard.Infrastructure.Persistence.SimulatedData.csproj" />
     <ProjectReference Include="..\Common\TradingDashboard.Presentation.Common\TradingDashboard.Presentation.Common.csproj" />
   </ItemGroup>
 

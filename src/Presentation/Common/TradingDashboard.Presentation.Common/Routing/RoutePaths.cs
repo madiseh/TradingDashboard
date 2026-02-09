@@ -15,8 +15,10 @@ public static class RoutePaths
         public const string Health = "/health";
         public const string ApiVersionPrefix = "/api/v1/";
         public const string CommonBase = $"{ApiVersionPrefix}common";
+        public const string CotBase = $"{ApiVersionPrefix}cot";
         public const string MarketTypes = $"{CommonBase}/market-types";
         public const string Markets = $"{CommonBase}/markets";
         public const string MarketsDirectory = $"{CommonBase}/markets-directory";
+        public const string CotInstrumentBySlug = $"{CotBase}/instruments/{{instrumentSlug}}";
     }
 }

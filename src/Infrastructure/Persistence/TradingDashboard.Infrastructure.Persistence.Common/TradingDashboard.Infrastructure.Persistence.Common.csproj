@@ -1,9 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.5" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.5" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\TradingDashboard.Infrastructure.Persistence.Common\TradingDashboard.Infrastructure.Persistence.Common.csproj" />
+		<ProjectReference Include="..\..\..\Application\TradingDashboard.Application\TradingDashboard.Application.csproj" />
+		<ProjectReference Include="..\..\..\Domain\TradingDashboard.Domain\TradingDashboard.Domain.csproj" />
+		<ProjectReference Include="..\..\..\Domain\TradingDashboard.Domain.Abstraction\TradingDashboard.Domain.Abstraction.csproj" />
+	</ItemGroup>
 
 </Project>

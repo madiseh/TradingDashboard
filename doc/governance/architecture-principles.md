@@ -51,6 +51,8 @@
 
 - JSON-based fake repositories must live in `Infrastructure.Persistence.SimulatedData`.
 - EF Core repositories remain in persistence implementation projects and represent real database access.
+- EF entity mappings must live in `Infrastructure.Persistence.Implementation/Configuration` as `IEntityTypeConfiguration<T>`.
+- `DbContext` classes must apply these mappings instead of inlining entity configuration in `OnModelCreating`.
 
 ## Global Usings Standard
 

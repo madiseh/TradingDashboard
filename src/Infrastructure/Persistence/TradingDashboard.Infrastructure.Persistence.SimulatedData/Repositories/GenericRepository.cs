@@ -1,8 +1,7 @@
 using System.Linq.Expressions;
-using TradingDashboard.Application.Repository.Base;
 using Microsoft.EntityFrameworkCore;
 
-namespace TradingDashboard.Infrastructure.Persistence.Implementation.Repositories;
+namespace TradingDashboard.Infrastructure.Persistence.SimulatedData.Repositories;
 
 public class GenericRepository<T, TKey> : IRepository<T, TKey> where T : class
 {

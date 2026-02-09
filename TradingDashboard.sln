@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{8B290487-4C16-E85E-E807-F579CBE9FC4D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Domain", "1.Domain", "{8B290487-4C16-E85E-E807-F579CBE9FC4D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingDashboard.Domain.Abstraction", "src\Domain\TradingDashboard.Domain.Abstraction\TradingDashboard.Domain.Abstraction.csproj", "{1D0B3A9D-00CE-448F-8469-B1BBE975ACC1}"
 EndProject
@@ -191,5 +191,8 @@ Global
 		{71C5CC4F-0FAA-2695-F279-53193925857C} = {6996BBF7-DB31-59BC-C7DD-9A7CCC6138C4}
 		{31E737CA-2013-44B9-8827-7BFDAA69D845} = {71C5CC4F-0FAA-2695-F279-53193925857C}
 		{77EBC1D7-9159-4D50-B604-A5E020932E58} = {813E7100-D1EB-AF84-2D96-A854DDFD8E47}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EB181E60-107F-4DE4-8808-458CA614ECE0}
 	EndGlobalSection
 EndGlobal

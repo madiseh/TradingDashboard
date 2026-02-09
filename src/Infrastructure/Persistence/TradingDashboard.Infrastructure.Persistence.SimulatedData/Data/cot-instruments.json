@@ -1,0 +1,22 @@
+{
+  "instruments": [
+    {
+      "id": "3b5e96cc-0b34-4d8f-9f72-a73c2a4d4188",
+      "instrumentId": "aud-cme-futures",
+      "instrumentSlug": "australian-dollar",
+      "instrumentName": "AUSTRALIAN DOLLAR"
+    },
+    {
+      "id": "3436b70c-2bb0-412e-a133-2a365f7af761",
+      "instrumentId": "gbp-cme-futures",
+      "instrumentSlug": "british-pound-sterling",
+      "instrumentName": "BRITISH POUND STERLING"
+    },
+    {
+      "id": "5d8502f1-b8af-40f0-94b8-8c736ec7b44b",
+      "instrumentId": "cad-cme-futures",
+      "instrumentSlug": "canadian-dollar",
+      "instrumentName": "CANADIAN DOLLAR"
+    }
+  ]
+}
