@@ -1,0 +1,6 @@
+@TradingDashboard.Presentation.Api.Cot_HostAddress = http://localhost:5002
+
+GET {{TradingDashboard.Presentation.Api.Cot_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

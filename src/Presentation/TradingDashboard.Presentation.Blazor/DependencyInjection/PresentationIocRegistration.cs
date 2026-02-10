@@ -10,7 +10,7 @@ public static class PresentationIocRegistration
         services.AddHttpClient<ICommonDirectoryClient, CommonDirectoryClient>((sp, client) =>
         {
             var configuration = sp.GetRequiredService<IConfiguration>();
-            var baseUrl = configuration["Api:BaseUrl"] ?? "https://localhost:7116";
+            var baseUrl = configuration["ApiCot:BaseUrl"] ?? "https://localhost:7116";
             client.BaseAddress = new Uri(baseUrl);
         });
 
