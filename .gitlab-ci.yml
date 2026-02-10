@@ -1,0 +1,97 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  DOTNET_VERSION: '9.0.x'
+  RESOURCE_GROUP: 'TradingDashboard-RG'
+  API_APP_NAME: 'td-api-cot'
+  BLAZOR_APP_NAME: 'td-blazor-ui'
+
+# Build API
+build-api:
+  stage: build
+  image: mcr.microsoft.com/dotnet/sdk:9.0
+  script:
+    - cd src/Presentation/TradingDashboard.Presentation.Api.Cot
+    - dotnet restore
+    - dotnet build -c Release --no-restore
+    - dotnet publish -c Release -o ./publish --no-build
+    - cd publish && zip -r ../api.zip .
+  artifacts:
+    paths:
+      - src/Presentation/TradingDashboard.Presentation.Api.Cot/api.zip
+    expire_in: 1 hour
+  only:
+    - main
+    - develop
+
+# Build Blazor
+build-blazor:
+  stage: build
+  image: mcr.microsoft.com/dotnet/sdk:9.0
+  script:
+    - cd src/Presentation/TradingDashboard.Presentation.Blazor
+    - dotnet restore
+    - dotnet build -c Release --no-restore
+    - dotnet publish -c Release -o ./publish --no-build
+    - cd publish && zip -r ../blazor.zip .
+  artifacts:
+    paths:
+      - src/Presentation/TradingDashboard.Presentation.Blazor/blazor.zip
+    expire_in: 1 hour
+  only:
+    - main
+    - develop
+
+# Deploy API to Azure
+deploy-api:
+  stage: deploy
+  image: mcr.microsoft.com/azure-cli
+  dependencies:
+    - build-api
+  script:
+    - az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
+    - az webapp deploy --resource-group $RESOURCE_GROUP --name $API_APP_NAME --src-path src/Presentation/TradingDashboard.Presentation.Api.Cot/api.zip --type zip
+  only:
+    - main
+  needs:
+    - build-api
+  environment:
+    name: production-api
+    url: https://td-api-cot-ejenhygxhtewasb2.westeurope-01.azurewebsites.net
+
+# Deploy Blazor to Azure
+deploy-blazor:
+  stage: deploy
+  image: mcr.microsoft.com/azure-cli
+  dependencies:
+    - build-blazor
+  script:
+    - az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
+    - az webapp deploy --resource-group $RESOURCE_GROUP --name $BLAZOR_APP_NAME --src-path src/Presentation/TradingDashboard.Presentation.Blazor/blazor.zip --type zip
+  only:
+    - main
+  needs:
+    - build-blazor
+  environment:
+    name: production-blazor
+    url: https://td-blazor-ui.azurewebsites.net
+
+# Deploy API to staging (develop branch)
+deploy-api-staging:
+  stage: deploy
+  image: mcr.microsoft.com/azure-cli
+  dependencies:
+    - build-api
+  script:
+    - az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
+    - az webapp deploy --resource-group $RESOURCE_GROUP --name $API_APP_NAME --src-path src/Presentation/TradingDashboard.Presentation.Api.Cot/api.zip --type zip
+  only:
+    - develop
+  needs:
+    - build-api
+  environment:
+    name: staging-api
+    url: https://td-api-cot-ejenhygxhtewasb2.westeurope-01.azurewebsites.net
+  when: manual

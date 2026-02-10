@@ -3,6 +3,10 @@ bin/
 obj/
 out/
 
+# Publish & Deploy
+**/publish/
+**/app.zip
+
 # IDE
 .vs/
 .vscode/

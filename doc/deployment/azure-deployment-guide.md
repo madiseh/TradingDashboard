@@ -1,6 +1,21 @@
-# راهنمای Deploy در Azure
+# Azure Deployment Guide
 
-## پورت‌های پروژه‌ها (Local Development)
+## ✅ Prerequisites
+- ✅ Azure CLI installed
+- ✅ Active Azure Subscription
+- ✅ .NET 9 SDK installed
+- ✅ Git installed
+
+---
+
+## 🌐 Production URLs
+
+- **API Production:** https://td-api-cot-ejenhygxhtewasb2.westeurope-01.azurewebsites.net
+- **Blazor UI:** https://td-blazor-ui.azurewebsites.net
+
+---
+
+## Project Ports (Local Development)
 
 ### TradingDashboard.Presentation.Api.Cot (API)
 - **HTTP:** http://localhost:5002
@@ -14,26 +29,26 @@
 
 ---
 
-## مراحل Deploy کردن API به Azure
+## Steps to Deploy API to Azure
 
-### پیش‌نیازها
-- Azure CLI نصب شده
-- Azure Subscription فعال
-- .NET 9 SDK نصب شده
+### Prerequisites
+- Azure CLI installed
+- Active Azure Subscription
+- .NET 9 SDK installed
 
-### مرحله 1: لاگین به Azure
+### Step 1: Login to Azure
 
 ```powershell
 az login
 ```
 
-### مرحله 2: ایجاد Resource Group
+### Step 2: Create Resource Group
 
 ```powershell
 az group create --name TradingDashboard-RG --location westeurope
 ```
 
-### مرحله 3: ایجاد App Service Plan (رایگان)
+### Step 3: Create App Service Plan (Free Tier)
 
 ```powershell
 az appservice plan create `
@@ -43,7 +58,7 @@ az appservice plan create `
   --is-linux
 ```
 
-### مرحله 4: ایجاد Web App برای API
+### Step 4: Create Web App for API
 
 ```powershell
 az webapp create `
@@ -53,20 +68,22 @@ az webapp create `
   --runtime "DOTNET:9.0"
 ```
 
-### مرحله 5: Publish کردن پروژه API
+### Step 5: Publish API Project
 
 ```powershell
-# رفتن به پوشه API
+# Navigate to API folder
 cd src\Presentation\TradingDashboard.Presentation.Api.Cot
 
-# Publish کردن پروژه
+# Publish the project
 dotnet publish -c Release -o ./publish
 
-# Zip کردن فایل‌ها
+# Create zip file
 Compress-Archive -Path .\publish\* -DestinationPath .\app.zip -Force
 ```
 
-### مرحله 6: Deploy کردن به Azure
+**Note:** `publish/` and `app.zip` files are in `.gitignore` and won't be committed.
+
+### Step 6: Deploy to Azure
 
 ```powershell
 az webapp deploy `
@@ -76,7 +93,7 @@ az webapp deploy `
   --type zip
 ```
 
-### مرحله 7: تنظیم CORS (اختیاری)
+### Step 7: Configure CORS (Optional)
 
 ```powershell
 az webapp cors add `
@@ -85,7 +102,7 @@ az webapp cors add `
   --allowed-origins "*"
 ```
 
-### مرحله 8: مشاهده لاگ‌ها
+### Step 8: View Logs
 
 ```powershell
 az webapp log tail `
@@ -93,87 +110,106 @@ az webapp log tail `
   --name td-api-cot
 ```
 
-### مرحله 9: تست API
+### Step 9: Test API
 
 ```powershell
-# تست Health Endpoint
-curl https://td-api-cot.azurewebsites.net/health
+# Test Health Endpoint
+curl https://td-api-cot-ejenhygxhtewasb2.westeurope-01.azurewebsites.net/health
 
-# یا با PowerShell
-Invoke-WebRequest -Uri https://td-api-cot.azurewebsites.net/health
+# Or with PowerShell
+Invoke-WebRequest -Uri https://td-api-cot-ejenhygxhtewasb2.westeurope-01.azurewebsites.net/health
 ```
 
 ---
 
-## Endpoints API
+## API Endpoints
 
-بعد از deploy، API شما در این آدرس در دسترس است:
+After deployment, your API is available at:
 
-**Base URL:** `https://td-api-cot.azurewebsites.net`
+**Base URL:** `https://td-api-cot-ejenhygxhtewasb2.westeurope-01.azurewebsites.net`
 
 ### Available Endpoints:
 
-- `GET /health` - Health check
-- `GET /api/v1/common/market-types` - دریافت انواع بازار
-- `GET /api/v1/common/markets?type={type}&q={search}` - جستجوی بازارها
-- `GET /api/v1/common/markets-directory` - دایرکتوری کامل بازارها
-- `GET /api/v1/cot/instruments/{instrumentSlug}` - جزئیات ابزار COT
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/health` | Health check |
+| `GET` | `/swagger` | Swagger UI (Development only) |
+| `GET` | `/api/v1/common/market-types` | Get market types |
+| `GET` | `/api/v1/common/markets?type={type}&q={search}` | Search markets |
+| `GET` | `/api/v1/common/markets-directory` | Get complete markets directory |
+| `GET` | `/api/v1/cot/instruments/{instrumentSlug}` | Get COT instrument details |
+
+### Testing Endpoints:
+
+```powershell
+# Health Check
+Invoke-WebRequest -Uri https://td-api-cot-ejenhygxhtewasb2.westeurope-01.azurewebsites.net/health
+
+# Get Market Types
+Invoke-WebRequest -Uri https://td-api-cot-ejenhygxhtewasb2.westeurope-01.azurewebsites.net/api/v1/common/market-types
+
+# Get Markets
+Invoke-WebRequest -Uri "https://td-api-cot-ejenhygxhtewasb2.westeurope-01.azurewebsites.net/api/v1/common/markets?type=futures"
+
+# Get COT Instrument
+Invoke-WebRequest -Uri https://td-api-cot-ejenhygxhtewasb2.westeurope-01.azurewebsites.net/api/v1/cot/instruments/gold
+```
 
 ---
 
-## اجرای لوکال
+## Running Locally
 
-### اجرای API
+### Run API
 
 ```powershell
-# از ریشه پروژه
+# From project root
 dotnet run --project src\Presentation\TradingDashboard.Presentation.Api.Cot\TradingDashboard.Presentation.Api.Cot.csproj
 ```
 
-یا:
+Or:
 
 ```powershell
 cd src\Presentation\TradingDashboard.Presentation.Api.Cot
 dotnet run
 ```
 
-API در آدرس زیر در دسترس خواهد بود:
+API will be available at:
 - HTTP: http://localhost:5002
 - HTTPS: https://localhost:7116
 
-### اجرای Blazor UI
+### Run Blazor UI
 
 ```powershell
-# از ریشه پروژه
+# From project root
 dotnet run --project src\Presentation\TradingDashboard.Presentation.Blazor\TradingDashboard.Presentation.Blazor.csproj
 ```
 
-UI در آدرس زیر در دسترس خواهد بود:
+UI will be available at:
 - HTTP: http://localhost:5078
 - HTTPS: https://localhost:7232
 
 ---
 
-## یک دستور Deploy سریع
+## Quick Deploy Script
 
-برای deploy سریع همه مراحل را در یک اسکریپت قرار دهید:
+For quick deployment, use this script:
 
 ```powershell
 # deploy-api.ps1
 
-# متغیرها
+# Variables
 $ResourceGroup = "TradingDashboard-RG"
 $AppName = "td-api-cot"
 $Location = "westeurope"
 
-# رفتن به پوشه API
+# Navigate to API folder
 Set-Location "src\Presentation\TradingDashboard.Presentation.Api.Cot"
 
 # Publish
 Write-Host "Publishing API..." -ForegroundColor Green
 dotnet publish -c Release -o ./publish
 
-# Zip
+# Create zip
 Write-Host "Creating zip file..." -ForegroundColor Green
 Compress-Archive -Path .\publish\* -DestinationPath .\app.zip -Force
 
@@ -186,14 +222,14 @@ az webapp deploy `
   --type zip
 
 Write-Host "Deployment completed!" -ForegroundColor Green
-Write-Host "API URL: https://$AppName.azurewebsites.net" -ForegroundColor Cyan
+Write-Host "API URL: https://$AppName-ejenhygxhtewasb2.westeurope-01.azurewebsites.net" -ForegroundColor Cyan
 
-# پاک کردن فایل‌های موقت
+# Clean up temporary files
 Remove-Item .\app.zip
 Remove-Item .\publish -Recurse -Force
 ```
 
-استفاده:
+Usage:
 
 ```powershell
 .\deploy-api.ps1
@@ -201,30 +237,39 @@ Remove-Item .\publish -Recurse -Force
 
 ---
 
-## عیب‌یابی
+## Troubleshooting
 
-### خطای "No subscriptions found"
-- مطمئن شوید Azure Subscription ساخته‌اید
-- از Azure Portal به https://portal.azure.com بروید و subscription را فعال کنید
+### Error: "No subscriptions found"
+- Make sure you have created an Azure Subscription
+- Go to Azure Portal at https://portal.azure.com and activate the subscription
 
-### خطای "Body was inferred"
-- در endpoint‌های Minimal API، dependency injection باید با `[FromServices]` مشخص شود
-- یا service را در constructor ثبت کنید
+### Error: "TypeLoadException: Could not load type 'Microsoft.OpenApi.Models.OpenApiOperation'"
+- This error occurs due to conflict between `Microsoft.AspNetCore.OpenApi` and `Swashbuckle`
+- Solution: Don't use `.WithOpenApi()`, only use Swagger
 
-### API در Azure کار نمی‌کند
-- لاگ‌ها را چک کنید: `az webapp log tail --name td-api-cot --resource-group TradingDashboard-RG`
-- مطمئن شوید Runtime در Azure روی .NET 9 است
+### Error: "Body was inferred"
+- In Minimal API endpoints, dependency injection must be specified with `[FromServices]`
+- Example: `([FromServices] ICotInstrumentRepository repository)`
 
-### پورت اشتباه در Local
-- پورت‌ها در `launchSettings.json` تنظیم می‌شوند
+### API not working in Azure
+- Check logs: `az webapp log tail --name td-api-cot --resource-group TradingDashboard-RG`
+- Make sure Runtime in Azure is set to .NET 9
+- Test the `/health` endpoint
+
+### Wrong port in Local
+- Ports are configured in `launchSettings.json`
 - API: 5002 (HTTP), 7116 (HTTPS)
 - Blazor: 5078 (HTTP), 7232 (HTTPS)
 
+### Publish files visible in Git
+- `publish/` and `*.zip` are added to `.gitignore`
+- These files won't be committed
+
 ---
 
-## به‌روزرسانی‌های بعدی
+## Redeployment After Changes
 
-برای deploy مجدد بعد از تغییرات:
+To redeploy after making changes:
 
 ```powershell
 cd src\Presentation\TradingDashboard.Presentation.Api.Cot
@@ -235,9 +280,9 @@ az webapp deploy --resource-group TradingDashboard-RG --name td-api-cot --src-pa
 
 ---
 
-## لینک‌های مفید
+## Useful Links
 
 - **Azure Portal:** https://portal.azure.com
-- **API Production URL:** https://td-api-cot.azurewebsites.net
+- **API Production URL:** https://td-api-cot-ejenhygxhtewasb2.westeurope-01.azurewebsites.net
 - **Azure CLI Docs:** https://docs.microsoft.com/cli/azure/
 - **ASP.NET Core Deployment:** https://docs.microsoft.com/aspnet/core/host-and-deploy/azure-apps/
