@@ -1,25 +1,36 @@
 using TradingDashboard.Infrastructure.Persistence.Implementation.Seed;
 using TradingDashboard.Application.Repository.Cot;
 using TradingDashboard.Infrastructure.Persistence.SimulatedData.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddOpenApi();
+// Add services
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new() { Title = "Trading Dashboard API - COT", Version = "v1" });
+});
 builder.Services.AddHealthChecks();
 builder.Services.AddSingleton<ICotInstrumentRepository, CotInstrumentFakeRepository>();
 
-
-
 var app = builder.Build();
 
+// Configure Swagger
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Trading Dashboard API v1");
+        options.RoutePrefix = string.Empty; // Swagger UI در root باشد
+    });
 }
 
 app.UseHttpsRedirection();
 app.MapHealthChecks(RoutePaths.Api.Health);
 
+// Market Endpoints
 var markets = CommonMarketSeedData.Markets;
 var marketTypes = markets
     .Select(x => x.Type)
@@ -30,7 +41,9 @@ var marketTypes = markets
 app.MapGet(RoutePaths.Api.MarketTypes, () =>
 {
     return Results.Ok(new { items = marketTypes });
-});
+})
+.WithName("GetMarketTypes")
+.WithTags("Common");
 
 app.MapGet(RoutePaths.Api.Markets, (string type, string? q) =>
 {
@@ -66,7 +79,9 @@ app.MapGet(RoutePaths.Api.Markets, (string type, string? q) =>
         type,
         items
     });
-});
+})
+.WithName("GetMarkets")
+.WithTags("Common");
 
 app.MapGet(RoutePaths.Api.MarketsDirectory, () =>
 {
@@ -88,9 +103,11 @@ app.MapGet(RoutePaths.Api.MarketsDirectory, () =>
         .ToArray();
 
     return Results.Ok(new { groups });
-});
+})
+.WithName("GetMarketsDirectory")
+.WithTags("Common");
 
-app.MapGet(RoutePaths.Api.CotInstrumentBySlug, (string instrumentSlug, ICotInstrumentRepository repository) =>
+app.MapGet(RoutePaths.Api.CotInstrumentBySlug, (string instrumentSlug, [FromServices] ICotInstrumentRepository repository) =>
 {
     var instrument = repository.GetBySlug(instrumentSlug);
     if (instrument is null)
@@ -112,7 +129,9 @@ app.MapGet(RoutePaths.Api.CotInstrumentBySlug, (string instrumentSlug, ICotInstr
         instrumentSlug = instrument.InstrumentSlug,
         instrumentName = instrument.InstrumentName
     });
-});
+})
+.WithName("GetCotInstrument")
+.WithTags("COT");
 
 app.Run();
 
