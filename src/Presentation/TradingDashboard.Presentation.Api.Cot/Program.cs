@@ -22,6 +22,7 @@ using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<TradingDashboardDbContext>();
     dbContext.Database.EnsureCreated();
+    CotInstrumentSeedBootstrapper.SeedMissingInstruments(dbContext);
 }
 
 // Configure Swagger
@@ -117,3 +118,4 @@ app.MapGet(RoutePaths.Api.MarketsDirectory, () =>
 .WithTags("Common");
 
 app.Run();
+
