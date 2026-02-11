@@ -1,6 +1,3 @@
-using TradingDashboard.Application.Repository.Cot;
-using TradingDashboard.Domain.Entities;
-
 namespace TradingDashboard.Infrastructure.Persistence.SimulatedData.Repositories;
 
 public sealed class CotInstrumentFakeRepository : ICotInstrumentRepository

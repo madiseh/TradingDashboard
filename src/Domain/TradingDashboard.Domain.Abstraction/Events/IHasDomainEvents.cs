@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace TradingDashboard.Domain.Abstraction.Events;
 
 public interface IHasDomainEvents

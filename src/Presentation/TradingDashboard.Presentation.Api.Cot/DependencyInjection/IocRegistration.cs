@@ -1,6 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using TradingDashboard.Infrastructure.Persistence.Implementation.Context;
-
 namespace TradingDashboard.Presentation.Api.Cot.DependencyInjection;
 
 public static class IocRegistration

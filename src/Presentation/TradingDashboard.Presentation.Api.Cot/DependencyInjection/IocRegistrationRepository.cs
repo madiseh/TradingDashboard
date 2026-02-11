@@ -1,6 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using TradingDashboard.Application.Repository.Cot;
-using TradingDashboard.Infrastructure.Persistence.Implementation.Context;
 using TradingDashboard.Infrastructure.Persistence.Implementation.Repositories;
 
 namespace TradingDashboard.Presentation.Api.Cot.DependencyInjection;

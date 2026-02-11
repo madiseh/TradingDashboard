@@ -60,6 +60,12 @@
 - `GlobalUsings.cs` must contain a `#region System` block.
 - All shared `using System...` directives must be placed inside that region.
 
+## NuGet Versioning Rule
+
+- Package versions must be managed centrally in `Directory.Packages.props`.
+- `PackageReference` entries in `.csproj` files must not include a `Version` attribute.
+- New packages must be added with `PackageVersion` in `Directory.Packages.props` before use in projects.
+
 ## Interface Documentation Rule
 
 - Every interface must include XML documentation summary (`/// <summary> ... </summary>`).

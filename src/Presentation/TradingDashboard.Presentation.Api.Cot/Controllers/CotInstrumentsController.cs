@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using TradingDashboard.Application.Repository.Cot;
 
 namespace TradingDashboard.Presentation.Api.Cot.Controllers;
 

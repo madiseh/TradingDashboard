@@ -1,6 +1,4 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TradingDashboard.Domain.Entities;
 
 namespace TradingDashboard.Infrastructure.Persistence.Implementation.Configuration;
 

@@ -1,6 +1,5 @@
 using TradingDashboard.Infrastructure.Persistence.Implementation.Seed;
 using TradingDashboard.Presentation.Api.Cot.DependencyInjection;
-using TradingDashboard.Infrastructure.Persistence.Implementation.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
