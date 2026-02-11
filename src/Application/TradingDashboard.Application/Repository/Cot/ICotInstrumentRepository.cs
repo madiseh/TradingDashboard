@@ -1,4 +1,5 @@
 using TradingDashboard.Domain.Entities;
+using TradingDashboard.Domain.Enums;
 
 namespace TradingDashboard.Application.Repository.Cot;
 
@@ -17,7 +18,7 @@ public interface ICotInstrumentRepository : IRepository<CotInstrument, Guid>
     /// <summary>
     /// Returns instruments by market group/type.
     /// </summary>
-    /// <param name="group">Group value (for example: Currencies).</param>
+    /// <param name="group">Group value.</param>
     /// <returns>List of instruments in that group.</returns>
-    IList<CotInstrument> GetByGroup(string group);
+    IList<CotInstrument> GetByGroup(CotInstrumentType group);
 }

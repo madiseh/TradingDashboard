@@ -6,6 +6,23 @@ public static class CotInstrumentSeedBootstrapper
 {
     public static int SeedMissingInstruments(TradingDashboardDbContext dbContext)
     {
+        var expectedTypes = Enum.GetValues<CotInstrumentType>()
+            .Select(type => new CotInstrumentTypeLookup(type, type.ToContractValue()))
+            .ToArray();
+
+        var existingTypeIds = dbContext.CotInstrumentTypes
+            .Select(x => x.Id)
+            .ToHashSet();
+
+        var missingTypes = expectedTypes
+            .Where(x => !existingTypeIds.Contains(x.Id))
+            .ToArray();
+
+        if (missingTypes.Length > 0)
+        {
+            dbContext.CotInstrumentTypes.AddRange(missingTypes);
+        }
+
         var seedLookup = CommonMarketSeedData.Markets
             .ToDictionary(x => x.InstrumentId, StringComparer.OrdinalIgnoreCase);
 

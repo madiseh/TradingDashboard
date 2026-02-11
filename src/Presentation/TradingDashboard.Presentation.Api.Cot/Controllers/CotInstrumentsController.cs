@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using TradingDashboard.Domain.Enums;
 
 namespace TradingDashboard.Presentation.Api.Cot.Controllers;
 
@@ -28,7 +29,7 @@ public class CotInstrumentsController(ICotInstrumentRepository repository) : Con
             instrumentId = instrument.InstrumentId,
             instrumentSlug = instrument.InstrumentSlug,
             instrumentName = instrument.InstrumentName,
-            type = instrument.Type
+            type = instrument.Type.ToContractValue()
         });
     }
 
@@ -47,20 +48,32 @@ public class CotInstrumentsController(ICotInstrumentRepository repository) : Con
             });
         }
 
-        var items = repository.GetByGroup(group)
+        if (!CotInstrumentTypeExtensions.TryParse(group, out var instrumentType))
+        {
+            return BadRequest(new
+            {
+                error = new
+                {
+                    code = "INVALID_GROUP",
+                    message = $"Unsupported group '{group}'."
+                }
+            });
+        }
+
+        var items = repository.GetByGroup(instrumentType)
             .Select(instrument => new
             {
                 id = instrument.Id,
                 instrumentId = instrument.InstrumentId,
                 instrumentSlug = instrument.InstrumentSlug,
                 instrumentName = instrument.InstrumentName,
-                type = instrument.Type
+                type = instrument.Type.ToContractValue()
             })
             .ToArray();
 
         return Ok(new
         {
-            group = group.Trim(),
+            group = instrumentType.ToContractValue(),
             items
         });
     }

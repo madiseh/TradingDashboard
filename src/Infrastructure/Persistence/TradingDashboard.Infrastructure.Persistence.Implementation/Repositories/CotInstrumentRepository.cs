@@ -1,4 +1,5 @@
 using TradingDashboard.Application.Repository.Cot;
+using TradingDashboard.Domain.Enums;
 using TradingDashboard.Infrastructure.Persistence.Common.Repositories;
 
 namespace TradingDashboard.Infrastructure.Persistence.Implementation.Repositories;
@@ -22,17 +23,10 @@ public sealed class CotInstrumentRepository : GenericRepository<CotInstrument, G
             .FirstOrDefault(x => x.InstrumentSlug == normalizedSlug);
     }
 
-    public IList<CotInstrument> GetByGroup(string group)
+    public IList<CotInstrument> GetByGroup(CotInstrumentType group)
     {
-        if (string.IsNullOrWhiteSpace(group))
-        {
-            throw new ArgumentException("Group cannot be empty.", nameof(group));
-        }
-
-        var normalizedGroup = group.Trim();
-
         return _context.Set<CotInstrument>()
-            .Where(x => x.Type == normalizedGroup)
+            .Where(x => x.Type == group)
             .OrderBy(x => x.InstrumentName)
             .ToList();
     }

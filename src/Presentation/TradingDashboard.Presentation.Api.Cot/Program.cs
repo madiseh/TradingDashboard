@@ -1,5 +1,6 @@
 using TradingDashboard.Infrastructure.Persistence.Implementation.Seed;
 using TradingDashboard.Presentation.Api.Cot.DependencyInjection;
+using TradingDashboard.Domain.Enums;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,20 +44,20 @@ app.MapHealthChecks(RoutePaths.Api.Health);
 var markets = CommonMarketSeedData.Markets;
 var marketTypes = markets
     .Select(x => x.Type)
-    .Distinct(StringComparer.OrdinalIgnoreCase)
-    .OrderBy(x => x)
+    .Distinct()
+    .OrderBy(x => x.ToContractValue())
     .ToArray();
 
 app.MapGet(RoutePaths.Api.MarketTypes, () =>
 {
-    return Results.Ok(new { items = marketTypes });
+    return Results.Ok(new { items = marketTypes.Select(x => x.ToContractValue()) });
 })
 .WithName("GetMarketTypes")
 .WithTags("Common");
 
 app.MapGet(RoutePaths.Api.Markets, (string type, string? q) =>
 {
-    if (string.IsNullOrWhiteSpace(type) || !marketTypes.Contains(type, StringComparer.OrdinalIgnoreCase))
+    if (!CotInstrumentTypeExtensions.TryParse(type, out var marketType) || !marketTypes.Contains(marketType))
     {
         return Results.BadRequest(new
         {
@@ -69,7 +70,7 @@ app.MapGet(RoutePaths.Api.Markets, (string type, string? q) =>
     }
 
     var items = markets
-        .Where(x => string.Equals(x.Type, type, StringComparison.OrdinalIgnoreCase))
+        .Where(x => x.Type == marketType)
         .Where(x =>
             string.IsNullOrWhiteSpace(q) ||
             x.Name.Contains(q, StringComparison.OrdinalIgnoreCase) ||
@@ -85,7 +86,7 @@ app.MapGet(RoutePaths.Api.Markets, (string type, string? q) =>
 
     return Results.Ok(new
     {
-        type,
+        type = marketType.ToContractValue(),
         items
     });
 })
@@ -97,9 +98,9 @@ app.MapGet(RoutePaths.Api.MarketsDirectory, () =>
     var groups = marketTypes
         .Select(type => new
         {
-            type,
+            type = type.ToContractValue(),
             items = markets
-                .Where(x => string.Equals(x.Type, type, StringComparison.OrdinalIgnoreCase))
+                .Where(x => x.Type == type)
                 .Select(x => new
                 {
                     x.InstrumentId,
