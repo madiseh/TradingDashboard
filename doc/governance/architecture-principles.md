@@ -54,6 +54,11 @@
 - EF entity mappings must live in `Infrastructure.Persistence.Implementation/Configuration` as `IEntityTypeConfiguration<T>`.
 - `DbContext` classes must apply these mappings instead of inlining entity configuration in `OnModelCreating`.
 
+## Database Table Naming Rule
+
+- Database table names must be defined as constants in a dedicated file.
+- EF Core mappings must use those constants (for example in `ToTable(...)`) and must not use hard-coded table name strings.
+
 ## Global Usings Standard
 
 - Every project must include a `GlobalUsings.cs` file.

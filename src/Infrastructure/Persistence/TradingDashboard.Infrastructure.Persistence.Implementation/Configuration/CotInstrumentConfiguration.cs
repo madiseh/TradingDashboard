@@ -7,7 +7,7 @@ public sealed class CotInstrumentConfiguration : IEntityTypeConfiguration<CotIns
 {
     public void Configure(EntityTypeBuilder<CotInstrument> entity)
     {
-        entity.ToTable("CotInstruments");
+        entity.ToTable(DbTableNames.CotInstruments);
         entity.HasKey(x => x.Id);
 
         entity.Property(x => x.Id)
