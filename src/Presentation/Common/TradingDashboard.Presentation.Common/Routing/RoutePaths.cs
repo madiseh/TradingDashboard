@@ -13,12 +13,13 @@ public static class RoutePaths
     public static class Api
     {
         public const string Health = "/health";
-        public const string ApiVersionPrefix = "/api/v1/";
-        public const string CommonBase = $"{ApiVersionPrefix}common";
-        public const string CotBase = $"{ApiVersionPrefix}cot";
+        public const string ApiVersionPrefix = "/api/v1";
+        public const string CommonBase = $"{ApiVersionPrefix}/common";
+        public const string CotBase = $"{ApiVersionPrefix}/cot";
+        public const string CotInstruments = $"{CotBase}/instruments";
         public const string MarketTypes = $"{CommonBase}/market-types";
         public const string Markets = $"{CommonBase}/markets";
         public const string MarketsDirectory = $"{CommonBase}/markets-directory";
-        public const string CotInstrumentBySlug = $"{CotBase}/instruments/{{instrumentSlug}}";
+        public const string CotInstrumentBySlug = $"{CotInstruments}/{{instrumentSlug}}";
     }
 }

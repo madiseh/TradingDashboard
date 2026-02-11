@@ -1,13 +1,12 @@
 using TradingDashboard.Infrastructure.Persistence.Implementation.Seed;
 using TradingDashboard.Presentation.Api.Cot.DependencyInjection;
 using TradingDashboard.Infrastructure.Persistence.Implementation.Context;
-using TradingDashboard.Application.Repository.Cot;
-using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new() { Title = "Trading Dashboard API - COT", Version = "v1" });
@@ -37,6 +36,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.MapControllers();
 app.MapHealthChecks(RoutePaths.Api.Health);
 
 // Market Endpoints
@@ -115,31 +115,5 @@ app.MapGet(RoutePaths.Api.MarketsDirectory, () =>
 })
 .WithName("GetMarketsDirectory")
 .WithTags("Common");
-
-app.MapGet(RoutePaths.Api.CotInstrumentBySlug, (string instrumentSlug, [FromServices] ICotInstrumentRepository repository) =>
-{
-    var instrument = repository.GetBySlug(instrumentSlug);
-    if (instrument is null)
-    {
-        return Results.NotFound(new
-        {
-            error = new
-            {
-                code = "INSTRUMENT_NOT_FOUND",
-                message = $"Instrument '{instrumentSlug}' was not found."
-            }
-        });
-    }
-
-    return Results.Ok(new
-    {
-        id = instrument.Id,
-        instrumentId = instrument.InstrumentId,
-        instrumentSlug = instrument.InstrumentSlug,
-        instrumentName = instrument.InstrumentName
-    });
-})
-.WithName("GetCotInstrument")
-.WithTags("COT");
 
 app.Run();
