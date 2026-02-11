@@ -1,0 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using TradingDashboard.Application.Repository.Cot;
+using TradingDashboard.Infrastructure.Persistence.Implementation.Context;
+using TradingDashboard.Infrastructure.Persistence.Implementation.Repositories;
+
+namespace TradingDashboard.Presentation.Api.Cot.DependencyInjection;
+
+public static class IocRegistrationRepository
+{
+    public static IServiceCollection AddIocRegistrationRepository(this IServiceCollection services)
+    {
+        services.AddScoped<DbContext, TradingDashboardDbContext>();
+
+        services.AddScoped<ICotInstrumentRepository, CotInstrumentRepository>();
+        return services;
+    }
+}

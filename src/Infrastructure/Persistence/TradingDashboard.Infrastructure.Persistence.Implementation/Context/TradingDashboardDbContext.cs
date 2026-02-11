@@ -1,6 +1,6 @@
 
 
-namespace TradingDashboard.Infrastructure.Persistence.SimulatedData.Context;
+namespace TradingDashboard.Infrastructure.Persistence.Implementation.Context;
 
 public sealed class TradingDashboardDbContext : DbContext
 {

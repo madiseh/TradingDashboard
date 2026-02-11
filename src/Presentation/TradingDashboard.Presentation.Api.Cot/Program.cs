@@ -1,6 +1,7 @@
 using TradingDashboard.Infrastructure.Persistence.Implementation.Seed;
+using TradingDashboard.Presentation.Api.Cot.DependencyInjection;
+using TradingDashboard.Infrastructure.Persistence.Implementation.Context;
 using TradingDashboard.Application.Repository.Cot;
-using TradingDashboard.Infrastructure.Persistence.SimulatedData.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,9 +13,17 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new() { Title = "Trading Dashboard API - COT", Version = "v1" });
 });
 builder.Services.AddHealthChecks();
-builder.Services.AddSingleton<ICotInstrumentRepository, CotInstrumentFakeRepository>();
+Directory.CreateDirectory(Path.Combine(builder.Environment.ContentRootPath, "db"));
+
+builder.Services.AddIocRegistration(builder.Configuration);
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<TradingDashboardDbContext>();
+    dbContext.Database.EnsureCreated();
+}
 
 // Configure Swagger
 if (app.Environment.IsDevelopment())
@@ -23,7 +32,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "Trading Dashboard API v1");
-        options.RoutePrefix = string.Empty; // Swagger UI در root باشد
+        options.RoutePrefix = string.Empty; 
     });
 }
 
@@ -134,4 +143,3 @@ app.MapGet(RoutePaths.Api.CotInstrumentBySlug, (string instrumentSlug, [FromServ
 .WithTags("COT");
 
 app.Run();
-

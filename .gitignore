@@ -39,3 +39,7 @@ packages/
 # Environment
 .env
 .env.*
+
+# Local database files
+db/*
+**/db/*
