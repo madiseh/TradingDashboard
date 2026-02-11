@@ -16,7 +16,9 @@ public sealed class CotInstrumentRepository : GenericRepository<CotInstrument, G
             throw new ArgumentException("Instrument slug cannot be empty.", nameof(instrumentSlug));
         }
 
+        var normalizedSlug = instrumentSlug.Trim();
+
         return _context.Set<CotInstrument>()
-            .FirstOrDefault(x => string.Equals(x.InstrumentSlug, instrumentSlug, StringComparison.OrdinalIgnoreCase));
+            .FirstOrDefault(x => x.InstrumentSlug == normalizedSlug);
     }
 }
