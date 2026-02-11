@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddMudServices();
-builder.Services.AddPresentationIoc();
+builder.Services.AddIocRegistration();
 
 var app = builder.Build();
 

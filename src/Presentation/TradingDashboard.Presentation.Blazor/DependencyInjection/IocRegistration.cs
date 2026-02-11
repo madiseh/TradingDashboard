@@ -3,9 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace TradingDashboard.Presentation.Blazor.DependencyInjection;
 
-public static class PresentationIocRegistration
+public static class IocRegistration
 {
-    public static IServiceCollection AddPresentationIoc(this IServiceCollection services)
+    public static IServiceCollection AddIocRegistration(this IServiceCollection services)
     {
         services.AddHttpClient<ICommonDirectoryClient, CommonDirectoryClient>((sp, client) =>
         {
