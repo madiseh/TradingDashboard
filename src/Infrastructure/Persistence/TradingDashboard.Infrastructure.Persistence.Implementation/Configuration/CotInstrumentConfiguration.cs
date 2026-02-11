@@ -25,7 +25,13 @@ public sealed class CotInstrumentConfiguration : IEntityTypeConfiguration<CotIns
             .HasMaxLength(256)
             .IsRequired();
 
+        entity.Property(x => x.Type)
+            .HasMaxLength(128)
+            .UseCollation("NOCASE")
+            .IsRequired();
+
         entity.HasIndex(x => x.InstrumentId).IsUnique();
         entity.HasIndex(x => x.InstrumentSlug).IsUnique();
+        entity.HasIndex(x => x.Type);
     }
 }

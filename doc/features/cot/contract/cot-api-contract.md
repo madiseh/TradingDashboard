@@ -40,7 +40,9 @@ Blazor UI consumes these endpoints and does not access storage directly.
 ```json
 {
   "instrumentId": "aud-cme-futures",
+  "instrumentSlug": "australian-dollar",
   "name": "Australian Dollar",
+  "type": "Currencies",
   "exchange": "CME",
   "cftcCode": "232741",
   "availableModels": ["Cot", "CotLegacy"]
@@ -87,6 +89,43 @@ Blazor UI consumes these endpoints and does not access storage directly.
 ```
 
 ## Endpoints
+
+### 0) Get Instrument By Slug
+
+- `GET /api/v1/cot/instruments/{instrumentSlug}`
+
+Response `200`:
+
+```json
+{
+  "id": "f1085f88-6f20-4517-8020-6b53db8a0f6d",
+  "instrumentId": "aud-cme-futures",
+  "instrumentSlug": "australian-dollar",
+  "instrumentName": "AUSTRALIAN DOLLAR",
+  "type": "Currencies"
+}
+```
+
+### 0.1) Get Instruments By Group
+
+- `GET /api/v1/cot/instruments/by-group?group=Currencies`
+
+Response `200`:
+
+```json
+{
+  "group": "Currencies",
+  "items": [
+    {
+      "id": "f1085f88-6f20-4517-8020-6b53db8a0f6d",
+      "instrumentId": "aud-cme-futures",
+      "instrumentSlug": "australian-dollar",
+      "instrumentName": "AUSTRALIAN DOLLAR",
+      "type": "Currencies"
+    }
+  ]
+}
+```
 
 ### 1) Get Instruments
 

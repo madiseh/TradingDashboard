@@ -29,6 +29,8 @@ Methods:
 Methods:
 - `GetAll`
 - `GetByCode`
+- `GetBySlug`
+- `GetByGroup`
 
 ## Notes
 

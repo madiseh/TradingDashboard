@@ -21,4 +21,19 @@ public sealed class CotInstrumentRepository : GenericRepository<CotInstrument, G
         return _context.Set<CotInstrument>()
             .FirstOrDefault(x => x.InstrumentSlug == normalizedSlug);
     }
+
+    public IList<CotInstrument> GetByGroup(string group)
+    {
+        if (string.IsNullOrWhiteSpace(group))
+        {
+            throw new ArgumentException("Group cannot be empty.", nameof(group));
+        }
+
+        var normalizedGroup = group.Trim();
+
+        return _context.Set<CotInstrument>()
+            .Where(x => x.Type == normalizedGroup)
+            .OrderBy(x => x.InstrumentName)
+            .ToList();
+    }
 }

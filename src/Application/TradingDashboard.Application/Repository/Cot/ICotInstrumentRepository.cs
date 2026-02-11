@@ -13,4 +13,11 @@ public interface ICotInstrumentRepository : IRepository<CotInstrument, Guid>
     /// <param name="instrumentSlug">Slug value (for example: australian-dollar).</param>
     /// <returns>The instrument when found; otherwise null.</returns>
     CotInstrument? GetBySlug(string instrumentSlug);
+
+    /// <summary>
+    /// Returns instruments by market group/type.
+    /// </summary>
+    /// <param name="group">Group value (for example: Currencies).</param>
+    /// <returns>List of instruments in that group.</returns>
+    IList<CotInstrument> GetByGroup(string group);
 }
