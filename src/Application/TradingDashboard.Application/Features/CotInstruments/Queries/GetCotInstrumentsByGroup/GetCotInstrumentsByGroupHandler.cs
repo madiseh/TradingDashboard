@@ -1,13 +1,13 @@
 using FluentValidation;
 using MediatR;
-using TradingDashboard.Application.Abstractions.Persistence;
 using TradingDashboard.Application.Common.Results;
+using TradingDashboard.Application.Repository.Cot;
 using TradingDashboard.Domain.Enums;
 
 namespace TradingDashboard.Application.Features.CotInstruments.Queries.GetCotInstrumentsByGroup;
 
 public sealed class GetCotInstrumentsByGroupHandler(
-    ICotInstrumentRepository repository,
+    ICotInstrumentQueryRepository repository,
     IValidator<GetCotInstrumentsByGroupQuery> validator)
     : IRequestHandler<GetCotInstrumentsByGroupQuery, OperationalResult<GetCotInstrumentsByGroupResponse>>
 {

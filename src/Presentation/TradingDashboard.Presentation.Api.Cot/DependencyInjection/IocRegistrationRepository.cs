@@ -1,5 +1,5 @@
 using TradingDashboard.Infrastructure.Persistence.Implementation.Repositories;
-using TradingDashboard.Application.Abstractions.Persistence;
+using TradingDashboard.Application.Repository.Cot;
 
 namespace TradingDashboard.Presentation.Api.Cot.DependencyInjection;
 
@@ -9,7 +9,7 @@ public static class IocRegistrationRepository
     {
         services.AddScoped<DbContext, TradingDashboardDbContext>();
 
-        services.AddScoped<ICotInstrumentRepository, CotInstrumentRepository>();
+        services.AddScoped<ICotInstrumentQueryRepository, CotInstrumentQueryRepository>();
         return services;
     }
 }

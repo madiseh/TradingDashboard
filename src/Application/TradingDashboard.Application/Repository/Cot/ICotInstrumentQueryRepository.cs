@@ -12,13 +12,15 @@ public interface ICotInstrumentQueryRepository : IQueryRepository<CotInstrument,
     /// Returns an instrument by slug.
     /// </summary>
     /// <param name="instrumentSlug">Slug value (for example: australian-dollar).</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>The instrument when found; otherwise null.</returns>
-    CotInstrument? GetBySlug(string instrumentSlug);
+    Task<CotInstrument?> GetBySlugAsync(string instrumentSlug, CancellationToken cancellationToken);
 
     /// <summary>
     /// Returns instruments by market group/type.
     /// </summary>
     /// <param name="group">Group value.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>List of instruments in that group.</returns>
-    IList<CotInstrument> GetByGroup(CotInstrumentType group);
+    Task<IReadOnlyList<CotInstrument>> GetByGroupAsync(CotInstrumentType group, CancellationToken cancellationToken);
 }

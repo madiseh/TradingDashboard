@@ -1,26 +1,13 @@
-using TradingDashboard.Application.Abstractions.Persistence;
+using TradingDashboard.Application.Repository.Cot;
 using TradingDashboard.Domain.Enums;
 using TradingDashboard.Infrastructure.Persistence.Common.Repositories;
 
 namespace TradingDashboard.Infrastructure.Persistence.Implementation.Repositories;
 
-public sealed class CotInstrumentRepository : GenericQueryRepository<CotInstrument, Guid>, ICotInstrumentRepository
+public sealed class CotInstrumentQueryRepository : GenericQueryRepository<CotInstrument, Guid>, ICotInstrumentQueryRepository
 {
-    public CotInstrumentRepository(DbContext context) : base(context)
+    public CotInstrumentQueryRepository(DbContext context) : base(context)
     {
-    }
-
-    public async Task<bool> ExistsBySlugAsync(string instrumentSlug, CancellationToken cancellationToken)
-    {
-        if (string.IsNullOrWhiteSpace(instrumentSlug))
-        {
-            throw new ArgumentException("Instrument slug cannot be empty.", nameof(instrumentSlug));
-        }
-
-        var normalizedSlug = instrumentSlug.Trim();
-
-        return await _context.Set<CotInstrument>()
-            .AnyAsync(x => x.InstrumentSlug == normalizedSlug, cancellationToken);
     }
 
     public async Task<CotInstrument?> GetBySlugAsync(string instrumentSlug, CancellationToken cancellationToken)

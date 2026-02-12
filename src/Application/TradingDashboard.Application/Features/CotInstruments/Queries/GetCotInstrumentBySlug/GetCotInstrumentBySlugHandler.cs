@@ -1,13 +1,13 @@
 using FluentValidation;
 using MediatR;
-using TradingDashboard.Application.Abstractions.Persistence;
 using TradingDashboard.Application.Common.Results;
+using TradingDashboard.Application.Repository.Cot;
 using TradingDashboard.Domain.Enums;
 
 namespace TradingDashboard.Application.Features.CotInstruments.Queries.GetCotInstrumentBySlug;
 
 public sealed class GetCotInstrumentBySlugHandler(
-    ICotInstrumentRepository repository,
+    ICotInstrumentQueryRepository repository,
     IValidator<GetCotInstrumentBySlugQuery> validator)
     : IRequestHandler<GetCotInstrumentBySlugQuery, OperationalResult<GetCotInstrumentBySlugResponse>>
 {
