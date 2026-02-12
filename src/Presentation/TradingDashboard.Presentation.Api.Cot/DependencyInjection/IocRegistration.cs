@@ -1,3 +1,5 @@
+using TradingDashboard.Application.Features.CotInstruments.Queries.GetCotInstrumentBySlug;
+
 namespace TradingDashboard.Presentation.Api.Cot.DependencyInjection;
 
 public static class IocRegistration
@@ -12,6 +14,7 @@ public static class IocRegistration
 
 
         services.AddIocRegistrationRepository();
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetCotInstrumentBySlugQuery).Assembly));
 
 
         return services;
