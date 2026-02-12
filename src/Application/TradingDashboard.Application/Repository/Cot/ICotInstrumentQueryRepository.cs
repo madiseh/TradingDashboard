@@ -4,9 +4,9 @@ using TradingDashboard.Domain.Enums;
 namespace TradingDashboard.Application.Repository.Cot;
 
 /// <summary>
-/// Repository contract for COT instruments.
+/// Query repository contract for COT instruments.
 /// </summary>
-public interface ICotInstrumentRepository : IQueryRepository<CotInstrument, Guid>
+public interface ICotInstrumentQueryRepository : IQueryRepository<CotInstrument, Guid>
 {
     /// <summary>
     /// Returns an instrument by slug.

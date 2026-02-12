@@ -5,7 +5,7 @@ namespace TradingDashboard.Presentation.Api.Cot.Controllers;
 
 [ApiController]
 [Route(RoutePaths.Api.CotInstruments)]
-public class CotInstrumentsController(ICotInstrumentRepository repository) : ControllerBase
+public class CotInstrumentsController(ICotInstrumentQueryRepository repository) : ControllerBase
 {
     [HttpGet("{instrumentSlug}")]
     public IActionResult GetBySlug([FromRoute] string instrumentSlug)
