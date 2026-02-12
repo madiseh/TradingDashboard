@@ -27,7 +27,7 @@ public class CotInstrumentsController(IMediator _mediator) : ControllerBase
     }
 
     [HttpGet("by-group")]
-    public async Task<IActionResult> GetByGroup([FromQuery] string group, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetByGroup([FromQuery] string? group, CancellationToken cancellationToken)
     {
         var result = await _mediator.Send(new GetCotInstrumentsByGroupQuery(group), cancellationToken);
         if (!result.IsSuccess)

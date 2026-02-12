@@ -30,4 +30,12 @@ public sealed class CotInstrumentQueryRepository : GenericQueryRepository<CotIns
             .OrderBy(x => x.InstrumentName)
             .ToListAsync(cancellationToken);
     }
+
+    public async Task<IReadOnlyList<CotInstrument>> GetAllOrderedAsync(CancellationToken cancellationToken)
+    {
+        return await _context.Set<CotInstrument>()
+            .OrderBy(x => x.Type)
+            .ThenBy(x => x.InstrumentName)
+            .ToListAsync(cancellationToken);
+    }
 }

@@ -23,4 +23,11 @@ public interface ICotInstrumentQueryRepository : IQueryRepository<CotInstrument,
     /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>List of instruments in that group.</returns>
     Task<IReadOnlyList<CotInstrument>> GetByGroupAsync(CotInstrumentType group, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Returns all instruments ordered by group and instrument name.
+    /// </summary>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>Ordered list of all instruments.</returns>
+    Task<IReadOnlyList<CotInstrument>> GetAllOrderedAsync(CancellationToken cancellationToken);
 }

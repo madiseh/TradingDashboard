@@ -2,6 +2,7 @@ using FluentValidation;
 using MediatR;
 using TradingDashboard.Application.Common.Results;
 using TradingDashboard.Application.Repository.Cot;
+using TradingDashboard.Domain.Entities;
 using TradingDashboard.Domain.Enums;
 
 namespace TradingDashboard.Application.Features.CotInstruments.Queries.GetCotInstrumentsByGroup;
@@ -9,16 +10,16 @@ namespace TradingDashboard.Application.Features.CotInstruments.Queries.GetCotIns
 public sealed class GetCotInstrumentsByGroupHandler(
     ICotInstrumentQueryRepository repository,
     IValidator<GetCotInstrumentsByGroupQuery> validator)
-    : IRequestHandler<GetCotInstrumentsByGroupQuery, OperationalResult<GetCotInstrumentsByGroupResponse>>
+    : IRequestHandler<GetCotInstrumentsByGroupQuery, OperationalResult<IReadOnlyList<GetCotInstrumentsByGroupResponse>>>
 {
-    public async Task<OperationalResult<GetCotInstrumentsByGroupResponse>> Handle(
+    public async Task<OperationalResult<IReadOnlyList<GetCotInstrumentsByGroupResponse>>> Handle(
         GetCotInstrumentsByGroupQuery request,
         CancellationToken cancellationToken)
     {
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
         {
-            return OperationalResult<GetCotInstrumentsByGroupResponse>.Fail(
+            return OperationalResult<IReadOnlyList<GetCotInstrumentsByGroupResponse>>.Fail(
                 "Validation failed",
                 "VALIDATION",
                 validationResult.Errors
@@ -27,59 +28,79 @@ public sealed class GetCotInstrumentsByGroupHandler(
                     .ToArray());
         }
 
-        if (!CotInstrumentTypeExtensions.TryParse(request.Group, out var instrumentType))
-        {
-            return OperationalResult<GetCotInstrumentsByGroupResponse>.Fail(
-                "Validation failed",
-                "VALIDATION",
-                $"Unsupported group '{request.Group}'.");
-        }
-
         try
         {
-            var instruments = await repository.GetByGroupAsync(instrumentType, cancellationToken);
-
-            var duplicateSlugs = instruments
-                .GroupBy(x => x.InstrumentSlug, StringComparer.OrdinalIgnoreCase)
-                .Where(x => x.Count() > 1)
-                .Select(x => x.Key)
-                .ToArray();
-
-            if (duplicateSlugs.Length > 0)
+            if (!string.IsNullOrWhiteSpace(request.Group))
             {
-                return OperationalResult<GetCotInstrumentsByGroupResponse>.Fail(
-                    "Already exists",
-                    "DUPLICATE",
-                    $"Duplicate instrument slug(s) detected: {string.Join(", ", duplicateSlugs)}");
+                return await HandleSingleGroupAsync(request.Group, cancellationToken);
             }
 
-            if (instruments.Count == 0)
+            var allInstruments = await repository.GetAllOrderedAsync(cancellationToken);
+            var groupedResponse = BuildGroupedResponse(allInstruments);
+
+            if (groupedResponse.Count == 0)
             {
-                return OperationalResult<GetCotInstrumentsByGroupResponse>.Fail(
+                return OperationalResult<IReadOnlyList<GetCotInstrumentsByGroupResponse>>.Fail(
                     "Not found",
                     "NOT_FOUND",
-                    $"No instruments found for group '{instrumentType.ToContractValue()}'.");
+                    "No instruments found.");
             }
 
-            var response = new GetCotInstrumentsByGroupResponse(
-                instrumentType.ToContractValue(),
-                instruments
-                    .Select(instrument => new GetCotInstrumentsByGroupItemResponse(
+            return OperationalResult<IReadOnlyList<GetCotInstrumentsByGroupResponse>>.Success(
+                groupedResponse,
+                "Instruments fetched successfully.");
+        }
+        catch (Exception ex)
+        {
+            return OperationalResult<IReadOnlyList<GetCotInstrumentsByGroupResponse>>.Fail(
+                "Unexpected error",
+                "UNEXPECTED",
+                ex.Message);
+        }
+    }
+
+    private async Task<OperationalResult<IReadOnlyList<GetCotInstrumentsByGroupResponse>>> HandleSingleGroupAsync(
+        string group,
+        CancellationToken cancellationToken)
+    {
+        if (!CotInstrumentTypeExtensions.TryParse(group, out var instrumentType))
+        {
+            return OperationalResult<IReadOnlyList<GetCotInstrumentsByGroupResponse>>.Fail(
+                "Validation failed",
+                "VALIDATION",
+                $"Unsupported group '{group}'.");
+        }
+
+        var instruments = await repository.GetByGroupAsync(instrumentType, cancellationToken);
+
+        if (instruments.Count == 0)
+        {
+            return OperationalResult<IReadOnlyList<GetCotInstrumentsByGroupResponse>>.Fail(
+                "Not found",
+                "NOT_FOUND",
+                $"No instruments found for group '{instrumentType.ToContractValue()}'.");
+        }
+
+        return OperationalResult<IReadOnlyList<GetCotInstrumentsByGroupResponse>>.Success(
+            BuildGroupedResponse(instruments),
+            "Instruments fetched successfully.");
+    }
+
+    private static IReadOnlyList<GetCotInstrumentsByGroupResponse> BuildGroupedResponse(
+        IReadOnlyList<CotInstrument> instruments)
+    {
+        return instruments
+            .GroupBy(x => x.Type)
+            .OrderBy(x => x.Key)
+            .Select(group => new GetCotInstrumentsByGroupResponse(
+                group.Key.ToContractValue(),
+                group.Select(instrument => new GetCotInstrumentsByGroupItemResponse(
                         instrument.Id,
                         instrument.InstrumentId,
                         instrument.InstrumentSlug,
                         instrument.InstrumentName,
                         instrument.Type.ToContractValue()))
-                    .ToArray());
-
-            return OperationalResult<GetCotInstrumentsByGroupResponse>.Success(response, "Instruments fetched successfully.");
-        }
-        catch (Exception ex)
-        {
-            return OperationalResult<GetCotInstrumentsByGroupResponse>.Fail(
-                "Unexpected error",
-                "UNEXPECTED",
-                ex.Message);
-        }
+                    .ToArray()))
+            .ToArray();
     }
 }
