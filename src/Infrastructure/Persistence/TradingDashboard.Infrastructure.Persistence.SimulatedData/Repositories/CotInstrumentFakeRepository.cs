@@ -21,12 +21,6 @@ public sealed class CotInstrumentFakeRepository : ICotInstrumentRepository
         };
     }
 
-    public void Create(CotInstrument entity)
-    {
-        ArgumentNullException.ThrowIfNull(entity);
-        _instruments.Add(entity);
-    }
-
     public CotInstrument Get(Guid id)
     {
         var instrument = _instruments.FirstOrDefault(x => x.Id == id);
@@ -42,11 +36,6 @@ public sealed class CotInstrumentFakeRepository : ICotInstrumentRepository
     {
         ArgumentNullException.ThrowIfNull(expression);
         return _instruments.AsQueryable().Any(expression);
-    }
-
-    public void SaveChanges()
-    {
-        // No-op for fake repository
     }
 
     public CotInstrument? GetBySlug(string instrumentSlug)

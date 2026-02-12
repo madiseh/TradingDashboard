@@ -4,7 +4,7 @@ using TradingDashboard.Infrastructure.Persistence.Common.Repositories;
 
 namespace TradingDashboard.Infrastructure.Persistence.Implementation.Repositories;
 
-public sealed class CotInstrumentRepository : GenericRepository<CotInstrument, Guid>, ICotInstrumentRepository
+public sealed class CotInstrumentRepository : GenericQueryRepository<CotInstrument, Guid>, ICotInstrumentRepository
 {
     public CotInstrumentRepository(DbContext context) : base(context)
     {

@@ -6,7 +6,7 @@ namespace TradingDashboard.Application.Repository.Cot;
 /// <summary>
 /// Repository contract for COT instruments.
 /// </summary>
-public interface ICotInstrumentRepository : IRepository<CotInstrument, Guid>
+public interface ICotInstrumentRepository : IQueryRepository<CotInstrument, Guid>
 {
     /// <summary>
     /// Returns an instrument by slug.
