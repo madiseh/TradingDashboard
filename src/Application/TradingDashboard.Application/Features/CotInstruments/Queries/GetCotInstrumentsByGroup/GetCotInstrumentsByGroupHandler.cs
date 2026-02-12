@@ -1,3 +1,4 @@
+using FluentValidation;
 using MediatR;
 using TradingDashboard.Application.Abstractions.Persistence;
 using TradingDashboard.Application.Common.Results;
@@ -5,30 +6,25 @@ using TradingDashboard.Domain.Enums;
 
 namespace TradingDashboard.Application.Features.CotInstruments.Queries.GetCotInstrumentsByGroup;
 
-public sealed class GetCotInstrumentsByGroupHandler(ICotInstrumentRepository repository)
+public sealed class GetCotInstrumentsByGroupHandler(
+    ICotInstrumentRepository repository,
+    IValidator<GetCotInstrumentsByGroupQuery> validator)
     : IRequestHandler<GetCotInstrumentsByGroupQuery, OperationalResult<GetCotInstrumentsByGroupResponse>>
 {
     public async Task<OperationalResult<GetCotInstrumentsByGroupResponse>> Handle(
         GetCotInstrumentsByGroupQuery request,
         CancellationToken cancellationToken)
     {
-        var validationErrors = new List<string>();
-
-        if (string.IsNullOrWhiteSpace(request.Group))
-        {
-            validationErrors.Add("Group is required.");
-        }
-        else if (request.Group.Trim().Length < 3)
-        {
-            validationErrors.Add("Group must be at least 3 characters.");
-        }
-
-        if (validationErrors.Count > 0)
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+        if (!validationResult.IsValid)
         {
             return OperationalResult<GetCotInstrumentsByGroupResponse>.Fail(
                 "Validation failed",
                 "VALIDATION",
-                validationErrors.ToArray());
+                validationResult.Errors
+                    .Select(x => x.ErrorMessage)
+                    .Distinct()
+                    .ToArray());
         }
 
         if (!CotInstrumentTypeExtensions.TryParse(request.Group, out var instrumentType))

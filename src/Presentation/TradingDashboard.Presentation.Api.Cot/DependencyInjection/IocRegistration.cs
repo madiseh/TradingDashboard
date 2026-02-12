@@ -1,3 +1,4 @@
+using FluentValidation;
 using TradingDashboard.Application.Features.CotInstruments.Queries.GetCotInstrumentBySlug;
 
 namespace TradingDashboard.Presentation.Api.Cot.DependencyInjection;
@@ -15,6 +16,7 @@ public static class IocRegistration
 
         services.AddIocRegistrationRepository();
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetCotInstrumentBySlugQuery).Assembly));
+        services.AddValidatorsFromAssemblyContaining<GetCotInstrumentBySlugValidator>();
 
 
         return services;

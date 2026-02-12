@@ -1,3 +1,4 @@
+using FluentValidation;
 using MediatR;
 using TradingDashboard.Application.Abstractions.Persistence;
 using TradingDashboard.Application.Common.Results;
@@ -5,30 +6,25 @@ using TradingDashboard.Domain.Enums;
 
 namespace TradingDashboard.Application.Features.CotInstruments.Queries.GetCotInstrumentBySlug;
 
-public sealed class GetCotInstrumentBySlugHandler(ICotInstrumentRepository repository)
+public sealed class GetCotInstrumentBySlugHandler(
+    ICotInstrumentRepository repository,
+    IValidator<GetCotInstrumentBySlugQuery> validator)
     : IRequestHandler<GetCotInstrumentBySlugQuery, OperationalResult<GetCotInstrumentBySlugResponse>>
 {
     public async Task<OperationalResult<GetCotInstrumentBySlugResponse>> Handle(
         GetCotInstrumentBySlugQuery request,
         CancellationToken cancellationToken)
     {
-        var validationErrors = new List<string>();
-
-        if (string.IsNullOrWhiteSpace(request.InstrumentSlug))
-        {
-            validationErrors.Add("InstrumentSlug is required.");
-        }
-        else if (request.InstrumentSlug.Trim().Length < 3)
-        {
-            validationErrors.Add("InstrumentSlug must be at least 3 characters.");
-        }
-
-        if (validationErrors.Count > 0)
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+        if (!validationResult.IsValid)
         {
             return OperationalResult<GetCotInstrumentBySlugResponse>.Fail(
                 "Validation failed",
                 "VALIDATION",
-                validationErrors.ToArray());
+                validationResult.Errors
+                    .Select(x => x.ErrorMessage)
+                    .Distinct()
+                    .ToArray());
         }
 
         try
