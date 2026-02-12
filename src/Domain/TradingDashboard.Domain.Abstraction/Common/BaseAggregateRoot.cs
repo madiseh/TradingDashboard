@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TradingDashboard.Domain.Abstraction.Events;
 
 namespace TradingDashboard.Domain.Abstraction.Common;

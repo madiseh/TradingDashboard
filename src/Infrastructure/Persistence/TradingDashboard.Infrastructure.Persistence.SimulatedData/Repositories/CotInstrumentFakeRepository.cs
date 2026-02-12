@@ -1,5 +1,4 @@
-using TradingDashboard.Application.Repository.Cot;
-using TradingDashboard.Domain.Entities;
+using TradingDashboard.Domain.Enums;
 
 namespace TradingDashboard.Infrastructure.Persistence.SimulatedData.Repositories;
 
@@ -11,14 +10,14 @@ public sealed class CotInstrumentFakeRepository : ICotInstrumentRepository
     {
         _instruments = new List<CotInstrument>
         {
-            new CotInstrument(Guid.NewGuid(), "01", "australian-dollar", "Australian Dollar"),
-            new CotInstrument(Guid.NewGuid(), "02", "canadian-dollar", "Canadian Dollar"),
-            new CotInstrument(Guid.NewGuid(), "03", "crude-oil-wti", "Crude Oil WTI"),
-            new CotInstrument(Guid.NewGuid(), "04", "gold", "Gold"),
-            new CotInstrument(Guid.NewGuid(), "05", "silver", "Silver"),
-            new CotInstrument(Guid.NewGuid(), "06", "sp500", "S&P 500"),
-            new CotInstrument(Guid.NewGuid(), "07", "euro-fx", "Euro FX"),
-            new CotInstrument(Guid.NewGuid(), "08", "japanese-yen", "Japanese Yen"),
+            new CotInstrument(Guid.NewGuid(), "01", "australian-dollar", "Australian Dollar", CotInstrumentType.Currencies),
+            new CotInstrument(Guid.NewGuid(), "02", "canadian-dollar", "Canadian Dollar", CotInstrumentType.Currencies),
+            new CotInstrument(Guid.NewGuid(), "03", "crude-oil-wti", "Crude Oil WTI", CotInstrumentType.Energies),
+            new CotInstrument(Guid.NewGuid(), "04", "gold", "Gold", CotInstrumentType.Metals),
+            new CotInstrument(Guid.NewGuid(), "05", "silver", "Silver", CotInstrumentType.Metals),
+            new CotInstrument(Guid.NewGuid(), "06", "sp500", "S&P 500", CotInstrumentType.Indexes),
+            new CotInstrument(Guid.NewGuid(), "07", "euro-fx", "Euro FX", CotInstrumentType.Currencies),
+            new CotInstrument(Guid.NewGuid(), "08", "japanese-yen", "Japanese Yen", CotInstrumentType.Currencies),
         };
     }
 
@@ -57,7 +56,15 @@ public sealed class CotInstrumentFakeRepository : ICotInstrumentRepository
             throw new ArgumentException("Instrument slug cannot be empty.", nameof(instrumentSlug));
         }
 
-        return _instruments.FirstOrDefault(x => 
+        return _instruments.FirstOrDefault(x =>
             string.Equals(x.InstrumentSlug, instrumentSlug, StringComparison.OrdinalIgnoreCase));
+    }
+
+    public IList<CotInstrument> GetByGroup(CotInstrumentType group)
+    {
+        return _instruments
+            .Where(x => x.Type == group)
+            .OrderBy(x => x.InstrumentName)
+            .ToList();
     }
 }

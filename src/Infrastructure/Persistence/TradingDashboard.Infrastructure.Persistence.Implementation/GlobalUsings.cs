@@ -6,4 +6,6 @@ global using System.Linq;
 
 global using Microsoft.EntityFrameworkCore;
 global using TradingDashboard.Domain.Entities;
+global using TradingDashboard.Domain.Enums;
+global using TradingDashboard.Infrastructure.Persistence.Implementation.Constants;
 global using TradingDashboard.Infrastructure.Persistence.Implementation.Configuration;

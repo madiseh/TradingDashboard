@@ -1,6 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TradingDashboard.Domain.Entities;
+using TradingDashboard.Domain.Enums;
 
 namespace TradingDashboard.Infrastructure.Persistence.Implementation.Configuration;
 
@@ -8,7 +7,7 @@ public sealed class CotInstrumentConfiguration : IEntityTypeConfiguration<CotIns
 {
     public void Configure(EntityTypeBuilder<CotInstrument> entity)
     {
-        entity.ToTable("CotInstruments");
+        entity.ToTable(DbTableNames.CotInstruments);
         entity.HasKey(x => x.Id);
 
         entity.Property(x => x.Id)
@@ -20,13 +19,24 @@ public sealed class CotInstrumentConfiguration : IEntityTypeConfiguration<CotIns
 
         entity.Property(x => x.InstrumentSlug)
             .HasMaxLength(256)
+            .UseCollation("NOCASE")
             .IsRequired();
 
         entity.Property(x => x.InstrumentName)
             .HasMaxLength(256)
             .IsRequired();
 
+        entity.Property(x => x.Type)
+            .HasConversion<int>()
+            .IsRequired();
+
         entity.HasIndex(x => x.InstrumentId).IsUnique();
         entity.HasIndex(x => x.InstrumentSlug).IsUnique();
+        entity.HasIndex(x => x.Type);
+
+        entity.HasOne(x => x.TypeLookup)
+            .WithMany()
+            .HasForeignKey(x => x.Type)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

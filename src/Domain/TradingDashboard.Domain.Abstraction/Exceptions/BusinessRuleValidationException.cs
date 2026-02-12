@@ -1,5 +1,3 @@
-using System;
-
 namespace TradingDashboard.Domain.Abstraction.Exceptions;
 
 public sealed class BusinessRuleValidationException : Exception

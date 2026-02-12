@@ -54,11 +54,22 @@
 - EF entity mappings must live in `Infrastructure.Persistence.Implementation/Configuration` as `IEntityTypeConfiguration<T>`.
 - `DbContext` classes must apply these mappings instead of inlining entity configuration in `OnModelCreating`.
 
+## Database Table Naming Rule
+
+- Database table names must be defined as constants in a dedicated file.
+- EF Core mappings must use those constants (for example in `ToTable(...)`) and must not use hard-coded table name strings.
+
 ## Global Usings Standard
 
 - Every project must include a `GlobalUsings.cs` file.
 - `GlobalUsings.cs` must contain a `#region System` block.
 - All shared `using System...` directives must be placed inside that region.
+
+## NuGet Versioning Rule
+
+- Package versions must be managed centrally in `Directory.Packages.props`.
+- `PackageReference` entries in `.csproj` files must not include a `Version` attribute.
+- New packages must be added with `PackageVersion` in `Directory.Packages.props` before use in projects.
 
 ## Interface Documentation Rule
 

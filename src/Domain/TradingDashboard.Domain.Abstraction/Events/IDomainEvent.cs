@@ -1,5 +1,3 @@
-using System;
-
 namespace TradingDashboard.Domain.Abstraction.Events;
 
 public interface IDomainEvent

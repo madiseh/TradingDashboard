@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace TradingDashboard.Domain.Abstraction.Common;
 
 public abstract class BaseValueObject

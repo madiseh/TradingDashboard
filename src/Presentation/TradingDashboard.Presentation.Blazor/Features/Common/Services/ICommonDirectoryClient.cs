@@ -1,5 +1,3 @@
-using TradingDashboard.Presentation.Blazor.Features.Common.Contracts;
-
 namespace TradingDashboard.Presentation.Blazor.Features.Common.Services;
 
 /// <summary>

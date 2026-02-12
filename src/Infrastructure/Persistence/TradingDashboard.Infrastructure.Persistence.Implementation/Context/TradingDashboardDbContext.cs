@@ -9,9 +9,11 @@ public sealed class TradingDashboardDbContext : DbContext
     }
 
     public DbSet<CotInstrument> CotInstruments => Set<CotInstrument>();
+    public DbSet<CotInstrumentTypeLookup> CotInstrumentTypes => Set<CotInstrumentTypeLookup>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.ApplyConfiguration(new CotInstrumentTypeLookupConfiguration());
         modelBuilder.ApplyConfiguration(new CotInstrumentConfiguration());
         base.OnModelCreating(modelBuilder);
     }

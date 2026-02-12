@@ -1,7 +1,3 @@
-using System.Net.Http.Json;
-using TradingDashboard.Presentation.Blazor.Features.Common.Contracts;
-using TradingDashboard.Presentation.Common.Routing;
-
 namespace TradingDashboard.Presentation.Blazor.Features.Common.Services;
 
 public sealed class CommonDirectoryClient(HttpClient httpClient) : ICommonDirectoryClient
