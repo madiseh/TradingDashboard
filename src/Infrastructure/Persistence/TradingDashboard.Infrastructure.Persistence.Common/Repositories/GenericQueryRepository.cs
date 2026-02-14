@@ -1,21 +1,16 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using TradingDashboard.Application.Repository.Base;
 
-namespace TradingDashboard.Infrastructure.Persistence.SimulatedData.Repositories;
+namespace TradingDashboard.Infrastructure.Persistence.Common.Repositories;
 
-public class GenericRepository<T, TKey> : IRepository<T, TKey> where T : class
+public class GenericQueryRepository<T, TKey> : IQueryRepository<T, TKey> where T : class
 {
-    private readonly DbContext _context;
+    protected readonly DbContext _context;
 
-    public GenericRepository(DbContext context)
+    public GenericQueryRepository(DbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
-    }
-
-    public void Create(T entity)
-    {
-        ArgumentNullException.ThrowIfNull(entity);
-        _context.Set<T>().Add(entity);
     }
 
     public T Get(TKey id)
@@ -33,10 +28,5 @@ public class GenericRepository<T, TKey> : IRepository<T, TKey> where T : class
     {
         ArgumentNullException.ThrowIfNull(expression);
         return _context.Set<T>().Any(expression);
-    }
-
-    public void SaveChanges()
-    {
-        _context.SaveChanges();
     }
 }

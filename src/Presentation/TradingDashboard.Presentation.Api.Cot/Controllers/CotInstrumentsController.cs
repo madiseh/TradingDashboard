@@ -1,80 +1,45 @@
 using Microsoft.AspNetCore.Mvc;
-using TradingDashboard.Domain.Enums;
+using MediatR;
+using TradingDashboard.Application.Features.CotInstruments.Queries.GetCotInstrumentBySlug;
+using TradingDashboard.Application.Features.CotInstruments.Queries.GetCotInstrumentsByGroup;
 
 namespace TradingDashboard.Presentation.Api.Cot.Controllers;
 
 [ApiController]
 [Route(RoutePaths.Api.CotInstruments)]
-public class CotInstrumentsController(ICotInstrumentRepository repository) : ControllerBase
+public class CotInstrumentsController(IMediator _mediator) : ControllerBase
 {
     [HttpGet("{instrumentSlug}")]
-    public IActionResult GetBySlug([FromRoute] string instrumentSlug)
+    public async Task<IActionResult> GetBySlug([FromRoute] string instrumentSlug, CancellationToken cancellationToken)
     {
-        var instrument = repository.GetBySlug(instrumentSlug);
-        if (instrument is null)
+        var result = await _mediator.Send(new GetCotInstrumentBySlugQuery(instrumentSlug), cancellationToken);
+        if (!result.IsSuccess)
         {
-            return NotFound(new
+            return BadRequest(new
             {
-                error = new
-                {
-                    code = "INSTRUMENT_NOT_FOUND",
-                    message = $"Instrument '{instrumentSlug}' was not found."
-                }
+                result.Message,
+                result.ErrorCode,
+                result.Errors
             });
         }
 
-        return Ok(new
-        {
-            id = instrument.Id,
-            instrumentId = instrument.InstrumentId,
-            instrumentSlug = instrument.InstrumentSlug,
-            instrumentName = instrument.InstrumentName,
-            type = instrument.Type.ToContractValue()
-        });
+        return Ok(result.Data);
     }
 
     [HttpGet("by-group")]
-    public IActionResult GetByGroup([FromQuery] string group)
+    public async Task<IActionResult> GetByGroup([FromQuery] string? group, CancellationToken cancellationToken)
     {
-        if (string.IsNullOrWhiteSpace(group))
+        var result = await _mediator.Send(new GetCotInstrumentsByGroupQuery(group), cancellationToken);
+        if (!result.IsSuccess)
         {
             return BadRequest(new
             {
-                error = new
-                {
-                    code = "INVALID_GROUP",
-                    message = "Query parameter 'group' is required."
-                }
+                result.Message,
+                result.ErrorCode,
+                result.Errors
             });
         }
 
-        if (!CotInstrumentTypeExtensions.TryParse(group, out var instrumentType))
-        {
-            return BadRequest(new
-            {
-                error = new
-                {
-                    code = "INVALID_GROUP",
-                    message = $"Unsupported group '{group}'."
-                }
-            });
-        }
-
-        var items = repository.GetByGroup(instrumentType)
-            .Select(instrument => new
-            {
-                id = instrument.Id,
-                instrumentId = instrument.InstrumentId,
-                instrumentSlug = instrument.InstrumentSlug,
-                instrumentName = instrument.InstrumentName,
-                type = instrument.Type.ToContractValue()
-            })
-            .ToArray();
-
-        return Ok(new
-        {
-            group = instrumentType.ToContractValue(),
-            items
-        });
+        return Ok(result.Data);
     }
 }
