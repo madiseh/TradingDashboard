@@ -7,5 +7,6 @@ global using System.Linq;
 global using TradingDashboard.Application.Common.Models;
 global using Microsoft.AspNetCore.Components;
 global using System.Net.Http.Json;
+global using PageComponentBase = TradingDashboard.Presentation.Blazor.Components.Pages.PageComponentBase;
 global using TradingDashboard.Presentation.Common.Constants;
 global using TradingDashboard.Presentation.Common.Routing;

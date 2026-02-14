@@ -8,9 +8,6 @@ public partial class Home
         CotReportModel.Cot.ToContractValue()
     ];
 
-    [Inject]
-    private IHttpClientFactory HttpClientFactory { get; set; } = default!;
-
     private bool _isLoading = true;
     private string? _errorMessage;
     private List<HomeGroupViewModel> _groups = [];
