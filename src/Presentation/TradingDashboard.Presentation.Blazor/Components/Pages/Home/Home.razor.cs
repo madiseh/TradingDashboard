@@ -1,4 +1,4 @@
-namespace TradingDashboard.Presentation.Blazor.Components.Pages;
+namespace TradingDashboard.Presentation.Blazor.Components.Pages.Home;
 
 public partial class Home
 {
@@ -27,7 +27,7 @@ public partial class Home
 
         try
         {
-            var client = HttpClientFactory.CreateClient("ApiCot");
+            var client = HttpClientFactory.CreateClient(HttpClientNames.ApiCot);
             var response = await client.GetAsync(RoutePaths.Api.CotInstrumentsByGroup);
             if (!response.IsSuccessStatusCode)
             {
@@ -80,24 +80,4 @@ public partial class Home
     {
         return $"{RoutePaths.Ui.Markets}?group={Uri.EscapeDataString(group)}&model={model.ToContractValue()}";
     }
-
-    private sealed record CotInstrumentsByGroupResponseDto(
-        string Group,
-        IReadOnlyList<CotInstrumentsByGroupItemDto> Items);
-
-    private sealed record CotInstrumentsByGroupItemDto(
-        Guid Id,
-        string InstrumentId,
-        string InstrumentSlug,
-        string InstrumentName,
-        string Type);
-
-    private sealed record HomeGroupViewModel(
-        string Type,
-        IReadOnlyList<HomeItemViewModel> Items);
-
-    private sealed record HomeItemViewModel(
-        string Name,
-        string Slug,
-        IReadOnlyList<string> AvailableModels);
 }

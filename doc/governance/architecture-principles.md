@@ -137,8 +137,10 @@ Application/
 ## Razor Component Structure Rule
 
 - Every Blazor component must use split files: `<Component>.razor` and `<Component>.razor.cs`.
+- Every Blazor page/module component must have a dedicated sibling view-model file: `<Component>.ViewModels.cs` in the same folder.
 - UI markup must stay in `.razor`.
 - Parameters, state, and methods must stay in `.razor.cs`.
+- View model records/classes must stay in `<Component>.ViewModels.cs`.
 - Inline `@code` blocks should not be used in `.razor` files.
 
 Example:

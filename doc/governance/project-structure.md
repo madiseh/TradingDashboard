@@ -34,6 +34,7 @@ TradingDashboard/
 - Naming follows `TradingDashboard.<Layer>` convention.
 - Blazor UI consumes data from `TradingDashboard.Presentation.Api` only.
 - Blazor presentation stack uses `MudBlazor`.
+- Blazor modules/pages must keep view models in sibling files named `<Component>.ViewModels.cs` next to `<Component>.razor` and `<Component>.razor.cs`.
 - `TradingDashboard.Domain.Abstraction` is a dedicated project for shared base domain types.
 - Persistence is split into `Infrastructure.Persistence.Common` and `Infrastructure.Persistence.Implementation`.
 - `Infrastructure.Persistence.SimulatedData` contains fake/json-backed repositories for development and local simulation.

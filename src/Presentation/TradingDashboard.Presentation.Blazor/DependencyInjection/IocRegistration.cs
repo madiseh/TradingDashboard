@@ -6,10 +6,10 @@ public static class IocRegistration
 {
     public static IServiceCollection AddIocRegistration(this IServiceCollection services)
     {
-        services.AddHttpClient("ApiCot", (sp, client) =>
+        services.AddHttpClient(HttpClientNames.ApiCot, (sp, client) =>
         {
             var configuration = sp.GetRequiredService<IConfiguration>();
-            var baseUrl = configuration["ApiCot:BaseUrl"] ?? "https://localhost:7116";
+            var baseUrl = configuration[$"{HttpClientNames.ApiCot}:BaseUrl"] ?? "https://localhost:7116";
             client.BaseAddress = new Uri(baseUrl);
         });
 
