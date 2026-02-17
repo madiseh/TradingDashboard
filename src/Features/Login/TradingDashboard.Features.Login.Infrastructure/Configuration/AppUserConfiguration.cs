@@ -15,7 +15,6 @@ public sealed class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
 
         entity.Property(x => x.Username)
             .HasMaxLength(64)
-            .UseCollation("NOCASE")
             .IsRequired();
 
         entity.Property(x => x.Email)
@@ -23,7 +22,6 @@ public sealed class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
                 x => x.Value,
                 value => EmailAddress.Create(value))
             .HasMaxLength(256)
-            .UseCollation("NOCASE")
             .IsRequired();
 
         entity.Property(x => x.PasswordHash)

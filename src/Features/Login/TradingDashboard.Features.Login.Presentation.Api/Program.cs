@@ -15,7 +15,12 @@ public partial class Program
 {
     public static WebApplicationBuilder CreateHostBuilder(string[] args)
     {
-        var builder = WebApplication.CreateBuilder(args);
+        var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+        {
+            Args = args,
+            ApplicationName = typeof(Program).Assembly.FullName,
+            ContentRootPath = AppContext.BaseDirectory
+        });
 
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(options =>

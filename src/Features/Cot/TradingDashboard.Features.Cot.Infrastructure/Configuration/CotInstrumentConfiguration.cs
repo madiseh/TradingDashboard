@@ -19,7 +19,6 @@ public sealed class CotInstrumentConfiguration : IEntityTypeConfiguration<CotIns
 
         entity.Property(x => x.InstrumentSlug)
             .HasMaxLength(256)
-            .UseCollation("NOCASE")
             .IsRequired();
 
         entity.Property(x => x.InstrumentName)

@@ -16,7 +16,6 @@ public sealed class CotInstrumentTypeLookupConfiguration : IEntityTypeConfigurat
 
         entity.Property(x => x.Name)
             .HasMaxLength(128)
-            .UseCollation("NOCASE")
             .IsRequired();
 
         entity.HasIndex(x => x.Name).IsUnique();

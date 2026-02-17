@@ -20,7 +20,7 @@ namespace TradingDashboard.Features.Cot.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false, collation: "NOCASE")
+                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -34,7 +34,7 @@ namespace TradingDashboard.Features.Cot.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     InstrumentId = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    InstrumentSlug = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false, collation: "NOCASE"),
+                    InstrumentSlug = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     InstrumentName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     Type = table.Column<int>(type: "int", nullable: false)
                 },

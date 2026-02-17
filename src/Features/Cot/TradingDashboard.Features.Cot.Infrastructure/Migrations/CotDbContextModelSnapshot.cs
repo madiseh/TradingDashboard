@@ -41,8 +41,7 @@ namespace TradingDashboard.Features.Cot.Infrastructure.Migrations
                     b.Property<string>("InstrumentSlug")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)")
-                        .UseCollation("NOCASE");
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
@@ -68,8 +67,7 @@ namespace TradingDashboard.Features.Cot.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)")
-                        .UseCollation("NOCASE");
+                        .HasColumnType("nvarchar(128)");
 
                     b.HasKey("Id");
 

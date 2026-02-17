@@ -34,8 +34,7 @@ namespace TradingDashboard.Features.Login.Infrastructure.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)")
-                        .UseCollation("NOCASE");
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<DateTime?>("LastLoginAtUtc")
                         .HasColumnType("datetime2");
@@ -56,8 +55,7 @@ namespace TradingDashboard.Features.Login.Infrastructure.Migrations
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)")
-                        .UseCollation("NOCASE");
+                        .HasColumnType("nvarchar(64)");
 
                     b.HasKey("Id");
 

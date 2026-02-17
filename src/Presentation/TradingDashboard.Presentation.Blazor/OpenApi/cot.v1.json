@@ -1,4 +1,4 @@
-{
+﻿{
   "openapi": "3.0.1",
   "info": {
     "title": "Trading Dashboard API - COT",
@@ -10,6 +10,8 @@
         "tags": [
           "CotInstruments"
         ],
+        "summary": "Get COT instrument by slug",
+        "operationId": "CotGetInstrumentBySlug",
         "parameters": [
           {
             "name": "instrumentSlug",
@@ -24,17 +26,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetCotInstrumentBySlugResponse"
-                }
-              },
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetCotInstrumentBySlugResponse"
-                }
-              },
-              "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetCotInstrumentBySlugResponse"
                 }
@@ -44,17 +36,7 @@
           "400": {
             "description": "Bad Request",
             "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              },
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              },
-              "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ApiErrorResponse"
                 }
@@ -69,6 +51,8 @@
         "tags": [
           "CotInstruments"
         ],
+        "summary": "Get COT instruments by group",
+        "operationId": "CotGetInstrumentsByGroup",
         "parameters": [
           {
             "name": "group",
@@ -82,23 +66,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/GetCotInstrumentsByGroupResponse"
-                  }
-                }
-              },
               "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/GetCotInstrumentsByGroupResponse"
-                  }
-                }
-              },
-              "text/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -111,17 +79,7 @@
           "400": {
             "description": "Bad Request",
             "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              },
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              },
-              "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ApiErrorResponse"
                 }
