@@ -4,6 +4,7 @@ using TradingDashboard.Application.Features.Auth.Commands.SignIn;
 using TradingDashboard.Application.Features.Auth.Commands.SignUp;
 using TradingDashboard.Presentation.Api.Login.Contracts;
 using TradingDashboard.Presentation.Api.Login.Services;
+using TradingDashboard.Presentation.Common.Contracts;
 
 namespace TradingDashboard.Presentation.Api.Login.Endpoints;
 
@@ -16,16 +17,22 @@ public static class AuthEndpoints
 
         group.MapPost("signup", SignUpAsync)
             .WithName("AuthSignUp")
-            .WithSummary("Create a new account and returns an access token");
+            .WithSummary("Create a new account and returns an access token")
+            .Produces<AuthTokenResult>(StatusCodes.Status200OK)
+            .Produces<ApiErrorResponse>(StatusCodes.Status400BadRequest);
 
         group.MapPost("signin", SignInAsync)
             .WithName("AuthSignIn")
-            .WithSummary("Sign in with username/email and password");
+            .WithSummary("Sign in with username/email and password")
+            .Produces<AuthTokenResult>(StatusCodes.Status200OK)
+            .Produces<ApiErrorResponse>(StatusCodes.Status400BadRequest);
 
         group.MapGet("me", GetCurrentUser)
             .WithName("AuthMe")
             .RequireAuthorization()
-            .WithSummary("Returns the current authenticated user");
+            .WithSummary("Returns the current authenticated user")
+            .Produces<MeResponse>(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status401Unauthorized);
 
         return app;
     }
@@ -42,7 +49,7 @@ public static class AuthEndpoints
 
         if (!result.IsSuccess || result.Data is null)
         {
-            return TypedResults.BadRequest(new { result.Message, result.ErrorCode, result.Errors });
+            return TypedResults.BadRequest(new ApiErrorResponse(result.Message, result.ErrorCode, result.Errors));
         }
 
         var token = jwtTokenService.GenerateToken(result.Data);
@@ -61,7 +68,7 @@ public static class AuthEndpoints
 
         if (!result.IsSuccess || result.Data is null)
         {
-            return TypedResults.BadRequest(new { result.Message, result.ErrorCode, result.Errors });
+            return TypedResults.BadRequest(new ApiErrorResponse(result.Message, result.ErrorCode, result.Errors));
         }
 
         var token = jwtTokenService.GenerateToken(result.Data);
@@ -74,11 +81,6 @@ public static class AuthEndpoints
         var username = user.FindFirstValue(ClaimTypes.Name) ?? user.FindFirstValue(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.UniqueName);
         var email = user.FindFirstValue(ClaimTypes.Email) ?? user.FindFirstValue(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Email);
 
-        return TypedResults.Ok(new
-        {
-            UserId = userId,
-            Username = username,
-            Email = email
-        });
+        return TypedResults.Ok(new MeResponse(userId, username, email));
     }
 }

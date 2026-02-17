@@ -33,7 +33,7 @@ public partial class Home
                 return;
             }
 
-            var payload = await response.Content.ReadFromJsonAsync<IReadOnlyList<CotInstrumentsByGroupResponseDto>>();
+            var payload = await response.Content.ReadFromJsonAsync<IReadOnlyList<GetCotInstrumentsByGroupResponse>>();
             if (payload is null)
             {
                 _errorMessage = "Market directory response is empty.";
@@ -43,11 +43,11 @@ public partial class Home
 
             _groups = payload
                 .Select(group => new HomeGroupViewModel(
-                    group.Group,
-                    group.Items
+                    group.Group ?? string.Empty,
+                    (group.Items ?? [])
                         .Select(item => new HomeItemViewModel(
-                            item.InstrumentName,
-                            item.InstrumentSlug,
+                            item.InstrumentName ?? string.Empty,
+                            item.InstrumentSlug ?? string.Empty,
                             [.. BothModels]))
                         .ToList()))
                 .ToList();

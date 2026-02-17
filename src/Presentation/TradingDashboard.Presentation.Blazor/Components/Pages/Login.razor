@@ -43,7 +43,7 @@
             Expires: @_authResult.ExpiresAtUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")
         </MudText>
         <MudText Typo="Typo.caption" Class="mt-1 d-block">
-            Token: @_authResult.AccessToken[..Math.Min(40, _authResult.AccessToken.Length)]...
+            Token: @(_authResult.AccessToken ?? string.Empty)[..Math.Min(40, (_authResult.AccessToken ?? string.Empty).Length)]...
         </MudText>
 
         @if (_meResult is not null)

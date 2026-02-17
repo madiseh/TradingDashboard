@@ -40,9 +40,15 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-Directory.CreateDirectory(Path.Combine(builder.Environment.ContentRootPath, "db"));
-using (var scope = app.Services.CreateScope())
+var skipDbInit = string.Equals(
+    Environment.GetEnvironmentVariable("TD_SKIP_DB_INIT"),
+    "true",
+    StringComparison.OrdinalIgnoreCase);
+
+if (!skipDbInit)
 {
+    Directory.CreateDirectory(Path.Combine(builder.Environment.ContentRootPath, "db"));
+    using var scope = app.Services.CreateScope();
     var dbContext = scope.ServiceProvider.GetRequiredService<LoginDbContext>();
     dbContext.Database.EnsureCreated();
 }

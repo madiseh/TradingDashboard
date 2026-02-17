@@ -22,21 +22,30 @@ public partial class Login
 
     private bool _isSubmitting;
     private string? _errorMessage;
-    private AuthResultDto? _authResult;
-    private MeResultDto? _meResult;
+    private AuthTokenResult? _authResult;
+    private MeResponse? _meResult;
 
     private async Task SignInAsync()
     {
         await AuthenticateAsync(
             RoutePaths.Api.Login.SignIn,
-            new SignInRequestDto(_signInIdentity, _signInPassword));
+            new SignInRequest
+            {
+                Identity = _signInIdentity,
+                Password = _signInPassword
+            });
     }
 
     private async Task SignUpAsync()
     {
         await AuthenticateAsync(
             RoutePaths.Api.Login.SignUp,
-            new SignUpRequestDto(_signUpUsername, _signUpEmail, _signUpPassword));
+            new SignUpRequest
+            {
+                Username = _signUpUsername,
+                Email = _signUpEmail,
+                Password = _signUpPassword
+            });
     }
 
     private async Task AuthenticateAsync(string route, object payload)
@@ -59,7 +68,7 @@ public partial class Login
                 return;
             }
 
-            var authResult = await response.Content.ReadFromJsonAsync<AuthResultDto>();
+            var authResult = await response.Content.ReadFromJsonAsync<AuthTokenResult>();
             if (authResult is null)
             {
                 _errorMessage = "Authentication response is empty.";
@@ -70,6 +79,15 @@ public partial class Login
             }
 
             _authResult = authResult;
+            if (string.IsNullOrWhiteSpace(authResult.AccessToken))
+            {
+                _errorMessage = "Authentication response does not contain access token.";
+                Snackbar.Add(_errorMessage, Severity.Error);
+                _authResult = null;
+                AuthSession.Clear();
+                return;
+            }
+
             AuthSession.SetToken(authResult.AccessToken, authResult.ExpiresAtUtc);
 
             Snackbar.Add("Authentication succeeded.", Severity.Success);
@@ -106,12 +124,12 @@ public partial class Login
             return;
         }
 
-        _meResult = await response.Content.ReadFromJsonAsync<MeResultDto>();
+        _meResult = await response.Content.ReadFromJsonAsync<MeResponse>();
     }
 
     private static async Task<string> ExtractErrorAsync(HttpResponseMessage response)
     {
-        var payload = await response.Content.ReadFromJsonAsync<ErrorResponseDto>();
+        var payload = await response.Content.ReadFromJsonAsync<TradingDashboard.Presentation.Blazor.Contracts.Login.ApiErrorResponse>();
         if (payload is null)
         {
             return $"Request failed with status {(int)response.StatusCode}.";
@@ -122,18 +140,4 @@ public partial class Login
             : payload.Message ?? $"Request failed with status {(int)response.StatusCode}.";
     }
 
-    private sealed record SignInRequestDto(string Identity, string Password);
-
-    private sealed record SignUpRequestDto(string Username, string Email, string Password);
-
-    private sealed record AuthResultDto(
-        string AccessToken,
-        DateTime ExpiresAtUtc,
-        Guid UserId,
-        string Username,
-        string Email);
-
-    private sealed record MeResultDto(string? UserId, string? Username, string? Email);
-
-    private sealed record ErrorResponseDto(string? Message, string? ErrorCode, IReadOnlyList<string>? Errors);
 }

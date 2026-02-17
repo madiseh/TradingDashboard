@@ -17,8 +17,14 @@ builder.Services.AddIocRegistration(builder.Configuration);
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
+var skipDbInit = string.Equals(
+    Environment.GetEnvironmentVariable("TD_SKIP_DB_INIT"),
+    "true",
+    StringComparison.OrdinalIgnoreCase);
+
+if (!skipDbInit)
 {
+    using var scope = app.Services.CreateScope();
     var dbContext = scope.ServiceProvider.GetRequiredService<CotDbContext>();
     dbContext.Database.EnsureCreated();
     CotInstrumentSeedBootstrapper.SeedMissingInstruments(dbContext);
