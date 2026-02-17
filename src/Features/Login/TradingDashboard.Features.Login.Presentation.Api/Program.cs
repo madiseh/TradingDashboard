@@ -1,7 +1,8 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using TradingDashboard.Presentation.Api.Login.Data;
+using TradingDashboard.Application.Common.Security;
+using TradingDashboard.Infrastructure.Persistence.Implementation.Seed;
 using TradingDashboard.Presentation.Api.Login.DependencyInjection;
 using TradingDashboard.Presentation.Api.Login.Endpoints;
 using TradingDashboard.Presentation.Api.Login.Options;
@@ -48,9 +49,11 @@ var skipDbInit = string.Equals(
 
 if (!skipDbInit)
 {
-    Directory.CreateDirectory(Path.Combine(builder.Environment.ContentRootPath, "db"));
     using var scope = app.Services.CreateScope();
-    await LoginDbInitializer.InitializeAsync(scope.ServiceProvider);
+    var dbContext = scope.ServiceProvider.GetRequiredService<LoginDbContext>();
+    var passwordHashingService = scope.ServiceProvider.GetRequiredService<IPasswordHashingService>();
+    dbContext.Database.EnsureCreated();
+    AdminUserSeedBootstrapper.SeedMissingAdmin(dbContext, passwordHashingService);
 }
 
 if (app.Environment.IsDevelopment())

@@ -11,24 +11,17 @@ public static class IocRegistration
 {
     public static IServiceCollection AddIocRegistration(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("LoginDatabase")
-            ?? "Data Source=db/login.db";
-        var databaseOptions = configuration.GetSection(DatabaseOptions.SectionName).Get<DatabaseOptions>() ?? new DatabaseOptions();
+        var connectionString = configuration.GetConnectionString("LoginDatabase");
+        if (string.IsNullOrWhiteSpace(connectionString))
+        {
+            throw new InvalidOperationException("Connection string 'LoginDatabase' is required.");
+        }
 
         services.AddDbContext<LoginDbContext>(options =>
-        {
-            if (string.Equals(databaseOptions.Provider, "SqlServer", StringComparison.OrdinalIgnoreCase))
+            options.UseSqlServer(connectionString, sql =>
             {
-                options.UseSqlServer(connectionString, sql =>
-                {
-                    sql.EnableRetryOnFailure();
-                });
-
-                return;
-            }
-
-            options.UseSqlite(connectionString);
-        });
+                sql.EnableRetryOnFailure();
+            }));
 
         services.AddIocRegistrationRepository();
 
@@ -39,8 +32,6 @@ public static class IocRegistration
         services.AddSingleton<IJwtTokenService, JwtTokenService>();
 
         services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName));
-        services.Configure<DatabaseOptions>(configuration.GetSection(DatabaseOptions.SectionName));
-        services.Configure<AdminSeedOptions>(configuration.GetSection(AdminSeedOptions.SectionName));
 
         return services;
     }
