@@ -1,4 +1,4 @@
-namespace TradingDashboard.Domain.Abstraction.Common;
+namespace TradingDashboard.Domain.Common.Common;
 
 public abstract class BaseEntity<TId> where TId : notnull
 {
@@ -9,3 +9,4 @@ public abstract class BaseEntity<TId> where TId : notnull
         Id = id;
     }
 }
+

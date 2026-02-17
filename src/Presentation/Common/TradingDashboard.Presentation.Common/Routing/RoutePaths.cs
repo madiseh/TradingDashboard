@@ -34,7 +34,9 @@ public static class RoutePaths
         public static class Login
         {
             public const string LoginBase = $"{ApiCommon.ApiVersionPrefix}/login";
-                        
+            public const string SignUp = $"{LoginBase}/signup";
+            public const string SignIn = $"{LoginBase}/signin";
+            public const string Me = $"{LoginBase}/me";
         }
     }
 }

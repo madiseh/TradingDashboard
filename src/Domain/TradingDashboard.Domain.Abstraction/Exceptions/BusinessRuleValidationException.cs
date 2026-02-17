@@ -1,4 +1,4 @@
-namespace TradingDashboard.Domain.Abstraction.Exceptions;
+namespace TradingDashboard.Domain.Common.Exceptions;
 
 public sealed class BusinessRuleValidationException : Exception
 {
@@ -6,3 +6,4 @@ public sealed class BusinessRuleValidationException : Exception
     {
     }
 }
+

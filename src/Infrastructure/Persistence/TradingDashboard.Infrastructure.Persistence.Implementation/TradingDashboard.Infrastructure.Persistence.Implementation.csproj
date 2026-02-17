@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TradingDashboard.Infrastructure.Persistence.Common\TradingDashboard.Infrastructure.Persistence.Common.csproj" />
+    <ProjectReference Include="..\TradingDashboard.Infrastructure.Persistence.Common\TradingDashboard.Infrastructure.Persistence.Abstraction.csproj" />
   </ItemGroup>
 
 </Project>

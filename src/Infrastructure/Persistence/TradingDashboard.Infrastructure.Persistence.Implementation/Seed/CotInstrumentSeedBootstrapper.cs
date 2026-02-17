@@ -4,7 +4,7 @@ namespace TradingDashboard.Infrastructure.Persistence.Implementation.Seed;
 
 public static class CotInstrumentSeedBootstrapper
 {
-    public static int SeedMissingInstruments(TradingDashboardDbContext dbContext)
+    public static int SeedMissingInstruments(CotDbContext dbContext)
     {
         var expectedTypes = Enum.GetValues<CotInstrumentType>()
             .Select(type => new CotInstrumentTypeLookup(type, type.ToContractValue()))

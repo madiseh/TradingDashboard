@@ -1,8 +1,58 @@
 @page "/login"
+@inherits PageComponentBase
 
 <PageTitle>Login</PageTitle>
 
-<MudPaper Class="pa-6">
-    <MudText Typo="Typo.h4">Login</MudText>
-    <MudText Typo="Typo.body1" Class="mt-2">Login page is under construction.</MudText>
+<MudPaper Class="pa-6 mx-auto" Style="max-width: 560px;">
+    <MudText Typo="Typo.h4">Authentication</MudText>
+    <MudText Typo="Typo.body2" Class="mt-1 mb-4">Sign in with username/email or create a new account.</MudText>
+
+    <MudTabs Rounded="true" Elevation="0">
+        <MudTabPanel Text="Sign In">
+            <MudTextField @bind-Value="_signInIdentity" Label="Username or Email" Variant="Variant.Outlined" Required="true" />
+            <MudTextField @bind-Value="_signInPassword" Label="Password" Variant="Variant.Outlined" Required="true" InputType="InputType.Password" Class="mt-2" />
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SignInAsync" Disabled="_isSubmitting" Class="mt-4">
+                Sign In
+            </MudButton>
+        </MudTabPanel>
+
+        <MudTabPanel Text="Sign Up">
+            <MudTextField @bind-Value="_signUpUsername" Label="Username" Variant="Variant.Outlined" Required="true" />
+            <MudTextField @bind-Value="_signUpEmail" Label="Email" Variant="Variant.Outlined" Required="true" Class="mt-2" />
+            <MudTextField @bind-Value="_signUpPassword" Label="Password" Variant="Variant.Outlined" Required="true" InputType="InputType.Password" Class="mt-2" />
+            <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="SignUpAsync" Disabled="_isSubmitting" Class="mt-4">
+                Sign Up
+            </MudButton>
+        </MudTabPanel>
+    </MudTabs>
+
+    @if (!string.IsNullOrWhiteSpace(_errorMessage))
+    {
+        <MudAlert Severity="Severity.Error" Variant="Variant.Outlined" Dense="true" Class="mt-4">
+            @_errorMessage
+        </MudAlert>
+    }
+
+    @if (_authResult is not null)
+    {
+        <MudAlert Severity="Severity.Success" Variant="Variant.Filled" Dense="true" Class="mt-4">
+            Authenticated as <b>@_authResult.Username</b> (@_authResult.Email)
+        </MudAlert>
+
+        <MudText Typo="Typo.caption" Class="mt-2 d-block">
+            Expires: @_authResult.ExpiresAtUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")
+        </MudText>
+        <MudText Typo="Typo.caption" Class="mt-1 d-block">
+            Token: @_authResult.AccessToken[..Math.Min(40, _authResult.AccessToken.Length)]...
+        </MudText>
+
+        @if (_meResult is not null)
+        {
+            <MudDivider Class="my-3" />
+            <MudText Typo="Typo.subtitle2">/me response</MudText>
+            <MudText Typo="Typo.body2">UserId: @_meResult.UserId</MudText>
+            <MudText Typo="Typo.body2">Username: @_meResult.Username</MudText>
+            <MudText Typo="Typo.body2">Email: @_meResult.Email</MudText>
+        }
+    }
 </MudPaper>

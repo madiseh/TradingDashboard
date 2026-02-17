@@ -19,7 +19,7 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<TradingDashboardDbContext>();
+    var dbContext = scope.ServiceProvider.GetRequiredService<CotDbContext>();
     dbContext.Database.EnsureCreated();
     CotInstrumentSeedBootstrapper.SeedMissingInstruments(dbContext);
 }

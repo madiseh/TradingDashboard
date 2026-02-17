@@ -6,4 +6,23 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
+    <PackageReference Include="MediatR" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+    <PackageReference Include="Swashbuckle.AspNetCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Application\TradingDashboard.Application\TradingDashboard.Application.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Persistence\TradingDashboard.Infrastructure.Persistence.Common\TradingDashboard.Infrastructure.Persistence.Common.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Persistence\TradingDashboard.Infrastructure.Persistence.Implementation\TradingDashboard.Infrastructure.Persistence.Implementation.csproj" />
+    <ProjectReference Include="..\..\Common\TradingDashboard.Presentation.Common\TradingDashboard.Presentation.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="db\" />
+  </ItemGroup>
+
 </Project>

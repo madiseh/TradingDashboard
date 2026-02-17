@@ -7,7 +7,7 @@ public sealed class CotInstrumentTypeLookupConfiguration : IEntityTypeConfigurat
 {
     public void Configure(EntityTypeBuilder<CotInstrumentTypeLookup> entity)
     {
-        entity.ToTable(DbTableNames.CotInstrumentTypes);
+        entity.ToTable(DbTableNames.CotInstrumentTypes, DbSchemas.Cot);
         entity.HasKey(x => x.Id);
 
         entity.Property(x => x.Id)

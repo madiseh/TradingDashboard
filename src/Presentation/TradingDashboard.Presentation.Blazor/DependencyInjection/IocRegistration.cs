@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using TradingDashboard.Presentation.Blazor.Services;
 
 namespace TradingDashboard.Presentation.Blazor.DependencyInjection;
 
@@ -12,6 +13,15 @@ public static class IocRegistration
             var baseUrl = configuration[$"{HttpClientNames.ApiCot}:BaseUrl"] ?? "https://localhost:7116";
             client.BaseAddress = new Uri(baseUrl);
         });
+
+        services.AddHttpClient(HttpClientNames.ApiLogin, (sp, client) =>
+        {
+            var configuration = sp.GetRequiredService<IConfiguration>();
+            var baseUrl = configuration[$"{HttpClientNames.ApiLogin}:BaseUrl"] ?? "https://localhost:7181";
+            client.BaseAddress = new Uri(baseUrl);
+        });
+
+        services.AddScoped<AuthSession>();
 
         return services;
     }
