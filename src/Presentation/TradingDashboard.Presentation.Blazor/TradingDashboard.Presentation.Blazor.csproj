@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Application\TradingDashboard.Application\TradingDashboard.Application.csproj" />
+    <ProjectReference Include="..\..\Application\TradingDashboard.Application\TradingDashboard.Application.Abstraction.csproj" />
     <ProjectReference Include="..\Common\TradingDashboard.Presentation.Common\TradingDashboard.Presentation.Common.csproj" />
   </ItemGroup>
 

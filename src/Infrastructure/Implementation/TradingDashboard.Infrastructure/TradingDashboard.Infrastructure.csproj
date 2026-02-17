@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Application\TradingDashboard.Application\TradingDashboard.Application.csproj" />
+    <ProjectReference Include="..\..\..\Application\TradingDashboard.Application\TradingDashboard.Application.Abstraction.csproj" />
     <ProjectReference Include="..\..\..\Domain\TradingDashboard.Domain.Common\TradingDashboard.Domain.Common.csproj" />
     <ProjectReference Include="..\..\..\Domain\TradingDashboard.Domain.Common\TradingDashboard.Domain.Common.csproj" />
     <ProjectReference Include="..\..\Persistence\TradingDashboard.Infrastructure.Persistence.Implementation\TradingDashboard.Infrastructure.Persistence.Implementation.csproj" />

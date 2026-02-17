@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Domain", "1.Domain", "{8B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{22BAF98C-8415-17C4-B26A-D537657BC863}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingDashboard.Application", "src\Application\TradingDashboard.Application\TradingDashboard.Application.csproj", "{64650513-365C-4712-BC40-064F2B03304F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingDashboard.Application.Abstraction", "src\Application\TradingDashboard.Application\TradingDashboard.Application.Abstraction.csproj", "{64650513-365C-4712-BC40-064F2B03304F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9048EB7F-3875-A59E-E36B-5BD4C6F2A282}"
 EndProject
