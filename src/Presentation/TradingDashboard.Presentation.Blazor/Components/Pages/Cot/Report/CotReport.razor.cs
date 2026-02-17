@@ -1,4 +1,4 @@
-namespace TradingDashboard.Presentation.Blazor.Components.Pages;
+namespace TradingDashboard.Presentation.Blazor.Components.Pages.Cot.Report;
 
 public partial class CotReport
 {

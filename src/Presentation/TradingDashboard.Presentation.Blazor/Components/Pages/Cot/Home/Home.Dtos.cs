@@ -1,4 +1,4 @@
-namespace TradingDashboard.Presentation.Blazor.Components.Pages.Home;
+namespace TradingDashboard.Presentation.Blazor.Components.Pages.Cot.Home;
 
 public partial class Home
 {
