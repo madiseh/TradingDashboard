@@ -12,9 +12,21 @@ public static class IocRegistration
     public static IServiceCollection AddIocRegistration(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("LoginDatabase");
+        var skipDbInit = string.Equals(
+            Environment.GetEnvironmentVariable("TD_SKIP_DB_INIT"),
+            "true",
+            StringComparison.OrdinalIgnoreCase);
+
         if (string.IsNullOrWhiteSpace(connectionString))
         {
-            throw new InvalidOperationException("Connection string 'LoginDatabase' is required.");
+            if (skipDbInit)
+            {
+                connectionString = "Server=(localdb)\\mssqllocaldb;Database=TradingDashboard_Login_Swagger;Trusted_Connection=True;TrustServerCertificate=True;";
+            }
+            else
+            {
+                throw new InvalidOperationException("Connection string 'LoginDatabase' is required.");
+            }
         }
 
         services.AddDbContext<LoginDbContext>(options =>

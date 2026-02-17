@@ -42,7 +42,7 @@
           EnvironmentVariables="TD_SKIP_DB_INIT=true" />
 
     <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\Tools\GenerateContractsFromOpenApi.ps1&quot; -OpenApiPath &quot;$(CotOpenApiPath)&quot; -OutputDirectory &quot;$(MSBuildProjectDirectory)\Contracts\Generated\Cot&quot; -Namespace &quot;TradingDashboard.Presentation.Blazor.Contracts.Generated.Cot&quot; -PreserveFiles CotReportModel.cs" />
-    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\Tools\GenerateContractsFromOpenApi.ps1&quot; -OpenApiPath &quot;$(LoginOpenApiPath)&quot; -OutputDirectory &quot;$(MSBuildProjectDirectory)\Contracts\Generated\Login&quot; -Namespace &quot;TradingDashboard.Presentation.Blazor.Contracts.Generated.Login&quot;" />
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\Tools\GenerateContractsFromOpenApi.ps1&quot; -OpenApiPath &quot;$(LoginOpenApiPath)&quot; -OutputDirectory &quot;$(MSBuildProjectDirectory)\Contracts\Generated\Login&quot; -Namespace &quot;TradingDashboard.Presentation.Blazor.Contracts.Generated.Login&quot; -AllowNoSchemas" />
   </Target>
 
 </Project>

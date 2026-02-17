@@ -5,7 +5,8 @@ param(
     [string]$OutputDirectory,
     [Parameter(Mandatory = $true)]
     [string]$Namespace,
-    [string[]]$PreserveFiles = @()
+    [string[]]$PreserveFiles = @(),
+    [switch]$AllowNoSchemas
 )
 
 Set-StrictMode -Version Latest
@@ -153,6 +154,19 @@ if (-not (Test-Path $OpenApiPath)) {
 
 New-Item -ItemType Directory -Force -Path $OutputDirectory | Out-Null
 
+$openApi = Get-Content -Path $OpenApiPath -Raw | ConvertFrom-Json
+if (-not (Has-Prop $openApi "components") -or -not (Has-Prop (Get-Prop $openApi "components") "schemas")) {
+    if ($AllowNoSchemas) {
+        Write-Host "No components.schemas found in: $OpenApiPath. Skipping contract generation."
+        return
+    }
+
+    throw "No components.schemas found in: $OpenApiPath"
+}
+
+$schemas = Get-Prop (Get-Prop $openApi "components") "schemas"
+$schemaNames = Get-ObjectPropertyNames $schemas | Sort-Object
+
 $preserveSet = @{}
 foreach ($preserve in $PreserveFiles) {
     $preserveSet[$preserve] = $true
@@ -163,14 +177,6 @@ Get-ChildItem -Path $OutputDirectory -Filter *.cs -File | ForEach-Object {
         Remove-Item $_.FullName -Force
     }
 }
-
-$openApi = Get-Content -Path $OpenApiPath -Raw | ConvertFrom-Json
-if (-not (Has-Prop $openApi "components") -or -not (Has-Prop (Get-Prop $openApi "components") "schemas")) {
-    throw "No components.schemas found in: $OpenApiPath"
-}
-
-$schemas = Get-Prop (Get-Prop $openApi "components") "schemas"
-$schemaNames = Get-ObjectPropertyNames $schemas | Sort-Object
 
 foreach ($schemaName in $schemaNames) {
     $schema = Get-ObjectPropertyValue -Object $schemas -Name $schemaName

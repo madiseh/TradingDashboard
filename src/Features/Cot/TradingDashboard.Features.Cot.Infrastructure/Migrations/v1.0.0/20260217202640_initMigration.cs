@@ -19,8 +19,8 @@ namespace TradingDashboard.Features.Cot.Infrastructure.Migrations
                 schema: "cot",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false, collation: "NOCASE")
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false, collation: "NOCASE")
                 },
                 constraints: table =>
                 {
@@ -32,11 +32,11 @@ namespace TradingDashboard.Features.Cot.Infrastructure.Migrations
                 schema: "cot",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    InstrumentId = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
-                    InstrumentSlug = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false, collation: "NOCASE"),
-                    InstrumentName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
-                    Type = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    InstrumentId = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    InstrumentSlug = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false, collation: "NOCASE"),
+                    InstrumentName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

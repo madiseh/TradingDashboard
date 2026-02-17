@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TradingDashboard.Infrastructure.Persistence.Implementation.Context;
@@ -11,39 +12,43 @@ using TradingDashboard.Infrastructure.Persistence.Implementation.Context;
 namespace TradingDashboard.Features.Cot.Infrastructure.Migrations
 {
     [DbContext(typeof(CotDbContext))]
-    [Migration("20260217194436_initMigration")]
+    [Migration("20260217202640_initMigration")]
     partial class initMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "9.0.5");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "9.0.5")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("TradingDashboard.Domain.Entities.CotInstrument", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("InstrumentId")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("InstrumentName")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("InstrumentSlug")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(256)")
                         .UseCollation("NOCASE");
 
                     b.Property<int>("Type")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -61,12 +66,12 @@ namespace TradingDashboard.Features.Cot.Infrastructure.Migrations
             modelBuilder.Entity("TradingDashboard.Domain.Entities.CotInstrumentTypeLookup", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(128)")
                         .UseCollation("NOCASE");
 
                     b.HasKey("Id");

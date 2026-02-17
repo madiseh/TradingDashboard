@@ -12,11 +12,17 @@ public static class IocRegistration
 {
     public static IServiceCollection AddIocRegistration(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("CotDatabase")
-            ?? "Data Source=db/cot.db";
+        var connectionString = configuration.GetConnectionString("CotDatabase");
+        if (string.IsNullOrWhiteSpace(connectionString))
+        {
+            throw new InvalidOperationException("Connection string 'CotDatabase' is required.");
+        }
 
         services.AddDbContext<CotDbContext>(options =>
-            options.UseSqlite(connectionString));
+            options.UseSqlServer(connectionString, sql =>
+            {
+                sql.EnableRetryOnFailure();
+            }));
 
 
         services.AddIocRegistrationRepository();
