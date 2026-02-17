@@ -2,6 +2,8 @@ namespace TradingDashboard.Presentation.Blazor.Components.Pages.Cot.Report;
 
 public partial class CotReport
 {
+    private DateTime? SelectedAsOfDate { get; set; } = DateTime.UtcNow.Date;
+
     [Parameter]
     public string InstrumentSlug { get; set; } = string.Empty;
 
@@ -25,6 +27,11 @@ public partial class CotReport
         return ReportModel == CotReportModel.CotLegacy
             ? "COT legacy report, futures only"
             : "futures only";
+    }
+
+    private string GetAsOfDateLabel()
+    {
+        return SelectedAsOfDate?.ToString("yyyy-MM-dd") ?? "N/A";
     }
 
     private static string GetDisplayName(string slug)
