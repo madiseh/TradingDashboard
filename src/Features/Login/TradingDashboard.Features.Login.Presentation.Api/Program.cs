@@ -52,7 +52,13 @@ if (!skipDbInit)
     using var scope = app.Services.CreateScope();
     var dbContext = scope.ServiceProvider.GetRequiredService<LoginDbContext>();
     var passwordHashingService = scope.ServiceProvider.GetRequiredService<IPasswordHashingService>();
-    dbContext.Database.EnsureCreated();
+    var canConnect = dbContext.Database.CanConnect();
+    if (!canConnect)
+    {
+        throw new InvalidOperationException("Cannot connect to LoginDatabase. Migration was not applied.");
+    }
+
+    dbContext.Database.Migrate();
     AdminUserSeedBootstrapper.SeedMissingAdmin(dbContext, passwordHashingService);
 }
 
