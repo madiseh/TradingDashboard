@@ -1,14 +1,14 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TradingDashboard.Presentation.Blazor.Contracts.Login;
+namespace TradingDashboard.Presentation.Blazor.Contracts.Generated.Login;
 
-public sealed class SignUpRequest
+public sealed class MeResponse
 {
     [JsonPropertyName("email")]
     public string? Email { get; set; }
 
-    [JsonPropertyName("password")]
-    public string? Password { get; set; }
+    [JsonPropertyName("userId")]
+    public string? UserId { get; set; }
 
     [JsonPropertyName("username")]
     public string? Username { get; set; }

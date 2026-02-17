@@ -1,8 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TradingDashboard.Presentation.Blazor.Contracts.Cot;
+namespace TradingDashboard.Presentation.Blazor.Contracts.Generated.Cot;
 
-public sealed class GetCotInstrumentBySlugResponse
+public sealed class GetCotInstrumentsByGroupItemResponse
 {
     [JsonPropertyName("id")]
     public Guid Id { get; set; }

@@ -2,6 +2,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using MudBlazor;
 using TradingDashboard.Presentation.Blazor.Services;
+using LoginContracts = TradingDashboard.Presentation.Blazor.Contracts.Generated.Login;
 
 namespace TradingDashboard.Presentation.Blazor.Components.Pages;
 
@@ -22,14 +23,14 @@ public partial class Login
 
     private bool _isSubmitting;
     private string? _errorMessage;
-    private AuthTokenResult? _authResult;
-    private MeResponse? _meResult;
+    private LoginContracts.AuthTokenResult? _authResult;
+    private LoginContracts.MeResponse? _meResult;
 
     private async Task SignInAsync()
     {
         await AuthenticateAsync(
             RoutePaths.Api.Login.SignIn,
-            new SignInRequest
+            new LoginContracts.SignInRequest
             {
                 Identity = _signInIdentity,
                 Password = _signInPassword
@@ -40,7 +41,7 @@ public partial class Login
     {
         await AuthenticateAsync(
             RoutePaths.Api.Login.SignUp,
-            new SignUpRequest
+            new LoginContracts.SignUpRequest
             {
                 Username = _signUpUsername,
                 Email = _signUpEmail,
@@ -68,7 +69,7 @@ public partial class Login
                 return;
             }
 
-            var authResult = await response.Content.ReadFromJsonAsync<AuthTokenResult>();
+            var authResult = await response.Content.ReadFromJsonAsync<LoginContracts.AuthTokenResult>();
             if (authResult is null)
             {
                 _errorMessage = "Authentication response is empty.";
@@ -124,12 +125,12 @@ public partial class Login
             return;
         }
 
-        _meResult = await response.Content.ReadFromJsonAsync<MeResponse>();
+        _meResult = await response.Content.ReadFromJsonAsync<LoginContracts.MeResponse>();
     }
 
     private static async Task<string> ExtractErrorAsync(HttpResponseMessage response)
     {
-        var payload = await response.Content.ReadFromJsonAsync<TradingDashboard.Presentation.Blazor.Contracts.Login.ApiErrorResponse>();
+        var payload = await response.Content.ReadFromJsonAsync<LoginContracts.ApiErrorResponse>();
         if (payload is null)
         {
             return $"Request failed with status {(int)response.StatusCode}.";

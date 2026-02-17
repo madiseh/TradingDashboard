@@ -1,4 +1,4 @@
-namespace TradingDashboard.Presentation.Blazor.Contracts.Cot;
+namespace TradingDashboard.Presentation.Blazor.Contracts.Generated.Cot;
 
 public enum CotReportModel
 {

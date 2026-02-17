@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TradingDashboard.Presentation.Blazor.Contracts.Login;
+namespace TradingDashboard.Presentation.Blazor.Contracts.Generated.Login;
 
 public sealed class ApiErrorResponse
 {
