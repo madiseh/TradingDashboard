@@ -14,9 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Application\TradingDashboard.Application\TradingDashboard.Application.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\Implementation\TradingDashboard.Infrastructure\TradingDashboard.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\Persistence\TradingDashboard.Infrastructure.Persistence.Implementation\TradingDashboard.Infrastructure.Persistence.Implementation.csproj" />
+    <ProjectReference Include="..\..\Features\Cot\TradingDashboard.Features.Cot.Application\TradingDashboard.Features.Cot.Application.csproj" />
+    <ProjectReference Include="..\..\Features\Cot\TradingDashboard.Features.Cot.Infrastructure\TradingDashboard.Features.Cot.Infrastructure.csproj" />
     <ProjectReference Include="..\Common\TradingDashboard.Presentation.Common\TradingDashboard.Presentation.Common.csproj" />
   </ItemGroup>
 
