@@ -7,10 +7,15 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Infrastructure\Persistence\TradingDashboard.Infrastructure.Persistence.Common\TradingDashboard.Infrastructure.Persistence.Abstraction.csproj" />
     <ProjectReference Include="..\TradingDashboard.Features.Login.Application\TradingDashboard.Features.Login.Application.csproj" />
     <ProjectReference Include="..\TradingDashboard.Features.Login.Domain\TradingDashboard.Features.Login.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Persistence\Repositories\" />
   </ItemGroup>
 </Project>

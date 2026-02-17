@@ -13,8 +13,22 @@ public static class IocRegistration
     {
         var connectionString = configuration.GetConnectionString("LoginDatabase")
             ?? "Data Source=db/login.db";
+        var databaseOptions = configuration.GetSection(DatabaseOptions.SectionName).Get<DatabaseOptions>() ?? new DatabaseOptions();
 
-        services.AddDbContext<LoginDbContext>(options => options.UseSqlite(connectionString));
+        services.AddDbContext<LoginDbContext>(options =>
+        {
+            if (string.Equals(databaseOptions.Provider, "SqlServer", StringComparison.OrdinalIgnoreCase))
+            {
+                options.UseSqlServer(connectionString, sql =>
+                {
+                    sql.EnableRetryOnFailure();
+                });
+
+                return;
+            }
+
+            options.UseSqlite(connectionString);
+        });
 
         services.AddIocRegistrationRepository();
 
@@ -25,6 +39,8 @@ public static class IocRegistration
         services.AddSingleton<IJwtTokenService, JwtTokenService>();
 
         services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName));
+        services.Configure<DatabaseOptions>(configuration.GetSection(DatabaseOptions.SectionName));
+        services.Configure<AdminSeedOptions>(configuration.GetSection(AdminSeedOptions.SectionName));
 
         return services;
     }

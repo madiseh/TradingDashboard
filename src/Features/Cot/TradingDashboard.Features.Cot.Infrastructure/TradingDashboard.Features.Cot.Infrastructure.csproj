@@ -10,7 +10,11 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Infrastructure\Persistence\TradingDashboard.Infrastructure.Persistence.Common\TradingDashboard.Infrastructure.Persistence.Abstraction.csproj" />
     <ProjectReference Include="..\TradingDashboard.Features.Cot.Application\TradingDashboard.Features.Cot.Application.csproj" />
     <ProjectReference Include="..\TradingDashboard.Features.Cot.Domain\TradingDashboard.Features.Cot.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Persistence\Repositories\" />
   </ItemGroup>
 </Project>

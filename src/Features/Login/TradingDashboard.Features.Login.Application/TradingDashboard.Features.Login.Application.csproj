@@ -9,6 +9,10 @@
     <PackageReference Include="MediatR" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Application\TradingDashboard.Application\TradingDashboard.Application.Abstraction.csproj" />
     <ProjectReference Include="..\TradingDashboard.Features.Login.Domain\TradingDashboard.Features.Login.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\Results\" />
   </ItemGroup>
 </Project>
