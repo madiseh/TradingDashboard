@@ -6,7 +6,7 @@ using TradingDashboard.Application.Features.CotInstruments.Queries.GetCotInstrum
 namespace TradingDashboard.Presentation.Api.Cot.Controllers;
 
 [ApiController]
-[Route(RoutePaths.Api.CotInstruments)]
+[Route(RoutePaths.Api.Cot.CotInstruments)]
 public class CotInstrumentsController(IMediator _mediator) : ControllerBase
 {
     [HttpGet("{instrumentSlug}")]

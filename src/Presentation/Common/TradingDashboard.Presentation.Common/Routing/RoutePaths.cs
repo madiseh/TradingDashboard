@@ -5,22 +5,31 @@ public static class RoutePaths
     public static class Ui
     {
         public const string Home = "/";
-        public const string CotReports = Home;
+        public const string Login = "/login";
+        
         public const string Markets = "/markets";
-        public const string Cot = "/cot";
-    }
 
-    public static class Api
+        public const string CotHome = "/cot";
+        public const string CotReports = $"{CotHome}/report";
+    }
+    public static class ApiCommon
     {
         public const string ApiVersionPrefix = "/api/v1";
         public const string Health = "/health";
-        public const string CommonBase = $"{ApiVersionPrefix}/common";
-        public const string CotBase = $"{ApiVersionPrefix}/cot";
-        public const string CotInstruments = $"{CotBase}/instruments";
+    }
+    public static class Api
+    {
+        public const string CommonBase = $"{ApiCommon.ApiVersionPrefix}/common";
         public const string MarketTypes = $"{CommonBase}/market-types";
         public const string Markets = $"{CommonBase}/markets";
         public const string MarketsDirectory = $"{CommonBase}/markets-directory";
-        public const string CotInstrumentBySlug = $"{CotInstruments}/{{instrumentSlug}}";
-        public const string CotInstrumentsByGroup = $"{CotInstruments}/by-group";
+
+        public static class Cot
+        {
+            public const string CotBase = $"{ApiCommon.ApiVersionPrefix}/cot";
+            public const string CotInstruments = $"{CotBase}/instruments";
+            public const string CotInstrumentBySlug = $"{CotInstruments}/{{instrumentSlug}}";
+            public const string CotInstrumentsByGroup = $"{CotInstruments}/by-group";
+        }
     }
 }

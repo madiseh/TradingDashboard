@@ -25,7 +25,7 @@ public partial class Home
         try
         {
             var client = HttpClientFactory.CreateClient(HttpClientNames.ApiCot);
-            var response = await client.GetAsync(RoutePaths.Api.CotInstrumentsByGroup);
+            var response = await client.GetAsync(RoutePaths.Api.Cot.CotInstrumentsByGroup);
             if (!response.IsSuccessStatusCode)
             {
                 _errorMessage = "Failed to load market directory.";
@@ -70,7 +70,7 @@ public partial class Home
 
     private static string BuildCotLink(string slug, CotReportModel model)
     {
-        return $"{RoutePaths.Ui.Cot}/{slug}?model={model.ToContractValue()}";
+        return $"{RoutePaths.Ui.CotReports}/{slug}?model={model.ToContractValue()}";
     }
 
     private static string BuildMarketsLink(string group, CotReportModel model)
