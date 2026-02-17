@@ -7,7 +7,7 @@ public static class IocRegistrationRepository
 {
     public static IServiceCollection AddIocRegistrationRepository(this IServiceCollection services)
     {
-        services.AddScoped<DbContext, TradingDashboardDbContext>();
+        services.AddScoped<DbContext>(sp => sp.GetRequiredService<CotDbContext>());
 
         services.AddScoped<ICotInstrumentQueryRepository, CotInstrumentQueryRepository>();
         return services;

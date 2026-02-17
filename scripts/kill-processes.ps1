@@ -1,0 +1,1 @@
+@("TradingDashboard.Presentation.Api.Cot","TradingDashboard.Presentation.Api.Login","TradingDashboard.Presentation.Blazor") | ForEach-Object { Get-Process -Name $_ -ErrorAction SilentlyContinue | Stop-Process -Force }

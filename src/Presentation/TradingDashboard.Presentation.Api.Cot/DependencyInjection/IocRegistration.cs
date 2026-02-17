@@ -1,5 +1,10 @@
 using FluentValidation;
+using MediatR;
 using TradingDashboard.Application.Features.CotInstruments.Queries.GetCotInstrumentBySlug;
+using TradingDashboard.Application.Features.CotInstruments.Queries.GetCotInstrumentsByGroup;
+using TradingDashboard.Application.Common.Results;
+using TradingDashboard.Application.Repository.Cot;
+using TradingDashboard.Infrastructure.Persistence.Implementation.Repositories;
 
 namespace TradingDashboard.Presentation.Api.Cot.DependencyInjection;
 
@@ -7,16 +12,22 @@ public static class IocRegistration
 {
     public static IServiceCollection AddIocRegistration(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("TradingDashboard")
-            ?? "Data Source=db/trading-dashboard.db";
+        var connectionString = configuration.GetConnectionString("CotDatabase")
+            ?? "Data Source=db/cot.db";
 
-        services.AddDbContext<TradingDashboardDbContext>(options =>
+        services.AddDbContext<CotDbContext>(options =>
             options.UseSqlite(connectionString));
 
 
         services.AddIocRegistrationRepository();
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetCotInstrumentBySlugQuery).Assembly));
-        services.AddValidatorsFromAssemblyContaining<GetCotInstrumentBySlugValidator>();
+        services.AddScoped<ICotInstrumentQueryRepository, CotInstrumentQueryRepository>();
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(IocRegistration).Assembly));
+
+        services.AddTransient<IRequestHandler<GetCotInstrumentBySlugQuery, OperationalResult<GetCotInstrumentBySlugResponse>>, GetCotInstrumentBySlugHandler>();
+        services.AddTransient<IRequestHandler<GetCotInstrumentsByGroupQuery, OperationalResult<IReadOnlyList<GetCotInstrumentsByGroupResponse>>>, GetCotInstrumentsByGroupHandler>();
+
+        services.AddScoped<IValidator<GetCotInstrumentBySlugQuery>, GetCotInstrumentBySlugValidator>();
+        services.AddScoped<IValidator<GetCotInstrumentsByGroupQuery>, GetCotInstrumentsByGroupValidator>();
 
 
         return services;

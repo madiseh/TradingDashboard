@@ -1,6 +1,6 @@
-using TradingDashboard.Domain.Abstraction.Events;
+using TradingDashboard.Domain.Common.Events;
 
-namespace TradingDashboard.Domain.Abstraction.Common;
+namespace TradingDashboard.Domain.Common.Common;
 
 public abstract class BaseAggregateRoot<TId> : BaseEntity<TId>, IHasDomainEvents
     where TId : notnull
@@ -23,3 +23,4 @@ public abstract class BaseAggregateRoot<TId> : BaseEntity<TId>, IHasDomainEvents
         _domainEvents.Clear();
     }
 }
+

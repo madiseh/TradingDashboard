@@ -1,4 +1,4 @@
-namespace TradingDashboard.Domain.Abstraction.Common;
+namespace TradingDashboard.Domain.Common.Common;
 
 public abstract class BaseValueObject
 {
@@ -31,3 +31,4 @@ public abstract class BaseValueObject
         return !Equals(left, right);
     }
 }
+

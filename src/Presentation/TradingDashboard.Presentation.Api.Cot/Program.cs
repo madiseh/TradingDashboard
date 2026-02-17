@@ -19,7 +19,7 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<TradingDashboardDbContext>();
+    var dbContext = scope.ServiceProvider.GetRequiredService<CotDbContext>();
     dbContext.Database.EnsureCreated();
     CotInstrumentSeedBootstrapper.SeedMissingInstruments(dbContext);
 }
@@ -37,7 +37,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.MapControllers();
-app.MapHealthChecks(RoutePaths.Api.Health);
+app.MapHealthChecks(RoutePaths.ApiCommon.Health);
 
 
 
