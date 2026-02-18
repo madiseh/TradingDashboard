@@ -23,9 +23,11 @@ public partial class Program
         });
 
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen(options =>
+        builder.Services.AddOpenApiDocument(options =>
         {
-            options.SwaggerDoc("v1", new() { Title = "Trading Dashboard API - Login", Version = "v1" });
+            options.DocumentName = "v1";
+            options.Title = "Trading Dashboard API - Login";
+            options.Version = "v1";
         });
         builder.Services.AddHealthChecks();
 
@@ -75,12 +77,8 @@ public partial class Program
 
         if (app.Environment.IsDevelopment())
         {
-            app.UseSwagger();
-            app.UseSwaggerUI(options =>
-            {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Trading Dashboard Login API v1");
-                options.RoutePrefix = string.Empty;
-            });
+            app.UseOpenApi();
+            app.UseSwaggerUi();
         }
 
         app.UseHttpsRedirection();

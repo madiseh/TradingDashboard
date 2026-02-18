@@ -12,7 +12,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Swashbuckle.AspNetCore" />
+    <PackageReference Include="NSwag.AspNetCore" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TradingDashboard.Features.Login.Application\TradingDashboard.Features.Login.Application.csproj" />

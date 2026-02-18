@@ -2,7 +2,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using MudBlazor;
 using TradingDashboard.Presentation.Blazor.Services;
-using LoginContracts = TradingDashboard.Presentation.Blazor.Contracts.Generated.Login;
+using LoginContracts = TradingDashboard.Presentation.Blazor.Contracts.Login.Generated;
 
 namespace TradingDashboard.Presentation.Blazor.Components.Pages;
 

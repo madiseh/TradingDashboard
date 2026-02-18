@@ -10,7 +10,7 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
     <PackageReference Include="MediatR" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
-    <PackageReference Include="Swashbuckle.AspNetCore" />
+    <PackageReference Include="NSwag.AspNetCore" />
   </ItemGroup>
 
   <ItemGroup>
