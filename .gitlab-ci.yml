@@ -9,6 +9,10 @@ variables:
   API_LOGIN_APP_NAME: 'td-api-login'
   BLAZOR_APP_NAME: 'td-blazor-ui'
 
+#########################################
+################# Build #################
+#########################################
+
 # Build COT API
 build-api-cot:
   stage: build
@@ -44,7 +48,6 @@ build-api-login:
     expire_in: 1 hour
   only:
     - master
-    - develop
 
 # Build Client Dashboard
 build-client-dashboard:
@@ -64,6 +67,12 @@ build-client-dashboard:
   only:
     - master
 
+
+
+
+#########################################
+################# Deply #################
+#########################################
 # Deploy COT API to Azure
 deploy-api-cot:
   stage: deploy
@@ -81,6 +90,8 @@ deploy-api-cot:
     name: production-api
     url: https://td-api-cot-ejenhygxhtewasb2.westeurope-01.azurewebsites.net
 
+
+
 # Deploy Login API to Azure
 deploy-api-login:
   stage: deploy
@@ -96,7 +107,7 @@ deploy-api-login:
     - build-api-login
   environment:
     name: production-api-login
-    url: https://td-api-login.azurewebsites.net
+    url: https://td-api-login-fagqhrd4gacyhvf2.westeurope-01.azurewebsites.net
 
 # Deploy Blazor to Azure
 deploy-client-dashboard:
@@ -115,20 +126,3 @@ deploy-client-dashboard:
     name: production-blazor
     url: https://td-blazor-ui.azurewebsites.net
 
-# Deploy COT API to staging (develop branch)
-deploy-api-cot-staging:
-  stage: deploy
-  image: mcr.microsoft.com/azure-cli
-  dependencies:
-    - build-api-cot
-  script:
-    - az login --service-principal --username $AZURE_CLIENT_ID --password $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
-    - az webapp deploy --resource-group $RESOURCE_GROUP --name $API_COT_APP_NAME --src-path src/Features/Cot/TradingDashboard.Features.Cot.Presentation.Api/api-cot.zip --type zip
-  only:
-    - develop
-  needs:
-    - build-api-cot
-  environment:
-    name: staging-api
-    url: https://td-api-cot-ejenhygxhtewasb2.westeurope-01.azurewebsites.net
-  when: manual
