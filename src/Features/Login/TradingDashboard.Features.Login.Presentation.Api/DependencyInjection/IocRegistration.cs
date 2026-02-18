@@ -17,17 +17,7 @@ public static class IocRegistration
             "true",
             StringComparison.OrdinalIgnoreCase);
 
-        if (string.IsNullOrWhiteSpace(connectionString))
-        {
-            if (skipDbInit)
-            {
-                connectionString = "Server=(localdb)\\mssqllocaldb;Database=TradingDashboard_Login_Swagger;Trusted_Connection=True;TrustServerCertificate=True;";
-            }
-            else
-            {
-                throw new InvalidOperationException("Connection string 'LoginDatabase' is required.");
-            }
-        }
+        
 
         services.AddDbContext<LoginDbContext>(options =>
             options.UseSqlServer(connectionString, sql =>

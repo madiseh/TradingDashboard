@@ -67,11 +67,7 @@ public partial class Program
             using var scope = app.Services.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<LoginDbContext>();
             var passwordHashingService = scope.ServiceProvider.GetRequiredService<IPasswordHashingService>();
-            var canConnect = dbContext.Database.CanConnect();
-            if (!canConnect)
-            {
-                throw new InvalidOperationException("Cannot connect to LoginDatabase. Migration was not applied.");
-            }
+           
 
             dbContext.Database.Migrate();
             AdminUserSeedBootstrapper.SeedMissingAdmin(dbContext, passwordHashingService);
