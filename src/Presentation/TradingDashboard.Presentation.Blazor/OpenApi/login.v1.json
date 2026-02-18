@@ -112,6 +112,54 @@
           }
         }
       }
+    },
+    "/api/v1/login/google/start": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "AuthGoogleSignInStart",
+        "parameters": [
+          {
+            "name": "returnUrl",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/login/google/callback": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "AuthGoogleSignInCallback",
+        "parameters": [
+          {
+            "name": "returnUrl",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "components": {

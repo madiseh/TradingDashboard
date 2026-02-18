@@ -5,10 +5,15 @@
 
 <MudPaper Class="pa-6 mx-auto" Style="max-width: 560px;">
     <MudText Typo="Typo.h4">Authentication</MudText>
-    <MudText Typo="Typo.body2" Class="mt-1 mb-4">Sign in with username/email or create a new account.</MudText>
+    <MudText Typo="Typo.body2" Class="mt-1 mb-4">Sign in with Google or with username/email, or create a new account.</MudText>
 
     <MudTabs Rounded="true" Elevation="0">
         <MudTabPanel Text="Sign In">
+            <MudButton Variant="Variant.Outlined" Color="Color.Primary" OnClick="BeginGoogleSignIn" Disabled="_isSubmitting" Class="mt-1 mb-3">
+                Sign in with Google
+            </MudButton>
+            <MudDivider Class="mb-3" />
+
             <MudTextField @bind-Value="_signInIdentity" Label="Username or Email" Variant="Variant.Outlined" Required="true" />
             <MudTextField @bind-Value="_signInPassword" Label="Password" Variant="Variant.Outlined" Required="true" InputType="InputType.Password" Class="mt-2" />
             <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SignInAsync" Disabled="_isSubmitting" Class="mt-4">
