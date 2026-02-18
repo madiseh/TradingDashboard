@@ -8,6 +8,7 @@ using TradingDashboard.Application.Features.Auth.Commands.SignUp;
 using TradingDashboard.Application.Features.Auth;
 using TradingDashboard.Application.Repository.Auth;
 using TradingDashboard.Domain.Entities;
+using TradingDashboard.Domain.Enums;
 using TradingDashboard.Presentation.Api.Login.Contracts;
 using TradingDashboard.Presentation.Api.Login.Services;
 using TradingDashboard.Presentation.Common.Contracts;
@@ -175,6 +176,8 @@ public static class AuthEndpoints
                 email,
                 passwordHash,
                 passwordSalt,
+                SignupAppPlatform.Google,
+                true,
                 DateTime.UtcNow);
 
             user.MarkLogin(DateTime.UtcNow);

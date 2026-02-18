@@ -4,6 +4,7 @@ using TradingDashboard.Application.Common.Results;
 using TradingDashboard.Application.Common.Security;
 using TradingDashboard.Application.Repository.Auth;
 using TradingDashboard.Domain.Entities;
+using TradingDashboard.Domain.Enums;
 
 namespace TradingDashboard.Application.Features.Auth.Commands.SignUp;
 
@@ -53,6 +54,8 @@ public sealed class SignUpCommandHandler(
                 request.Email,
                 passwordHash,
                 passwordSalt,
+                SignupAppPlatform.Local,
+                false,
                 DateTime.UtcNow);
 
             userCommandRepository.Create(user);

@@ -1,4 +1,5 @@
 using TradingDashboard.Domain.Common.Common;
+using TradingDashboard.Domain.Enums;
 using TradingDashboard.Domain.ValueObjects;
 
 namespace TradingDashboard.Domain.Entities;
@@ -9,6 +10,8 @@ public sealed class AppUser : BaseAuditableEntity<Guid>
     public EmailAddress Email { get; private set; }
     public string PasswordHash { get; private set; }
     public string PasswordSalt { get; private set; }
+    public SignupAppPlatform SignupAppPlatform { get; private set; }
+    public bool IsEmailVerified { get; private set; }
     public DateTime? LastLoginAtUtc { get; private set; }
 
     public AppUser(
@@ -17,6 +20,8 @@ public sealed class AppUser : BaseAuditableEntity<Guid>
         string email,
         string passwordHash,
         string passwordSalt,
+        SignupAppPlatform signupAppPlatform,
+        bool isEmailVerified,
         DateTime createdAtUtc)
         : base(id, createdAtUtc)
     {
@@ -24,6 +29,8 @@ public sealed class AppUser : BaseAuditableEntity<Guid>
         Email = EmailAddress.Create(email);
         PasswordHash = NormalizeRequired(passwordHash, nameof(passwordHash));
         PasswordSalt = NormalizeRequired(passwordSalt, nameof(passwordSalt));
+        SignupAppPlatform = signupAppPlatform;
+        IsEmailVerified = isEmailVerified;
     }
 
     public void MarkLogin(DateTime loginAtUtc)
@@ -48,6 +55,8 @@ public sealed class AppUser : BaseAuditableEntity<Guid>
         Email = EmailAddress.Create("placeholder@example.local");
         PasswordHash = string.Empty;
         PasswordSalt = string.Empty;
+        SignupAppPlatform = SignupAppPlatform.Local;
+        IsEmailVerified = false;
     }
 }
 

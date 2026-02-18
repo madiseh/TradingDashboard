@@ -24,6 +24,13 @@ Provide authentication services for local credentials and Google OAuth.
   - challenge start (`google/start`)
   - callback completion (`google/callback`)
 
+## User Persistence Contract
+
+- `AppUser.SignupAppPlatform`: enum values `Local` and `Google`.
+- `AppUser.IsEmailVerified`:
+  - default `false` for local sign-up.
+  - set to `true` for Google sign-up.
+
 ## Configuration Contract
 
 - `Authentication:Google:ClientId`

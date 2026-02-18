@@ -18,6 +18,10 @@ Deliver a complete login experience in Blazor with local credentials and Google 
 3. After successful Google authentication, user must be authenticated in the app using JWT.
 4. Existing local credentials flow (`signin`, `signup`) must remain functional.
 5. `/me` endpoint must return the authenticated profile for local and Google flows.
+6. System must persist signup source platform for each user (`Local`, `Google`).
+7. System must persist email verification state:
+   - `false` for local sign-up by default.
+   - `true` for Google sign-up.
 
 ## Configuration Requirements
 
@@ -40,3 +44,5 @@ Deliver a complete login experience in Blazor with local credentials and Google 
 3. Existing Google-linked user signs in without creating duplicates.
 4. Authenticated session allows successful call to `GET /api/v1/login/me`.
 5. Local `signin` and `signup` continue to work unchanged.
+6. A local sign-up record is stored with `SignupAppPlatform = Local` and `IsEmailVerified = false`.
+7. A Google sign-up record is stored with `SignupAppPlatform = Google` and `IsEmailVerified = true`.
