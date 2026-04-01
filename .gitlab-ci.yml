@@ -3,126 +3,73 @@ stages:
   - deploy
 
 variables:
-  DOTNET_VERSION: '9.0.x'
-  RESOURCE_GROUP: 'TradingDashboard-RG'
-  API_COT_APP_NAME: 'td-api-cot'
-  API_LOGIN_APP_NAME: 'td-api-login'
-  BLAZOR_APP_NAME: 'td-blazor-ui'
+  DOTNET_VERSION: "9.0"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+  DOTNET_NOLOGO: "true"
 
-#########################################
-################# Build #################
-#########################################
+default:
+  interruptible: true
 
-# Build COT API
-build-api-cot:
+build-release:
   stage: build
   image: mcr.microsoft.com/dotnet/sdk:9.0
   script:
     - apt-get update && apt-get install -y zip
-    - cd src/Features/Cot/TradingDashboard.Features.Cot.Presentation.Api
     - dotnet restore
-    - dotnet build -c Release --no-restore
-    - dotnet publish -c Release -o ./publish --no-build
-    - cd publish && zip -r ../api-cot.zip .
+    - dotnet publish src/Features/Cot/TradingDashboard.Features.Cot.Presentation.Api/TradingDashboard.Features.Cot.Presentation.Api.csproj -c Release -o out/cot
+    - dotnet publish src/Features/Login/TradingDashboard.Features.Login.Presentation.Api/TradingDashboard.Features.Login.Presentation.Api.csproj -c Release -o out/login
+    - dotnet publish src/Presentation/TradingDashboard.Presentation.Blazor/TradingDashboard.Presentation.Blazor.csproj -c Release -o out/blazor
+    - cd out/cot && zip -r ../cot.zip .
+    - cd ../login && zip -r ../login.zip .
+    - cd ../blazor && zip -r ../blazor.zip .
   artifacts:
+    name: "terminalprime-release-$CI_COMMIT_SHORT_SHA"
     paths:
-      - src/Features/Cot/TradingDashboard.Features.Cot.Presentation.Api/api-cot.zip
-    expire_in: 1 hour
-  only:
-    - master
+      - out/cot.zip
+      - out/login.zip
+      - out/blazor.zip
+    expire_in: 1 day
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
 
-# Build Login API
-build-api-login:
-  stage: build
-  image: mcr.microsoft.com/dotnet/sdk:9.0
-  script:
-    - apt-get update && apt-get install -y zip
-    - cd src/Features/Login/TradingDashboard.Features.Login.Presentation.Api
-    - dotnet restore
-    - dotnet build -c Release --no-restore
-    - dotnet publish -c Release -o ./publish --no-build
-    - cd publish && zip -r ../api-login.zip .
-  artifacts:
-    paths:
-      - src/Features/Login/TradingDashboard.Features.Login.Presentation.Api/api-login.zip
-    expire_in: 1 hour
-  only:
-    - master
-
-# Build Client Dashboard
-build-client-dashboard:
-  stage: build
-  image: mcr.microsoft.com/dotnet/sdk:9.0
-  script:
-    - apt-get update && apt-get install -y zip
-    - cd src/Presentation/TradingDashboard.Presentation.Blazor
-    - dotnet restore
-    - dotnet build -c Release --no-restore
-    - dotnet publish -c Release -o ./publish --no-build
-    - cd publish && zip -r ../blazor.zip .
-  artifacts:
-    paths:
-      - src/Presentation/TradingDashboard.Presentation.Blazor/blazor.zip
-    expire_in: 1 hour
-  only:
-    - master
-
-
-
-
-#########################################
-################# Deply #################
-#########################################
-# Deploy COT API to Azure
-deploy-api-cot:
+deploy-production:
   stage: deploy
-  image: mcr.microsoft.com/azure-cli
-  dependencies:
-    - build-api-cot
-  script:
-    - az login --service-principal --username $AZURE_CLIENT_ID --password $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
-    - az webapp deploy --resource-group $RESOURCE_GROUP --name $API_COT_APP_NAME --src-path src/Features/Cot/TradingDashboard.Features.Cot.Presentation.Api/api-cot.zip --type zip
-  only:
-    - master
+  image: alpine:3.20
   needs:
-    - build-api-cot
-  environment:
-    name: production-api
-    url: https://td-api-cot-ejenhygxhtewasb2.westeurope-01.azurewebsites.net
-
-
-
-# Deploy Login API to Azure
-deploy-api-login:
-  stage: deploy
-  image: mcr.microsoft.com/azure-cli
-  dependencies:
-    - build-api-login
+    - build-release
+  before_script:
+    - apk add --no-cache openssh-client
+    - mkdir -p ~/.ssh
+    - echo "$VPS_SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H "$VPS_HOST" >> ~/.ssh/known_hosts
   script:
-    - az login --service-principal --username $AZURE_CLIENT_ID --password $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
-    - az webapp deploy --resource-group $RESOURCE_GROUP --name $API_LOGIN_APP_NAME --src-path src/Features/Login/TradingDashboard.Features.Login.Presentation.Api/api-login.zip --type zip
-  only:
-    - master
-  needs:
-    - build-api-login
+    - scp out/cot.zip "$VPS_USER@$VPS_HOST:/tmp/terminalprime-cot.zip"
+    - scp out/login.zip "$VPS_USER@$VPS_HOST:/tmp/terminalprime-login.zip"
+    - scp out/blazor.zip "$VPS_USER@$VPS_HOST:/tmp/terminalprime-blazor.zip"
+    - |
+      ssh "$VPS_USER@$VPS_HOST" '
+      set -e
+      sudo systemctl stop terminalprime-cot
+      sudo systemctl stop terminalprime-login
+      sudo systemctl stop terminalprime-blazor
+      sudo rm -rf /var/www/terminalprime/cot/*
+      sudo rm -rf /var/www/terminalprime/login/*
+      sudo rm -rf /var/www/terminalprime/blazor/*
+      sudo unzip -oq /tmp/terminalprime-cot.zip -d /var/www/terminalprime/cot
+      sudo unzip -oq /tmp/terminalprime-login.zip -d /var/www/terminalprime/login
+      sudo unzip -oq /tmp/terminalprime-blazor.zip -d /var/www/terminalprime/blazor
+      sudo chown -R terminalprime:terminalprime /var/www/terminalprime
+      sudo systemctl start terminalprime-cot
+      sudo systemctl start terminalprime-login
+      sudo systemctl start terminalprime-blazor
+      sudo systemctl --no-pager --full status terminalprime-cot
+      sudo systemctl --no-pager --full status terminalprime-login
+      sudo systemctl --no-pager --full status terminalprime-blazor
+      rm -f /tmp/terminalprime-cot.zip /tmp/terminalprime-login.zip /tmp/terminalprime-blazor.zip
+      '
   environment:
-    name: production-api-login
-    url: https://td-api-login-fagqhrd4gacyhvf2.westeurope-01.azurewebsites.net
-
-# Deploy Blazor to Azure
-deploy-client-dashboard:
-  stage: deploy
-  image: mcr.microsoft.com/azure-cli
-  dependencies:
-    - build-client-dashboard
-  script:
-    - az login --service-principal --username $AZURE_CLIENT_ID --password $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
-    - az webapp deploy --resource-group $RESOURCE_GROUP --name $BLAZOR_APP_NAME --src-path src/Presentation/TradingDashboard.Presentation.Blazor/blazor.zip --type zip
-  only:
-    - master
-  needs:
-    - build-client-dashboard
-  environment:
-    name: production-blazor
-    url: https://td-blazor-ui.azurewebsites.net
-
+    name: production
+    url: https://terminalprime.com
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
