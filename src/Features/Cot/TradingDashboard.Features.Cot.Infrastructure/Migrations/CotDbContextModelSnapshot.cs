@@ -22,6 +22,42 @@ namespace TradingDashboard.Features.Cot.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("TradingDashboard.Domain.Entities.CotCollectionJobState", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastCompletedAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastError")
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.Property<int>("LastFetchedProfileCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LastSavedFileCount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("LastStartedAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastSucceededAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("UpdatedAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CotCollectionJobStates", "cot");
+                });
+
             modelBuilder.Entity("TradingDashboard.Domain.Entities.CotInstrument", b =>
                 {
                     b.Property<Guid>("Id")
@@ -59,6 +95,38 @@ namespace TradingDashboard.Features.Cot.Infrastructure.Migrations
                     b.ToTable("CotInstruments", "cot");
                 });
 
+            modelBuilder.Entity("TradingDashboard.Domain.Entities.CotInstrumentCollectionProfile", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsLegacyEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsNormalEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LegacyMarketAndExchangeName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalMarketAndExchangeName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTime>("UpdatedAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CotInstrumentCollectionProfiles", "cot");
+                });
+
             modelBuilder.Entity("TradingDashboard.Domain.Entities.CotInstrumentTypeLookup", b =>
                 {
                     b.Property<int>("Id")
@@ -86,6 +154,17 @@ namespace TradingDashboard.Features.Cot.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("TypeLookup");
+                });
+
+            modelBuilder.Entity("TradingDashboard.Domain.Entities.CotInstrumentCollectionProfile", b =>
+                {
+                    b.HasOne("TradingDashboard.Domain.Entities.CotInstrument", "Instrument")
+                        .WithOne()
+                        .HasForeignKey("TradingDashboard.Domain.Entities.CotInstrumentCollectionProfile", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Instrument");
                 });
 #pragma warning restore 612, 618
         }
