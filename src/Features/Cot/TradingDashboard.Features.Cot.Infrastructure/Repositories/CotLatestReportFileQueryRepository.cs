@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Globalization;
 using TradingDashboard.Application.Common.Models;
 using TradingDashboard.Application.Repository.Cot;
 
@@ -28,13 +29,70 @@ public sealed class CotLatestReportFileQueryRepository : ICotLatestReportQueryRe
 
         foreach (var storageRoot in _storageRoots)
         {
-            var latestFilePath = Path.Combine(storageRoot, modelFolder, normalizedSlug, "latest.json");
-            if (!File.Exists(latestFilePath))
+            var instrumentDirectory = Path.Combine(storageRoot, modelFolder, normalizedSlug);
+            if (!Directory.Exists(instrumentDirectory))
             {
                 continue;
             }
 
-            await using var stream = File.OpenRead(latestFilePath);
+            var latestFilePath = Path.Combine(instrumentDirectory, "latest.json");
+            if (File.Exists(latestFilePath))
+            {
+                var latestRecord = await ReadRecordAsync(latestFilePath, cancellationToken);
+                if (latestRecord is not null)
+                {
+                    return latestRecord;
+                }
+            }
+
+            var fallbackFilePath = ResolveLatestDatedFilePath(instrumentDirectory);
+            if (fallbackFilePath is null)
+            {
+                continue;
+            }
+
+            var fallbackRecord = await ReadRecordAsync(fallbackFilePath, cancellationToken);
+            if (fallbackRecord is not null)
+            {
+                return fallbackRecord;
+            }
+        }
+
+        return null;
+    }
+
+    private static string? ResolveLatestDatedFilePath(string instrumentDirectory)
+    {
+        return Directory.EnumerateFiles(instrumentDirectory, "*.json", SearchOption.TopDirectoryOnly)
+            .Where(path => !string.Equals(Path.GetFileName(path), "latest.json", StringComparison.OrdinalIgnoreCase))
+            .Select(path => new
+            {
+                Path = path,
+                FileName = Path.GetFileNameWithoutExtension(path)
+            })
+            .Select(item => new
+            {
+                item.Path,
+                ReportDate = DateOnly.TryParseExact(
+                    item.FileName,
+                    "yyyy-MM-dd",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out var parsedDate)
+                    ? parsedDate
+                    : (DateOnly?)null
+            })
+            .Where(item => item.ReportDate is not null)
+            .OrderByDescending(item => item.ReportDate)
+            .Select(item => item.Path)
+            .FirstOrDefault();
+    }
+
+    private static async Task<CotLatestReportRawRecord?> ReadRecordAsync(string filePath, CancellationToken cancellationToken)
+    {
+        try
+        {
+            await using var stream = File.OpenRead(filePath);
             using var document = await JsonDocument.ParseAsync(stream, cancellationToken: cancellationToken);
 
             if (document.RootElement.ValueKind != JsonValueKind.Array || document.RootElement.GetArrayLength() == 0)
@@ -70,8 +128,10 @@ public sealed class CotLatestReportFileQueryRepository : ICotLatestReportQueryRe
                 contractUnits,
                 fields);
         }
-
-        return null;
+        catch (Exception ex) when (ex is IOException or JsonException)
+        {
+            return null;
+        }
     }
 
     private static string? ReadValue(JsonElement element)

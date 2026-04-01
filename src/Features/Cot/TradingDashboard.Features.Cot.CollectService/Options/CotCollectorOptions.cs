@@ -6,6 +6,8 @@ public sealed class CotCollectorOptions
 
     public string BaseUrl { get; set; } = "https://publicreporting.cftc.gov";
     public string StorageRoot { get; set; } = Path.Combine("storage", "cot-raw");
+    public string HistoryStartDate { get; set; } = "2010-01-01";
+    public int IncrementalLookbackDays { get; set; } = 7;
     public int RequestTimeoutSeconds { get; set; } = 30;
     public bool RunOnStartup { get; set; } = true;
     public int IntervalMinutes { get; set; } = 10;
