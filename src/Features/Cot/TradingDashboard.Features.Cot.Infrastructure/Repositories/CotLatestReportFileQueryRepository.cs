@@ -14,9 +14,10 @@ public sealed class CotLatestReportFileQueryRepository : ICotLatestReportQueryRe
         _storageRoots = storageRoots;
     }
 
-    public async Task<CotLatestReportRawRecord?> GetLatestAsync(
+    public async Task<CotLatestReportRawRecord?> GetAsync(
         string instrumentSlug,
         CotReportModel model,
+        DateOnly? reportDate,
         CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(instrumentSlug))
@@ -32,6 +33,23 @@ public sealed class CotLatestReportFileQueryRepository : ICotLatestReportQueryRe
             var instrumentDirectory = Path.Combine(storageRoot, modelFolder, normalizedSlug);
             if (!Directory.Exists(instrumentDirectory))
             {
+                continue;
+            }
+
+            if (reportDate is not null)
+            {
+                var requestedFilePath = BuildReportFilePath(instrumentDirectory, reportDate.Value);
+                if (!File.Exists(requestedFilePath))
+                {
+                    continue;
+                }
+
+                var requestedRecord = await ReadRecordAsync(requestedFilePath, cancellationToken);
+                if (requestedRecord is not null)
+                {
+                    return requestedRecord;
+                }
+
                 continue;
             }
 
@@ -59,6 +77,11 @@ public sealed class CotLatestReportFileQueryRepository : ICotLatestReportQueryRe
         }
 
         return null;
+    }
+
+    private static string BuildReportFilePath(string instrumentDirectory, DateOnly reportDate)
+    {
+        return Path.Combine(instrumentDirectory, $"{reportDate:yyyy-MM-dd}.json");
     }
 
     private static string? ResolveLatestDatedFilePath(string instrumentDirectory)

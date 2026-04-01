@@ -3,20 +3,22 @@ using TradingDashboard.Application.Common.Models;
 namespace TradingDashboard.Application.Repository.Cot;
 
 /// <summary>
-/// Reads the latest collected raw COT report for an instrument and report model.
+/// Reads a collected raw COT report for an instrument and report model.
 /// </summary>
 public interface ICotLatestReportQueryRepository
 {
     /// <summary>
-    /// Returns the latest collected raw report entry for the given instrument slug and model.
+    /// Returns the collected raw report entry for the given instrument slug, model, and optional report date.
     /// </summary>
     /// <param name="instrumentSlug">Instrument slug.</param>
     /// <param name="model">Requested report model.</param>
+    /// <param name="reportDate">Requested report date. When null, the latest report is returned.</param>
     /// <param name="cancellationToken">Cancellation token.</param>
-    /// <returns>The latest collected report entry when present; otherwise null.</returns>
-    Task<CotLatestReportRawRecord?> GetLatestAsync(
+    /// <returns>The collected report entry when present; otherwise null.</returns>
+    Task<CotLatestReportRawRecord?> GetAsync(
         string instrumentSlug,
         CotReportModel model,
+        DateOnly? reportDate,
         CancellationToken cancellationToken);
 }
 

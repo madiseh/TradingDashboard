@@ -1,4 +1,5 @@
 using MediatR;
+using System.Globalization;
 using TradingDashboard.Application.Common.Models;
 using TradingDashboard.Application.Features.CotInstruments.Queries.GetCotInstrumentBySlug;
 using TradingDashboard.Application.Features.CotInstruments.Queries.GetCotInstrumentsByGroup;
@@ -38,6 +39,7 @@ public static class CotEndpoints
     private static async Task<IResult> GetLatestReportAsync(
         string instrumentSlug,
         string? model,
+        string? reportDate,
         IMediator mediator,
         CancellationToken cancellationToken)
     {
@@ -49,7 +51,17 @@ public static class CotEndpoints
                 ["Query parameter 'model' must be 'cot' or 'cot-legacy'."]));
         }
 
-        var result = await mediator.Send(new GetCotLatestReportQuery(instrumentSlug, parsedModel), cancellationToken);
+        if (!TryParseReportDate(reportDate, out var parsedReportDate))
+        {
+            return TypedResults.BadRequest(new ApiErrorResponse(
+                "Validation failed",
+                "VALIDATION",
+                ["Query parameter 'reportDate' must be in 'yyyy-MM-dd' format."]));
+        }
+
+        var result = await mediator.Send(
+            new GetCotLatestReportQuery(instrumentSlug, parsedModel, parsedReportDate),
+            cancellationToken);
         if (!result.IsSuccess)
         {
             return TypedResults.BadRequest(new ApiErrorResponse(result.Message, result.ErrorCode, result.Errors));
@@ -104,6 +116,29 @@ public static class CotEndpoints
         }
 
         model = CotReportModel.Cot;
+        return false;
+    }
+
+    private static bool TryParseReportDate(string? value, out DateOnly? reportDate)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            reportDate = null;
+            return true;
+        }
+
+        if (DateOnly.TryParseExact(
+                value,
+                "yyyy-MM-dd",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None,
+                out var parsedReportDate))
+        {
+            reportDate = parsedReportDate;
+            return true;
+        }
+
+        reportDate = null;
         return false;
     }
 }

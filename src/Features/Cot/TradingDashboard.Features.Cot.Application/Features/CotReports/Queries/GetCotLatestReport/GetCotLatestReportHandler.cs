@@ -40,13 +40,21 @@ public sealed class GetCotLatestReportHandler(
                     $"Instrument '{request.InstrumentSlug}' was not found.");
             }
 
-            var latestReport = await latestReportRepository.GetLatestAsync(request.InstrumentSlug, request.Model, cancellationToken);
+            var latestReport = await latestReportRepository.GetAsync(
+                request.InstrumentSlug,
+                request.Model,
+                request.ReportDate,
+                cancellationToken);
             if (latestReport is null)
             {
+                var reportDateMessage = request.ReportDate is null
+                    ? string.Empty
+                    : $" for {request.ReportDate.Value:yyyy-MM-dd}";
+
                 return OperationalResult<GetCotLatestReportResponse>.Fail(
                     "Collected report not found",
                     "NOT_FOUND",
-                    $"No collected {ToUiModelValue(request.Model)} report was found for '{request.InstrumentSlug}'.");
+                    $"No collected {ToUiModelValue(request.Model)} report{reportDateMessage} was found for '{request.InstrumentSlug}'.");
             }
 
             var response = new GetCotLatestReportResponse(
@@ -63,7 +71,7 @@ public sealed class GetCotLatestReportHandler(
                 ParseInt(latestReport.Fields, "traders_tot_all"),
                 BuildCategories(request.Model, latestReport.Fields));
 
-            return OperationalResult<GetCotLatestReportResponse>.Success(response, "Latest collected report fetched successfully.");
+            return OperationalResult<GetCotLatestReportResponse>.Success(response, "Collected report fetched successfully.");
         }
         catch (Exception ex)
         {

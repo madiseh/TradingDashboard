@@ -5,13 +5,16 @@ public partial class CotReport
     private bool _isLoading = true;
     private string? _errorMessage;
     private CotLatestReportResponse? _report;
+    private string? _lastInstrumentSlug;
+    private string? _lastModel;
+    private bool _hasExplicitDateSelection;
 
-    private DateTime? _selectedAsOfDate = GetMostRecentTuesday(DateTime.UtcNow.Date);
+    private DateTime? _selectedAsOfDate;
 
     private DateTime? SelectedAsOfDate
     {
         get => _selectedAsOfDate;
-        set => _selectedAsOfDate = value is null ? null : GetMostRecentTuesday(value.Value);
+        set => _selectedAsOfDate = NormalizeReportDate(value);
     }
 
     [Parameter]
@@ -27,6 +30,15 @@ public partial class CotReport
 
     protected override async Task OnParametersSetAsync()
     {
+        if (!string.Equals(_lastInstrumentSlug, InstrumentSlug, StringComparison.OrdinalIgnoreCase) ||
+            !string.Equals(_lastModel, Model, StringComparison.Ordinal))
+        {
+            _lastInstrumentSlug = InstrumentSlug;
+            _lastModel = Model;
+            _hasExplicitDateSelection = false;
+            _selectedAsOfDate = null;
+        }
+
         await LoadReportAsync();
     }
 
@@ -54,11 +66,17 @@ public partial class CotReport
         return date.DayOfWeek != DayOfWeek.Tuesday;
     }
 
-    private static DateTime GetMostRecentTuesday(DateTime date)
+    private static DateTime? NormalizeReportDate(DateTime? date)
     {
-        int offset = ((int)date.DayOfWeek - (int)DayOfWeek.Tuesday + 7) % 7;
-        return date.Date.AddDays(-offset);
+        if (date is null)
+        {
+            return null;
+        }
+
+        int offset = ((int)date.Value.DayOfWeek - (int)DayOfWeek.Tuesday + 7) % 7;
+        return date.Value.Date.AddDays(-offset);
     }
+
     private string GetDisplayName(string slug)
     {
         if (!string.IsNullOrWhiteSpace(_report?.InstrumentName))
@@ -110,11 +128,34 @@ public partial class CotReport
         }
     }
 
+    private async Task OnSelectedAsOfDateChangedAsync(DateTime? value)
+    {
+        var normalizedDate = NormalizeReportDate(value);
+        if (normalizedDate == SelectedAsOfDate && _hasExplicitDateSelection)
+        {
+            return;
+        }
+
+        _hasExplicitDateSelection = normalizedDate is not null;
+        SelectedAsOfDate = normalizedDate;
+        await LoadReportAsync();
+    }
+
     private string BuildLatestReportUri()
     {
         var route = RoutePaths.Api.Cot.CotInstrumentLatestReport
             .Replace("{instrumentSlug}", Uri.EscapeDataString(InstrumentSlug), StringComparison.Ordinal);
 
-        return $"{route}?model={Uri.EscapeDataString(ReportModel.ToContractValue())}";
+        var queryParts = new List<string>
+        {
+            $"model={Uri.EscapeDataString(ReportModel.ToContractValue())}"
+        };
+
+        if (_hasExplicitDateSelection && SelectedAsOfDate is not null)
+        {
+            queryParts.Add($"reportDate={Uri.EscapeDataString(SelectedAsOfDate.Value.ToString("yyyy-MM-dd"))}");
+        }
+
+        return $"{route}?{string.Join("&", queryParts)}";
     }
 }
