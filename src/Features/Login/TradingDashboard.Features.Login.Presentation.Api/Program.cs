@@ -1,6 +1,7 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.IdentityModel.Tokens;
 using TradingDashboard.Application.Common.Security;
 using TradingDashboard.Infrastructure.Persistence.Implementation.Seed;
@@ -31,6 +32,12 @@ public partial class Program
             options.Version = "v1";
         });
         builder.Services.AddHealthChecks();
+        builder.Services.Configure<ForwardedHeadersOptions>(options =>
+        {
+            options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+            options.KnownNetworks.Clear();
+            options.KnownProxies.Clear();
+        });
 
         builder.Services.AddIocRegistration(builder.Configuration);
 
@@ -108,6 +115,7 @@ public partial class Program
             app.UseSwaggerUi();
         }
 
+        app.UseForwardedHeaders();
         app.UseHttpsRedirection();
         app.UseAuthentication();
         app.UseAuthorization();

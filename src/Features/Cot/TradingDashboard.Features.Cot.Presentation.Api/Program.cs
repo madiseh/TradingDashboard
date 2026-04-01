@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.HttpOverrides;
 using TradingDashboard.Infrastructure.Persistence.Implementation.Seed;
 using TradingDashboard.Presentation.Api.Cot.DependencyInjection;
 using TradingDashboard.Presentation.Api.Cot.Endpoints;
@@ -25,6 +26,12 @@ public partial class Program
             options.Version = "v1";
         });
         builder.Services.AddHealthChecks();
+        builder.Services.Configure<ForwardedHeadersOptions>(options =>
+        {
+            options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+            options.KnownNetworks.Clear();
+            options.KnownProxies.Clear();
+        });
 
         builder.Services.AddIocRegistration(builder.Configuration);
 
@@ -52,6 +59,7 @@ public partial class Program
             app.UseSwaggerUi();
         }
 
+        app.UseForwardedHeaders();
         app.UseHttpsRedirection();
         app.MapHealthChecks(RoutePaths.ApiCommon.Health);
         app.MapCotEndpoints();
