@@ -1,6 +1,17 @@
 <MudPaper Class="pa-4 cot-table-shell">
-    @if (IsLegacy)
+    @if (Report is null)
     {
+        <MudAlert Severity="Severity.Warning" Dense="true">
+            No report data is available.
+        </MudAlert>
+    }
+    else if (IsLegacy)
+    {
+        var nonCommercial = GetCategory("non-commercial");
+        var commercial = GetCategory("commercial");
+        var total = GetCategory("total");
+        var nonReportable = GetCategory("nonreportable");
+
         <table class="cot-grid">
             <thead>
                 <tr>
@@ -23,61 +34,64 @@
             </thead>
             <tbody>
                 <tr>
-                    <td colspan="5">(CONTRACTS OF AUD 100,000)</td>
-                    <td colspan="4" class="align-right">Open Interest: <strong>254,240</strong></td>
+                    <td colspan="5">@Report.ContractUnits</td>
+                    <td colspan="4" class="align-right">Open Interest: <strong>@FormatNumber(Report.OpenInterestAll)</strong></td>
                 </tr>
                 <tr>
-                    <td><strong>118,751</strong></td>
-                    <td><strong>92,633</strong></td>
-                    <td><strong>1,477</strong></td>
-                    <td><strong>92,582</strong></td>
-                    <td><strong>140,642</strong></td>
-                    <td><strong>212,810</strong></td>
-                    <td><strong>234,752</strong></td>
-                    <td><strong>41,430</strong></td>
-                    <td><strong>19,488</strong></td>
+                    <td><strong>@FormatNumber(nonCommercial?.Long?.Positions)</strong></td>
+                    <td><strong>@FormatNumber(nonCommercial?.Short?.Positions)</strong></td>
+                    <td><strong>@FormatNumber(nonCommercial?.Spread?.Positions)</strong></td>
+                    <td><strong>@FormatNumber(commercial?.Long?.Positions)</strong></td>
+                    <td><strong>@FormatNumber(commercial?.Short?.Positions)</strong></td>
+                    <td><strong>@FormatNumber(total?.Long?.Positions)</strong></td>
+                    <td><strong>@FormatNumber(total?.Short?.Positions)</strong></td>
+                    <td><strong>@FormatNumber(nonReportable?.Long?.Positions)</strong></td>
+                    <td><strong>@FormatNumber(nonReportable?.Short?.Positions)</strong></td>
                 </tr>
                 <tr>
                     <td colspan="5">Changes</td>
-                    <td colspan="4" class="align-right">(Change In Open Interest: <span class="pill positive">+2,185</span>)</td>
+                    <td colspan="4" class="align-right">
+                        (Change In Open Interest:
+                        <span class="@GetChangeCss(Report.ChangeInOpenInterestAll)">@FormatSigned(Report.ChangeInOpenInterestAll)</span>)
+                    </td>
                 </tr>
                 <tr>
-                    <td><span class="pill positive">+8,945</span></td>
-                    <td><span class="pill negative">-10,027</span></td>
-                    <td><span class="pill negative">-116</span></td>
-                    <td><span class="pill negative">-7,444</span></td>
-                    <td><span class="pill positive">+12,307</span></td>
-                    <td><span class="pill positive">+1,385</span></td>
-                    <td><span class="pill positive">+2,164</span></td>
-                    <td><span class="pill positive">+800</span></td>
-                    <td><span class="pill positive">+21</span></td>
+                    <td><span class="@GetChangeCss(nonCommercial?.Long?.Change)">@FormatSigned(nonCommercial?.Long?.Change)</span></td>
+                    <td><span class="@GetChangeCss(nonCommercial?.Short?.Change)">@FormatSigned(nonCommercial?.Short?.Change)</span></td>
+                    <td><span class="@GetChangeCss(nonCommercial?.Spread?.Change)">@FormatSigned(nonCommercial?.Spread?.Change)</span></td>
+                    <td><span class="@GetChangeCss(commercial?.Long?.Change)">@FormatSigned(commercial?.Long?.Change)</span></td>
+                    <td><span class="@GetChangeCss(commercial?.Short?.Change)">@FormatSigned(commercial?.Short?.Change)</span></td>
+                    <td><span class="@GetChangeCss(total?.Long?.Change)">@FormatSigned(total?.Long?.Change)</span></td>
+                    <td><span class="@GetChangeCss(total?.Short?.Change)">@FormatSigned(total?.Short?.Change)</span></td>
+                    <td><span class="@GetChangeCss(nonReportable?.Long?.Change)">@FormatSigned(nonReportable?.Long?.Change)</span></td>
+                    <td><span class="@GetChangeCss(nonReportable?.Short?.Change)">@FormatSigned(nonReportable?.Short?.Change)</span></td>
                 </tr>
                 <tr>
                     <td colspan="9">Percent of Open Interest for Each Category of Traders</td>
                 </tr>
                 <tr>
-                    <td><strong>46.7%</strong></td>
-                    <td><strong>36.4%</strong></td>
-                    <td><strong>0.6%</strong></td>
-                    <td><strong>36.4%</strong></td>
-                    <td><strong>55.3%</strong></td>
-                    <td><strong>83.7%</strong></td>
-                    <td><strong>92.3%</strong></td>
-                    <td><strong>16.3%</strong></td>
-                    <td><strong>7.7%</strong></td>
+                    <td><strong>@FormatPercent(nonCommercial?.Long?.PercentOfOpenInterest)</strong></td>
+                    <td><strong>@FormatPercent(nonCommercial?.Short?.PercentOfOpenInterest)</strong></td>
+                    <td><strong>@FormatPercent(nonCommercial?.Spread?.PercentOfOpenInterest)</strong></td>
+                    <td><strong>@FormatPercent(commercial?.Long?.PercentOfOpenInterest)</strong></td>
+                    <td><strong>@FormatPercent(commercial?.Short?.PercentOfOpenInterest)</strong></td>
+                    <td><strong>@FormatPercent(total?.Long?.PercentOfOpenInterest)</strong></td>
+                    <td><strong>@FormatPercent(total?.Short?.PercentOfOpenInterest)</strong></td>
+                    <td><strong>@FormatPercent(nonReportable?.Long?.PercentOfOpenInterest)</strong></td>
+                    <td><strong>@FormatPercent(nonReportable?.Short?.PercentOfOpenInterest)</strong></td>
                 </tr>
                 <tr>
                     <td colspan="5">Number of Traders in Each Category</td>
-                    <td colspan="4" class="align-right">(Total Traders: <strong>139</strong>)</td>
+                    <td colspan="4" class="align-right">(Total Traders: <strong>@FormatNumber(Report.TotalTraders)</strong>)</td>
                 </tr>
                 <tr>
-                    <td><strong>55</strong></td>
-                    <td><strong>27</strong></td>
-                    <td><strong>12</strong></td>
-                    <td><strong>38</strong></td>
-                    <td><strong>26</strong></td>
-                    <td><strong>96</strong></td>
-                    <td><strong>62</strong></td>
+                    <td><strong>@FormatNumber(nonCommercial?.Long?.Traders)</strong></td>
+                    <td><strong>@FormatNumber(nonCommercial?.Short?.Traders)</strong></td>
+                    <td><strong>@FormatNumber(nonCommercial?.Spread?.Traders)</strong></td>
+                    <td><strong>@FormatNumber(commercial?.Long?.Traders)</strong></td>
+                    <td><strong>@FormatNumber(commercial?.Short?.Traders)</strong></td>
+                    <td><strong>@FormatNumber(total?.Long?.Traders)</strong></td>
+                    <td><strong>@FormatNumber(total?.Short?.Traders)</strong></td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -108,66 +122,21 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><strong>Dealer Intermediary</strong></td>
-                    <td><strong>33,794</strong><br /><span class="pill negative">-2,573</span></td>
-                    <td><strong>13.3%</strong></td>
-                    <td><strong>7</strong></td>
-                    <td><strong>108,417</strong><br /><span class="pill positive">+15,827</span></td>
-                    <td><strong>42.6%</strong></td>
-                    <td><strong>12</strong></td>
-                    <td><strong>181</strong><br /><span class="pill positive">+18</span></td>
-                    <td><strong>0.1%</strong></td>
-                    <td><strong>0</strong></td>
-                </tr>
-                <tr>
-                    <td><strong>Asset Manager/Institutional</strong></td>
-                    <td><strong>62,654</strong><br /><span class="pill negative">-3,149</span></td>
-                    <td><strong>24.6%</strong></td>
-                    <td><strong>30</strong></td>
-                    <td><strong>81,456</strong><br /><span class="pill negative">-3,696</span></td>
-                    <td><strong>32.0%</strong></td>
-                    <td><strong>11</strong></td>
-                    <td><strong>2,845</strong><br /><span class="pill negative">-118</span></td>
-                    <td><strong>1.1%</strong></td>
-                    <td><strong>6</strong></td>
-                </tr>
-                <tr>
-                    <td><strong>Leveraged Funds</strong></td>
-                    <td><strong>98,448</strong><br /><span class="pill positive">+5,469</span></td>
-                    <td><strong>38.7%</strong></td>
-                    <td><strong>38</strong></td>
-                    <td><strong>39,039</strong><br /><span class="pill negative">-9,214</span></td>
-                    <td><strong>15.4%</strong></td>
-                    <td><strong>24</strong></td>
-                    <td><strong>1,364</strong><br /><span class="pill negative">-283</span></td>
-                    <td><strong>0.5%</strong></td>
-                    <td><strong>11</strong></td>
-                </tr>
-                <tr>
-                    <td><strong>Other Reportables</strong></td>
-                    <td><strong>13,524</strong><br /><span class="pill positive">+2,021</span></td>
-                    <td><strong>5.3%</strong></td>
-                    <td><strong>13</strong></td>
-                    <td><strong>1,450</strong><br /><span class="pill negative">-370</span></td>
-                    <td><strong>0.6%</strong></td>
-                    <td><strong>4</strong></td>
-                    <td><strong>0</strong><br /><span class="pill positive">0</span></td>
-                    <td><strong>0.0%</strong></td>
-                    <td><strong>0</strong></td>
-                </tr>
-                <tr>
-                    <td><strong>Nonreportable Positions</strong></td>
-                    <td><strong>41,430</strong><br /><span class="pill positive">+800</span></td>
-                    <td><strong>16.3%</strong></td>
-                    <td></td>
-                    <td><strong>19,488</strong><br /><span class="pill positive">+21</span></td>
-                    <td><strong>7.7%</strong></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach (var category in Categories)
+                {
+                    <tr>
+                        <td><strong>@category.Label</strong></td>
+                        <td><strong>@FormatNumber(category.Long?.Positions)</strong><br /><span class="@GetChangeCss(category.Long?.Change)">@FormatSigned(category.Long?.Change)</span></td>
+                        <td><strong>@FormatPercent(category.Long?.PercentOfOpenInterest)</strong></td>
+                        <td><strong>@FormatNumber(category.Long?.Traders)</strong></td>
+                        <td><strong>@FormatNumber(category.Short?.Positions)</strong><br /><span class="@GetChangeCss(category.Short?.Change)">@FormatSigned(category.Short?.Change)</span></td>
+                        <td><strong>@FormatPercent(category.Short?.PercentOfOpenInterest)</strong></td>
+                        <td><strong>@FormatNumber(category.Short?.Traders)</strong></td>
+                        <td><strong>@FormatNumber(category.Spread?.Positions)</strong><br /><span class="@GetChangeCss(category.Spread?.Change)">@FormatSigned(category.Spread?.Change)</span></td>
+                        <td><strong>@FormatPercent(category.Spread?.PercentOfOpenInterest)</strong></td>
+                        <td><strong>@FormatNumber(category.Spread?.Traders)</strong></td>
+                    </tr>
+                }
             </tbody>
         </table>
     }

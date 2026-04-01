@@ -1,6 +1,8 @@
 using MediatR;
+using TradingDashboard.Application.Common.Models;
 using TradingDashboard.Application.Features.CotInstruments.Queries.GetCotInstrumentBySlug;
 using TradingDashboard.Application.Features.CotInstruments.Queries.GetCotInstrumentsByGroup;
+using TradingDashboard.Application.Features.CotReports.Queries.GetCotLatestReport;
 using TradingDashboard.Presentation.Common.Contracts;
 
 namespace TradingDashboard.Presentation.Api.Cot.Endpoints;
@@ -11,6 +13,12 @@ public static class CotEndpoints
     {
         var group = app.MapGroup(RoutePaths.Api.Cot.CotInstruments)
             .WithTags("CotInstruments");
+
+        group.MapGet("{instrumentSlug}/latest", GetLatestReportAsync)
+            .WithName("CotGetLatestReport")
+            .WithSummary("Get the latest collected COT report for an instrument")
+            .Produces<GetCotLatestReportResponse>(StatusCodes.Status200OK)
+            .Produces<ApiErrorResponse>(StatusCodes.Status400BadRequest);
 
         group.MapGet("{instrumentSlug}", GetBySlugAsync)
             .WithName("CotGetInstrumentBySlug")
@@ -25,6 +33,29 @@ public static class CotEndpoints
             .Produces<ApiErrorResponse>(StatusCodes.Status400BadRequest);
 
         return app;
+    }
+
+    private static async Task<IResult> GetLatestReportAsync(
+        string instrumentSlug,
+        string? model,
+        IMediator mediator,
+        CancellationToken cancellationToken)
+    {
+        if (!TryParseModel(model, out var parsedModel))
+        {
+            return TypedResults.BadRequest(new ApiErrorResponse(
+                "Validation failed",
+                "VALIDATION",
+                ["Query parameter 'model' must be 'cot' or 'cot-legacy'."]));
+        }
+
+        var result = await mediator.Send(new GetCotLatestReportQuery(instrumentSlug, parsedModel), cancellationToken);
+        if (!result.IsSuccess)
+        {
+            return TypedResults.BadRequest(new ApiErrorResponse(result.Message, result.ErrorCode, result.Errors));
+        }
+
+        return TypedResults.Ok(result.Data);
     }
 
     private static async Task<IResult> GetBySlugAsync(
@@ -53,5 +84,26 @@ public static class CotEndpoints
         }
 
         return TypedResults.Ok(result.Data);
+    }
+
+    private static bool TryParseModel(string? value, out CotReportModel model)
+    {
+        if (string.IsNullOrWhiteSpace(value) ||
+            string.Equals(value, "cot", StringComparison.OrdinalIgnoreCase) ||
+            string.Equals(value, nameof(CotReportModel.Cot), StringComparison.OrdinalIgnoreCase))
+        {
+            model = CotReportModel.Cot;
+            return true;
+        }
+
+        if (string.Equals(value, "cot-legacy", StringComparison.OrdinalIgnoreCase) ||
+            string.Equals(value, nameof(CotReportModel.CotLegacy), StringComparison.OrdinalIgnoreCase))
+        {
+            model = CotReportModel.CotLegacy;
+            return true;
+        }
+
+        model = CotReportModel.Cot;
+        return false;
     }
 }

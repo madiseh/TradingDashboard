@@ -2,6 +2,10 @@ namespace TradingDashboard.Presentation.Blazor.Components.Pages.Cot.Report;
 
 public partial class CotReport
 {
+    private bool _isLoading = true;
+    private string? _errorMessage;
+    private CotLatestReportResponse? _report;
+
     private DateTime? _selectedAsOfDate = GetMostRecentTuesday(DateTime.UtcNow.Date);
 
     private DateTime? SelectedAsOfDate
@@ -20,6 +24,11 @@ public partial class CotReport
         CotReportModelExtensions.TryParse(Model, out CotReportModel parsed)
             ? parsed
             : CotReportModel.Cot;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await LoadReportAsync();
+    }
 
     private string GetBreadcrumbTitle()
     {
@@ -50,9 +59,13 @@ public partial class CotReport
         int offset = ((int)date.DayOfWeek - (int)DayOfWeek.Tuesday + 7) % 7;
         return date.Date.AddDays(-offset);
     }
-
-    private static string GetDisplayName(string slug)
+    private string GetDisplayName(string slug)
     {
+        if (!string.IsNullOrWhiteSpace(_report?.InstrumentName))
+        {
+            return _report.InstrumentName;
+        }
+
         if (string.IsNullOrWhiteSpace(slug))
         {
             return "UNKNOWN INSTRUMENT";
@@ -60,5 +73,48 @@ public partial class CotReport
 
         return string.Join(' ', slug.Split('-', StringSplitOptions.RemoveEmptyEntries))
             .ToUpperInvariant();
+    }
+
+    private async Task LoadReportAsync()
+    {
+        _isLoading = true;
+        _errorMessage = null;
+        _report = null;
+
+        try
+        {
+            var client = HttpClientFactory.CreateClient(HttpClientNames.ApiCot);
+            var response = await client.GetAsync(BuildLatestReportUri());
+            if (!response.IsSuccessStatusCode)
+            {
+                _errorMessage = "Failed to load collected COT report.";
+                return;
+            }
+
+            _report = await response.Content.ReadFromJsonAsync<CotLatestReportResponse>();
+            if (_report is null)
+            {
+                _errorMessage = "Collected COT report response is empty.";
+                return;
+            }
+
+            SelectedAsOfDate = _report.ReportDate;
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = $"Failed to load collected COT report. {ex.Message}";
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+
+    private string BuildLatestReportUri()
+    {
+        var route = RoutePaths.Api.Cot.CotInstrumentLatestReport
+            .Replace("{instrumentSlug}", Uri.EscapeDataString(InstrumentSlug), StringComparison.Ordinal);
+
+        return $"{route}?model={Uri.EscapeDataString(ReportModel.ToContractValue())}";
     }
 }

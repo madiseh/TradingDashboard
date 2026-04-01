@@ -29,6 +29,7 @@ public static class RoutePaths
             public const string CotBase = $"{ApiCommon.ApiVersionPrefix}/cot";
             public const string CotInstruments = $"{CotBase}/instruments";
             public const string CotInstrumentBySlug = $"{CotInstruments}/{{instrumentSlug}}";
+            public const string CotInstrumentLatestReport = $"{CotInstruments}/{{instrumentSlug}}/latest";
             public const string CotInstrumentsByGroup = $"{CotInstruments}/by-group";
         }
         public static class Login
