@@ -2,7 +2,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\TradingDashboard.Domain.Common\TradingDashboard.Domain.Common.csproj" />
-    <ProjectReference Include="..\..\Domain\TradingDashboard.Domain.Common\TradingDashboard.Domain.Common.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

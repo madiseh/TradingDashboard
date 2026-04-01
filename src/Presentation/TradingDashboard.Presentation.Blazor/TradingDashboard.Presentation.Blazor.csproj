@@ -31,7 +31,7 @@
 
   <Target Name="GenerateOpenApiContracts"
           BeforeTargets="BeforeCompile"
-          Condition="'$(DesignTimeBuild)' != 'true' and '$(OS)' == 'Windows_NT'">
+          Condition="'$(DesignTimeBuild)' != 'true' and '$(OS)' == 'Windows_NT' and '$(BuildingSolutionFile)' != 'true'">
     <MakeDir Directories="$(MSBuildProjectDirectory)\OpenApi" />
     <MakeDir Directories="$(MSBuildProjectDirectory)\Contracts\Cot\Generated" />
     <MakeDir Directories="$(MSBuildProjectDirectory)\Contracts\Login\Generated" />
