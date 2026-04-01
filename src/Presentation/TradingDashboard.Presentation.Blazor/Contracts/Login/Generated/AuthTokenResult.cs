@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TradingDashboard.Presentation.Blazor.Contracts.Generated.Login;
+namespace TradingDashboard.Presentation.Blazor.Contracts.Login.Generated;
 
 public sealed class AuthTokenResult
 {
@@ -14,9 +14,8 @@ public sealed class AuthTokenResult
     public DateTime ExpiresAtUtc { get; set; }
 
     [JsonPropertyName("userId")]
-    public Guid UserId { get; set; }
+    public string? UserId { get; set; }
 
     [JsonPropertyName("username")]
     public string? Username { get; set; }
 }
-

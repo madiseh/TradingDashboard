@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TradingDashboard.Presentation.Blazor.Contracts.Generated.Login;
+namespace TradingDashboard.Presentation.Blazor.Contracts.Cot.Generated;
 
 public sealed class ApiErrorResponse
 {
@@ -13,4 +13,3 @@ public sealed class ApiErrorResponse
     [JsonPropertyName("message")]
     public string? Message { get; set; }
 }
-

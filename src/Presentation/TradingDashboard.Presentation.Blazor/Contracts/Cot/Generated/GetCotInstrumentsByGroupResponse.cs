@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TradingDashboard.Presentation.Blazor.Contracts.Generated.Cot;
+namespace TradingDashboard.Presentation.Blazor.Contracts.Cot.Generated;
 
 public sealed class GetCotInstrumentsByGroupResponse
 {
@@ -10,4 +10,3 @@ public sealed class GetCotInstrumentsByGroupResponse
     [JsonPropertyName("items")]
     public IReadOnlyList<GetCotInstrumentsByGroupItemResponse>? Items { get; set; }
 }
-

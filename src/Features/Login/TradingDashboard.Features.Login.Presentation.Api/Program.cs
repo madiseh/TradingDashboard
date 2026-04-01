@@ -1,5 +1,7 @@
 using System.Text;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.IdentityModel.Tokens;
 using TradingDashboard.Application.Common.Security;
 using TradingDashboard.Infrastructure.Persistence.Implementation.Seed;
@@ -23,19 +25,31 @@ public partial class Program
         });
 
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen(options =>
+        builder.Services.AddOpenApiDocument(options =>
         {
-            options.SwaggerDoc("v1", new() { Title = "Trading Dashboard API - Login", Version = "v1" });
+            options.DocumentName = "v1";
+            options.Title = "Trading Dashboard API - Login";
+            options.Version = "v1";
         });
         builder.Services.AddHealthChecks();
+        builder.Services.Configure<ForwardedHeadersOptions>(options =>
+        {
+            options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+            options.KnownNetworks.Clear();
+            options.KnownProxies.Clear();
+        });
 
         builder.Services.AddIocRegistration(builder.Configuration);
 
         var jwtOptions = builder.Configuration.GetSection(JwtOptions.SectionName).Get<JwtOptions>() ?? new JwtOptions();
         var keyBytes = Encoding.UTF8.GetBytes(jwtOptions.SigningKey);
 
-        builder.Services
-            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        var authenticationBuilder = builder.Services
+            .AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
             .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -49,7 +63,29 @@ public partial class Program
                     IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
                     ClockSkew = TimeSpan.Zero
                 };
+            })
+            .AddCookie("External", options =>
+            {
+                options.Cookie.Name = "__td_login_external";
+                options.Cookie.HttpOnly = true;
+                options.Cookie.SameSite = SameSiteMode.Lax;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.SlidingExpiration = false;
             });
+
+        var googleClientId = builder.Configuration["Authentication:Google:ClientId"];
+        var googleClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+        if (!string.IsNullOrWhiteSpace(googleClientId)
+            && !string.IsNullOrWhiteSpace(googleClientSecret))
+        {
+            authenticationBuilder.AddGoogle("Google", options =>
+            {
+                options.SignInScheme = "External";
+                options.ClientId = googleClientId;
+                options.ClientSecret = googleClientSecret;
+            });
+        }
 
         builder.Services.AddAuthorization();
         return builder;
@@ -67,11 +103,7 @@ public partial class Program
             using var scope = app.Services.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<LoginDbContext>();
             var passwordHashingService = scope.ServiceProvider.GetRequiredService<IPasswordHashingService>();
-            var canConnect = dbContext.Database.CanConnect();
-            if (!canConnect)
-            {
-                throw new InvalidOperationException("Cannot connect to LoginDatabase. Migration was not applied.");
-            }
+           
 
             dbContext.Database.Migrate();
             AdminUserSeedBootstrapper.SeedMissingAdmin(dbContext, passwordHashingService);
@@ -79,14 +111,11 @@ public partial class Program
 
         if (app.Environment.IsDevelopment())
         {
-            app.UseSwagger();
-            app.UseSwaggerUI(options =>
-            {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Trading Dashboard Login API v1");
-                options.RoutePrefix = string.Empty;
-            });
+            app.UseOpenApi();
+            app.UseSwaggerUi();
         }
 
+        app.UseForwardedHeaders();
         app.UseHttpsRedirection();
         app.UseAuthentication();
         app.UseAuthorization();

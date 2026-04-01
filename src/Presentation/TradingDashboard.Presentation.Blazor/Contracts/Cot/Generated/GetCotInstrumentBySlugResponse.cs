@@ -1,11 +1,11 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TradingDashboard.Presentation.Blazor.Contracts.Generated.Cot;
+namespace TradingDashboard.Presentation.Blazor.Contracts.Cot.Generated;
 
-public sealed class GetCotInstrumentsByGroupItemResponse
+public sealed class GetCotInstrumentBySlugResponse
 {
     [JsonPropertyName("id")]
-    public Guid Id { get; set; }
+    public string? Id { get; set; }
 
     [JsonPropertyName("instrumentId")]
     public string? InstrumentId { get; set; }
@@ -19,4 +19,3 @@ public sealed class GetCotInstrumentsByGroupItemResponse
     [JsonPropertyName("type")]
     public string? Type { get; set; }
 }
-

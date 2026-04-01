@@ -1,0 +1,52 @@
+stages:
+  - docker
+  - deploy
+
+variables:
+  DOCKER_TLS_CERTDIR: "/certs"
+  API_COT_IMAGE: "$CI_REGISTRY_IMAGE/api-cot:$CI_COMMIT_SHORT_SHA"
+  API_LOGIN_IMAGE: "$CI_REGISTRY_IMAGE/api-login:$CI_COMMIT_SHORT_SHA"
+  BLAZOR_IMAGE: "$CI_REGISTRY_IMAGE/blazor:$CI_COMMIT_SHORT_SHA"
+
+docker-build:
+  stage: docker
+  image: docker:27
+  services:
+    - docker:27-dind
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login "$CI_REGISTRY" -u "$CI_REGISTRY_USER" --password-stdin
+  script:
+    - docker build -f docker/api-cot.Dockerfile -t "$API_COT_IMAGE" .
+    - docker build -f docker/api-login.Dockerfile -t "$API_LOGIN_IMAGE" .
+    - docker build -f docker/blazor.Dockerfile -t "$BLAZOR_IMAGE" .
+    - docker push "$API_COT_IMAGE"
+    - docker push "$API_LOGIN_IMAGE"
+    - docker push "$BLAZOR_IMAGE"
+  only:
+    - master
+
+deploy-vps:
+  stage: deploy
+  image: alpine:3.20
+  needs:
+    - docker-build
+  before_script:
+    - apk add --no-cache openssh-client bash
+    - mkdir -p ~/.ssh
+    - echo "$VPS_SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H "$VPS_HOST" >> ~/.ssh/known_hosts
+  script:
+    - |
+      ssh "$VPS_USER@$VPS_HOST" "
+      cd /opt/terminalprime &&
+      export API_COT_IMAGE='$API_COT_IMAGE' &&
+      export API_LOGIN_IMAGE='$API_LOGIN_IMAGE' &&
+      export BLAZOR_IMAGE='$BLAZOR_IMAGE' &&
+      docker login '$CI_REGISTRY' -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' &&
+      docker compose --env-file .env -f deploy/docker-compose.prod.yml pull &&
+      docker compose --env-file .env -f deploy/docker-compose.prod.yml up -d --remove-orphans
+      "
+  only:
+    - master
+

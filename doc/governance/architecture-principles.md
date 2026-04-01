@@ -116,6 +116,14 @@ Application/
 - Database table names must be defined as constants in a dedicated file.
 - EF Core mappings must use those constants (for example in `ToTable(...)`) and must not use hard-coded table name strings.
 
+## Migration Version Folder Rule
+
+- Every EF Core migration must be created inside a dedicated version folder under `Migrations/` (for example `Migrations/v1.0.1`).
+- A single migration must not be placed in the root `Migrations/` directory.
+- Version folders must be incremental and represent release/version grouping.
+- Schema migrations must inherit from `BaseSchemaMigration`.
+- Data migrations must inherit from `BaseDataMigration`.
+
 ## Global Usings Standard
 
 - Every project must include a `GlobalUsings.cs` file.

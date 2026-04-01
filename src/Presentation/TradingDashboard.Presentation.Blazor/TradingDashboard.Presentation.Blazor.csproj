@@ -8,6 +8,9 @@
 
   <ItemGroup>
     <PackageReference Include="MudBlazor" />
+    <PackageReference Include="NSwag.MSBuild">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -23,24 +26,26 @@
     <LoginApiProjectPath>$(MSBuildProjectDirectory)\..\..\Features\Login\TradingDashboard.Features.Login.Presentation.Api\TradingDashboard.Features.Login.Presentation.Api.csproj</LoginApiProjectPath>
     <LoginApiAssemblyPath>$(MSBuildProjectDirectory)\..\..\Features\Login\TradingDashboard.Features.Login.Presentation.Api\bin\$(Configuration)\net9.0\TradingDashboard.Features.Login.Presentation.Api.dll</LoginApiAssemblyPath>
     <LoginOpenApiPath>$(MSBuildProjectDirectory)\OpenApi\login.v1.json</LoginOpenApiPath>
+    <ContractsGeneratorProjectPath>$(MSBuildProjectDirectory)\..\..\Tools\TradingDashboard.Tools.OpenApiContractsGenerator\TradingDashboard.Tools.OpenApiContractsGenerator.csproj</ContractsGeneratorProjectPath>
   </PropertyGroup>
 
   <Target Name="GenerateOpenApiContracts"
           BeforeTargets="BeforeCompile"
-          Condition="'$(DesignTimeBuild)' != 'true' and '$(OS)' == 'Windows_NT'">
+          Condition="'$(DesignTimeBuild)' != 'true' and '$(OS)' == 'Windows_NT' and '$(BuildingSolutionFile)' != 'true'">
     <MakeDir Directories="$(MSBuildProjectDirectory)\OpenApi" />
-    <MakeDir Directories="$(MSBuildProjectDirectory)\Contracts\Generated\Cot" />
-    <MakeDir Directories="$(MSBuildProjectDirectory)\Contracts\Generated\Login" />
+    <MakeDir Directories="$(MSBuildProjectDirectory)\Contracts\Cot\Generated" />
+    <MakeDir Directories="$(MSBuildProjectDirectory)\Contracts\Login\Generated" />
+    <MakeDir Directories="$(MSBuildProjectDirectory)\Contracts\Cot\Owned" />
 
     <Exec Command="dotnet build &quot;$(CotApiProjectPath)&quot; -c $(Configuration) --nologo --verbosity:minimal" />
     <Exec Command="dotnet build &quot;$(LoginApiProjectPath)&quot; -c $(Configuration) --nologo --verbosity:minimal" />
-    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\Tools\FetchOpenApiFromRunningApi.ps1&quot; -ProjectPath &quot;$(CotApiProjectPath)&quot; -OpenApiPath &quot;$(CotOpenApiPath)&quot; -Port 5297"
+    <Exec Command="$(NSwagExe_Net90) aspnetcore2openapi /project:&quot;$(CotApiProjectPath)&quot; /documentName:v1 /configuration:$(Configuration) /targetFramework:net9.0 /noBuild:true /aspNetCoreEnvironment:Development /output:&quot;$(CotOpenApiPath)&quot; /verbose:true"
           EnvironmentVariables="TD_SKIP_DB_INIT=true" />
-    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\Tools\FetchOpenApiFromRunningApi.ps1&quot; -ProjectPath &quot;$(LoginApiProjectPath)&quot; -OpenApiPath &quot;$(LoginOpenApiPath)&quot; -Port 5298"
+    <Exec Command="$(NSwagExe_Net90) aspnetcore2openapi /project:&quot;$(LoginApiProjectPath)&quot; /documentName:v1 /configuration:$(Configuration) /targetFramework:net9.0 /noBuild:true /aspNetCoreEnvironment:Development /output:&quot;$(LoginOpenApiPath)&quot; /verbose:true"
           EnvironmentVariables="TD_SKIP_DB_INIT=true" />
 
-    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\Tools\GenerateContractsFromOpenApi.ps1&quot; -OpenApiPath &quot;$(CotOpenApiPath)&quot; -OutputDirectory &quot;$(MSBuildProjectDirectory)\Contracts\Generated\Cot&quot; -Namespace &quot;TradingDashboard.Presentation.Blazor.Contracts.Generated.Cot&quot; -PreserveFiles CotReportModel.cs" />
-    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\Tools\GenerateContractsFromOpenApi.ps1&quot; -OpenApiPath &quot;$(LoginOpenApiPath)&quot; -OutputDirectory &quot;$(MSBuildProjectDirectory)\Contracts\Generated\Login&quot; -Namespace &quot;TradingDashboard.Presentation.Blazor.Contracts.Generated.Login&quot;" />
+    <Exec Command="dotnet run --project &quot;$(ContractsGeneratorProjectPath)&quot; -- --openapi &quot;$(CotOpenApiPath)&quot; --output &quot;$(MSBuildProjectDirectory)\Contracts\Cot\Generated&quot; --namespace &quot;TradingDashboard.Presentation.Blazor.Contracts.Cot.Generated&quot;" />
+    <Exec Command="dotnet run --project &quot;$(ContractsGeneratorProjectPath)&quot; -- --openapi &quot;$(LoginOpenApiPath)&quot; --output &quot;$(MSBuildProjectDirectory)\Contracts\Login\Generated&quot; --namespace &quot;TradingDashboard.Presentation.Blazor.Contracts.Login.Generated&quot;" />
   </Target>
 
 </Project>

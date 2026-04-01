@@ -36,6 +36,9 @@ namespace TradingDashboard.Features.Login.Infrastructure.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<bool>("IsEmailVerified")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("LastLoginAtUtc")
                         .HasColumnType("datetime2");
 
@@ -48,6 +51,9 @@ namespace TradingDashboard.Features.Login.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<int>("SignupAppPlatform")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAtUtc")
                         .HasColumnType("datetime2");

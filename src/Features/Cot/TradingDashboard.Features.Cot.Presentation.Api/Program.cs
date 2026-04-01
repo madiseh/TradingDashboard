@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.HttpOverrides;
 using TradingDashboard.Infrastructure.Persistence.Implementation.Seed;
 using TradingDashboard.Presentation.Api.Cot.DependencyInjection;
 using TradingDashboard.Presentation.Api.Cot.Endpoints;
@@ -18,11 +19,19 @@ public partial class Program
         });
 
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen(options =>
+        builder.Services.AddOpenApiDocument(options =>
         {
-            options.SwaggerDoc("v1", new() { Title = "Trading Dashboard API - COT", Version = "v1" });
+            options.DocumentName = "v1";
+            options.Title = "Trading Dashboard API - COT";
+            options.Version = "v1";
         });
         builder.Services.AddHealthChecks();
+        builder.Services.Configure<ForwardedHeadersOptions>(options =>
+        {
+            options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+            options.KnownNetworks.Clear();
+            options.KnownProxies.Clear();
+        });
 
         builder.Services.AddIocRegistration(builder.Configuration);
 
@@ -46,14 +55,11 @@ public partial class Program
 
         if (app.Environment.IsDevelopment())
         {
-            app.UseSwagger();
-            app.UseSwaggerUI(options =>
-            {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Trading Dashboard API v1");
-                options.RoutePrefix = string.Empty;
-            });
+            app.UseOpenApi();
+            app.UseSwaggerUi();
         }
 
+        app.UseForwardedHeaders();
         app.UseHttpsRedirection();
         app.MapHealthChecks(RoutePaths.ApiCommon.Health);
         app.MapCotEndpoints();

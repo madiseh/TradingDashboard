@@ -1,13 +1,21 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Globalization;
+using Microsoft.AspNetCore.WebUtilities;
 using MudBlazor;
 using TradingDashboard.Presentation.Blazor.Services;
-using LoginContracts = TradingDashboard.Presentation.Blazor.Contracts.Generated.Login;
+using LoginContracts = TradingDashboard.Presentation.Blazor.Contracts.Login.Generated;
 
 namespace TradingDashboard.Presentation.Blazor.Components.Pages;
 
 public partial class Login
 {
+    [Inject]
+    private NavigationManager NavigationManager { get; set; } = default!;
+
+    [Inject]
+    private IConfiguration Configuration { get; set; } = default!;
+
     [Inject]
     private AuthSession AuthSession { get; set; } = default!;
 
@@ -25,6 +33,25 @@ public partial class Login
     private string? _errorMessage;
     private LoginContracts.AuthTokenResult? _authResult;
     private LoginContracts.MeResponse? _meResult;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await HandleGoogleSignInCallbackAsync();
+    }
+
+    private void BeginGoogleSignIn()
+    {
+        _errorMessage = null;
+
+        var apiBaseUrl = Configuration[$"{HttpClientNames.ApiLogin}:BaseUrl"] ?? "https://localhost:7181";
+        var returnUrl = NavigationManager.ToAbsoluteUri(RoutePaths.Ui.Login).ToString();
+        var startUrl = QueryHelpers.AddQueryString(
+            $"{apiBaseUrl.TrimEnd('/')}{RoutePaths.Api.Login.GoogleStart}",
+            "returnUrl",
+            returnUrl);
+
+        NavigationManager.NavigateTo(startUrl, forceLoad: true);
+    }
 
     private async Task SignInAsync()
     {
@@ -141,4 +168,66 @@ public partial class Login
             : payload.Message ?? $"Request failed with status {(int)response.StatusCode}.";
     }
 
+    private async Task HandleGoogleSignInCallbackAsync()
+    {
+        var currentUri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        var query = QueryHelpers.ParseQuery(currentUri.Query);
+
+        if (query.TryGetValue("authError", out var errorValue))
+        {
+            _errorMessage = errorValue.ToString();
+            Snackbar.Add(_errorMessage, Severity.Error);
+            return;
+        }
+
+        if (!query.TryGetValue("accessToken", out var accessTokenValue))
+        {
+            return;
+        }
+
+        var accessToken = accessTokenValue.ToString();
+        if (string.IsNullOrWhiteSpace(accessToken))
+        {
+            _errorMessage = "Google authentication returned an empty token.";
+            Snackbar.Add(_errorMessage, Severity.Error);
+            return;
+        }
+
+        if (!query.TryGetValue("expiresAtUtc", out var expiresAtValue)
+            || !DateTime.TryParse(
+                expiresAtValue.ToString(),
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.RoundtripKind,
+                out var expiresAtUtc))
+        {
+            _errorMessage = "Google authentication returned an invalid expiration timestamp.";
+            Snackbar.Add(_errorMessage, Severity.Error);
+            return;
+        }
+
+        var username = query.TryGetValue("username", out var usernameValue)
+            ? usernameValue.ToString()
+            : string.Empty;
+
+        var email = query.TryGetValue("email", out var emailValue)
+            ? emailValue.ToString()
+            : string.Empty;
+
+        var userId = query.TryGetValue("userId", out var userIdValue)
+            ? userIdValue.ToString()
+            : string.Empty;
+
+        AuthSession.SetToken(accessToken, expiresAtUtc.ToUniversalTime());
+        _authResult = new LoginContracts.AuthTokenResult
+        {
+            AccessToken = accessToken,
+            ExpiresAtUtc = expiresAtUtc.ToUniversalTime(),
+            UserId = userId,
+            Username = username,
+            Email = email
+        };
+
+        Snackbar.Add("Signed in with Google successfully.", Severity.Success);
+        await LoadCurrentUserAsync();
+    }
 }

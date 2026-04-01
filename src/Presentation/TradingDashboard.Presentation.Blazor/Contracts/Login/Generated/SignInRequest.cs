@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TradingDashboard.Presentation.Blazor.Contracts.Generated.Login;
+namespace TradingDashboard.Presentation.Blazor.Contracts.Login.Generated;
 
 public sealed class SignInRequest
 {
@@ -10,4 +10,3 @@ public sealed class SignInRequest
     [JsonPropertyName("password")]
     public string? Password { get; set; }
 }
-

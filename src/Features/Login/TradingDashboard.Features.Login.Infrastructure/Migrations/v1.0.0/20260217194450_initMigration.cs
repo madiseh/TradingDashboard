@@ -1,12 +1,13 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using TradingDashboard.Infrastructure.Persistence.Common.Migrations;
 
 #nullable disable
 
 namespace TradingDashboard.Features.Login.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class initMigration : Migration
+    public partial class initMigration : BaseSchemaMigration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -57,3 +58,5 @@ namespace TradingDashboard.Features.Login.Infrastructure.Migrations
         }
     }
 }
+
+

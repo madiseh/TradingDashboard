@@ -1,5 +1,6 @@
-﻿{
-  "openapi": "3.0.1",
+{
+  "x-generator": "NSwag v14.6.1.0 (NJsonSchema v11.5.1.0 (Newtonsoft.Json v13.0.0.0))",
+  "openapi": "3.0.0",
   "info": {
     "title": "Trading Dashboard API - Login",
     "version": "v1"
@@ -10,9 +11,9 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Create a new account and returns an access token",
         "operationId": "AuthSignUp",
         "requestBody": {
+          "x-name": "request",
           "content": {
             "application/json": {
               "schema": {
@@ -20,11 +21,12 @@
               }
             }
           },
-          "required": true
+          "required": true,
+          "x-position": 1
         },
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "",
             "content": {
               "application/json": {
                 "schema": {
@@ -34,7 +36,7 @@
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "",
             "content": {
               "application/json": {
                 "schema": {
@@ -51,9 +53,9 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Sign in with username/email and password",
         "operationId": "AuthSignIn",
         "requestBody": {
+          "x-name": "request",
           "content": {
             "application/json": {
               "schema": {
@@ -61,11 +63,12 @@
               }
             }
           },
-          "required": true
+          "required": true,
+          "x-position": 1
         },
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "",
             "content": {
               "application/json": {
                 "schema": {
@@ -75,7 +78,7 @@
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "",
             "content": {
               "application/json": {
                 "schema": {
@@ -92,11 +95,10 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Returns the current authenticated user",
         "operationId": "AuthMe",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "",
             "content": {
               "application/json": {
                 "schema": {
@@ -106,7 +108,55 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/login/google/start": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "AuthGoogleSignInStart",
+        "parameters": [
+          {
+            "name": "returnUrl",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/login/google/callback": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "AuthGoogleSignInCallback",
+        "parameters": [
+          {
+            "name": "returnUrl",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
           }
         }
       }
@@ -114,8 +164,32 @@
   },
   "components": {
     "schemas": {
+      "AuthTokenResult": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "expiresAtUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
       "ApiErrorResponse": {
         "type": "object",
+        "additionalProperties": false,
         "properties": {
           "message": {
             "type": "string",
@@ -127,75 +201,48 @@
           },
           "errors": {
             "type": "array",
+            "nullable": true,
             "items": {
               "type": "string"
-            },
-            "nullable": true
+            }
           }
-        },
-        "additionalProperties": false
-      },
-      "AuthTokenResult": {
-        "type": "object",
-        "properties": {
-          "accessToken": {
-            "type": "string",
-            "nullable": true
-          },
-          "expiresAtUtc": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "userId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "username": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "MeResponse": {
-        "type": "object",
-        "properties": {
-          "userId": {
-            "type": "string",
-            "nullable": true
-          },
-          "username": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "SignInRequest": {
-        "type": "object",
-        "properties": {
-          "identity": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
+        }
       },
       "SignUpRequest": {
         "type": "object",
+        "additionalProperties": false,
         "properties": {
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "SignInRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "identity": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "MeResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
           "username": {
             "type": "string",
             "nullable": true
@@ -203,13 +250,8 @@
           "email": {
             "type": "string",
             "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       }
     }
   }

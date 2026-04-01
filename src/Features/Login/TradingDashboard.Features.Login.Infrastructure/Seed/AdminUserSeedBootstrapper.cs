@@ -1,4 +1,5 @@
 using TradingDashboard.Application.Common.Security;
+using TradingDashboard.Domain.Enums;
 using TradingDashboard.Domain.ValueObjects;
 using TradingDashboard.Infrastructure.Persistence.Implementation.Context;
 
@@ -30,6 +31,8 @@ public static class AdminUserSeedBootstrapper
             AdminUserSeedData.Email,
             passwordHash,
             passwordSalt,
+            SignupAppPlatform.Local,
+            false,
             DateTime.UtcNow);
 
         dbContext.AppUsers.Add(admin);
