@@ -1,4 +1,6 @@
 @inherits LayoutComponentBase
+@using TradingDashboard.Presentation.Common.Resources.Components.Layout.MainLayout
+@inject IStringLocalizer<MainLayoutResource> L
 
 <MudThemeProvider />
 <MudPopoverProvider />
@@ -7,11 +9,11 @@
 
 <MudLayout>
     <MudAppBar Elevation="1" Color="Color.Primary">
-        <MudText Typo="Typo.h6">TradingDashboard</MudText>
-        <MudButton Variant="Variant.Text" Color="Color.Inherit" Href="@RoutePaths.Ui.Home" Class="ml-4">Home</MudButton>
-        <MudButton Variant="Variant.Text" Color="Color.Inherit" Href="@RoutePaths.Ui.CotHome">Cot</MudButton>
+        <MudText Typo="Typo.h6">@L["AppName"]</MudText>
+        <MudButton Variant="Variant.Text" Color="Color.Inherit" Href="@RoutePaths.Ui.Home" Class="ml-4">@L["Menu.Home"]</MudButton>
+        <MudButton Variant="Variant.Text" Color="Color.Inherit" Href="@RoutePaths.Ui.CotHome">@L["Menu.Cot"]</MudButton>
         <MudSpacer />
-        <MudButton Variant="Variant.Outlined" Color="Color.Inherit" Href="@RoutePaths.Ui.Login">Login</MudButton>
+        <MudButton Variant="Variant.Outlined" Color="Color.Inherit" Href="@RoutePaths.Ui.Login">@L["Menu.Login"]</MudButton>
     </MudAppBar>
 
     <MudMainContent>
@@ -22,7 +24,7 @@
 </MudLayout>
 
 <div id="blazor-error-ui" data-nosnippet>
-    An unhandled error has occurred.
-    <a href="." class="reload">Reload</a>
+    @L["Common.UnhandledError"]
+    <a href="." class="reload">@L["Common.Reload"]</a>
     <span class="dismiss">x</span>
 </div>

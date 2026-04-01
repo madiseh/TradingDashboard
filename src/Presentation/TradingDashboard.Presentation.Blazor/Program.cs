@@ -1,13 +1,18 @@
 using TradingDashboard.Presentation.Blazor.Components;
 using TradingDashboard.Presentation.Blazor.DependencyInjection;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Localization;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+var supportedCultures = new[] { "en", "fa", "tr", "de" }
+    .Select(culture => new CultureInfo(culture))
+    .ToList();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 builder.Services.AddMudServices();
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
@@ -15,11 +20,15 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
     options.KnownNetworks.Clear();
     options.KnownProxies.Clear();
 });
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new RequestCulture("en");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+});
 builder.Services.AddIocRegistration();
 
 var app = builder.Build();
-
-
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -30,9 +39,8 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseForwardedHeaders();
+app.UseRequestLocalization();
 app.UseHttpsRedirection();
-
-
 app.UseAntiforgery();
 
 app.MapStaticAssets();

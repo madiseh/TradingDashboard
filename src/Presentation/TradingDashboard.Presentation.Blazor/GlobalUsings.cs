@@ -1,10 +1,12 @@
 #region System
 global using System;
 global using System.Collections.Generic;
+global using System.Globalization;
 global using System.Linq;
 #endregion
 
 global using Microsoft.AspNetCore.Components;
+global using Microsoft.Extensions.Localization;
 global using System.Net.Http.Json;
 global using PageComponentBase = TradingDashboard.Presentation.Blazor.Components.Pages.PageComponentBase;
 global using TradingDashboard.Presentation.Blazor.Contracts.Cot.Generated;
