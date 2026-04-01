@@ -14,7 +14,10 @@
 
             <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
                 <MudText Typo="Typo.h4">Futures Only Positions as of @GetAsOfDateLabel()</MudText>
-                <MudDatePicker @bind-Date="SelectedAsOfDate" Label="As Of Date" Variant="Variant.Outlined" />
+                <MudDatePicker @bind-Date="SelectedAsOfDate"
+                               Label="As Of Date"
+                               Variant="Variant.Outlined"
+                               IsDateDisabledFunc="IsNotTuesday" />
             </MudStack>
 
             <MudText Typo="Typo.body1" Align="Align.Left" Class="mt-4">

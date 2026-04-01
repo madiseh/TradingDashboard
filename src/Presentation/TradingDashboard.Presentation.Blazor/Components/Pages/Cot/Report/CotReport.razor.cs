@@ -2,7 +2,13 @@ namespace TradingDashboard.Presentation.Blazor.Components.Pages.Cot.Report;
 
 public partial class CotReport
 {
-    private DateTime? SelectedAsOfDate { get; set; } = DateTime.UtcNow.Date;
+    private DateTime? _selectedAsOfDate = GetMostRecentTuesday(DateTime.UtcNow.Date);
+
+    private DateTime? SelectedAsOfDate
+    {
+        get => _selectedAsOfDate;
+        set => _selectedAsOfDate = value is null ? null : GetMostRecentTuesday(value.Value);
+    }
 
     [Parameter]
     public string InstrumentSlug { get; set; } = string.Empty;
@@ -32,6 +38,17 @@ public partial class CotReport
     private string GetAsOfDateLabel()
     {
         return SelectedAsOfDate?.ToString("yyyy-MM-dd") ?? "N/A";
+    }
+
+    private static bool IsNotTuesday(DateTime date)
+    {
+        return date.DayOfWeek != DayOfWeek.Tuesday;
+    }
+
+    private static DateTime GetMostRecentTuesday(DateTime date)
+    {
+        int offset = ((int)date.DayOfWeek - (int)DayOfWeek.Tuesday + 7) % 7;
+        return date.Date.AddDays(-offset);
     }
 
     private static string GetDisplayName(string slug)
