@@ -16,3 +16,11 @@ This `doc` directory contains three main documentation groups:
 - After governance is clear, move on to `features/*`.
 - For features, use the `_template.md` file as the exact structure for new feature documentation.
 - Everything must proceed step-by-step, and if required documentation is missing, do not make assumptions.
+
+
+# Step-by-step implementation
+1. When creating a new page, first verify whether a new UI component is required.
+1.1. If a new UI component is needed, document it under `uiComponent/*`.
+1.2. Then add a new module for that component inside `TradingDashboard.Presentation.Blazor` under `Components -> Modules`, making it reusable for others.
+1.3. For each new UI page, which will likely use several existing modules or components, create a Resource file. Use the `Localization.md` documentation for the resource setup.
+

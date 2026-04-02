@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Actions.BackToDirectory" xml:space="preserve">
+    <value>بازگشت به فهرست بازارها</value>
+  </data>
+  <data name="Actions.Retry" xml:space="preserve">
+    <value>تلاش مجدد</value>
+  </data>
+  <data name="Empty.GroupNotAvailable" xml:space="preserve">
+    <value>این گروه بازار در دسترس نیست.</value>
+  </data>
+  <data name="Empty.NoInstruments" xml:space="preserve">
+    <value>برای این گروه بازار ابزاری پیدا نشد.</value>
+  </data>
+  <data name="Errors.EmptyGroupResponse" xml:space="preserve">
+    <value>پاسخ گروه بازار خالی است.</value>
+  </data>
+  <data name="Errors.GroupMissing" xml:space="preserve">
+    <value>هیچ گروه بازاری انتخاب نشده است.</value>
+  </data>
+  <data name="Errors.GroupNotFound" xml:space="preserve">
+    <value>هیچ گروه بازاری برای "{0}" پیدا نشد.</value>
+  </data>
+  <data name="Errors.LoadGroup" xml:space="preserve">
+    <value>بارگذاری گروه بازار انجام نشد.</value>
+  </data>
+  <data name="Errors.LoadGroupWithMessage" xml:space="preserve">
+    <value>بارگذاری گروه بازار انجام نشد. {0}</value>
+  </data>
+  <data name="Heading.Markets" xml:space="preserve">
+    <value>بازارها</value>
+  </data>
+  <data name="Labels.SelectedGroup" xml:space="preserve">
+    <value>گروه انتخاب‌شده</value>
+  </data>
+  <data name="Labels.SelectedModel" xml:space="preserve">
+    <value>مدل انتخاب‌شده</value>
+  </data>
+  <data name="Labels.TotalInstruments" xml:space="preserve">
+    <value>تعداد ابزارها</value>
+  </data>
+  <data name="Models.Cot" xml:space="preserve">
+    <value>COT</value>
+  </data>
+  <data name="Models.CotLegacy" xml:space="preserve">
+    <value>COT Legacy</value>
+  </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>بازارها</value>
+  </data>
+  <data name="PageTitle.WithGroup" xml:space="preserve">
+    <value>بازارهای {0}</value>
+  </data>
+  <data name="Summary.ShowingGroup" xml:space="preserve">
+    <value>فقط گروه {0} برای مدل {1} نمایش داده می‌شود.</value>
+  </data>
+  <data name="Table.Action" xml:space="preserve">
+    <value>عملیات</value>
+  </data>
+  <data name="Table.Instrument" xml:space="preserve">
+    <value>ابزار</value>
+  </data>
+</root>
