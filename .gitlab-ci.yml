@@ -15,10 +15,14 @@ build-release:
   image: mcr.microsoft.com/dotnet/sdk:9.0
   script:
     - apt-get update && apt-get install -y zip
-    - dotnet restore
-    - dotnet publish src/Features/Cot/TradingDashboard.Features.Cot.Presentation.Api/TradingDashboard.Features.Cot.Presentation.Api.csproj -c Release -o out/cot
-    - dotnet publish src/Features/Login/TradingDashboard.Features.Login.Presentation.Api/TradingDashboard.Features.Login.Presentation.Api.csproj -c Release -o out/login
-    - dotnet publish src/Presentation/TradingDashboard.Presentation.Blazor/TradingDashboard.Presentation.Blazor.csproj -c Release -o out/blazor
+    # Restoring the whole solution pulls in the MAUI host, which needs workloads
+    # that are not installed in this Linux runner. Restore only deployable projects.
+    - dotnet restore src/Features/Cot/TradingDashboard.Features.Cot.Presentation.Api/TradingDashboard.Features.Cot.Presentation.Api.csproj
+    - dotnet restore src/Features/Login/TradingDashboard.Features.Login.Presentation.Api/TradingDashboard.Features.Login.Presentation.Api.csproj
+    - dotnet restore src/Presentation/TradingDashboard.Presentation.Blazor/TradingDashboard.Presentation.Blazor.csproj
+    - dotnet publish src/Features/Cot/TradingDashboard.Features.Cot.Presentation.Api/TradingDashboard.Features.Cot.Presentation.Api.csproj -c Release -o out/cot --no-restore
+    - dotnet publish src/Features/Login/TradingDashboard.Features.Login.Presentation.Api/TradingDashboard.Features.Login.Presentation.Api.csproj -c Release -o out/login --no-restore
+    - dotnet publish src/Presentation/TradingDashboard.Presentation.Blazor/TradingDashboard.Presentation.Blazor.csproj -c Release -o out/blazor --no-restore
     - cd out/cot && zip -r ../cot.zip .
     - cd ../login && zip -r ../login.zip .
     - cd ../blazor && zip -r ../blazor.zip .
