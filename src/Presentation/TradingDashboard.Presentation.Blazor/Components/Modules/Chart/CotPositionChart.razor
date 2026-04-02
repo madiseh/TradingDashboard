@@ -2,20 +2,32 @@
     <MudStack Spacing="3">
         <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Wrap="Wrap.Wrap">
             <div>
-                <MudText Typo="Typo.h4">Net Position</MudText>
+                <MudText Typo="Typo.h4">@SelectedMetric.Title</MudText>
                 <MudText Typo="Typo.body2" Color="Color.Secondary">
-                    Select participant groups and a report-date range to compare net positioning.
+                    @SelectedMetric.Description
                 </MudText>
             </div>
 
             <MudChip T="string"
                      Variant="Variant.Outlined"
-                     Color="Color.Primary"
+                     Color="@GetSelectedMetricAccentColor()"
                      Size="Size.Small"
                      Value="@SelectedRangeLabel">
                 @SelectedRangeLabel
             </MudChip>
         </MudStack>
+
+        <MudTabs ActivePanelIndex="_activeMetricTabIndex"
+                 ActivePanelIndexChanged="OnActiveMetricTabChanged"
+                 Rounded="true"
+                 Elevation="0"
+                 ApplyEffectsToContainer="true">
+            @foreach (var metric in MetricTabs)
+            {
+                <MudTabPanel Text="@metric.TabLabel">
+                </MudTabPanel>
+            }
+        </MudTabs>
 
         @if (_isLoading)
         {
@@ -33,9 +45,14 @@
         {
             <MudGrid>
                 <MudItem xs="12" lg="3">
-                    <MudExpansionPanels MultiExpansion="true">
-                        <MudExpansionPanel Text="Participant Groups">
-                            <MudStack Spacing="1">
+                    <MudStack Spacing="2">
+                        <MudPaper Outlined="true" Class="pa-4 cot-position-filter-panel">
+                            <MudStack Spacing="2">
+                                <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
+                                    <MudText Typo="Typo.h6">Participant Groups</MudText>
+                                    <MudIcon Icon="@Icons.Material.Filled.ExpandLess" Color="Color.Default" />
+                                </MudStack>
+
                                 <MudStack Row="true" Spacing="1" Wrap="Wrap.Wrap">
                                     <MudButton Variant="Variant.Outlined" Size="Size.Small" OnClick="SelectAllAsync">
                                         Select All
@@ -55,10 +72,15 @@
                                                  Color="Color.Primary" />
                                 }
                             </MudStack>
-                        </MudExpansionPanel>
+                        </MudPaper>
 
-                        <MudExpansionPanel Text="Date Range">
+                        <MudPaper Outlined="true" Class="pa-4 cot-position-filter-panel">
                             <MudStack Spacing="2">
+                                <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
+                                    <MudText Typo="Typo.h6">Date Range</MudText>
+                                    <MudIcon Icon="@Icons.Material.Filled.ExpandLess" Color="Color.Default" />
+                                </MudStack>
+
                                 <MudDatePicker Date="_fromDate"
                                                DateChanged="OnFromDateChangedAsync"
                                                Label="From"
@@ -77,15 +99,15 @@
                                                MaxDate="MaxAvailableDate"
                                                IsDateDisabledFunc="IsDateUnavailable" />
                             </MudStack>
-                        </MudExpansionPanel>
-                    </MudExpansionPanels>
+                        </MudPaper>
+                    </MudStack>
                 </MudItem>
 
                 <MudItem xs="12" lg="9">
                     @if (ChartSeries.Count == 0)
                     {
                         <MudAlert Severity="Severity.Info" Dense="true">
-                            Select at least one participant group to render the net position chart.
+                            @SelectedMetric.EmptyMessage
                         </MudAlert>
                     }
                     else
@@ -99,16 +121,16 @@
                                     <MudChip T="string"
                                              Variant="Variant.Outlined"
                                              Size="Size.Small"
-                                             Color="@GetNetPositionColor(series.LatestNetPosition)"
-                                             Value="@FormatNumber(series.LatestNetPosition)">
-                                        @FormatNumber(series.LatestNetPosition)
+                                             Color="@GetValueColor(series.LatestValue)"
+                                             Value="@FormatNumber(series.LatestValue)">
+                                        @FormatNumber(series.LatestValue)
                                     </MudChip>
                                 </div>
                             }
                         </div>
 
                         <div class="cot-net-position-chart">
-                            <svg viewBox="0 0 960 420" role="img" aria-label="Net position chart">
+                            <svg viewBox="0 0 960 420" role="img" aria-label="@GetChartAriaLabel()">
                                 <rect x="@PlotLeft" y="@PlotTop" width="@(SvgWidth - PlotLeft - PlotRight)" height="@(SvgHeight - PlotTop - PlotBottom)" class="cot-net-position-plot"></rect>
 
                                 @foreach (var label in YAxisLabels)

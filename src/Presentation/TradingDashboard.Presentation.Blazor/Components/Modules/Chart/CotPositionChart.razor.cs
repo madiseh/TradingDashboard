@@ -3,7 +3,7 @@ using MudBlazor;
 
 namespace TradingDashboard.Presentation.Blazor.Components.Modules.Chart;
 
-public partial class CotNetPositionChart
+public partial class CotPositionChart
 {
     private const int DefaultVisibleWeeks = 52;
     private const decimal SvgWidth = 960m;
@@ -29,9 +29,38 @@ public partial class CotNetPositionChart
         new() { Key = "nonreportable", Label = "Non-Reportable", Color = "#be123c", IsSelected = true }
     ];
 
+    private static readonly IReadOnlyList<MetricTabViewModel> MetricTabs =
+    [
+        new(
+            PositionMetricType.NetPosition,
+            "Net Position",
+            "Net Position",
+            "Select participant groups and a report-date range to compare net positioning.",
+            "Select at least one participant group to render the net position chart.",
+            "Net",
+            Color.Primary),
+        new(
+            PositionMetricType.Long,
+            "Long",
+            "Long Positions",
+            "Use the same participant and date filters to compare long positioning across groups.",
+            "Select at least one participant group to render the long positions chart.",
+            "Long",
+            Color.Info),
+        new(
+            PositionMetricType.Short,
+            "Short",
+            "Short Positions",
+            "Use the same participant and date filters to compare short positioning across groups.",
+            "Select at least one participant group to render the short positions chart.",
+            "Short",
+            Color.Warning)
+    ];
+
     private bool _isLoading = true;
     private string? _errorMessage;
     private string? _lastContextKey;
+    private int _activeMetricTabIndex;
     private List<GroupSelectionViewModel> _groupSelections = [];
     private List<DateOnly> _availableDates = [];
     private Dictionary<string, CotReportSeriesResponse> _seriesByGroup = new(StringComparer.OrdinalIgnoreCase);
@@ -48,6 +77,8 @@ public partial class CotNetPositionChart
     public CotReportModel Model { get; set; } = CotReportModel.Cot;
 
     private IReadOnlyList<GroupSelectionViewModel> SelectedGroups => _groupSelections.Where(x => x.IsSelected).ToArray();
+
+    private MetricTabViewModel SelectedMetric => MetricTabs[_activeMetricTabIndex];
 
     private DateTime? MinAvailableDate => _availableDates.Count == 0
         ? null
@@ -85,6 +116,7 @@ public partial class CotNetPositionChart
     {
         _isLoading = true;
         _errorMessage = null;
+        _activeMetricTabIndex = 0;
         _seriesByGroup.Clear();
         _availableDates.Clear();
         _groupSelections = CreateDefaultGroupSelections();
@@ -121,14 +153,14 @@ public partial class CotNetPositionChart
         var response = await client.GetAsync(BuildAvailableDatesUri());
         if (!response.IsSuccessStatusCode)
         {
-            _errorMessage = "Failed to load available report dates for net position.";
+            _errorMessage = "Failed to load available report dates for the position chart.";
             return;
         }
 
         var payload = await response.Content.ReadFromJsonAsync<CotAvailableDatesResponse>();
         if (payload is null || payload.AvailableDates.Count == 0)
         {
-            _errorMessage = "No available report dates were returned for net position.";
+            _errorMessage = "No available report dates were returned for the position chart.";
             return;
         }
 
@@ -175,7 +207,7 @@ public partial class CotNetPositionChart
         var failedResult = results.FirstOrDefault(x => x.Response is null);
         if (failedResult.Group is not null)
         {
-            _errorMessage = $"Failed to load net position series for '{failedResult.Group.Label}'.";
+            _errorMessage = $"Failed to load chart series for '{failedResult.Group.Label}'.";
             return;
         }
 
@@ -198,6 +230,16 @@ public partial class CotNetPositionChart
         }
 
         return (group, await response.Content.ReadFromJsonAsync<CotReportSeriesResponse>());
+    }
+
+    private void OnActiveMetricTabChanged(int index)
+    {
+        if (index < 0 || index >= MetricTabs.Count)
+        {
+            return;
+        }
+
+        _activeMetricTabIndex = index;
     }
 
     private async Task OnGroupSelectionChangedAsync(string groupKey, bool selected)
@@ -315,7 +357,17 @@ public partial class CotNetPositionChart
             {
                 Group = group,
                 Points = _seriesByGroup[group.Key].Items
-                    .Where(item => item.NetPosition is not null)
+                    .Select(item => new
+                    {
+                        Item = item,
+                        Value = GetSelectedMetricValue(item)
+                    })
+                    .Where(x => x.Value is not null)
+                    .Select(x => new
+                    {
+                        x.Item.ReportDate,
+                        Value = x.Value!.Value
+                    })
                     .OrderBy(item => item.ReportDate)
                     .ToArray()
             })
@@ -329,7 +381,7 @@ public partial class CotNetPositionChart
 
         var allValues = selectedSeries
             .SelectMany(x => x.Points)
-            .Select(x => x.NetPosition ?? 0)
+            .Select(x => x.Value)
             .ToArray();
 
         GetChartScale(allValues, out var axisMin, out var axisMax, out _);
@@ -346,12 +398,12 @@ public partial class CotNetPositionChart
                     {
                         var dateIndex = Array.IndexOf(allDates, item.ReportDate);
                         var x = PlotLeft + (plotWidth * dateIndex / lastIndex);
-                        var y = PlotTop + (plotHeight * (decimal)(axisMax - (item.NetPosition ?? 0)) / (decimal)range);
-                        var tooltip = $"{series.Group.Label} | {item.ReportDate:yyyy-MM-dd} | Net: {FormatNumber(item.NetPosition)}";
+                        var y = PlotTop + (plotHeight * (decimal)(axisMax - item.Value) / (decimal)range);
+                        var tooltip = $"{series.Group.Label} | {item.ReportDate:yyyy-MM-dd} | {SelectedMetric.TooltipLabel}: {FormatNumber(item.Value)}";
 
                         return new SeriesPointViewModel(
                             item.ReportDate,
-                            item.NetPosition ?? 0,
+                            item.Value,
                             decimal.Round(x, 2),
                             decimal.Round(y, 2),
                             tooltip);
@@ -363,7 +415,7 @@ public partial class CotNetPositionChart
                     series.Group.Label,
                     series.Group.Color,
                     string.Join(' ', points.Select(point => $"{point.X.ToString("0.##", CultureInfo.InvariantCulture)},{point.Y.ToString("0.##", CultureInfo.InvariantCulture)}")),
-                    points[^1].NetPosition,
+                    points[^1].Value,
                     points);
             })
             .ToArray();
@@ -371,7 +423,7 @@ public partial class CotNetPositionChart
 
     private IReadOnlyList<AxisLabelViewModel> BuildYAxisLabels()
     {
-        var values = ChartSeries.SelectMany(x => x.Points).Select(x => x.NetPosition).ToArray();
+        var values = ChartSeries.SelectMany(x => x.Points).Select(x => x.Value).ToArray();
         if (values.Length == 0)
         {
             return [];
@@ -437,7 +489,7 @@ public partial class CotNetPositionChart
 
     private decimal GetZeroLineY()
     {
-        var values = ChartSeries.SelectMany(x => x.Points).Select(x => x.NetPosition).ToArray();
+        var values = ChartSeries.SelectMany(x => x.Points).Select(x => x.Value).ToArray();
         if (values.Length == 0)
         {
             return PlotTop;
@@ -516,6 +568,16 @@ public partial class CotNetPositionChart
         return $"{route}?model={Uri.EscapeDataString(Model.ToContractValue())}&group={Uri.EscapeDataString(groupKey)}&from={Uri.EscapeDataString(_fromDate!.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))}&to={Uri.EscapeDataString(_toDate!.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))}";
     }
 
+    private int? GetSelectedMetricValue(CotReportSeriesItemResponse item)
+    {
+        return SelectedMetric.Type switch
+        {
+            PositionMetricType.Long => item.Long,
+            PositionMetricType.Short => item.Short,
+            _ => item.NetPosition
+        };
+    }
+
     private static string FormatNumber(int? value)
     {
         return value?.ToString("N0", CultureInfo.InvariantCulture) ?? "N/A";
@@ -537,14 +599,31 @@ public partial class CotNetPositionChart
         return value.ToString("N0", CultureInfo.InvariantCulture);
     }
 
-    private static Color GetNetPositionColor(int value)
+    private Color GetValueColor(int value)
     {
-        return value switch
+        if (SelectedMetric.Type == PositionMetricType.NetPosition)
         {
-            > 0 => Color.Success,
-            < 0 => Color.Error,
-            _ => Color.Default
-        };
+            return value switch
+            {
+                > 0 => Color.Success,
+                < 0 => Color.Error,
+                _ => Color.Default
+            };
+        }
+
+        return value > 0
+            ? SelectedMetric.AccentColor
+            : Color.Default;
+    }
+
+    private string GetChartAriaLabel()
+    {
+        return $"{SelectedMetric.Title} chart";
+    }
+
+    private Color GetSelectedMetricAccentColor()
+    {
+        return SelectedMetric.AccentColor;
     }
 
     private static MarkupString BuildSvgText(decimal x, decimal y, string text, bool isDate, string anchor)

@@ -1,13 +1,13 @@
-# COT Net Position Chart UI Component
+# COT Position Chart UI Component
 
 ## Component
 
-- Name: `CotNetPositionChart`
-- Source: `src/Presentation/TradingDashboard.Presentation.Blazor/Components/Modules/Chart/CotNetPositionChart.razor`
+- Name: `CotPositionChart`
+- Source: `src/Presentation/TradingDashboard.Presentation.Blazor/Components/Modules/Chart/CotPositionChart.razor`
 
 ## Purpose
 
-Render the selectable net-position chart card for a COT instrument.
+Render the selectable multi-tab position chart card for a COT instrument.
 
 ## Input
 
@@ -17,12 +17,13 @@ Render the selectable net-position chart card for a COT instrument.
 ## Behavior
 
 - Loads `available-dates` from the COT API and initializes the date range from the most recent 52 report weeks.
+- Renders three tabs: `Net Position`, `Long`, and `Short`.
 - Renders participant-group filters inside an accordion section and keeps all groups selected by default.
 - Renders `from` and `to` date pickers inside an accordion section and restricts selection to available report dates only.
-- Calls the `series` endpoint per selected group and plots only `netPosition` values.
+- Calls the `series` endpoint per selected group and reuses the same chart module to plot `netPosition`, `long`, or `short` values based on the active tab.
 - Does not render any `prices` dataset.
 
 ## Notes
 
 - Must follow split-file rule: `.razor` + `.razor.cs` + `.ViewModels.cs`.
-- The component owns filter state, API calls, chart geometry, and line rendering so the page only composes modules.
+- The component owns filter state, API calls, chart geometry, and tab-to-metric mapping so the page only composes modules.

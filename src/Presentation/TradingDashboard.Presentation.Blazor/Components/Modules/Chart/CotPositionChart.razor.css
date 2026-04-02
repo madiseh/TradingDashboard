@@ -2,6 +2,11 @@
     overflow: hidden;
 }
 
+.cot-position-filter-panel {
+    border-radius: 1rem;
+    background: #fff;
+}
+
 .cot-net-position-legend {
     display: flex;
     flex-wrap: wrap;
