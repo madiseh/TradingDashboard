@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, ...</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, ...</value>
+  </resheader>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Trading Dashboard</value>
+  </data>
+  <data name="Eyebrow" xml:space="preserve">
+    <value>MAUI BLAZOR HYBRID</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Windows, Android ve iOS için tek bir sunum katmanı.</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Bu ilk sürüm, çözümü Blazor dostu bir çizgide tutarken panoyu yerel masaüstü ve mobil paketleme için hazırlar.</value>
+  </data>
+  <data name="Cards.Platforms.Title" xml:space="preserve">
+    <value>Hedef platformlar</value>
+  </data>
+  <data name="Cards.Platforms.Value" xml:space="preserve">
+    <value>Windows, Android, iOS</value>
+  </data>
+  <data name="Cards.Platforms.Description" xml:space="preserve">
+    <value>Bu aşamada proje dosyası üç çıktıyı da açıkça tanımlar.</value>
+  </data>
+  <data name="Cards.Architecture.Title" xml:space="preserve">
+    <value>Mimari</value>
+  </data>
+  <data name="Cards.Architecture.Value" xml:space="preserve">
+    <value>Sadece Presentation host</value>
+  </data>
+  <data name="Cards.Architecture.Description" xml:space="preserve">
+    <value>İş kuralları mevcut application ve feature katmanlarında kalır.</value>
+  </data>
+  <data name="Cards.Configuration.Title" xml:space="preserve">
+    <value>API yapılandırması</value>
+  </data>
+  <data name="Cards.Configuration.DefaultValue" xml:space="preserve">
+    <value>Masaüstü localhost uçları</value>
+  </data>
+  <data name="Cards.Configuration.AndroidValue" xml:space="preserve">
+    <value>Android emülatör uçları</value>
+  </data>
+  <data name="Cards.Configuration.Description" xml:space="preserve">
+    <value>Temel URL'ler appsettings dosyasından okunur ve gerektiğinde Android emülatör override değerleri kullanılır.</value>
+  </data>
+  <data name="ApiSection.Title" xml:space="preserve">
+    <value>Backend uçları</value>
+  </data>
+  <data name="ApiSection.Description" xml:space="preserve">
+    <value>Hybrid shell'i yerel geliştirme makinesinin dışındaki canlı API'lere bağlamadan önce bu değerleri güncelleyin.</value>
+  </data>
+  <data name="ApiSection.CotLabel" xml:space="preserve">
+    <value>COT API:</value>
+  </data>
+  <data name="ApiSection.LoginLabel" xml:space="preserve">
+    <value>Giriş API:</value>
+  </data>
+</root>

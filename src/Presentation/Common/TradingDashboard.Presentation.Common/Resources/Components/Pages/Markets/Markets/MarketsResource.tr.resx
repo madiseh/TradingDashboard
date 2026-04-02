@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Actions.BackToDirectory" xml:space="preserve">
+    <value>Piyasa dizinine geri don</value>
+  </data>
+  <data name="Actions.Retry" xml:space="preserve">
+    <value>Tekrar dene</value>
+  </data>
+  <data name="Empty.GroupNotAvailable" xml:space="preserve">
+    <value>Bu piyasa grubu kullanilabilir degil.</value>
+  </data>
+  <data name="Empty.NoInstruments" xml:space="preserve">
+    <value>Bu piyasa grubu icin enstruman bulunamadi.</value>
+  </data>
+  <data name="Errors.EmptyGroupResponse" xml:space="preserve">
+    <value>Piyasa grubu yaniti bos.</value>
+  </data>
+  <data name="Errors.GroupMissing" xml:space="preserve">
+    <value>Herhangi bir piyasa grubu secilmedi.</value>
+  </data>
+  <data name="Errors.GroupNotFound" xml:space="preserve">
+    <value>"{0}" icin piyasa grubu bulunamadi.</value>
+  </data>
+  <data name="Errors.LoadGroup" xml:space="preserve">
+    <value>Piyasa grubu yuklenemedi.</value>
+  </data>
+  <data name="Errors.LoadGroupWithMessage" xml:space="preserve">
+    <value>Piyasa grubu yuklenemedi. {0}</value>
+  </data>
+  <data name="Heading.Markets" xml:space="preserve">
+    <value>Piyasalar</value>
+  </data>
+  <data name="Labels.SelectedGroup" xml:space="preserve">
+    <value>Secilen grup</value>
+  </data>
+  <data name="Labels.SelectedModel" xml:space="preserve">
+    <value>Secilen model</value>
+  </data>
+  <data name="Labels.TotalInstruments" xml:space="preserve">
+    <value>Toplam enstruman</value>
+  </data>
+  <data name="Models.Cot" xml:space="preserve">
+    <value>COT</value>
+  </data>
+  <data name="Models.CotLegacy" xml:space="preserve">
+    <value>COT Legacy</value>
+  </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Piyasalar</value>
+  </data>
+  <data name="PageTitle.WithGroup" xml:space="preserve">
+    <value>{0} Piyasalari</value>
+  </data>
+  <data name="Summary.ShowingGroup" xml:space="preserve">
+    <value>Yalnizca {0} grubu, {1} modeli icin gosteriliyor.</value>
+  </data>
+  <data name="Table.Action" xml:space="preserve">
+    <value>Islem</value>
+  </data>
+  <data name="Table.Instrument" xml:space="preserve">
+    <value>Enstruman</value>
+  </data>
+</root>

@@ -1,0 +1,16 @@
+.td-hero {
+    color: #0f172a;
+    background:
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.32), transparent 28%),
+        linear-gradient(135deg, #f8fafc 0%, #dbeafe 52%, #e0f2fe 100%);
+    border: 1px solid rgba(14, 116, 144, 0.14);
+}
+
+.td-eyebrow {
+    letter-spacing: 0.12em;
+    font-weight: 700;
+}
+
+.td-status-card {
+    height: 100%;
+}

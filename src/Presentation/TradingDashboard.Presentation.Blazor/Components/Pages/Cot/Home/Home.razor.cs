@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Localization;
+using TradingDashboard.Presentation.Common.Resources.Components.Pages.Cot.Home;
+
 namespace TradingDashboard.Presentation.Blazor.Components.Pages.Cot.Home;
 
 public partial class Home
@@ -11,6 +15,9 @@ public partial class Home
     private bool _isLoading = true;
     private string? _errorMessage;
     private List<HomeGroupViewModel> _groups = [];
+
+    [Inject]
+    private IStringLocalizer<HomeResource> L { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
@@ -28,7 +35,7 @@ public partial class Home
             var response = await client.GetAsync(RoutePaths.Api.Cot.CotInstrumentsByGroup);
             if (!response.IsSuccessStatusCode)
             {
-                _errorMessage = "Failed to load market directory.";
+                _errorMessage = L["Errors.LoadDirectory"];
                 _groups = [];
                 return;
             }
@@ -36,7 +43,7 @@ public partial class Home
             var payload = await response.Content.ReadFromJsonAsync<IReadOnlyList<GetCotInstrumentsByGroupResponse>>();
             if (payload is null)
             {
-                _errorMessage = "Market directory response is empty.";
+                _errorMessage = L["Errors.EmptyDirectoryResponse"];
                 _groups = [];
                 return;
             }
@@ -54,7 +61,7 @@ public partial class Home
         }
         catch (Exception ex)
         {
-            _errorMessage = $"Failed to load market directory. {ex.Message}";
+            _errorMessage = L["Errors.LoadDirectoryWithMessage", ex.Message];
             _groups = [];
         }
         finally

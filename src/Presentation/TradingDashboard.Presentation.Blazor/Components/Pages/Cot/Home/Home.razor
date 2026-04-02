@@ -1,10 +1,11 @@
 @page "/cot"
 @inherits TradingDashboard.Presentation.Blazor.Components.Pages.PageComponentBase
+@using TradingDashboard.Presentation.Common.Resources.Components.Pages.Cot.Home
 
-<PageTitle>Home Directory</PageTitle>
+<PageTitle>@L["PageTitle"]</PageTitle>
 
 <MudStack Spacing="3">
-    <MudText Typo="Typo.h4">Markets Directory</MudText>
+    <MudText Typo="Typo.h4">@L["Heading.MarketsDirectory"]</MudText>
 
     @if (_isLoading)
     {
@@ -16,7 +17,7 @@
     {
         <MudAlert Severity="Severity.Error" Dense="true">
             @_errorMessage
-            <MudButton Class="ml-2" Variant="Variant.Outlined" Size="Size.Small" OnClick="LoadDirectoryAsync">Retry</MudButton>
+            <MudButton Class="ml-2" Variant="Variant.Outlined" Size="Size.Small" OnClick="LoadDirectoryAsync">@L["Actions.Retry"]</MudButton>
         </MudAlert>
     }
     else
@@ -29,15 +30,15 @@
                         <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
                             <MudText Typo="Typo.h5">@group.Type</MudText>
                             <MudStack Row="true" Spacing="2">
-                                <MudLink Href="@BuildMarketsLink(group.Type, CotReportModel.CotLegacy)">More in COT Legacy »</MudLink>
-                                <MudLink Href="@BuildMarketsLink(group.Type, CotReportModel.Cot)">More in COT »</MudLink>
+                                <MudLink Href="@BuildMarketsLink(group.Type, CotReportModel.CotLegacy)">@L["Links.MoreInCotLegacy"]</MudLink>
+                                <MudLink Href="@BuildMarketsLink(group.Type, CotReportModel.Cot)">@L["Links.MoreInCot"]</MudLink>
                             </MudStack>
                         </MudStack>
 
                         <MudSimpleTable Dense="true" Class="mt-2">
                             <thead>
                                 <tr>
-                                    <th>Instrument</th>
+                                    <th>@L["Table.Instrument"]</th>
                                     <th class="text-center">COT Legacy</th>
                                     <th class="text-center">COT</th>
                                 </tr>

@@ -6,6 +6,192 @@
     "version": "v1"
   },
   "paths": {
+    "/api/v1/cot/instruments/{instrumentSlug}/latest": {
+      "get": {
+        "tags": [
+          "CotInstruments"
+        ],
+        "operationId": "CotGetLatestReport",
+        "parameters": [
+          {
+            "name": "instrumentSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 2
+          },
+          {
+            "name": "reportDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCotLatestReportResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cot/instruments/{instrumentSlug}/available-dates": {
+      "get": {
+        "tags": [
+          "CotInstruments"
+        ],
+        "operationId": "CotGetAvailableDates",
+        "parameters": [
+          {
+            "name": "instrumentSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCotAvailableDatesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cot/instruments/{instrumentSlug}/series": {
+      "get": {
+        "tags": [
+          "CotInstruments"
+        ],
+        "operationId": "CotGetReportSeries",
+        "parameters": [
+          {
+            "name": "instrumentSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 2
+          },
+          {
+            "name": "group",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 3
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 5
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCotReportSeriesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/cot/instruments/{instrumentSlug}": {
       "get": {
         "tags": [
@@ -94,15 +280,15 @@
   },
   "components": {
     "schemas": {
-      "GetCotInstrumentBySlugResponse": {
+      "GetCotLatestReportResponse": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "id": {
+          "instrumentId": {
             "type": "string",
             "format": "guid"
           },
-          "instrumentId": {
+          "instrumentCode": {
             "type": "string"
           },
           "instrumentSlug": {
@@ -111,8 +297,102 @@
           "instrumentName": {
             "type": "string"
           },
-          "type": {
+          "model": {
             "type": "string"
+          },
+          "marketAndExchangeNames": {
+            "type": "string"
+          },
+          "reportDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "contractUnits": {
+            "type": "string"
+          },
+          "openInterestAll": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "changeInOpenInterestAll": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalTraders": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetCotLatestReportCategoryResponse"
+            }
+          }
+        }
+      },
+      "GetCotLatestReportCategoryResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "long": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/GetCotLatestReportMetricResponse"
+              }
+            ]
+          },
+          "short": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/GetCotLatestReportMetricResponse"
+              }
+            ]
+          },
+          "spread": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/GetCotLatestReportMetricResponse"
+              }
+            ]
+          }
+        }
+      },
+      "GetCotLatestReportMetricResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "positions": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "percentOfOpenInterest": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "traders": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "change": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -134,6 +414,137 @@
             "items": {
               "type": "string"
             }
+          }
+        }
+      },
+      "GetCotAvailableDatesResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "instrumentId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "instrumentSlug": {
+            "type": "string"
+          },
+          "instrumentName": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "latestDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "minDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "maxDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "availableDates": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        }
+      },
+      "GetCotReportSeriesResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "instrumentId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "instrumentSlug": {
+            "type": "string"
+          },
+          "instrumentName": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string"
+          },
+          "fromDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "toDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetCotReportSeriesItemResponse"
+            }
+          }
+        }
+      },
+      "GetCotReportSeriesItemResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "reportDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "long": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "short": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "spread": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "netPosition": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "openInterest": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "GetCotInstrumentBySlugResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "instrumentId": {
+            "type": "string"
+          },
+          "instrumentSlug": {
+            "type": "string"
+          },
+          "instrumentName": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
           }
         }
       },

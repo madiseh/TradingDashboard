@@ -1,4 +1,8 @@
 @inherits LayoutComponentBase
+@using TradingDashboard.Presentation.Common.Resources.Components.Layout.MainLayout
+@inject IStringLocalizer<MainLayoutResource> L
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 
 <MudThemeProvider />
 <MudPopoverProvider />
@@ -7,11 +11,25 @@
 
 <MudLayout>
     <MudAppBar Elevation="1" Color="Color.Primary">
-        <MudText Typo="Typo.h6">TradingDashboard</MudText>
-        <MudButton Variant="Variant.Text" Color="Color.Inherit" Href="@RoutePaths.Ui.Home" Class="ml-4">Home</MudButton>
-        <MudButton Variant="Variant.Text" Color="Color.Inherit" Href="@RoutePaths.Ui.CotHome">Cot</MudButton>
+        <MudText Typo="Typo.h6">@L["AppName"]</MudText>
+        <MudButton Variant="Variant.Text" Color="Color.Inherit" Href="@RoutePaths.Ui.Home" Class="ml-4">@L["Menu.Home"]</MudButton>
+        <MudButton Variant="Variant.Text" Color="Color.Inherit" Href="@RoutePaths.Ui.CotHome">@L["Menu.Cot"]</MudButton>
         <MudSpacer />
-        <MudButton Variant="Variant.Outlined" Color="Color.Inherit" Href="@RoutePaths.Ui.Login">Login</MudButton>
+        <MudSelect T="string"
+                   Value="@_selectedCulture"
+                   ValueChanged="OnCultureChangedAsync"
+                   Variant="Variant.Outlined"
+                   Margin="Margin.Dense"
+                   Dense="true"
+                   Class="mr-2 td-language-select"
+                   Style="width: 112px;"
+                   AdornmentColor="Color.Inherit">
+            @foreach (var language in SupportedLanguages)
+            {
+                <MudSelectItem T="string" Value="@language.Code">@language.Label</MudSelectItem>
+            }
+        </MudSelect>
+        <MudButton Variant="Variant.Outlined" Color="Color.Inherit" Href="@RoutePaths.Ui.Login">@L["Menu.Login"]</MudButton>
     </MudAppBar>
 
     <MudMainContent>
@@ -22,7 +40,46 @@
 </MudLayout>
 
 <div id="blazor-error-ui" data-nosnippet>
-    An unhandled error has occurred.
-    <a href="." class="reload">Reload</a>
+    @L["Common.UnhandledError"]
+    <a href="." class="reload">@L["Common.Reload"]</a>
     <span class="dismiss">x</span>
 </div>
+
+@code {
+    private string _selectedCulture = "en";
+
+    private static readonly IReadOnlyList<(string Code, string Label)> SupportedLanguages =
+    [
+        ("en", "English"),
+        ("fa", "Persian"),
+        ("tr", "Turkish"),
+        ("de", "Deutsch")
+    ];
+
+    protected override void OnInitialized()
+    {
+        _selectedCulture = NormalizeCulture(CultureInfo.CurrentUICulture.Name);
+    }
+
+    private async Task OnCultureChangedAsync(string culture)
+    {
+        var normalizedCulture = NormalizeCulture(culture);
+        _selectedCulture = normalizedCulture;
+
+        await JSRuntime.InvokeVoidAsync("tradingDashboardCulture.set", normalizedCulture);
+
+        var currentUri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        NavigationManager.NavigateTo(currentUri.PathAndQuery, forceLoad: true);
+    }
+
+    private static string NormalizeCulture(string? culture) =>
+        SupportedLanguages.Any(language => string.Equals(language.Code, culture, StringComparison.OrdinalIgnoreCase))
+            ? culture!
+            : culture?.Split('-', StringSplitOptions.RemoveEmptyEntries)[0].ToLowerInvariant() switch
+            {
+                "fa" => "fa",
+                "tr" => "tr",
+                "de" => "de",
+                _ => "en"
+            };
+}

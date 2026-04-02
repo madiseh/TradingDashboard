@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Actions.BackToDirectory" xml:space="preserve">
+    <value>Back to markets directory</value>
+  </data>
+  <data name="Actions.Retry" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="Empty.GroupNotAvailable" xml:space="preserve">
+    <value>This market group is not available.</value>
+  </data>
+  <data name="Empty.NoInstruments" xml:space="preserve">
+    <value>No instruments were found for this market group.</value>
+  </data>
+  <data name="Errors.EmptyGroupResponse" xml:space="preserve">
+    <value>Market group response is empty.</value>
+  </data>
+  <data name="Errors.GroupMissing" xml:space="preserve">
+    <value>No market group was selected.</value>
+  </data>
+  <data name="Errors.GroupNotFound" xml:space="preserve">
+    <value>No market group was found for "{0}".</value>
+  </data>
+  <data name="Errors.LoadGroup" xml:space="preserve">
+    <value>Failed to load market group.</value>
+  </data>
+  <data name="Errors.LoadGroupWithMessage" xml:space="preserve">
+    <value>Failed to load market group. {0}</value>
+  </data>
+  <data name="Heading.Markets" xml:space="preserve">
+    <value>Markets</value>
+  </data>
+  <data name="Labels.SelectedGroup" xml:space="preserve">
+    <value>Selected group</value>
+  </data>
+  <data name="Labels.SelectedModel" xml:space="preserve">
+    <value>Selected model</value>
+  </data>
+  <data name="Labels.TotalInstruments" xml:space="preserve">
+    <value>Total instruments</value>
+  </data>
+  <data name="Models.Cot" xml:space="preserve">
+    <value>COT</value>
+  </data>
+  <data name="Models.CotLegacy" xml:space="preserve">
+    <value>COT Legacy</value>
+  </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Markets</value>
+  </data>
+  <data name="PageTitle.WithGroup" xml:space="preserve">
+    <value>{0} Markets</value>
+  </data>
+  <data name="Summary.ShowingGroup" xml:space="preserve">
+    <value>Showing only the {0} group for the {1} model.</value>
+  </data>
+  <data name="Table.Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="Table.Instrument" xml:space="preserve">
+    <value>Instrument</value>
+  </data>
+</root>

@@ -7,6 +7,7 @@ A comprehensive trading analytics platform built with .NET, featuring COT (Commi
 Trading Dashboard is a multi-layered application following Clean Architecture principles, designed to provide real-time trading insights and data analysis. The solution consists of:
 
 - **Blazor Web Application** - Interactive dashboard for data visualization
+- **.NET MAUI Blazor Hybrid Application** - Cross-platform client for Windows, Android, and iOS
 - **REST API** - Backend services for COT data and analytics
 - **Clean Architecture** - Separation of Domain, Application, Infrastructure, and Presentation layers
 
@@ -14,8 +15,9 @@ Trading Dashboard is a multi-layered application following Clean Architecture pr
 
 ### Prerequisites
 
-- [.NET 8.0 SDK](https://dotnet.microsoft.com/download) or later
+- [.NET 9.0 SDK](https://dotnet.microsoft.com/download) or later
 - [Visual Studio 2022](https://visualstudio.microsoft.com/) or [Visual Studio Code](https://code.visualstudio.com/)
+- .NET MAUI workloads for `android`, `ios`, and `maui-windows`
 - Redis (for caching)
 
 ### Running the Application
@@ -40,6 +42,13 @@ Trading Dashboard is a multi-layered application following Clean Architecture pr
    ```bash
    dotnet run --project src/Presentation/TradingDashboard.Presentation.Blazor
    ```
+
+5. **Run the MAUI Hybrid App**
+   ```bash
+   dotnet build src/Presentation/TradingDashboard.Presentation.MauiHybrid -f net9.0-windows10.0.19041.0
+   ```
+
+   For Android emulator usage, the MAUI host reads `AndroidEmulatorBaseUrl` values from `src/Presentation/TradingDashboard.Presentation.MauiHybrid/appsettings.json`.
 
 ## Build and Test
 
@@ -74,7 +83,7 @@ We welcome contributions! To get started:
 - `src/Domain/` - Core business logic and entities
 - `src/Application/` - Use cases and business rules
 - `src/Infrastructure/` - Data access and external services
-- `src/Presentation/` - API and Blazor UI projects
+- `src/Presentation/` - API, Blazor web UI, and MAUI Hybrid UI projects
 
 For detailed documentation, see the [`doc/`](doc/) folder.
 
@@ -83,6 +92,7 @@ For detailed documentation, see the [`doc/`](doc/) folder.
 - Follow Clean Architecture principles
 - Write unit tests for new features
 - Follow the existing code style and conventions
+- Keep MAUI Hybrid as a Presentation-only host and document platform-specific behavior
 
 ---
 

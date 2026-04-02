@@ -1,0 +1,87 @@
+@page "/markets"
+@inherits TradingDashboard.Presentation.Blazor.Components.Pages.PageComponentBase
+@using TradingDashboard.Presentation.Common.Resources.Components.Pages.Markets.Markets
+
+<PageTitle>@GetPageTitle()</PageTitle>
+
+<MudStack Spacing="3">
+    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+        <MudText Typo="Typo.h4">@GetHeading()</MudText>
+        <MudButton Href="@RoutePaths.Ui.CotHome" Variant="Variant.Text" Color="Color.Primary">
+            @L["Actions.BackToDirectory"]
+        </MudButton>
+    </MudStack>
+
+    @if (_isLoading)
+    {
+        <MudPaper Class="pa-6 d-flex justify-center">
+            <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+        </MudPaper>
+    }
+    else if (!string.IsNullOrWhiteSpace(_errorMessage))
+    {
+        <MudAlert Severity="Severity.Error" Dense="true">
+            @_errorMessage
+            <MudButton Class="ml-2" Variant="Variant.Outlined" Size="Size.Small" OnClick="LoadGroupAsync">@L["Actions.Retry"]</MudButton>
+        </MudAlert>
+    }
+    else if (_group is null)
+    {
+        <MudAlert Severity="Severity.Warning" Dense="true">
+            @L["Empty.GroupNotAvailable"]
+        </MudAlert>
+    }
+    else
+    {
+        <MudPaper Class="pa-4">
+            <MudStack Spacing="2">
+                <MudStack Row="true" Wrap="Wrap.Wrap" Spacing="2">
+                    <MudChip T="string" Variant="Variant.Outlined" Color="Color.Primary">
+                        @L["Labels.SelectedGroup"]: @_group.Name
+                    </MudChip>
+                    <MudChip T="string" Variant="Variant.Outlined" Color="Color.Secondary">
+                        @L["Labels.SelectedModel"]: @GetSelectedModelLabel()
+                    </MudChip>
+                    <MudChip T="string" Variant="Variant.Outlined" Color="Color.Info">
+                        @L["Labels.TotalInstruments"]: @_group.Items.Count
+                    </MudChip>
+                </MudStack>
+
+                <MudText Typo="Typo.body1">
+                    @L["Summary.ShowingGroup", _group.Name, GetSelectedModelLabel()]
+                </MudText>
+            </MudStack>
+        </MudPaper>
+
+        @if (_group.Items.Count == 0)
+        {
+            <MudAlert Severity="Severity.Info" Dense="true">
+                @L["Empty.NoInstruments"]
+            </MudAlert>
+        }
+        else
+        {
+            <MudPaper Class="pa-3" Elevation="1">
+                <MudSimpleTable Dense="true">
+                    <thead>
+                        <tr>
+                            <th>@L["Table.Instrument"]</th>
+                            <th class="text-center">@L["Table.Action"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in _group.Items)
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td class="text-center">
+                                    <MudLink Href="@BuildCotLink(item.Slug)">@GetSelectedModelLabel()</MudLink>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </MudSimpleTable>
+            </MudPaper>
+        }
+    }
+</MudStack>
