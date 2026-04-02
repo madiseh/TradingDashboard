@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, ...</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, ...</value>
+  </resheader>
+  <data name="PageTitle" xml:space="preserve">
+    <value>داشبورد تریدینگ</value>
+  </data>
+  <data name="Eyebrow" xml:space="preserve">
+    <value>MAUI BLAZOR HYBRID</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>یک میزبان ارائه برای ویندوز، اندروید و iOS.</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>این نسخه اولیه، پروژه را روی مسیر سازگار با Blazor نگه می‌دارد و هم‌زمان آن را برای بسته‌بندی دسکتاپ و موبایل آماده می‌کند.</value>
+  </data>
+  <data name="Cards.Platforms.Title" xml:space="preserve">
+    <value>پلتفرم‌های هدف</value>
+  </data>
+  <data name="Cards.Platforms.Value" xml:space="preserve">
+    <value>ویندوز، اندروید، iOS</value>
+  </data>
+  <data name="Cards.Platforms.Description" xml:space="preserve">
+    <value>فایل پروژه در این مرحله هر سه خروجی را به‌صورت صریح تعریف می‌کند.</value>
+  </data>
+  <data name="Cards.Architecture.Title" xml:space="preserve">
+    <value>معماری</value>
+  </data>
+  <data name="Cards.Architecture.Value" xml:space="preserve">
+    <value>میزبان صرفا Presentation</value>
+  </data>
+  <data name="Cards.Architecture.Description" xml:space="preserve">
+    <value>منطق کسب‌وکار در لایه‌های فعلی application و feature باقی می‌ماند.</value>
+  </data>
+  <data name="Cards.Configuration.Title" xml:space="preserve">
+    <value>پیکربندی API</value>
+  </data>
+  <data name="Cards.Configuration.DefaultValue" xml:space="preserve">
+    <value>آدرس‌های localhost دسکتاپ</value>
+  </data>
+  <data name="Cards.Configuration.AndroidValue" xml:space="preserve">
+    <value>آدرس‌های شبیه‌ساز اندروید</value>
+  </data>
+  <data name="Cards.Configuration.Description" xml:space="preserve">
+    <value>آدرس پایه از appsettings خوانده می‌شود و در اندروید در صورت نیاز از override شبیه‌ساز استفاده می‌کند.</value>
+  </data>
+  <data name="ApiSection.Title" xml:space="preserve">
+    <value>اندپوینت‌های بک‌اند</value>
+  </data>
+  <data name="ApiSection.Description" xml:space="preserve">
+    <value>قبل از اتصال shell هیبرید به APIهای واقعی خارج از ماشین توسعه، این مقادیر را به‌روزرسانی کنید.</value>
+  </data>
+  <data name="ApiSection.CotLabel" xml:space="preserve">
+    <value>API گزارش COT:</value>
+  </data>
+  <data name="ApiSection.LoginLabel" xml:space="preserve">
+    <value>API ورود:</value>
+  </data>
+</root>

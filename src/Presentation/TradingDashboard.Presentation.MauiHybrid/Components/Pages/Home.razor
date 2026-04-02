@@ -1,0 +1,37 @@
+@page "/"
+@using TradingDashboard.Presentation.Common.Resources.Components.Pages.MauiHybrid.Home
+@inject IStringLocalizer<MauiHybridHomeResource> L
+
+<PageTitle>@L["PageTitle"]</PageTitle>
+
+<MudStack Spacing="3">
+    <MudPaper Class="td-hero pa-6" Elevation="0">
+        <MudStack Spacing="2">
+            <MudText Typo="Typo.overline" Class="td-eyebrow">@L["Eyebrow"]</MudText>
+            <MudText Typo="Typo.h3">@L["Title"]</MudText>
+            <MudText Typo="Typo.body1">@L["Description"]</MudText>
+        </MudStack>
+    </MudPaper>
+
+    <MudGrid>
+        @foreach (var card in Cards)
+        {
+            <MudItem xs="12" md="4">
+                <MudPaper Class="pa-4 td-status-card" Elevation="1">
+                    <MudText Typo="Typo.subtitle2" Color="Color.Secondary">@card.Title</MudText>
+                    <MudText Typo="Typo.h6" Class="mt-2">@card.Value</MudText>
+                    <MudText Typo="Typo.body2" Class="mt-2">@card.Description</MudText>
+                </MudPaper>
+            </MudItem>
+        }
+    </MudGrid>
+
+    <MudPaper Class="pa-4" Elevation="1">
+        <MudStack Spacing="2">
+            <MudText Typo="Typo.h6">@L["ApiSection.Title"]</MudText>
+            <MudText Typo="Typo.body2">@L["ApiSection.Description"]</MudText>
+            <MudText Typo="Typo.body2"><strong>@L["ApiSection.CotLabel"]</strong> @CotApiBaseUrl</MudText>
+            <MudText Typo="Typo.body2"><strong>@L["ApiSection.LoginLabel"]</strong> @LoginApiBaseUrl</MudText>
+        </MudStack>
+    </MudPaper>
+</MudStack>
