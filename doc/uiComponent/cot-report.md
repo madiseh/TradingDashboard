@@ -19,6 +19,7 @@ Render the report page shell and compose report modules.
 - Renders breadcrumb module.
 - Renders report header and summary text.
 - Renders `CotReportTable` based on selected model.
+- Renders `CotNetPositionChart` for historical net-position analysis.
 
 ## Notes
 

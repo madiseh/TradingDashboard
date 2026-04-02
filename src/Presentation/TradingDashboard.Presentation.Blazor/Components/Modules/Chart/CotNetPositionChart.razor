@@ -1,0 +1,150 @@
+<MudPaper Class="pa-4 cot-net-position-shell">
+    <MudStack Spacing="3">
+        <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Wrap="Wrap.Wrap">
+            <div>
+                <MudText Typo="Typo.h4">Net Position</MudText>
+                <MudText Typo="Typo.body2" Color="Color.Secondary">
+                    Select participant groups and a report-date range to compare net positioning.
+                </MudText>
+            </div>
+
+            <MudChip T="string"
+                     Variant="Variant.Outlined"
+                     Color="Color.Primary"
+                     Size="Size.Small"
+                     Value="@SelectedRangeLabel">
+                @SelectedRangeLabel
+            </MudChip>
+        </MudStack>
+
+        @if (_isLoading)
+        {
+            <MudPaper Outlined="true" Class="pa-6 d-flex justify-center">
+                <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+            </MudPaper>
+        }
+        else if (!string.IsNullOrWhiteSpace(_errorMessage))
+        {
+            <MudAlert Severity="Severity.Error" Dense="true">
+                @_errorMessage
+            </MudAlert>
+        }
+        else
+        {
+            <MudGrid>
+                <MudItem xs="12" lg="3">
+                    <MudExpansionPanels MultiExpansion="true">
+                        <MudExpansionPanel Text="Participant Groups">
+                            <MudStack Spacing="1">
+                                <MudStack Row="true" Spacing="1" Wrap="Wrap.Wrap">
+                                    <MudButton Variant="Variant.Outlined" Size="Size.Small" OnClick="SelectAllAsync">
+                                        Select All
+                                    </MudButton>
+                                    <MudButton Variant="Variant.Text" Size="Size.Small" OnClick="ClearSelection">
+                                        Clear
+                                    </MudButton>
+                                </MudStack>
+
+                                @foreach (var group in _groupSelections)
+                                {
+                                    <MudCheckBox T="bool"
+                                                 Value="@group.IsSelected"
+                                                 ValueChanged="@(value => OnGroupSelectionChangedAsync(group.Key, value))"
+                                                 Label="@group.Label"
+                                                 Dense="true"
+                                                 Color="Color.Primary" />
+                                }
+                            </MudStack>
+                        </MudExpansionPanel>
+
+                        <MudExpansionPanel Text="Date Range">
+                            <MudStack Spacing="2">
+                                <MudDatePicker Date="_fromDate"
+                                               DateChanged="OnFromDateChangedAsync"
+                                               Label="From"
+                                               Variant="Variant.Outlined"
+                                               Editable="false"
+                                               MinDate="MinAvailableDate"
+                                               MaxDate="MaxAvailableDate"
+                                               IsDateDisabledFunc="IsDateUnavailable" />
+
+                                <MudDatePicker Date="_toDate"
+                                               DateChanged="OnToDateChangedAsync"
+                                               Label="To"
+                                               Variant="Variant.Outlined"
+                                               Editable="false"
+                                               MinDate="MinAvailableDate"
+                                               MaxDate="MaxAvailableDate"
+                                               IsDateDisabledFunc="IsDateUnavailable" />
+                            </MudStack>
+                        </MudExpansionPanel>
+                    </MudExpansionPanels>
+                </MudItem>
+
+                <MudItem xs="12" lg="9">
+                    @if (ChartSeries.Count == 0)
+                    {
+                        <MudAlert Severity="Severity.Info" Dense="true">
+                            Select at least one participant group to render the net position chart.
+                        </MudAlert>
+                    }
+                    else
+                    {
+                        <div class="cot-net-position-legend">
+                            @foreach (var series in ChartSeries)
+                            {
+                                <div class="cot-net-position-legend-item">
+                                    <span class="cot-net-position-swatch" style="@($"background:{series.Color};")"></span>
+                                    <span>@series.Label</span>
+                                    <MudChip T="string"
+                                             Variant="Variant.Outlined"
+                                             Size="Size.Small"
+                                             Color="@GetNetPositionColor(series.LatestNetPosition)"
+                                             Value="@FormatNumber(series.LatestNetPosition)">
+                                        @FormatNumber(series.LatestNetPosition)
+                                    </MudChip>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="cot-net-position-chart">
+                            <svg viewBox="0 0 960 420" role="img" aria-label="Net position chart">
+                                <rect x="@PlotLeft" y="@PlotTop" width="@(SvgWidth - PlotLeft - PlotRight)" height="@(SvgHeight - PlotTop - PlotBottom)" class="cot-net-position-plot"></rect>
+
+                                @foreach (var label in YAxisLabels)
+                                {
+                                    <line x1="@PlotLeft" x2="@(SvgWidth - PlotRight)" y1="@label.Position" y2="@label.Position" class="cot-net-position-grid-line"></line>
+                                    @BuildSvgText(60m, label.Position + 4m, label.Text, false, "start")
+                                }
+
+                                <line x1="@PlotLeft" x2="@(SvgWidth - PlotRight)" y1="@ZeroLineY" y2="@ZeroLineY" class="cot-net-position-zero-line"></line>
+
+                                @foreach (var series in ChartSeries)
+                                {
+                                    <polyline points="@series.Path"
+                                              fill="none"
+                                              stroke="@series.Color"
+                                              stroke-width="3"
+                                              stroke-linecap="round"
+                                              stroke-linejoin="round"></polyline>
+
+                                    @foreach (var point in series.Points)
+                                    {
+                                        <circle cx="@point.X" cy="@point.Y" r="4" fill="@series.Color">
+                                            <title>@point.Tooltip</title>
+                                        </circle>
+                                    }
+                                }
+
+                                @foreach (var label in XAxisLabels)
+                                {
+                                    @BuildSvgText(label.Position, 392m, label.Text, true, "middle")
+                                }
+                            </svg>
+                        </div>
+                    }
+                </MudItem>
+            </MudGrid>
+        }
+    </MudStack>
+</MudPaper>

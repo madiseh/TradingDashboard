@@ -3,7 +3,9 @@ using MediatR;
 using TradingDashboard.Application.Common.Results;
 using TradingDashboard.Application.Features.CotInstruments.Queries.GetCotInstrumentBySlug;
 using TradingDashboard.Application.Features.CotInstruments.Queries.GetCotInstrumentsByGroup;
+using TradingDashboard.Application.Features.CotReports.Queries.GetCotAvailableDates;
 using TradingDashboard.Application.Features.CotReports.Queries.GetCotLatestReport;
+using TradingDashboard.Application.Features.CotReports.Queries.GetCotReportSeries;
 using TradingDashboard.Application.Repository.Cot;
 using TradingDashboard.Infrastructure.Persistence.Implementation.Repositories;
 
@@ -41,15 +43,20 @@ public static class IocRegistration
         services.AddIocRegistrationRepository();
         services.AddScoped<ICotInstrumentQueryRepository, CotInstrumentQueryRepository>();
         services.AddScoped<ICotLatestReportQueryRepository>(_ => new CotLatestReportFileQueryRepository(BuildCotRawStorageRoots(configuration)));
+        services.AddScoped<ICotHistoricalReportQueryRepository>(_ => new CotHistoricalReportFileQueryRepository(BuildCotRawStorageRoots(configuration)));
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(IocRegistration).Assembly));
 
         services.AddTransient<IRequestHandler<GetCotInstrumentBySlugQuery, OperationalResult<GetCotInstrumentBySlugResponse>>, GetCotInstrumentBySlugHandler>();
         services.AddTransient<IRequestHandler<GetCotInstrumentsByGroupQuery, OperationalResult<IReadOnlyList<GetCotInstrumentsByGroupResponse>>>, GetCotInstrumentsByGroupHandler>();
+        services.AddTransient<IRequestHandler<GetCotAvailableDatesQuery, OperationalResult<GetCotAvailableDatesResponse>>, GetCotAvailableDatesHandler>();
         services.AddTransient<IRequestHandler<GetCotLatestReportQuery, OperationalResult<GetCotLatestReportResponse>>, GetCotLatestReportHandler>();
+        services.AddTransient<IRequestHandler<GetCotReportSeriesQuery, OperationalResult<GetCotReportSeriesResponse>>, GetCotReportSeriesHandler>();
 
         services.AddScoped<IValidator<GetCotInstrumentBySlugQuery>, GetCotInstrumentBySlugValidator>();
         services.AddScoped<IValidator<GetCotInstrumentsByGroupQuery>, GetCotInstrumentsByGroupValidator>();
+        services.AddScoped<IValidator<GetCotAvailableDatesQuery>, GetCotAvailableDatesValidator>();
         services.AddScoped<IValidator<GetCotLatestReportQuery>, GetCotLatestReportValidator>();
+        services.AddScoped<IValidator<GetCotReportSeriesQuery>, GetCotReportSeriesValidator>();
 
 
         return services;

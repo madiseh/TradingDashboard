@@ -175,7 +175,7 @@ Response `200`:
 
 ### 3) Get Available Dates
 
-- `GET /api/v1/cot/instruments/{instrumentId}/available-dates?model=Cot`
+- `GET /api/v1/cot/instruments/{instrumentSlug}/available-dates?model=Cot`
 
 Purpose:
 - Power Blazor date picker.
@@ -185,7 +185,8 @@ Response `200`:
 
 ```json
 {
-  "instrumentId": "aud-cme-futures",
+  "instrumentId": "f1085f88-6f20-4517-8020-6b53db8a0f6d",
+  "instrumentSlug": "australian-dollar",
   "model": "Cot",
   "latestDate": "2026-02-03",
   "minDate": "2010-01-05",
@@ -227,15 +228,19 @@ Response `200`:
 
 ### 5) Get Series
 
-- `GET /api/v1/cot/instruments/{instrumentId}/series?model=Cot&group=LeveragedFunds&from=2025-01-07&to=2026-02-03`
+- `GET /api/v1/cot/instruments/{instrumentSlug}/series?model=Cot&group=dealer&from=2025-01-07&to=2026-02-03`
 
 Response `200`:
 
 ```json
 {
-  "instrumentId": "aud-cme-futures",
-  "model": "Cot",
-  "group": "LeveragedFunds",
+  "instrumentId": "f1085f88-6f20-4517-8020-6b53db8a0f6d",
+  "instrumentSlug": "australian-dollar",
+  "instrumentName": "AUSTRALIAN DOLLAR",
+  "model": "cot",
+  "group": "dealer",
+  "fromDate": "2025-01-07",
+  "toDate": "2026-02-03",
   "items": [
     {
       "reportDate": "2026-02-03",
