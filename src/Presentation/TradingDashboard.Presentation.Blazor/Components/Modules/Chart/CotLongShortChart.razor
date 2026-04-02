@@ -1,0 +1,49 @@
+<MudPaper Class="pa-4 cot-long-short-shell">
+    @if (ChartItems.Count == 0)
+    {
+        <MudAlert Severity="Severity.Info" Dense="true">
+            No long vs. short chart data is available for this report.
+        </MudAlert>
+    }
+    else
+    {
+        <MudStack Spacing="3">
+            <MudText Typo="Typo.h4" Align="Align.Center">
+                Long vs. Short
+            </MudText>
+
+            <div class="cot-long-short-grid">
+                @foreach (var item in ChartItems)
+                {
+                    <div class="cot-long-short-item">
+                        <div class="cot-long-short-bar"
+                             title="@BuildTooltip(item)"
+                             aria-label="@BuildTooltip(item)">
+                            <div class="cot-long-short-segment short"
+                                 style="@GetSegmentStyle(item.ShortRatio)">
+                            </div>
+                            <div class="cot-long-short-segment long"
+                                 style="@GetSegmentStyle(item.LongRatio)">
+                            </div>
+                        </div>
+
+                        <MudText Typo="Typo.subtitle1" Align="Align.Center" Class="mt-2">
+                            @item.Label
+                        </MudText>
+                    </div>
+                }
+            </div>
+
+            <div class="cot-long-short-legend" aria-hidden="true">
+                <div class="cot-long-short-legend-item">
+                    <span class="cot-long-short-legend-swatch long"></span>
+                    <span>Long</span>
+                </div>
+                <div class="cot-long-short-legend-item">
+                    <span class="cot-long-short-legend-swatch short"></span>
+                    <span>Short</span>
+                </div>
+            </div>
+        </MudStack>
+    }
+</MudPaper>

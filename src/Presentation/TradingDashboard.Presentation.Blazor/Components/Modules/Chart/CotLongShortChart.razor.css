@@ -1,0 +1,68 @@
+.cot-long-short-shell {
+    overflow-x: auto;
+}
+
+.cot-long-short-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    align-items: end;
+}
+
+.cot-long-short-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.cot-long-short-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 320px;
+    border: 1px solid #d3d3d3;
+    background-color: #f7f7f7;
+    overflow: hidden;
+}
+
+.cot-long-short-segment {
+    width: 100%;
+    transition: height 0.2s ease;
+}
+
+.cot-long-short-segment.long,
+.cot-long-short-legend-swatch.long {
+    background-color: #66b99c;
+}
+
+.cot-long-short-segment.short,
+.cot-long-short-legend-swatch.short {
+    background-color: #e68383;
+}
+
+.cot-long-short-legend {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid #d3d3d3;
+    flex-wrap: wrap;
+}
+
+.cot-long-short-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+}
+
+.cot-long-short-legend-swatch {
+    display: inline-block;
+    width: 28px;
+    height: 14px;
+}
+
+@media (max-width: 960px) {
+    .cot-long-short-bar {
+        height: 260px;
+    }
+}
