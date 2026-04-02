@@ -1,3 +1,6 @@
+using System.Globalization;
+using MudBlazor;
+
 namespace TradingDashboard.Presentation.Blazor.Components.Pages.Cot.Report;
 
 public partial class CotReport
@@ -59,6 +62,52 @@ public partial class CotReport
     private string GetAsOfDateLabel()
     {
         return SelectedAsOfDate?.ToString("yyyy-MM-dd") ?? "N/A";
+    }
+
+    private string GetMarketAndExchangeLabel()
+    {
+        return string.IsNullOrWhiteSpace(_report?.MarketAndExchangeNames)
+            ? GetDisplayName(InstrumentSlug)
+            : _report.MarketAndExchangeNames;
+    }
+
+    private string GetContractUnitsLabel()
+    {
+        return string.IsNullOrWhiteSpace(_report?.ContractUnits)
+            ? string.Empty
+            : $"({_report.ContractUnits})";
+    }
+
+    private string GetInstrumentCodeLabel()
+    {
+        return string.IsNullOrWhiteSpace(_report?.InstrumentCode) ? "N/A" : _report.InstrumentCode;
+    }
+
+    private static string FormatNumber(int? value)
+    {
+        return value?.ToString("N0", CultureInfo.InvariantCulture) ?? "N/A";
+    }
+
+    private static string FormatSignedNumber(int? value)
+    {
+        if (value is null)
+        {
+            return "N/A";
+        }
+
+        return value.Value >= 0
+            ? $"+{value.Value.ToString("N0", CultureInfo.InvariantCulture)}"
+            : value.Value.ToString("N0", CultureInfo.InvariantCulture);
+    }
+
+    private static Color GetChangeColor(int? value)
+    {
+        return value switch
+        {
+            > 0 => Color.Success,
+            < 0 => Color.Error,
+            _ => Color.Default
+        };
     }
 
     private static bool IsNotTuesday(DateTime date)
