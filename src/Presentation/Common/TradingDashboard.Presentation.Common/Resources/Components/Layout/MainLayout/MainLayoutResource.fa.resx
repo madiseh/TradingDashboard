@@ -30,4 +30,7 @@
   <data name="Common.Reload" xml:space="preserve">
     <value>بارگذاری مجدد</value>
   </data>
+  <data name="Footer.Releases" xml:space="preserve">
+    <value>Ø§Ù†ØªØ´Ø§Ø±Ù‡Ø§</value>
+  </data>
 </root>

@@ -1,0 +1,35 @@
+.td-releases-section .td-release-summary {
+    border: 1px solid rgba(36, 61, 255, 0.12);
+    background:
+        radial-gradient(circle at top right, rgba(36, 61, 255, 0.08), transparent 35%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(246, 249, 255, 0.98));
+}
+
+.td-release-summary__eyebrow {
+    color: #243dff;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.td-releases-section .td-release-card {
+    border: 1px solid rgba(10, 37, 64, 0.08);
+    border-left: 4px solid #243dff;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(250, 252, 255, 0.98));
+}
+
+.td-release-card__date {
+    color: #243dff;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.td-release-card__list {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: #16324f;
+}
+
+.td-release-card__list li + li {
+    margin-top: 0.75rem;
+}

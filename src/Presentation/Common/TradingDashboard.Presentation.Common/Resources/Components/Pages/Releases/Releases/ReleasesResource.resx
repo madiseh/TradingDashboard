@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Releases</value>
+  </data>
+  <data name="Hero.Eyebrow" xml:space="preserve">
+    <value>Product updates</value>
+  </data>
+  <data name="Hero.Title" xml:space="preserve">
+    <value>Releases</value>
+  </data>
+  <data name="Hero.Description" xml:space="preserve">
+    <value>A compact running log of what has shipped in Trading Dashboard, starting with the latest snapshot on April 3, 2026.</value>
+  </data>
+  <data name="Summary.Title" xml:space="preserve">
+    <value>Latest snapshot</value>
+  </data>
+  <data name="Summary.Description" xml:space="preserve">
+    <value>Use this page as the daily release note feed and add the next update above the current one.</value>
+  </data>
+  <data name="Summary.UpdatedThrough" xml:space="preserve">
+    <value>Updated through {0}</value>
+  </data>
+  <data name="Labels.Current" xml:space="preserve">
+    <value>Current</value>
+  </data>
+  <data name="Labels.Bullets" xml:space="preserve">
+    <value>{0} highlights</value>
+  </data>
+  <data name="Entry.Title.CurrentSnapshot" xml:space="preserve">
+    <value>Current product snapshot</value>
+  </data>
+  <data name="Entry.Description.CurrentSnapshot" xml:space="preserve">
+    <value>The product moved from core COT report flows into a more polished web experience with stronger hosting and delivery foundations.</value>
+  </data>
+  <data name="Entry.Highlight.1" xml:space="preserve">
+    <value>Rolled out a Tradexy-style homepage and main layout, including restored COT navigation and language switching.</value>
+  </data>
+  <data name="Entry.Highlight.2" xml:space="preserve">
+    <value>Added market directory and grouped markets pages so users can reach COT and COT Legacy reports faster.</value>
+  </data>
+  <data name="Entry.Highlight.3" xml:space="preserve">
+    <value>Expanded the report experience with summary stats, reusable long-short charts, and a selectable net-position chart with history filters.</value>
+  </data>
+  <data name="Entry.Highlight.4" xml:space="preserve">
+    <value>Improved data reliability by loading report pages from collected JSON snapshots and handling historical sync edge cases.</value>
+  </data>
+  <data name="Entry.Highlight.5" xml:space="preserve">
+    <value>Strengthened delivery with a MAUI Blazor Hybrid host plus updated GitLab CI steps for deploy and unit-test coverage.</value>
+  </data>
+</root>

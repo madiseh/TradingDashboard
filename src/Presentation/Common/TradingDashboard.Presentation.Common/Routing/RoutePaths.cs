@@ -6,6 +6,7 @@ public static class RoutePaths
     {
         public const string Home = "/";
         public const string Login = "/login";
+        public const string Releases = "/releases";
         
         public const string Markets = "/markets";
 

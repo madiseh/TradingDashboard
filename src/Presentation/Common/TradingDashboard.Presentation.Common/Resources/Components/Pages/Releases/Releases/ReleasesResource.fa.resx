@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PageTitle" xml:space="preserve">
+    <value>انتشارها</value>
+  </data>
+  <data name="Hero.Eyebrow" xml:space="preserve">
+    <value>به‌روزرسانی‌های محصول</value>
+  </data>
+  <data name="Hero.Title" xml:space="preserve">
+    <value>انتشارها</value>
+  </data>
+  <data name="Hero.Description" xml:space="preserve">
+    <value>یک لاگ خلاصه و پیوسته از چیزهایی که در Trading Dashboard منتشر شده است؛ شروع از آخرین وضعیت در 2026-04-03.</value>
+  </data>
+  <data name="Summary.Title" xml:space="preserve">
+    <value>آخرین وضعیت</value>
+  </data>
+  <data name="Summary.Description" xml:space="preserve">
+    <value>از این صفحه به‌عنوان فید روزانه Release Note استفاده کنید و آپدیت بعدی را بالای ورودی فعلی اضافه کنید.</value>
+  </data>
+  <data name="Summary.UpdatedThrough" xml:space="preserve">
+    <value>به‌روزشده تا {0}</value>
+  </data>
+  <data name="Labels.Current" xml:space="preserve">
+    <value>فعلی</value>
+  </data>
+  <data name="Labels.Bullets" xml:space="preserve">
+    <value>{0} نکته</value>
+  </data>
+  <data name="Entry.Title.CurrentSnapshot" xml:space="preserve">
+    <value>نمای فعلی محصول</value>
+  </data>
+  <data name="Entry.Description.CurrentSnapshot" xml:space="preserve">
+    <value>محصول از فلوهای اصلی گزارش COT به یک تجربه وب صیقلی‌تر با زیرساخت بهتر برای میزبانی و تحویل رسیده است.</value>
+  </data>
+  <data name="Entry.Highlight.1" xml:space="preserve">
+    <value>صفحه اصلی و Layout با استایل Tradexy اضافه شد و ناوبری COT و تغییر زبان دوباره برقرار شد.</value>
+  </data>
+  <data name="Entry.Highlight.2" xml:space="preserve">
+    <value>صفحه دایرکتوری بازارها و گروه‌بندی بازارها اضافه شد تا دسترسی به گزارش‌های COT و COT Legacy سریع‌تر شود.</value>
+  </data>
+  <data name="Entry.Highlight.3" xml:space="preserve">
+    <value>تجربه صفحه گزارش با آمار خلاصه، چارت reusable long-short و چارت selectable net-position با فیلتر تاریخ گسترش پیدا کرد.</value>
+  </data>
+  <data name="Entry.Highlight.4" xml:space="preserve">
+    <value>پایداری داده بهتر شد؛ صفحه گزارش از snapshotهای JSON بارگذاری می‌شود و edge caseهای سینک تاریخی هم پوشش داده شد.</value>
+  </data>
+  <data name="Entry.Highlight.5" xml:space="preserve">
+    <value>زیرساخت تحویل تقویت شد؛ هم MAUI Blazor Hybrid host اضافه شد و هم مراحل GitLab CI برای deploy و unit test بهبود پیدا کرد.</value>
+  </data>
+</root>

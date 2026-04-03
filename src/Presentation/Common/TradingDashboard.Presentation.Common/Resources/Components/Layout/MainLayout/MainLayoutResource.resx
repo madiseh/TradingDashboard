@@ -30,4 +30,7 @@
   <data name="Common.Reload" xml:space="preserve">
     <value>Reload</value>
   </data>
+  <data name="Footer.Releases" xml:space="preserve">
+    <value>Releases</value>
+  </data>
 </root>

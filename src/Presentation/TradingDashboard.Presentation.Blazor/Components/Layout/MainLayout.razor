@@ -1,8 +1,10 @@
 @inherits LayoutComponentBase
 @using System.Globalization
+@using TradingDashboard.Presentation.Common.Resources.Components.Layout.MainLayout
 @using TradingDashboard.Presentation.Common.Routing
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JSRuntime
+@inject IStringLocalizer<MainLayoutResource> L
 
 <MudThemeProvider />
 <MudPopoverProvider />
@@ -174,6 +176,7 @@
                     </div>
                     <div class="quick-link order-1 order-lg-0">
                         <ul class="quick-link__list">
+                            <li><a href="@RoutePaths.Ui.Releases">@L["Footer.Releases"]</a></li>
                             <li><a href="/#footer">Help &amp; Support</a></li>
                             <li><a href="/#footer">Privacy policy</a></li>
                             <li><a href="/#footer">Terms &amp; Conditions</a></li>
