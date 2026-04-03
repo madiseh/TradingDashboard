@@ -103,9 +103,11 @@
                                 (@GetModelDescription()) loaded from the selected collected JSON snapshot.
                             </MudText>
                         </MudStack>
+
+                        <CotReportTable Model="@ReportModel" Report="@_report" />
                     </MudPaper>
 
-                    <CotReportTable Model="@ReportModel" Report="@_report" />
+                   
                     <CotLongShortChart Model="@ReportModel" Report="@_report" />
                     <CotPositionChart InstrumentSlug="@InstrumentSlug" Model="@ReportModel" />
                 }

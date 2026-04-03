@@ -25,30 +25,12 @@
                         <div class="main-menu index-page">
                             <ul class="navbar-nav mb-lg-0 me-auto">
                                 <li class="nav-item dropdown nav-cus-item">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Home</a>
-                                    <ul class="dropdown-menu custom-dropdowns d-xl-flex">
-                                        @for (var i = 1; i <= 5; i++)
-                                        {
-                                            <li>
-                                                <a class="dropdown-item d-grid" href="@RoutePaths.Ui.Home">
-                                                    <img src="@Img($"menu/landing{i}.png")" alt="Landing preview @i" class="d-xl-block d-none" />
-                                                    <span class="text-cus d-block">Home @GetMenuLabel(i)</span>
-                                                </a>
-                                            </li>
-                                        }
-                                    </ul>
+                                        <a class="nav-link" href="@RoutePaths.Ui.Home">Home</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="@RoutePaths.Ui.CotHome">COT</a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Brokerage Reviews</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="/#broker-reviews">Brokerage Reviews</a></li>
-                                        <li><a class="dropdown-item" href="/#broker-reviews">Brokerage Details 01</a></li>
-                                        <li><a class="dropdown-item" href="/#broker-reviews">Brokerage Details 02</a></li>
-                                    </ul>
-                                </li>
+                                
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Market Analysis</a>
                                     <ul class="dropdown-menu">
@@ -56,59 +38,32 @@
                                         <li><a class="dropdown-item" href="@RoutePaths.Ui.CotHome">Weekly Review Details</a></li>
                                     </ul>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Educate</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="/#video-tutorial">Video Tutorial</a></li>
-                                        <li><a class="dropdown-item" href="/#video-tutorial">Tutorial Details</a></li>
-                                        <li><a class="dropdown-item" href="/#packages">Graphic Tutorial</a></li>
-                                        <li><a class="dropdown-item" href="/#packages">Graphic Details</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Serve</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="/#packages">Service Plan</a></li>
-                                        <li><a class="dropdown-item" href="/#packages">Service Packages</a></li>
-                                        <li><a class="dropdown-item" href="/#packages">Packages Details</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="/#about-us">About Us</a></li>
-                                        <li><a class="dropdown-item" href="/#faqa">Faqs</a></li>
-                                        <li><a class="dropdown-item" href="@RoutePaths.Ui.CotHome">Blog</a></li>
-                                        <li><a class="dropdown-item" href="@RoutePaths.Ui.CotHome">Blog Details</a></li>
-                                        <li><a class="dropdown-item" href="/#footer">Contact Us</a></li>
-                                        <li><a class="dropdown-item" href="@RoutePaths.Ui.Login">Sign Up</a></li>
-                                        <li><a class="dropdown-item" href="@RoutePaths.Ui.Login">Sign In</a></li>
-                                        <li><a class="dropdown-item" href="@RoutePaths.Ui.Home">404 Error Page</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item td-language-nav-item d-none d-xl-flex align-items-center">
-                                    <div class="language-box d-flex align-items-center justify-content-center position-relative">
-                                        <MudSelect T="string"
-                                                   Value="@_selectedCulture"
-                                                   ValueChanged="OnCultureChangedAsync"
-                                                   Variant="Variant.Text"
-                                                   Margin="Margin.Dense"
-                                                   Dense="true"
-                                                   Underline="false"
-                                                   Class="td-language-select"
-                                                   AnchorOrigin="Origin.BottomCenter"
-                                                   TransformOrigin="Origin.TopCenter">
-                                            @foreach (var language in SupportedLanguages)
-                                            {
-                                                <MudSelectItem T="string" Value="@language.Code">@language.ShortLabel</MudSelectItem>
-                                            }
-                                        </MudSelect>
-                                        <i class="bi bi-globe icon"></i>
-                                    </div>
-                                </li>
+                                
+                               
+                                
                             </ul>
-                            <div class="nav-right d-none d-xl-block">
+                            <div class="nav-right d-xl-block">
+                                   
+                                    
                                 <div class="nav-right__search">
+                                        <div class="language-box d-flex align-items-center justify-content-center position-relative">
+                                            <MudSelect T="string"
+                                                       Value="@_selectedCulture"
+                                                       ValueChanged="OnCultureChangedAsync"
+                                                       Variant="Variant.Text"
+                                                       Margin="Margin.Dense"
+                                                       Dense="true"
+                                                       Underline="false"
+                                                       Class="td-language-select"
+                                                       AnchorOrigin="Origin.BottomCenter"
+                                                       TransformOrigin="Origin.TopCenter">
+                                                @foreach (var language in SupportedLanguages)
+                                                {
+                                                    <MudSelectItem T="string" Value="@language.Code">@language.ShortLabel</MudSelectItem>
+                                                }
+                                            </MudSelect>
+                                            <i class="bi bi-globe icon"></i>
+                                        </div>
                                     <a href="javascript:void(0)" class="cmn__search-icon nav-right__search-icon d-center">
                                         <i class="bi bi-search"></i>
                                         <span></span>
