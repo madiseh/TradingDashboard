@@ -1,10 +1,11 @@
 .cot-long-short-shell {
-    overflow-x: auto;
+    overflow: hidden;
 }
 
 .cot-long-short-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1.5rem;
     align-items: end;
 }
@@ -12,6 +13,9 @@
 .cot-long-short-item {
     display: flex;
     flex-direction: column;
+    flex: 1 1 180px;
+    min-width: 180px;
+    max-width: 240px;
 }
 
 .cot-long-short-bar {

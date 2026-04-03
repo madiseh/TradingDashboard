@@ -1,4 +1,5 @@
 stages:
+  - test
   - build
   - deploy
 
@@ -9,6 +10,15 @@ variables:
 
 default:
   interruptible: true
+
+unit-tests:
+  stage: test
+  image: mcr.microsoft.com/dotnet/sdk:9.0
+  script:
+    - dotnet restore test/TradingDashboard.UnitTests/TradingDashboard.UnitTests.csproj
+    - dotnet test test/TradingDashboard.UnitTests/TradingDashboard.UnitTests.csproj -c Release --no-restore
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
 
 build-release:
   stage: build

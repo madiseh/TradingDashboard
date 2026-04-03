@@ -55,24 +55,33 @@
                                     <MudIcon Icon="@Icons.Material.Filled.ExpandLess" Color="Color.Default" />
                                 </MudStack>
 
-                                <MudStack Row="true" Spacing="1" Wrap="Wrap.Wrap">
-                                    <MudButton Variant="Variant.Outlined" Size="Size.Small" OnClick="SelectAllAsync">
+                                <MudStack Spacing="1" Class="cot-position-filter-actions">
+                                    <MudButton Variant="Variant.Outlined"
+                                               Size="Size.Small"
+                                               Class="cot-position-filter-action"
+                                               OnClick="SelectAllAsync">
                                         Select All
                                     </MudButton>
-                                    <MudButton Variant="Variant.Text" Size="Size.Small" OnClick="ClearSelection">
+                                    <MudButton Variant="Variant.Text"
+                                               Size="Size.Small"
+                                               Class="cot-position-filter-action"
+                                               OnClick="ClearSelection">
                                         Clear
                                     </MudButton>
                                 </MudStack>
 
-                                @foreach (var group in _groupSelections)
-                                {
-                                    <MudCheckBox T="bool"
-                                                 Value="@group.IsSelected"
-                                                 ValueChanged="@(value => OnGroupSelectionChangedAsync(group.Key, value))"
-                                                 Label="@group.Label"
-                                                 Dense="true"
-                                                 Color="Color.Primary" />
-                                }
+                                <div class="cot-position-filter-group-list">
+                                    @foreach (var group in _groupSelections)
+                                    {
+                                        <MudCheckBox T="bool"
+                                                     Value="@group.IsSelected"
+                                                     ValueChanged="@(value => OnGroupSelectionChangedAsync(group.Key, value))"
+                                                     Label="@group.Label"
+                                                     Dense="true"
+                                                     Color="Color.Primary"
+                                                     Class="cot-position-filter-checkbox" />
+                                    }
+                                </div>
                             </MudStack>
                         </MudPaper>
 

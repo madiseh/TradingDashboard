@@ -1,6 +1,6 @@
 @inherits LayoutComponentBase
-@using TradingDashboard.Presentation.Common.Resources.Components.Layout.MainLayout
-@inject IStringLocalizer<MainLayoutResource> L
+@using System.Globalization
+@using TradingDashboard.Presentation.Common.Routing
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JSRuntime
 
@@ -10,51 +10,226 @@
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudAppBar Elevation="1" Color="Color.Primary">
-        <MudText Typo="Typo.h6">@L["AppName"]</MudText>
-        <MudButton Variant="Variant.Text" Color="Color.Inherit" Href="@RoutePaths.Ui.Home" Class="ml-4">@L["Menu.Home"]</MudButton>
-        <MudButton Variant="Variant.Text" Color="Color.Inherit" Href="@RoutePaths.Ui.CotHome">@L["Menu.Cot"]</MudButton>
-        <MudSpacer />
-        <MudSelect T="string"
-                   Value="@_selectedCulture"
-                   ValueChanged="OnCultureChangedAsync"
-                   Variant="Variant.Outlined"
-                   Margin="Margin.Dense"
-                   Dense="true"
-                   Class="mr-2 td-language-select"
-                   Style="width: 112px;"
-                   AdornmentColor="Color.Inherit">
-            @foreach (var language in SupportedLanguages)
-            {
-                <MudSelectItem T="string" Value="@language.Code">@language.Label</MudSelectItem>
-            }
-        </MudSelect>
-        <MudButton Variant="Variant.Outlined" Color="Color.Inherit" Href="@RoutePaths.Ui.Login">@L["Menu.Login"]</MudButton>
-    </MudAppBar>
+<header class="header-section border-one index td-site-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-xl nav-shadow">
+                    <a class="navbar-brand" href="@RoutePaths.Ui.Home">
+                        <img src="@Img("logo/logo.png")" class="logo" alt="Tradexy logo" />
+                    </a>
+                    <a class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                        <i class="bi bi-list"></i>
+                    </a>
+                    <div class="collapse navbar-collapse ms-auto" id="navbar-content">
+                        <div class="main-menu index-page">
+                            <ul class="navbar-nav mb-lg-0 me-auto">
+                                <li class="nav-item dropdown nav-cus-item">
+                                        <a class="nav-link" href="@RoutePaths.Ui.Home">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@RoutePaths.Ui.CotHome">COT</a>
+                                </li>
+                                
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Market Analysis</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="@RoutePaths.Ui.CotHome">Weekly Review</a></li>
+                                        <li><a class="dropdown-item" href="@RoutePaths.Ui.CotHome">Weekly Review Details</a></li>
+                                    </ul>
+                                </li>
+                                
+                               
+                                
+                            </ul>
+                            <div class="nav-right d-xl-block">
+                                   
+                                    
+                                <div class="nav-right__search">
+                                        <div class="language-box d-flex align-items-center justify-content-center position-relative">
+                                            <MudSelect T="string"
+                                                       Value="@_selectedCulture"
+                                                       ValueChanged="OnCultureChangedAsync"
+                                                       Variant="Variant.Text"
+                                                       Margin="Margin.Dense"
+                                                       Dense="true"
+                                                       Underline="false"
+                                                       Class="td-language-select"
+                                                       AnchorOrigin="Origin.BottomCenter"
+                                                       TransformOrigin="Origin.TopCenter">
+                                                @foreach (var language in SupportedLanguages)
+                                                {
+                                                    <MudSelectItem T="string" Value="@language.Code">@language.ShortLabel</MudSelectItem>
+                                                }
+                                            </MudSelect>
+                                            <i class="bi bi-globe icon"></i>
+                                        </div>
+                                    <a href="javascript:void(0)" class="cmn__search-icon nav-right__search-icon d-center">
+                                        <i class="bi bi-search"></i>
+                                        <span></span>
+                                    </a>
+                                    <a href="/#footer" class="btn_theme btn_theme_active">Contact Us <i class="bi bi-arrow-up-right"></i><span></span></a>
+                                </div>
+                                <div class="nav-right__search-inner">
+                                    <div class="nav-search-inner__form">
+                                        <form method="post" id="search" class="inner__form">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Search" />
+                                                <button type="submit" class="search_icon"><i class="bi bi-search"></i></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
 
-    <MudMainContent>
-        <MudContainer MaxWidth="MaxWidth.Large" Class="mt-6">
-            @Body
-        </MudContainer>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight">
+    <div class="offcanvas-body custom-nevbar">
+        <div class="row">
+            <div class="col-md-7 col-xl-8">
+                <div class="custom-nevbar__left">
+                    <button type="button" class="close-icon d-md-none ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-x"></i></button>
+                    <ul class="custom-nevbar__nav mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="@RoutePaths.Ui.Home">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@RoutePaths.Ui.CotHome">COT</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/#broker-reviews">Brokerage Reviews</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@RoutePaths.Ui.CotHome">Market Analysis</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/#video-tutorial">Educate</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/#packages">Serve</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@RoutePaths.Ui.Login">Sign In</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-5 col-xl-4">
+                <div class="custom-nevbar__right">
+                    <div class="custom-nevbar__top d-none d-md-block">
+                        <button type="button" class="close-icon ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-x"></i></button>
+                        <div class="custom-nevbar__right-thumb mb-auto">
+                            <img src="@Img("logo/logo-light.png")" alt="Tradexy light logo" />
+                        </div>
+                    </div>
+                        <ul class="custom-nevbar__right-location">
+                        <li>
+                            <p class="mb-2">Language:</p>
+                            <div class="language-box d-flex align-items-center justify-content-center position-relative td-language-box-mobile">
+                                <MudSelect T="string"
+                                           Value="@_selectedCulture"
+                                           ValueChanged="OnCultureChangedAsync"
+                                           Variant="Variant.Outlined"
+                                           Margin="Margin.Dense"
+                                           Dense="true"
+                                           Underline="false"
+                                           Class="td-language-select td-language-select-mobile">
+                                    @foreach (var language in SupportedLanguages)
+                                    {
+                                        <MudSelectItem T="string" Value="@language.Code">@language.Label</MudSelectItem>
+                                    }
+                                </MudSelect>
+                                <i class="bi bi-globe icon"></i>
+                            </div>
+                        </li>
+                        <li>
+                            <p class="mb-2">Phone:</p>
+                            <a href="tel:+123456789" class="fs-4 contact">+123 456 789</a>
+                        </li>
+                        <li class="location">
+                            <p class="mb-2">Email:</p>
+                            <a href="mailto:info@tradexy.com" class="fs-4 contact">info&#64;tradexy.com</a>
+                        </li>
+                        <li class="location">
+                            <p class="mb-2">Location:</p>
+                            <p class="fs-4 contact">6391 Celina, Delaware 10299</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <MudMainContent style="padding-top:0px !important">
+       @*  <MudContainer> *@
+            <main class="td-site-main">
+                @Body
+            </main>
+     @*    </MudContainer> *@
     </MudMainContent>
-</MudLayout>
 
+
+<footer class="footer footer-secondary cmn-bg1" id="footer">
+    <div class="container">
+        <div class="row section">
+            <div class="col-12">
+                <div class="footer-secondary__content">
+                    <div class="footer__logo">
+                        <a href="@RoutePaths.Ui.Home">
+                            <img src="@Img("logo/logo-light.png")" alt="Tradexy footer logo" />
+                        </a>
+                    </div>
+                    <div class="quick-link order-1 order-lg-0">
+                        <ul class="quick-link__list">
+                            <li><a href="/#footer">Help &amp; Support</a></li>
+                            <li><a href="/#footer">Privacy policy</a></li>
+                            <li><a href="/#footer">Terms &amp; Conditions</a></li>
+                            <li><a href="/#footer">Contact us</a></li>
+                        </ul>
+                    </div>
+                    <div class="social">
+                        <a href="#" class="btn_theme social_box"><i class="bi bi-facebook"></i><span></span></a>
+                        <a href="#" class="btn_theme social_box"><i class="bi bi-twitter"></i><span></span></a>
+                        <a href="#" class="btn_theme social_box"><i class="bi bi-pinterest"></i><span></span></a>
+                        <a href="#" class="btn_theme social_box"><i class="bi bi-twitch"></i><span></span></a>
+                        <a href="#" class="btn_theme social_box"><i class="bi bi-skype"></i><span></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="footer__copyright">
+                    <p class="copyright text-center">Copyright &copy; @DateTime.UtcNow.Year <a href="@RoutePaths.Ui.Home" class="secondary_color">Tradexy</a>. Designed By <a href="https://pixner.net/" class="secondary_color">Pixelaxis</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<a href="#" class="scrollToTop"><i class="bi bi-chevron-double-up"></i></a>
+</MudLayout>
 <div id="blazor-error-ui" data-nosnippet>
-    @L["Common.UnhandledError"]
-    <a href="." class="reload">@L["Common.Reload"]</a>
+    An unhandled error has occurred.
+    <a href="." class="reload">Reload</a>
     <span class="dismiss">x</span>
 </div>
 
 @code {
     private string _selectedCulture = "en";
 
-    private static readonly IReadOnlyList<(string Code, string Label)> SupportedLanguages =
+    private static readonly IReadOnlyList<(string Code, string Label, string ShortLabel)> SupportedLanguages =
     [
-        ("en", "English"),
-        ("fa", "Persian"),
-        ("tr", "Turkish"),
-        ("de", "Deutsch")
+        ("en", "English", "En"),
+        ("fa", "Persian", "Fa"),
+        ("tr", "Turkish", "Tr"),
+        ("de", "Deutsch", "De")
     ];
+
+    private static string Img(string relativePath) => $"/images/tradexy/{relativePath}";
+
+    private static string GetMenuLabel(int index) => index switch
+    {
+        1 => "One",
+        2 => "Two",
+        3 => "Three",
+        4 => "Four",
+        5 => "Five",
+        _ => index.ToString(CultureInfo.InvariantCulture)
+    };
 
     protected override void OnInitialized()
     {

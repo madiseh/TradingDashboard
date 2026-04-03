@@ -7,6 +7,72 @@
     background: #fff;
 }
 
+.cot-position-filter-panel,
+.cot-position-filter-panel * {
+    text-align: left;
+}
+
+.cot-position-filter-panel ::deep .mud-stack {
+    align-items: flex-start;
+}
+
+.cot-position-filter-actions {
+    width: 100%;
+    align-items: stretch;
+}
+
+.cot-position-filter-panel ::deep .cot-position-filter-action.mud-button-root {
+    width: 100%;
+    justify-content: flex-start;
+    margin: 0;
+    text-align: left;
+}
+
+.cot-position-filter-group-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+}
+
+.cot-position-filter-panel ::deep .cot-position-filter-checkbox.mud-checkbox {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-self: flex-start;
+    margin-inline: 0;
+}
+
+.cot-position-filter-panel ::deep .cot-position-filter-checkbox .mud-button-root {
+    margin-inline: 0;
+    justify-content: flex-start;
+}
+
+.cot-position-filter-panel ::deep .cot-position-filter-checkbox .mud-checkbox-label {
+    text-align: left;
+}
+
+.cot-position-filter-panel ::deep .mud-input-control {
+    width: 100%;
+}
+
+.cot-position-filter-panel ::deep .mud-input-control-root {
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.cot-position-filter-panel ::deep .mud-input-control-input-container {
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.cot-position-filter-panel ::deep .mud-input-content-placement-end {
+    justify-content: flex-start;
+    text-align: left;
+}
+
 .cot-net-position-legend {
     display: flex;
     flex-wrap: wrap;
