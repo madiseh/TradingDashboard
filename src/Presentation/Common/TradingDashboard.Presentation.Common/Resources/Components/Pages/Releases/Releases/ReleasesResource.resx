@@ -60,4 +60,55 @@
   <data name="Entry.Highlight.5" xml:space="preserve">
     <value>Strengthened delivery with a MAUI Blazor Hybrid host plus updated GitLab CI steps for deploy and unit-test coverage.</value>
   </data>
+  <data name="List.Title" xml:space="preserve">
+    <value>Previous releases</value>
+  </data>
+  <data name="Entry.Version.2" xml:space="preserve">
+    <value>Version 2</value>
+  </data>
+  <data name="Entry.Version.1" xml:space="preserve">
+    <value>Version 1</value>
+  </data>
+  <data name="Entry.Title.Version2" xml:space="preserve">
+    <value>UI polish and navigation upgrade</value>
+  </data>
+  <data name="Entry.Description.Version2" xml:space="preserve">
+    <value>This release focused on shaping the product into a cleaner, more navigable experience while keeping the reporting flow stronger and easier to browse.</value>
+  </data>
+  <data name="Entry.Version2.Highlight.1" xml:space="preserve">
+    <value>Rolled out a Tradexy-style homepage and refreshed main layout for the web app.</value>
+  </data>
+  <data name="Entry.Version2.Highlight.2" xml:space="preserve">
+    <value>Restored COT navigation and language switching inside the main experience.</value>
+  </data>
+  <data name="Entry.Version2.Highlight.3" xml:space="preserve">
+    <value>Added market directory and grouped markets pages for faster report discovery.</value>
+  </data>
+  <data name="Entry.Version2.Highlight.4" xml:space="preserve">
+    <value>Expanded report pages with summary stats and reusable long-short chart modules.</value>
+  </data>
+  <data name="Entry.Version2.Highlight.5" xml:space="preserve">
+    <value>Strengthened delivery with the MAUI Blazor Hybrid host and updated GitLab CI stages.</value>
+  </data>
+  <data name="Entry.Title.Version1" xml:space="preserve">
+    <value>COT reporting foundation</value>
+  </data>
+  <data name="Entry.Description.Version1" xml:space="preserve">
+    <value>This version established the core reporting workflow, data loading pipeline, and a first pass of localization for the COT experience.</value>
+  </data>
+  <data name="Entry.Version1.Highlight.1" xml:space="preserve">
+    <value>Added the scheduled collector flow for raw CFTC JSON ingestion.</value>
+  </data>
+  <data name="Entry.Version1.Highlight.2" xml:space="preserve">
+    <value>Restricted the COT report date picker to valid Tuesday report dates.</value>
+  </data>
+  <data name="Entry.Version1.Highlight.3" xml:space="preserve">
+    <value>Localized the COT home directory texts with dedicated resource files.</value>
+  </data>
+  <data name="Entry.Version1.Highlight.4" xml:space="preserve">
+    <value>Loaded report page data from collected raw JSON snapshots.</value>
+  </data>
+  <data name="Entry.Version1.Highlight.5" xml:space="preserve">
+    <value>Improved breadcrumb and report navigation behavior for smoother browsing.</value>
+  </data>
 </root>

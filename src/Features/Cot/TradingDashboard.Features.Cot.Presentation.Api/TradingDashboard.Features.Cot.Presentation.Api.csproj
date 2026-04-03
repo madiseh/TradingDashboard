@@ -16,10 +16,6 @@
   <ItemGroup>
     <ProjectReference Include="..\TradingDashboard.Features.Cot.Application\TradingDashboard.Features.Cot.Application.csproj" />
     <ProjectReference Include="..\TradingDashboard.Features.Cot.Infrastructure\TradingDashboard.Features.Cot.Infrastructure.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\..\..\Presentation\Common\TradingDashboard.Presentation.Common\Contracts\ApiErrorResponse.cs">
-      <Link>Contracts\ApiErrorResponse.cs</Link>
-    </Compile>
+    <ProjectReference Include="..\..\..\Presentation\Common\TradingDashboard.Presentation.Common\TradingDashboard.Presentation.Common.csproj" />
   </ItemGroup>
 </Project>

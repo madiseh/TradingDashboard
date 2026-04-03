@@ -29,35 +29,40 @@
                     </MudStack>
                 </MudPaper>
 
-                @foreach (var entry in ReleaseEntries)
-                {
-                    <MudPaper Class="pa-4 pa-md-6 td-release-card" Elevation="1">
-                        <MudStack Spacing="3">
-                            <MudStack Row="true" Wrap="Wrap.Wrap" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
-                                <MudStack Spacing="1">
-                                    <MudText Typo="Typo.caption" Class="td-release-card__date">@entry.DisplayDate</MudText>
-                                    <MudText Typo="Typo.h4">@entry.Title</MudText>
-                                </MudStack>
-                                <MudStack Row="true" Wrap="Wrap.Wrap" Spacing="1">
+                <MudText Typo="Typo.h4" Class="td-release-list-title">@L["List.Title"]</MudText>
+
+                <div class="td-release-accordion">
+                    @foreach (var entry in ReleaseEntries)
+                    {
+                        <details class="td-release-accordion__item" open="@entry.IsCurrent">
+                            <summary class="td-release-accordion__summary">
+                                <div class="td-release-accordion__summary-copy">
+                                    <span class="td-release-accordion__version">@entry.VersionLabel</span>
+                                    <span class="td-release-accordion__date">@entry.DisplayDate</span>
+                                </div>
+                                <div class="td-release-accordion__summary-meta">
                                     @if (entry.IsCurrent)
                                     {
-                                        <MudChip T="string" Color="Color.Success" Variant="Variant.Filled">@L["Labels.Current"]</MudChip>
+                                        <MudChip T="string" Color="Color.Success" Variant="Variant.Filled" Size="Size.Small">@L["Labels.Current"]</MudChip>
                                     }
-                                    <MudChip T="string" Color="Color.Primary" Variant="Variant.Outlined">@L["Labels.Bullets", entry.Highlights.Count]</MudChip>
-                                </MudStack>
-                            </MudStack>
+                                    <MudChip T="string" Color="Color.Primary" Variant="Variant.Outlined" Size="Size.Small">@L["Labels.Bullets", entry.Highlights.Count]</MudChip>
+                                </div>
+                            </summary>
 
-                            <MudText Typo="Typo.body1">@entry.Description</MudText>
+                            <div class="td-release-accordion__content">
+                                <h3>@entry.Title</h3>
+                                <p>@entry.Description</p>
 
-                            <ul class="td-release-card__list">
-                                @foreach (var highlight in entry.Highlights)
-                                {
-                                    <li>@highlight</li>
-                                }
-                            </ul>
-                        </MudStack>
-                    </MudPaper>
-                }
+                                <ul class="td-release-card__list">
+                                    @foreach (var highlight in entry.Highlights)
+                                    {
+                                        <li>@highlight</li>
+                                    }
+                                </ul>
+                            </div>
+                        </details>
+                    }
+                </div>
             </MudStack>
         </div>
     </div>
