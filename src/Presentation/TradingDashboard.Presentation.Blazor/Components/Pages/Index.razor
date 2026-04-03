@@ -1,10 +1,489 @@
 @page "/"
+@using TradingDashboard.Presentation.Common.Routing
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Tradexy</PageTitle>
 
-<MudPaper Class="pa-6">
-    <MudText Typo="Typo.h4">Welcome to Trading Dashboard</MudText>
-    <MudText Typo="Typo.body1" Class="mt-2">
-        Use the top menu to navigate to the COT home page.
-    </MudText>
-</MudPaper>
+<section class="hero" id="hero" style="background-image: url('@Img("element/common-bg.png")');">
+    <div class="container">
+        <div class="row align-items-center justify-content-lg-between justify-content-center">
+            <div class="col-xxl-5 col-xl-6 col-lg-6">
+                <div class="banner-content text-lg-start text-center">
+                    <span class="mb-4 primary-clr d-flex align-items-center justify-content-lg-start justify-content-center gap-lg-3 gap-2 headingFour">
+                        <img src="@Img("element/section-badge1.png")" alt="Badge" /> Trading Signals And Get Stable Profits.
+                    </span>
+                    <h1 class="mb-4">
+                        Follow Top <span class="secondary-clr2">Traders</span> And Lead In Forex Trading
+                    </h1>
+                    <p>Welcome to TRADEXY, your trusted partner in forex trading. Whether you're a beginner or an expert.</p>
+                    <div class="btn-group justify-content-center justify-content-lg-start mt_40">
+                        <a href="@RoutePaths.Ui.CotHome" class="btn_theme btn_theme_active">Start Tracking Transactions<i class="bi bi-arrow-up-right"></i><span></span></a>
+                        <a href="/#broker-reviews" class="btn_theme">Explore Reviews<i class="bi bi-arrow-up-right"></i><span></span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-7 col-xl-6 col-lg-6">
+                <div class="hero__thumb">
+                    <img src="@Img("hero/hero-thumb1.png")" alt="Hero illustration" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="feature-section section" id="packages">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-9 col-xxl-8">
+                <div class="section__header">
+                    <span class="section__header-sub-title headingFour"><img src="@Img("element/section-badge1.png")" alt="Badge" /> Our Packages</span>
+                    <h2 class="section__header-title">Use our successful trading signals to achieve your financial freedom</h2>
+                    <p class="section__header-content">We are dedicated to providing you with valuable services that simplify your loan search and empower you to make informed borrowing decisions. Our comprehensive range of services</p>
+                </div>
+            </div>
+        </div>
+        <div class="row g-4">
+            @foreach (var package in Packages)
+            {
+                <div class="col-12 col-md-6 col-xl-4">
+                    <div class="card card--custom text-start td-card-fill">
+                        <div class="d-flex align-items-start justify-content-between w-100">
+                            <div class="icon">
+                                <img src="@Img(package.Icon)" alt="@package.Title icon" />
+                            </div>
+                            <a href="/#packages" class="btn_theme social_box m-0"><i class="bi bi-arrow-up-right"></i><span></span></a>
+                        </div>
+                        <div class="card__content">
+                            <h4 class="card__title"><a href="/#packages">@package.Title</a></h4>
+                            <p class="fs-small">@package.Description</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="broker-review-section overflow-hidden cmn-bg2 section" id="broker-reviews">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8 col-xxl-7">
+                <div class="section__header">
+                    <span class="section__header-sub-title headingFour"><img src="@Img("element/section-badge1.png")" alt="Badge" /> Forex Broker Reviews</span>
+                    <h2 class="section__header-title">Compare Brokers, Trade Safely, Securely</h2>
+                    <p class="section__header-content">Finding the right forex broker is crucial for a secure and profitable trading experience. We've done the hard work for you by reviewing.</p>
+                </div>
+            </div>
+        </div>
+        <div class="broker-review-wrap">
+            @foreach (var broker in Brokers)
+            {
+                <div class="broker-review-inner white-bg">
+                    <span class="badge">@broker.Number</span>
+                    <div class="broker-review-item style1 d-flex align-items-center position-relative">
+                        <div class="broker-thumb-area">
+                            <div class="thumb rounded-circle">
+                                <img src="@Img(broker.Image)" alt="@broker.Name" class="rounded-circle" />
+                            </div>
+                            <div class="cont">
+                                <h3 class="mb-1 black-clr">@broker.Name</h3>
+                                <p class="black-clr">@broker.Description</p>
+                            </div>
+                        </div>
+                        <div class="broker-ratting-box d-inline-block border rounded-3 text-center py-4 px-3">
+                            <div class="star_review mb-xxl-3 mb-2 justify-content-center">
+                                @for (var i = 0; i < 4; i++)
+                                {
+                                    <i class="bi bi-star-fill secondary-clr2"></i>
+                                }
+                                <i class="bi bi-star-half secondary-clr2"></i>
+                            </div>
+                            <h5 class="pra-clr">@broker.Reviews</h5>
+                            <p class="pra-clr customer-text">Customer Reviews</p>
+                        </div>
+                        <div class="breoker-button-area text-center">
+                            <span class="terms d-block mb-2">&middot; Terms &amp; Conditions Apply</span>
+                            <div class="text-center mb-3">
+                                <a href="/#broker-reviews" class="btn_theme d-flex btn_theme_active">Visit Site<i class="bi bi-arrow-up-right"></i><span></span></a>
+                            </div>
+                            <div class="detail-btn text-center">
+                                <button type="button" class="primary-clr m-auto d-flex align-items-center justify-content-center view-btn bg-transparent fw-semibold gap-2" data-bs-toggle="collapse" data-bs-target="#@broker.CollapseId" aria-expanded="@broker.IsExpanded.ToString().ToLowerInvariant()" aria-controls="@broker.CollapseId">
+                                    View More <i class="bi bi-chevron-down primary-clr"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="@broker.CollapseId" class="view-content-wrap mt-xxl-4 mt-xl-3 mt-2 text-start collapse @(broker.IsExpanded ? "show" : null)">
+                        <div class="box">
+                            <h5 class="mb-2">More Info</h5>
+                            <p class="mb-md-3 mb-3 pra-clr">It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.</p>
+                            <ul class="cartified-cheking d-flex flex-wrap align-items-center gap-xxl-4 gap-xl-3 gap-2">
+                                @foreach (var point in BrokerHighlights)
+                                {
+                                    <li class="d-flex align-items-center gap-2 pra-clr"><i class="bi bi-check2-circle primary-clr"></i> @point</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="text-center mt_40">
+                <a href="/#broker-reviews" class="btn_theme btn_theme_active">See All Review<i class="bi bi-arrow-up-right"></i><span></span></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="traning-plan overflow-hidden choose-section section" id="why-choose-us">
+    <div class="container">
+        <div class="row flex-row-reverse gy-5 gy-xl-0 justify-content-between align-items-lg-center">
+            <div class="col-xxl-6 col-xl-7 col-lg-7 col-md-6">
+                <div class="section__content">
+                    <span class="section__content-sub-title headingFour mb-lg-4 mb-3"><img src="@Img("element/section-badge1.png")" alt="Badge" /> Why Choose Us</span>
+                    <h2 class="section__content-title">Profit, Service, Technology, Stability-Traders' Top Choice.</h2>
+                    <p class="section__content-text">Watch our forex trading video tutorials to jumpstart your journey into becoming a profitable forex trading expert.</p>
+                    <ul class="section__content-list ms-0 gap-xl-4 gap-lg-3 gap-2">
+                        @foreach (var reason in ChooseUsPoints)
+                        {
+                            <li class="headingFive fw-normal fw-500 d-flex align-items-center gap-2"><i class="bi bi-check2-circle"></i> @reason</li>
+                        }
+                    </ul>
+                    <a href="/#about-us" class="btn_theme btn_theme_active mt_40">Read More <i class="bi bi-arrow-up-right"></i><span></span></a>
+                </div>
+            </div>
+            <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6">
+                <div class="choose-thumb1">
+                    <img src="@Img("about/choose-thumb1.png")" alt="Why choose us" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <img src="@Img("element/choose-globe.png")" alt="Globe element" class="choose-globe d-lg-block d-none" />
+    <img src="@Img("element/choose-line.png")" alt="Line element" class="choole-line" />
+</section>
+
+<section class="working-process-section section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-6 col-xxl-5">
+                <div class="section__header">
+                    <span class="section__header-sub-title headingFour"><img src="@Img("element/section-badge1.png")" alt="Badge" />How to copy trades</span>
+                    <h2 class="section__header-title">Start trading with expert-provided signals</h2>
+                    <p class="section__header-content ch-xxl">Kickstart your forex trading journey with confidence by leveraging expert-provided trading signals. These signals guide you through the market.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row g-2 g-md-4">
+            @foreach (var step in WorkingSteps)
+            {
+                <div class="col-12 col-sm-6 col-xxl-3">
+                    <div class="card card--custom td-card-fill">
+                        <div class="card__icon">
+                            <img src="@Img(step.Icon)" alt="@step.Title icon" />
+                            <span class="number-bullet">@step.Number</span>
+                        </div>
+                        <div class="card__content">
+                            <h4 class="card__title">@step.Title</h4>
+                            <p class="fs-small">@step.Description</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <img src="@Img("review/working-trades-ele.png")" alt="Working process element" class="working-process-ele" />
+</section>
+
+<section class="about-section cmn-bg2 section" id="about-us">
+    <img src="@Img("element/message-ele.png")" alt="Message element" class="message-ele" />
+    <div class="container">
+        <div class="row gy-5 gy-lg-0 justify-content-between align-items-center">
+            <div class="col-12 col-lg-7 col-xxl-6">
+                <div class="section__content">
+                    <span class="section__content-sub-title headingFour mb-lg-4 mb-3"><img src="@Img("element/section-badge1.png")" alt="Badge" /> About Us</span>
+                    <h2 class="section__content-title">Trusted by Over 66,000 Traders Worldwide, TRADEXY Excels.</h2>
+                    <p class="section__content-text">Join over 66,000 traders worldwide who trust TRADEXY for reliable trading signals, expert analysis, and a secure trading environment.</p>
+                    <div class="section__content-inner">
+                        @foreach (var feature in AboutFeatures)
+                        {
+                            <div class="card card--small">
+                                <div class="card--small-icon white-bg border">
+                                    <img src="@Img(feature.Icon)" alt="@feature.Title icon" />
+                                </div>
+                                <div class="card--small-content">
+                                    <h5 class="card--small-title">@feature.Title</h5>
+                                    <p class="card--small-text">@feature.Description</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <a href="/#about-us" class="btn_theme btn_theme_active mt_40">Read More <i class="bi bi-arrow-up-right"></i><span></span></a>
+                </div>
+            </div>
+            <div class="col-12 col-md-8 col-lg-5 mx-auto mx-lg-0">
+                <div class="choose-us__thumb unset-xxl me-xl-4 me-xxl-0">
+                    <img src="@Img("about/about1.png")" alt="About Tradexy" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="traning-plan section" id="video-tutorial">
+    <div class="container">
+        <div class="row flex-row-reverse gy-5 gy-xl-0 justify-content-between align-items-lg-center">
+            <div class="col-xxl-6 col-xl-7 col-lg-7 col-md-6">
+                <div class="section__content">
+                    <span class="section__content-sub-title headingFour mb-lg-4 mb-3"><img src="@Img("element/section-badge1.png")" alt="Badge" /> Video Tutorial</span>
+                    <h2 class="section__content-title">Carefully planned forex training video tutorials</h2>
+                    <p class="section__content-text">Watch our forex trading video tutorials to jumpstart your journey into becoming a profitable forex trading expert.</p>
+                    <ul class="section__content-list">
+                        @foreach (var item in VideoTopics)
+                        {
+                            <li class="headingFive fw-500">@item</li>
+                        }
+                    </ul>
+                    <a href="/#video-tutorial" class="btn_theme btn_theme_active mt_40">Watch Videos <i class="bi bi-arrow-up-right"></i><span></span></a>
+                </div>
+            </div>
+            <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6">
+                <div class="traning-plan-thumb w-100">
+                    <img src="@Img("app/apps-thumb2.png")" alt="Video tutorial preview" class="w-100" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-6 col-xxl-5">
+                <div class="section__header">
+                    <span class="section__header-sub-title headingFour"><img src="@Img("element/section-badge1.png")" alt="Badge" />Client Testimonials</span>
+                    <h2 class="section__header-title">Success Stories Shared by Our Customers</h2>
+                    <p class="section__header-content">We take pride in helping our traders succeed. Our platform is trusted by thousands worldwide for its reliability, accuracy.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row g-4">
+            @foreach (var testimonial in Testimonials)
+            {
+                <div class="col-12 col-lg-4">
+                    <div class="card card--custom td-card-fill">
+                        <div class="testimonials__author-review">
+                            <div class="star_review mb-3">
+                                @for (var i = 0; i < 4; i++)
+                                {
+                                    <i class="bi bi-star-fill secondary-clr2"></i>
+                                }
+                                <i class="bi bi-star-half secondary-clr2"></i>
+                            </div>
+                            <p class="text-start">"@testimonial.Quote"</p>
+                        </div>
+                        <div class="testimonials__author">
+                            <div class="author__thumg">
+                                <img src="@Img(testimonial.Image)" alt="@testimonial.Name" class="rounded-circle" />
+                            </div>
+                            <div class="author__content">
+                                <h5 class="author__title">@testimonial.Name</h5>
+                                <p class="author__desi">@testimonial.Role</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="download-app cmn-bg2 section overflow-hidden">
+    <div class="container">
+        <div class="row justify-content-center justify-content-md-between align-items-center gy-5 gy-lg-0">
+            <div class="col-md-5 col-lg-5 col-xl-5 col-xxl-5 order-1 order-lg-0">
+                <div class="download-app__thumb01">
+                    <div class="thumb">
+                        <img src="@Img("app/download-app1.png")" alt="App screenshot" />
+                    </div>
+                    <img src="@Img("app/app-circle1.png")" alt="Circle element" class="app-circle" />
+                </div>
+            </div>
+            <div class="col-md-7 col-lg-6 col-xl-6 col-xxl-6">
+                <div class="section__content ms-lg-4 ms-xl-0">
+                    <span class="section__content-sub-title headingFour mb-lg-4 mb-3"><img src="@Img("element/section-badge1.png")" alt="Badge" />Download Our Apps</span>
+                    <h2 class="section__content-title">Download Our Forex Trading Apps for Seamless Experience</h2>
+                    <p class="section__content-text mb-4 pb-lg-1">Experience the power of trading on the go with our user-friendly forex trading apps. Stay updated with real-time signals, execute trades seamlessly, and access expert insights anytime, anywhere. Download now and take your trading journey to the next level</p>
+                    <ul class="section__content-list02 d-grid gap-3">
+                        @foreach (var bullet in DownloadBullets)
+                        {
+                            <li class="headingFive fw-normal d-flex align-items-center gap-2"><i class="bi bi-check2-circle"></i> @bullet</li>
+                        }
+                    </ul>
+                    <div class="btn-group mt_40">
+                        <a href="/#footer" class="btn_theme">Google Play<span></span></a>
+                        <a href="/#footer" class="btn_theme">App Store<span></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section faq-section" id="faqa">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-7 col-xxl-6">
+                <div class="section__header">
+                    <span class="section__header-sub-title headingFour"><img src="@Img("element/section-badge1.png")" alt="Badge" />Frequently Asked Questions</span>
+                    <h2 class="section__header-title">Find Answers to Common Questions</h2>
+                    <p class="section__header-content">We've compiled a list of frequently asked questions to provide you with quick and helpful answers. If you have a question that is not addressed below</p>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-between gy-4 gy-lg-0">
+            <div class="col-12 col-lg-6 col-xxl-6">
+                <div class="accordion" id="faq-left">
+                    @foreach (var faq in LeftFaqs)
+                    {
+                        <div class="accordion-item @(faq.Expanded ? "accordion_bg" : string.Empty)">
+                            <h5 class="accordion-header">
+                                <button class="accordion-button @(faq.Expanded ? string.Empty : "collapsed")" type="button" data-bs-toggle="collapse" data-bs-target="#@faq.CollapseId" aria-expanded="@faq.Expanded.ToString().ToLowerInvariant()" aria-controls="@faq.CollapseId">
+                                    @faq.Question
+                                </button>
+                            </h5>
+                            <div id="@faq.CollapseId" class="accordion-collapse collapse @(faq.Expanded ? "show" : null)" data-bs-parent="#faq-left">
+                                <div class="accordion-body">
+                                    <p class="mb-0">@faq.Answer</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 col-xxl-6">
+                <div class="accordion" id="faq-right">
+                    @foreach (var faq in RightFaqs)
+                    {
+                        <div class="accordion-item">
+                            <h5 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#@faq.CollapseId" aria-expanded="false" aria-controls="@faq.CollapseId">
+                                    @faq.Question
+                                </button>
+                            </h5>
+                            <div id="@faq.CollapseId" class="accordion-collapse collapse" data-bs-parent="#faq-right">
+                                <div class="accordion-body">
+                                    <p class="mb-0">@faq.Answer</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    private static readonly string[] BrokerHighlights =
+    [
+        "Certified pre-approval Process",
+        "Online Application Available 24/7",
+        "Find a Quote Easily",
+        "100% Online Refinance"
+    ];
+
+    private static readonly string[] ChooseUsPoints =
+    [
+        "Excellent customer service",
+        "Trading signal tracking",
+        "Top technical analysis",
+        "First-class professional skills"
+    ];
+
+    private static readonly string[] VideoTopics =
+    [
+        "Foreign exchange basics",
+        "Risk management in actual trading",
+        "Trading system strategy",
+        "Explanation and application"
+    ];
+
+    private static readonly string[] DownloadBullets =
+    [
+        "Broker Regulation and Market Reputation",
+        "Spread Fees and Slippage Frequency",
+        "Commissions for RAW/ECN accounts",
+        "Trading Conditions Tools/Market Range"
+    ];
+
+    private static readonly PackageCard[] Packages =
+    [
+        new("icon/chart.png", "Intraday short-term - profit rate (50-65)%", "TRADEXY is simply dummy text of the printing and typesetting industry."),
+        new("icon/rate.png", "EA Intelligence - Profit Rate (30-45)%", "TRADEXY is simply dummy text of the printing and typesetting industry."),
+        new("icon/interest-rate.png", "Momentum Wave - Win Rate (88-95)%", "TRADEXY is simply dummy text of the printing and typesetting industry."),
+        new("icon/business.png", "Scalper Edge - Profit Rate (45-60)%", "TRADEXY is simply dummy text of the printing and typesetting industry."),
+        new("icon/business.png", "Scalper Edge - Profit Rate (45-60)%", "TRADEXY is simply dummy text of the printing and typesetting industry.")
+    ];
+
+    private static readonly BrokerReview[] Brokers =
+    [
+        new("01", "broker/ic-markets.png", "IC Markets", "IC Markets is a trusted broker with institutional-grade liquidity, offering one of the best trading environments globally.", "44K+", "broker-detail-01", true),
+        new("02", "broker/robofores.png", "RoboForex", "RoboForex is known for its innovative tools, multiple account types, and attractive bonuses for traders of all levels. There are many variations of passages of Lorem Ipsum available", "44K+", "broker-detail-02", false),
+        new("03", "broker/etoro.png", "eToro", "eToro is a top-rated social trading platform offering an easy way to copy successful traders while enjoying a user-friendly interface.", "25K+", "broker-detail-03", false),
+        new("04", "broker/peppershone.png", "Pepperstone", "Pepperstone delivers ultra-fast execution and low-cost trading, perfect for scalpers and high-frequency traders. There are many variations of passages of Lorem Ipsum available.", "44K+", "broker-detail-04", false)
+    ];
+
+    private static readonly WorkingStep[] WorkingSteps =
+    [
+        new("01", "icon/customer-support.png", "Open Account", "Choose a good forex broker and open a trading account."),
+        new("02", "icon/choose.png", "Choose Package", "Contact customer service to choose the copy trading package service."),
+        new("03", "icon/select-account.png", "Select a fund account", "Product packaging refers to the materials and design used to protect"),
+        new("04", "icon/profit-sharing.png", "Profit Sharing", "If you choose to follow the orders by yourself through the push signal.")
+    ];
+
+    private static readonly AboutFeature[] AboutFeatures =
+    [
+        new("icon/knowledge.png", "Expert Knowledge", "He has many years of foreign exchange trading experience."),
+        new("icon/advice.png", "Well-received Service", "We have a dedicated and friendly service team to provide you."),
+        new("icon/setting.png", "Leading Technology", "We are involved in all aspects of the foreign exchange field."),
+        new("icon/idea.png", "Innovative & Studious", "Everyone here is honest and eager to learn, never discouraged.")
+    ];
+
+    private static readonly TestimonialCard[] Testimonials =
+    [
+        new("testimonial/balogh.png", "TRADEXY has completely transformed the way I trade. The real-time signals are incredibly accurate, and I've seen a noticeable increase in my profits. Highly recommended!", "Balogh Imre", "Account Executive"),
+        new("testimonial/kende.png", "As a beginner, TRADEXY's tutorials and tools were a game changer. I've gained confidence and consistency in my trading journey. It's like having an expert guiding you every step of the way!", "Kende Attila", "President of Sales"),
+        new("testimonial/balogh.png", "Our satisfied clients have experienced success with our services and loan recommendations. Here are some of their testimonials highlighting their positive experiences and the value they received", "Eleanor Pena", "Medical Assistant")
+    ];
+
+    private static readonly FaqItem[] LeftFaqs =
+    [
+        new("How do I apply for a loan through your platform?", "Absolutely. We strive to provide reliable and up-to-date information. Our team follows strict editorial guidelines to ensure the accuracy and integrity of our content. However,", "faq-accordion-1", true),
+        new("What types of loans do you review and compare?", "Absolutely. We strive to provide reliable and up-to-date information. Our team follows strict editorial guidelines to ensure the accuracy and integrity of our content. However,", "faq-accordion-2", false),
+        new("Can I trust the information provided on your website?", "Absolutely. We strive to provide reliable and up-to-date information. Our team follows strict editorial guidelines to ensure the accuracy and integrity of our content. However,", "faq-accordion-3", false),
+        new("Do you offer financial advice or recommendations?", "Absolutely. We strive to provide reliable and up-to-date information. Our team follows strict editorial guidelines to ensure the accuracy and integrity of our content. However,", "faq-accordion-4", false),
+        new("How do I apply for a loan through your platform?", "Absolutely. We strive to provide reliable and up-to-date information. Our team follows strict editorial guidelines to ensure the accuracy and integrity of our content. However,", "faq-accordion-5", false)
+    ];
+
+    private static readonly FaqItem[] RightFaqs =
+    [
+        new("Can I get a loan with bad credit?", "Absolutely. We strive to provide reliable and up-to-date information. Our team follows strict editorial guidelines to ensure the accuracy and integrity of our content. However,", "faq2-accordion-1", false),
+        new("Are there any fees associated with taking out a loan?", "Absolutely. We strive to provide reliable and up-to-date information. Our team follows strict editorial guidelines to ensure the accuracy and integrity of our content. However,", "faq2-accordion-2", false),
+        new("What happens if I miss a loan payment?", "Absolutely. We strive to provide reliable and up-to-date information. Our team follows strict editorial guidelines to ensure the accuracy and integrity of our content. However,", "faq2-accordion-3", false),
+        new("Can I repay my loan early?", "Absolutely. We strive to provide reliable and up-to-date information. Our team follows strict editorial guidelines to ensure the accuracy and integrity of our content. However,", "faq2-accordion-4", false),
+        new("Can I refinance my existing loan?", "Absolutely. We strive to provide reliable and up-to-date information. Our team follows strict editorial guidelines to ensure the accuracy and integrity of our content. However,", "faq2-accordion-5", false)
+    ];
+
+    private static string Img(string relativePath) => $"/images/tradexy/{relativePath}";
+
+    private sealed record PackageCard(string Icon, string Title, string Description);
+
+    private sealed record BrokerReview(string Number, string Image, string Name, string Description, string Reviews, string CollapseId, bool IsExpanded);
+
+    private sealed record WorkingStep(string Number, string Icon, string Title, string Description);
+
+    private sealed record AboutFeature(string Icon, string Title, string Description);
+
+    private sealed record TestimonialCard(string Image, string Quote, string Name, string Role);
+
+    private sealed record FaqItem(string Question, string Answer, string CollapseId, bool Expanded);
+}

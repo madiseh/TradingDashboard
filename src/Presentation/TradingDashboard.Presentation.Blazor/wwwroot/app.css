@@ -58,3 +58,145 @@ h1:focus {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
     text-align: start;
 }
+
+.td-site-main {
+    min-height: 100vh;
+}
+
+.td-site-header {
+    position: relative;
+    z-index: 20;
+}
+
+.td-language-box-mobile {
+    max-width: 180px;
+}
+
+.td-language-select {
+    min-width: 72px;
+    color: #222e48;
+}
+
+.td-language-nav-item {
+    margin-left: 8px;
+}
+
+.td-language-select ::deep .mud-input-input {
+    color: #222e48;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding-right: 22px;
+}
+
+.td-language-select ::deep .mud-select-input {
+    color: #222e48;
+}
+
+.td-language-select ::deep .mud-input-slot {
+    min-width: 72px;
+}
+
+.td-language-select ::deep .mud-icon-root {
+    color: #222e48;
+}
+
+.td-language-box-mobile .td-language-select-mobile {
+    width: 100%;
+}
+
+.td-card-fill {
+    height: 100%;
+}
+
+.td-inner-hero {
+    padding: 180px 0 96px;
+    background: linear-gradient(180deg, rgba(19, 47, 89, 0.08) 0%, rgba(19, 47, 89, 0.02) 100%);
+}
+
+.td-inner-hero .section__content {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+.td-inner-hero .section__content-sub-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.td-inner-hero .section__content-title {
+    margin-bottom: 20px;
+}
+
+.td-cot-section {
+    padding-top: 0;
+}
+
+.td-cot-panel {
+    position: relative;
+    margin-top: -42px;
+    padding: 32px;
+    border-radius: 24px;
+    background: #ffffff;
+    box-shadow: 0 24px 80px rgba(19, 47, 89, 0.12);
+}
+
+.td-cot-panel .mud-paper {
+    border-radius: 18px;
+}
+
+.td-cot-panel .mud-table-container,
+.td-cot-panel table {
+    width: 100%;
+}
+
+.td-cot-panel .mud-chip {
+    font-weight: 600;
+}
+
+.td-cot-panel .mud-link {
+    font-weight: 600;
+}
+
+.download-app .btn-group .btn_theme {
+    justify-content: center;
+    min-width: 180px;
+}
+
+.testimonials .card--custom {
+    background-position: top right;
+}
+
+@media (max-width: 991.98px) {
+    .td-inner-hero {
+        padding: 150px 0 80px;
+    }
+
+    .td-cot-panel {
+        margin-top: -28px;
+        padding: 20px;
+        border-radius: 20px;
+    }
+}
+
+@media (max-width: 1399.98px) {
+    .td-language-nav-item {
+        display: none !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .td-inner-hero {
+        padding: 135px 0 72px;
+    }
+
+    .td-cot-panel {
+        padding: 16px;
+    }
+
+    .download-app .btn-group {
+        display: grid;
+        gap: 16px;
+    }
+}

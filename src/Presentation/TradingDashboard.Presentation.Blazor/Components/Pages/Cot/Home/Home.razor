@@ -4,69 +4,85 @@
 
 <PageTitle>@L["PageTitle"]</PageTitle>
 
-<MudStack Spacing="3">
-    <MudText Typo="Typo.h4">@L["Heading.MarketsDirectory"]</MudText>
+<section class="td-inner-hero td-inner-hero--light">
+    <div class="container">
+        <div class="section__content text-center">
+            <span class="section__content-sub-title headingFour"><img src="/images/tradexy/element/section-badge1.png" alt="Badge" /> Market Analysis</span>
+            <h1 class="section__content-title">COT Markets Directory</h1>
+            <p class="section__content-text">Browse grouped Commitment of Traders instruments and jump into either the COT Legacy or COT report flow inside the same Tradexy-style experience.</p>
+        </div>
+    </div>
+</section>
 
-    @if (_isLoading)
-    {
-        <MudPaper Class="pa-6 d-flex justify-center">
-            <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
-        </MudPaper>
-    }
-    else if (!string.IsNullOrWhiteSpace(_errorMessage))
-    {
-        <MudAlert Severity="Severity.Error" Dense="true">
-            @_errorMessage
-            <MudButton Class="ml-2" Variant="Variant.Outlined" Size="Size.Small" OnClick="LoadDirectoryAsync">@L["Actions.Retry"]</MudButton>
-        </MudAlert>
-    }
-    else
-    {
-        <MudGrid>
-            @foreach (var group in _groups)
-            {
-                <MudItem xs="12" md="6">
-                    <MudPaper Class="pa-3" Elevation="1">
-                        <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
-                            <MudText Typo="Typo.h5">@group.Type</MudText>
-                            <MudStack Row="true" Spacing="2">
-                                <MudLink Href="@BuildMarketsLink(group.Type, CotReportModel.CotLegacy)">@L["Links.MoreInCotLegacy"]</MudLink>
-                                <MudLink Href="@BuildMarketsLink(group.Type, CotReportModel.Cot)">@L["Links.MoreInCot"]</MudLink>
-                            </MudStack>
-                        </MudStack>
+<section class="section td-cot-section">
+    <div class="container">
+        <div class="td-cot-panel">
+            <MudStack Spacing="3">
+                <MudText Typo="Typo.h4">@L["Heading.MarketsDirectory"]</MudText>
 
-                        <MudSimpleTable Dense="true" Class="mt-2">
-                            <thead>
-                                <tr>
-                                    <th>@L["Table.Instrument"]</th>
-                                    <th class="text-center">COT Legacy</th>
-                                    <th class="text-center">COT</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in group.Items)
-                                {
-                                    <tr>
-                                        <td>@item.Name</td>
-                                        <td class="text-center">
-                                            @if (HasModel(item, CotReportModel.CotLegacy))
-                                            {
-                                                <MudLink Href="@BuildCotLink(item.Slug, CotReportModel.CotLegacy)">COT Legacy</MudLink>
-                                            }
-                                        </td>
-                                        <td class="text-center">
-                                            @if (HasModel(item, CotReportModel.Cot))
-                                            {
-                                                <MudLink Href="@BuildCotLink(item.Slug, CotReportModel.Cot)">COT</MudLink>
-                                            }
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </MudSimpleTable>
+                @if (_isLoading)
+                {
+                    <MudPaper Class="pa-6 d-flex justify-center">
+                        <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
                     </MudPaper>
-                </MudItem>
-            }
-        </MudGrid>
-    }
-</MudStack>
+                }
+                else if (!string.IsNullOrWhiteSpace(_errorMessage))
+                {
+                    <MudAlert Severity="Severity.Error" Dense="true">
+                        @_errorMessage
+                        <MudButton Class="ml-2" Variant="Variant.Outlined" Size="Size.Small" OnClick="LoadDirectoryAsync">@L["Actions.Retry"]</MudButton>
+                    </MudAlert>
+                }
+                else
+                {
+                    <MudGrid>
+                        @foreach (var group in _groups)
+                        {
+                            <MudItem xs="12" md="6">
+                                <MudPaper Class="pa-3" Elevation="1">
+                                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+                                        <MudText Typo="Typo.h5">@group.Type</MudText>
+                                        <MudStack Row="true" Spacing="2">
+                                            <MudLink Href="@BuildMarketsLink(group.Type, CotReportModel.CotLegacy)">@L["Links.MoreInCotLegacy"]</MudLink>
+                                            <MudLink Href="@BuildMarketsLink(group.Type, CotReportModel.Cot)">@L["Links.MoreInCot"]</MudLink>
+                                        </MudStack>
+                                    </MudStack>
+
+                                    <MudSimpleTable Dense="true" Class="mt-2">
+                                        <thead>
+                                            <tr>
+                                                <th>@L["Table.Instrument"]</th>
+                                                <th class="text-center">COT Legacy</th>
+                                                <th class="text-center">COT</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in group.Items)
+                                            {
+                                                <tr>
+                                                    <td>@item.Name</td>
+                                                    <td class="text-center">
+                                                        @if (HasModel(item, CotReportModel.CotLegacy))
+                                                        {
+                                                            <MudLink Href="@BuildCotLink(item.Slug, CotReportModel.CotLegacy)">COT Legacy</MudLink>
+                                                        }
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @if (HasModel(item, CotReportModel.Cot))
+                                                        {
+                                                            <MudLink Href="@BuildCotLink(item.Slug, CotReportModel.Cot)">COT</MudLink>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </MudSimpleTable>
+                                </MudPaper>
+                            </MudItem>
+                        }
+                    </MudGrid>
+                }
+            </MudStack>
+        </div>
+    </div>
+</section>
