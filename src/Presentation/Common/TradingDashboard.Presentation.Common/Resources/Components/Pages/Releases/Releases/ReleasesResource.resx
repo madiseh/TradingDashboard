@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Releases</value>
+  </data>
+  <data name="Hero.Eyebrow" xml:space="preserve">
+    <value>Product updates</value>
+  </data>
+  <data name="Hero.Title" xml:space="preserve">
+    <value>Releases</value>
+  </data>
+  <data name="Hero.Description" xml:space="preserve">
+    <value>A compact running log of what has shipped in Trading Dashboard, starting with the latest release on April 4, 2026.</value>
+  </data>
+  <data name="Summary.Title" xml:space="preserve">
+    <value>Latest snapshot</value>
+  </data>
+  <data name="Summary.Description" xml:space="preserve">
+    <value>Use this page as the daily release note feed and add the next update above the current one.</value>
+  </data>
+  <data name="Summary.UpdatedThrough" xml:space="preserve">
+    <value>Updated through {0}</value>
+  </data>
+  <data name="Labels.Current" xml:space="preserve">
+    <value>Current</value>
+  </data>
+  <data name="Labels.Bullets" xml:space="preserve">
+    <value>{0} highlights</value>
+  </data>
+  <data name="Entry.Version" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="Entry.Title.Version210" xml:space="preserve">
+    <value>Currency strength and keyboard navigation</value>
+  </data>
+  <data name="Entry.Description.Version210" xml:space="preserve">
+    <value>This release adds currency strength visibility and smoother COT navigation with keyboard support.</value>
+  </data>
+  <data name="Entry.Version210.Highlight.1" xml:space="preserve">
+    <value>Added Currency Strength so users can track the power of currencies inside the dashboard.</value>
+  </data>
+  <data name="Entry.Version210.Highlight.2" xml:space="preserve">
+    <value>Added left and right arrow key support to the COT experience for faster browsing.</value>
+  </data>
+  <data name="Entry.Version210.Highlight.3" xml:space="preserve">
+    <value>Surfaced the running Blazor app version in the footer for quicker release visibility.</value>
+  </data>
+  <data name="Entry.Title.CurrentSnapshot" xml:space="preserve">
+    <value>Current product snapshot</value>
+  </data>
+  <data name="Entry.Description.CurrentSnapshot" xml:space="preserve">
+    <value>The product moved from core COT report flows into a more polished web experience with stronger hosting and delivery foundations.</value>
+  </data>
+  <data name="Entry.Highlight.1" xml:space="preserve">
+    <value>Rolled out a refreshed homepage and main layout, including restored COT navigation and language switching.</value>
+  </data>
+  <data name="Entry.Highlight.2" xml:space="preserve">
+    <value>Added market directory and grouped markets pages so users can reach COT and COT Legacy reports faster.</value>
+  </data>
+  <data name="Entry.Highlight.3" xml:space="preserve">
+    <value>Expanded the report experience with summary stats, reusable long-short charts, and a selectable net-position chart with history filters.</value>
+  </data>
+  <data name="Entry.Highlight.4" xml:space="preserve">
+    <value>Improved data reliability by loading report pages from collected JSON snapshots and handling historical sync edge cases.</value>
+  </data>
+  <data name="Entry.Highlight.5" xml:space="preserve">
+    <value>Strengthened delivery with a MAUI Blazor Hybrid host plus updated GitLab CI steps for deploy and unit-test coverage.</value>
+  </data>
+  <data name="List.Title" xml:space="preserve">
+    <value>Previous releases</value>
+  </data>
+  <data name="Entry.Title.Version2" xml:space="preserve">
+    <value>UI polish and navigation upgrade</value>
+  </data>
+  <data name="Entry.Description.Version2" xml:space="preserve">
+    <value>This release focused on shaping the product into a cleaner, more navigable experience while keeping the reporting flow stronger and easier to browse.</value>
+  </data>
+  <data name="Entry.Version2.Highlight.1" xml:space="preserve">
+    <value>Rolled out a refreshed homepage and main layout for the web app.</value>
+  </data>
+  <data name="Entry.Version2.Highlight.2" xml:space="preserve">
+    <value>Restored COT navigation and language switching inside the main experience.</value>
+  </data>
+  <data name="Entry.Version2.Highlight.3" xml:space="preserve">
+    <value>Added market directory and grouped markets pages for faster report discovery.</value>
+  </data>
+  <data name="Entry.Version2.Highlight.4" xml:space="preserve">
+    <value>Expanded report pages with summary stats and reusable long-short chart modules.</value>
+  </data>
+  <data name="Entry.Version2.Highlight.5" xml:space="preserve">
+    <value>Strengthened delivery with the MAUI Blazor Hybrid host and updated GitLab CI stages.</value>
+  </data>
+  <data name="Entry.Title.Version1" xml:space="preserve">
+    <value>COT reporting foundation</value>
+  </data>
+  <data name="Entry.Description.Version1" xml:space="preserve">
+    <value>This version established the core reporting workflow, data loading pipeline, and a first pass of localization for the COT experience.</value>
+  </data>
+  <data name="Entry.Version1.Highlight.1" xml:space="preserve">
+    <value>Added the scheduled collector flow for raw CFTC JSON ingestion.</value>
+  </data>
+  <data name="Entry.Version1.Highlight.2" xml:space="preserve">
+    <value>Restricted the COT report date picker to valid Tuesday report dates.</value>
+  </data>
+  <data name="Entry.Version1.Highlight.3" xml:space="preserve">
+    <value>Localized the COT home directory texts with dedicated resource files.</value>
+  </data>
+  <data name="Entry.Version1.Highlight.4" xml:space="preserve">
+    <value>Loaded report page data from collected raw JSON snapshots.</value>
+  </data>
+  <data name="Entry.Version1.Highlight.5" xml:space="preserve">
+    <value>Improved breadcrumb and report navigation behavior for smoother browsing.</value>
+  </data>
+</root>

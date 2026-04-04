@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Ø§Ù†ØªØ´Ø§Ø±Ù‡Ø§</value>
+  </data>
+  <data name="Hero.Eyebrow" xml:space="preserve">
+    <value>Ø¨Ù‡â€ŒØ±ÙˆØ²Ø±Ø³Ø§Ù†ÛŒâ€ŒÙ‡Ø§ÛŒ Ù…Ø­ØµÙˆÙ„</value>
+  </data>
+  <data name="Hero.Title" xml:space="preserve">
+    <value>Ø§Ù†ØªØ´Ø§Ø±Ù‡Ø§</value>
+  </data>
+  <data name="Hero.Description" xml:space="preserve">
+    <value>ÛŒÚ© Ù„Ø§Ú¯ Ø®Ù„Ø§ØµÙ‡ Ùˆ Ù¾ÛŒÙˆØ³ØªÙ‡ Ø§Ø² Ú†ÛŒØ²Ù‡Ø§ÛŒÛŒ Ú©Ù‡ Ø¯Ø± Trading Dashboard Ù…Ù†ØªØ´Ø± Ø´Ø¯Ù‡ Ø§Ø³ØªØ› Ø´Ø±ÙˆØ¹ Ø§Ø² Ø¢Ø®Ø±ÛŒÙ† ÙˆØ¶Ø¹ÛŒØª Ø¯Ø± 2026-04-03.</value>
+  </data>
+  <data name="Summary.Title" xml:space="preserve">
+    <value>Ø¢Ø®Ø±ÛŒÙ† ÙˆØ¶Ø¹ÛŒØª</value>
+  </data>
+  <data name="Summary.Description" xml:space="preserve">
+    <value>Ø§Ø² Ø§ÛŒÙ† ØµÙØ­Ù‡ Ø¨Ù‡â€ŒØ¹Ù†ÙˆØ§Ù† ÙÛŒØ¯ Ø±ÙˆØ²Ø§Ù†Ù‡ Release Note Ø§Ø³ØªÙØ§Ø¯Ù‡ Ú©Ù†ÛŒØ¯ Ùˆ Ø¢Ù¾Ø¯ÛŒØª Ø¨Ø¹Ø¯ÛŒ Ø±Ø§ Ø¨Ø§Ù„Ø§ÛŒ ÙˆØ±ÙˆØ¯ÛŒ ÙØ¹Ù„ÛŒ Ø§Ø¶Ø§ÙÙ‡ Ú©Ù†ÛŒØ¯.</value>
+  </data>
+  <data name="Summary.UpdatedThrough" xml:space="preserve">
+    <value>Ø¨Ù‡â€ŒØ±ÙˆØ²Ø´Ø¯Ù‡ ØªØ§ {0}</value>
+  </data>
+  <data name="Labels.Current" xml:space="preserve">
+    <value>ÙØ¹Ù„ÛŒ</value>
+  </data>
+  <data name="Labels.Bullets" xml:space="preserve">
+    <value>{0} Ù†Ú©ØªÙ‡</value>
+  </data>
+  <data name="Entry.Title.CurrentSnapshot" xml:space="preserve">
+    <value>Ù†Ù…Ø§ÛŒ ÙØ¹Ù„ÛŒ Ù…Ø­ØµÙˆÙ„</value>
+  </data>
+  <data name="Entry.Description.CurrentSnapshot" xml:space="preserve">
+    <value>Ù…Ø­ØµÙˆÙ„ Ø§Ø² ÙÙ„ÙˆÙ‡Ø§ÛŒ Ø§ØµÙ„ÛŒ Ú¯Ø²Ø§Ø±Ø´ COT Ø¨Ù‡ ÛŒÚ© ØªØ¬Ø±Ø¨Ù‡ ÙˆØ¨ ØµÛŒÙ‚Ù„ÛŒâ€ŒØªØ± Ø¨Ø§ Ø²ÛŒØ±Ø³Ø§Ø®Øª Ø¨Ù‡ØªØ± Ø¨Ø±Ø§ÛŒ Ù…ÛŒØ²Ø¨Ø§Ù†ÛŒ Ùˆ ØªØ­ÙˆÛŒÙ„ Ø±Ø³ÛŒØ¯Ù‡ Ø§Ø³Øª.</value>
+  </data>
+  <data name="Entry.Highlight.1" xml:space="preserve">
+    <value>صفحه اصلی و Layout بازطراحی شد و ناوبری COT و تغییر زبان دوباره برقرار شد.</value>
+  </data>
+  <data name="Entry.Highlight.2" xml:space="preserve">
+    <value>ØµÙØ­Ù‡ Ø¯Ø§ÛŒØ±Ú©ØªÙˆØ±ÛŒ Ø¨Ø§Ø²Ø§Ø±Ù‡Ø§ Ùˆ Ú¯Ø±ÙˆÙ‡â€ŒØ¨Ù†Ø¯ÛŒ Ø¨Ø§Ø²Ø§Ø±Ù‡Ø§ Ø§Ø¶Ø§ÙÙ‡ Ø´Ø¯ ØªØ§ Ø¯Ø³ØªØ±Ø³ÛŒ Ø¨Ù‡ Ú¯Ø²Ø§Ø±Ø´â€ŒÙ‡Ø§ÛŒ COT Ùˆ COT Legacy Ø³Ø±ÛŒØ¹â€ŒØªØ± Ø´ÙˆØ¯.</value>
+  </data>
+  <data name="Entry.Highlight.3" xml:space="preserve">
+    <value>ØªØ¬Ø±Ø¨Ù‡ ØµÙØ­Ù‡ Ú¯Ø²Ø§Ø±Ø´ Ø¨Ø§ Ø¢Ù…Ø§Ø± Ø®Ù„Ø§ØµÙ‡ØŒ Ú†Ø§Ø±Øª reusable long-short Ùˆ Ú†Ø§Ø±Øª selectable net-position Ø¨Ø§ ÙÛŒÙ„ØªØ± ØªØ§Ø±ÛŒØ® Ú¯Ø³ØªØ±Ø´ Ù¾ÛŒØ¯Ø§ Ú©Ø±Ø¯.</value>
+  </data>
+  <data name="Entry.Highlight.4" xml:space="preserve">
+    <value>Ù¾Ø§ÛŒØ¯Ø§Ø±ÛŒ Ø¯Ø§Ø¯Ù‡ Ø¨Ù‡ØªØ± Ø´Ø¯Ø› ØµÙØ­Ù‡ Ú¯Ø²Ø§Ø±Ø´ Ø§Ø² snapshotÙ‡Ø§ÛŒ JSON Ø¨Ø§Ø±Ú¯Ø°Ø§Ø±ÛŒ Ù…ÛŒâ€ŒØ´ÙˆØ¯ Ùˆ edge caseÙ‡Ø§ÛŒ Ø³ÛŒÙ†Ú© ØªØ§Ø±ÛŒØ®ÛŒ Ù‡Ù… Ù¾ÙˆØ´Ø´ Ø¯Ø§Ø¯Ù‡ Ø´Ø¯.</value>
+  </data>
+  <data name="Entry.Highlight.5" xml:space="preserve">
+    <value>Ø²ÛŒØ±Ø³Ø§Ø®Øª ØªØ­ÙˆÛŒÙ„ ØªÙ‚ÙˆÛŒØª Ø´Ø¯Ø› Ù‡Ù… MAUI Blazor Hybrid host Ø§Ø¶Ø§ÙÙ‡ Ø´Ø¯ Ùˆ Ù‡Ù… Ù…Ø±Ø§Ø­Ù„ GitLab CI Ø¨Ø±Ø§ÛŒ deploy Ùˆ unit test Ø¨Ù‡Ø¨ÙˆØ¯ Ù¾ÛŒØ¯Ø§ Ú©Ø±Ø¯.</value>
+  </data>
+  <data name="List.Title" xml:space="preserve">
+    <value>Previous releases</value>
+  </data>
+  <data name="Entry.Version.2" xml:space="preserve">
+    <value>Version 2</value>
+  </data>
+  <data name="Entry.Version.1" xml:space="preserve">
+    <value>Version 1</value>
+  </data>
+  <data name="Entry.Title.Version2" xml:space="preserve">
+    <value>UI polish and navigation upgrade</value>
+  </data>
+  <data name="Entry.Description.Version2" xml:space="preserve">
+    <value>This release focused on shaping the product into a cleaner, more navigable experience while keeping the reporting flow stronger and easier to browse.</value>
+  </data>
+  <data name="Entry.Version2.Highlight.1" xml:space="preserve">
+    <value>صفحه اصلی و Layout نسخه وب بازطراحی شد.</value>
+  </data>
+  <data name="Entry.Version2.Highlight.2" xml:space="preserve">
+    <value>Restored COT navigation and language switching inside the main experience.</value>
+  </data>
+  <data name="Entry.Version2.Highlight.3" xml:space="preserve">
+    <value>Added market directory and grouped markets pages for faster report discovery.</value>
+  </data>
+  <data name="Entry.Version2.Highlight.4" xml:space="preserve">
+    <value>Expanded report pages with summary stats and reusable long-short chart modules.</value>
+  </data>
+  <data name="Entry.Version2.Highlight.5" xml:space="preserve">
+    <value>Strengthened delivery with the MAUI Blazor Hybrid host and updated GitLab CI stages.</value>
+  </data>
+  <data name="Entry.Title.Version1" xml:space="preserve">
+    <value>COT reporting foundation</value>
+  </data>
+  <data name="Entry.Description.Version1" xml:space="preserve">
+    <value>This version established the core reporting workflow, data loading pipeline, and a first pass of localization for the COT experience.</value>
+  </data>
+  <data name="Entry.Version1.Highlight.1" xml:space="preserve">
+    <value>Added the scheduled collector flow for raw CFTC JSON ingestion.</value>
+  </data>
+  <data name="Entry.Version1.Highlight.2" xml:space="preserve">
+    <value>Restricted the COT report date picker to valid Tuesday report dates.</value>
+  </data>
+  <data name="Entry.Version1.Highlight.3" xml:space="preserve">
+    <value>Localized the COT home directory texts with dedicated resource files.</value>
+  </data>
+  <data name="Entry.Version1.Highlight.4" xml:space="preserve">
+    <value>Loaded report page data from collected raw JSON snapshots.</value>
+  </data>
+  <data name="Entry.Version1.Highlight.5" xml:space="preserve">
+    <value>Improved breadcrumb and report navigation behavior for smoother browsing.</value>
+  </data>
+  <data name="Entry.Version" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="Entry.Title.Version210" xml:space="preserve">
+    <value>Currency strength and keyboard navigation</value>
+  </data>
+  <data name="Entry.Description.Version210" xml:space="preserve">
+    <value>This release adds currency strength visibility and smoother COT navigation with keyboard support.</value>
+  </data>
+  <data name="Entry.Version210.Highlight.1" xml:space="preserve">
+    <value>Added Currency Strength so users can track the power of currencies inside the dashboard.</value>
+  </data>
+  <data name="Entry.Version210.Highlight.2" xml:space="preserve">
+    <value>Added left and right arrow key support to the COT experience for faster browsing.</value>
+  </data>
+  <data name="Entry.Version210.Highlight.3" xml:space="preserve">
+    <value>Surfaced the running Blazor app version in the footer for quicker release visibility.</value>
+  </data>
+</root>

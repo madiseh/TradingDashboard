@@ -16,27 +16,42 @@
     <value>Tekrar dene</value>
   </data>
   <data name="Errors.EmptyDirectoryResponse" xml:space="preserve">
-    <value>Piyasa dizini yanıtı boş.</value>
+    <value>Piyasa dizini yaniti bos.</value>
   </data>
   <data name="Errors.LoadDirectory" xml:space="preserve">
-    <value>Piyasa dizini yüklenemedi.</value>
+    <value>Piyasa dizini yuklenemedi.</value>
   </data>
   <data name="Errors.LoadDirectoryWithMessage" xml:space="preserve">
-    <value>Piyasa dizini yüklenemedi. {0}</value>
+    <value>Piyasa dizini yuklenemedi. {0}</value>
   </data>
   <data name="Heading.MarketsDirectory" xml:space="preserve">
     <value>Piyasa Dizini</value>
   </data>
+  <data name="Hero.Badge" xml:space="preserve">
+    <value>COT Analizi</value>
+  </data>
+  <data name="Hero.Description" xml:space="preserve">
+    <value>Gruplanmis Commitment of Traders enstrumanlarini inceleyin ve TerminalPrime icinde dogrudan COT Legacy veya ayrintili COT raporlarina gecin.</value>
+  </data>
   <data name="Links.MoreInCot" xml:space="preserve">
-    <value>COT'ta daha fazlası »</value>
+    <value>COT'ta daha fazlasi »</value>
   </data>
   <data name="Links.MoreInCotLegacy" xml:space="preserve">
-    <value>COT Legacy'de daha fazlası »</value>
+    <value>COT Legacy'de daha fazlasi »</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
-    <value>Piyasa Dizini</value>
+    <value>COT Piyasa Dizini | Commitment of Traders Kapsami | TerminalPrime</value>
+  </data>
+  <data name="Seo.Description" xml:space="preserve">
+    <value>TerminalPrime'in COT piyasa dizininde piyasa grubu, enstruman ve rapor modeline gore Commitment of Traders kapsamini kesfedin.</value>
+  </data>
+  <data name="Seo.Keywords" xml:space="preserve">
+    <value>COT piyasa dizini, Commitment of Traders, forex COT analizi, vadeli islem pozisyonlari, TerminalPrime</value>
+  </data>
+  <data name="Seo.Title" xml:space="preserve">
+    <value>COT Piyasa Dizini | Commitment of Traders Kapsami | TerminalPrime</value>
   </data>
   <data name="Table.Instrument" xml:space="preserve">
-    <value>Enstrüman</value>
+    <value>Enstruman</value>
   </data>
 </root>

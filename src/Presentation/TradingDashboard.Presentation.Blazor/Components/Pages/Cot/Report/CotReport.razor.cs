@@ -8,6 +8,7 @@ public partial class CotReport
     private bool _isLoading = true;
     private string? _errorMessage;
     private CotLatestReportResponse? _report;
+    private List<DateOnly> _availableDates = [];
     private string? _lastInstrumentSlug;
     private string? _lastModel;
     private bool _hasExplicitDateSelection;
@@ -31,6 +32,18 @@ public partial class CotReport
             ? parsed
             : CotReportModel.Cot;
 
+    private DateTime? MinAvailableDate => _availableDates.Count == 0
+        ? null
+        : _availableDates[0].ToDateTime(TimeOnly.MinValue);
+
+    private DateTime? MaxAvailableDate => _availableDates.Count == 0
+        ? null
+        : _availableDates[^1].ToDateTime(TimeOnly.MinValue);
+
+    private bool CanNavigateToPreviousDate => !_isLoading && GetAdjacentAvailableDate(-1) is not null;
+
+    private bool CanNavigateToNextDate => !_isLoading && GetAdjacentAvailableDate(1) is not null;
+
     protected override async Task OnParametersSetAsync()
     {
         if (!string.Equals(_lastInstrumentSlug, InstrumentSlug, StringComparison.OrdinalIgnoreCase) ||
@@ -40,8 +53,10 @@ public partial class CotReport
             _lastModel = Model;
             _hasExplicitDateSelection = false;
             _selectedAsOfDate = null;
+            _availableDates.Clear();
         }
 
+        await LoadAvailableDatesAsync();
         await LoadReportAsync();
     }
 
@@ -110,9 +125,14 @@ public partial class CotReport
         };
     }
 
-    private static bool IsNotTuesday(DateTime date)
+    private bool IsDateUnavailable(DateTime date)
     {
-        return date.DayOfWeek != DayOfWeek.Tuesday;
+        if (_availableDates.Count == 0)
+        {
+            return date.DayOfWeek != DayOfWeek.Tuesday;
+        }
+
+        return !_availableDates.Contains(DateOnly.FromDateTime(date));
     }
 
     private static DateTime? NormalizeReportDate(DateTime? date)
@@ -177,6 +197,39 @@ public partial class CotReport
         }
     }
 
+    private async Task LoadAvailableDatesAsync()
+    {
+        if (_availableDates.Count > 0)
+        {
+            return;
+        }
+
+        try
+        {
+            var client = HttpClientFactory.CreateClient(HttpClientNames.ApiCot);
+            var response = await client.GetAsync(BuildAvailableDatesUri());
+            if (!response.IsSuccessStatusCode)
+            {
+                return;
+            }
+
+            var payload = await response.Content.ReadFromJsonAsync<CotAvailableDatesResponse>();
+            if (payload?.AvailableDates is null || payload.AvailableDates.Count == 0)
+            {
+                return;
+            }
+
+            _availableDates = payload.AvailableDates
+                .Distinct()
+                .OrderBy(x => x)
+                .ToList();
+        }
+        catch
+        {
+            _availableDates.Clear();
+        }
+    }
+
     private async Task OnSelectedAsOfDateChangedAsync(DateTime? value)
     {
         var normalizedDate = NormalizeReportDate(value);
@@ -188,6 +241,51 @@ public partial class CotReport
         _hasExplicitDateSelection = normalizedDate is not null;
         SelectedAsOfDate = normalizedDate;
         await LoadReportAsync();
+    }
+
+    private async Task NavigateToPreviousDateAsync()
+    {
+        var previousDate = GetAdjacentAvailableDate(-1);
+        if (previousDate is null)
+        {
+            return;
+        }
+
+        await OnSelectedAsOfDateChangedAsync(previousDate);
+    }
+
+    private async Task NavigateToNextDateAsync()
+    {
+        var nextDate = GetAdjacentAvailableDate(1);
+        if (nextDate is null)
+        {
+            return;
+        }
+
+        await OnSelectedAsOfDateChangedAsync(nextDate);
+    }
+
+    private DateTime? GetAdjacentAvailableDate(int direction)
+    {
+        if (SelectedAsOfDate is null || _availableDates.Count == 0)
+        {
+            return null;
+        }
+
+        var selectedDate = DateOnly.FromDateTime(SelectedAsOfDate.Value);
+        var selectedIndex = _availableDates.IndexOf(selectedDate);
+        if (selectedIndex < 0)
+        {
+            return null;
+        }
+
+        var targetIndex = selectedIndex + direction;
+        if (targetIndex < 0 || targetIndex >= _availableDates.Count)
+        {
+            return null;
+        }
+
+        return _availableDates[targetIndex].ToDateTime(TimeOnly.MinValue);
     }
 
     private string BuildLatestReportUri()
@@ -206,5 +304,13 @@ public partial class CotReport
         }
 
         return $"{route}?{string.Join("&", queryParts)}";
+    }
+
+    private string BuildAvailableDatesUri()
+    {
+        var route = RoutePaths.Api.Cot.CotInstrumentAvailableDates
+            .Replace("{instrumentSlug}", Uri.EscapeDataString(InstrumentSlug), StringComparison.Ordinal);
+
+        return $"{route}?model={Uri.EscapeDataString(ReportModel.ToContractValue())}";
     }
 }

@@ -14,6 +14,13 @@ public static class IocRegistration
             client.BaseAddress = new Uri(baseUrl);
         });
 
+        services.AddHttpClient(HttpClientNames.ApiCurrencyStrength, (sp, client) =>
+        {
+            var configuration = sp.GetRequiredService<IConfiguration>();
+            var baseUrl = configuration[$"{HttpClientNames.ApiCurrencyStrength}:BaseUrl"] ?? "https://localhost:7214";
+            client.BaseAddress = new Uri(baseUrl);
+        });
+
         services.AddHttpClient(HttpClientNames.ApiLogin, (sp, client) =>
         {
             var configuration = sp.GetRequiredService<IConfiguration>();

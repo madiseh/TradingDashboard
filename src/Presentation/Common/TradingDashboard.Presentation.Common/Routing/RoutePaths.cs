@@ -6,6 +6,8 @@ public static class RoutePaths
     {
         public const string Home = "/";
         public const string Login = "/login";
+        public const string Releases = "/releases";
+        public const string CurrencyStrength = "/currency-strength";
         
         public const string Markets = "/markets";
 
@@ -33,6 +35,12 @@ public static class RoutePaths
             public const string CotInstrumentAvailableDates = $"{CotInstruments}/{{instrumentSlug}}/available-dates";
             public const string CotInstrumentSeries = $"{CotInstruments}/{{instrumentSlug}}/series";
             public const string CotInstrumentsByGroup = $"{CotInstruments}/by-group";
+        }
+        public static class CurrencyStrength
+        {
+            public const string Base = $"{ApiCommon.ApiVersionPrefix}/currency-strength";
+            public const string Timeframes = $"{Base}/timeframes";
+            public const string Latest = $"{Timeframes}/{{timeframeKey}}/latest";
         }
         public static class Login
         {

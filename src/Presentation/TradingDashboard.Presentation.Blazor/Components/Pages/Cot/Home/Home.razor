@@ -3,13 +3,29 @@
 @using TradingDashboard.Presentation.Common.Resources.Components.Pages.Cot.Home
 
 <PageTitle>@L["PageTitle"]</PageTitle>
+<HeadContent>
+    <meta name="description" content="@L["Seo.Description"]" />
+    <meta name="keywords" content="@L["Seo.Keywords"]" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="@SiteBranding.AbsoluteUrl(RoutePaths.Ui.CotHome)" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="@SiteBranding.BrandName" />
+    <meta property="og:title" content="@L["Seo.Title"]" />
+    <meta property="og:description" content="@L["Seo.Description"]" />
+    <meta property="og:url" content="@SiteBranding.AbsoluteUrl(RoutePaths.Ui.CotHome)" />
+    <meta property="og:image" content="@SiteBranding.AbsoluteUrl(SiteBranding.Image("hero/hero-thumb1.png"))" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@L["Seo.Title"]" />
+    <meta name="twitter:description" content="@L["Seo.Description"]" />
+    <meta name="twitter:image" content="@SiteBranding.AbsoluteUrl(SiteBranding.Image("hero/hero-thumb1.png"))" />
+</HeadContent>
 
 <section class="td-inner-hero td-inner-hero--light">
     <div class="container">
         <div class="section__content text-center">
-            <span class="section__content-sub-title headingFour"><img src="/images/tradexy/element/section-badge1.png" alt="Badge" />COT Analysis</span>
+            <span class="section__content-sub-title headingFour"><img src="@SiteBranding.Image("element/section-badge1.png")" alt="Badge" />@L["Hero.Badge"]</span>
             <h1 class="section__content-title">@L["Heading.MarketsDirectory"]</h1>
-            <p class="section__content-text">Browse grouped Commitment of Traders instruments and jump into either the COT Legacy or COT report flow inside the same Tradexy-style experience.</p>
+            <p class="section__content-text">@L["Hero.Description"]</p>
         </div>
     </div>
 </section>

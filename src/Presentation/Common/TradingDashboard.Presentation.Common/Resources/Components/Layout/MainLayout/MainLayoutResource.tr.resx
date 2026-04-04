@@ -30,4 +30,10 @@
   <data name="Common.Reload" xml:space="preserve">
     <value>Yenile</value>
   </data>
+  <data name="Footer.Releases" xml:space="preserve">
+    <value>Sürümler</value>
+  </data>
+  <data name="Footer.Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
 </root>
