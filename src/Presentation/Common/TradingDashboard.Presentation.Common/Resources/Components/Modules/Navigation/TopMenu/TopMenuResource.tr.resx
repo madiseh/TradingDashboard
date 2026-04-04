@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Actions.ContactUs" xml:space="preserve">
+    <value>Bize Ulasin</value>
+  </data>
+  <data name="Actions.Search" xml:space="preserve">
+    <value>Ara</value>
+  </data>
+  <data name="Brand.HomeAriaLabel" xml:space="preserve">
+    <value>TerminalPrime ana sayfasi</value>
+  </data>
+  <data name="Brand.LightLogoAlt" xml:space="preserve">
+    <value>TerminalPrime acik logo</value>
+  </data>
+  <data name="Brand.LogoAlt" xml:space="preserve">
+    <value>TerminalPrime logosu</value>
+  </data>
+  <data name="Common.Close" xml:space="preserve">
+    <value>Kapat</value>
+  </data>
+  <data name="Info.Email" xml:space="preserve">
+    <value>E-posta</value>
+  </data>
+  <data name="Info.Focus" xml:space="preserve">
+    <value>Odak</value>
+  </data>
+  <data name="Info.FocusValue" xml:space="preserve">
+    <value>Forex arastirmasi, COT analizi ve para birimi gucu takibi</value>
+  </data>
+  <data name="Info.Website" xml:space="preserve">
+    <value>Web sitesi</value>
+  </data>
+  <data name="Language.Label" xml:space="preserve">
+    <value>Dil</value>
+  </data>
+  <data name="Language.Name.de" xml:space="preserve">
+    <value>Almanca</value>
+  </data>
+  <data name="Language.Name.en" xml:space="preserve">
+    <value>Ingilizce</value>
+  </data>
+  <data name="Language.Name.fa" xml:space="preserve">
+    <value>Farsca</value>
+  </data>
+  <data name="Language.Name.tr" xml:space="preserve">
+    <value>Turkce</value>
+  </data>
+  <data name="Language.Short.de" xml:space="preserve">
+    <value>De</value>
+  </data>
+  <data name="Language.Short.en" xml:space="preserve">
+    <value>En</value>
+  </data>
+  <data name="Language.Short.fa" xml:space="preserve">
+    <value>Fa</value>
+  </data>
+  <data name="Language.Short.tr" xml:space="preserve">
+    <value>Tr</value>
+  </data>
+  <data name="Menu.BrokerageReviews" xml:space="preserve">
+    <value>Araci kurum incelemeleri</value>
+  </data>
+  <data name="Menu.Cot" xml:space="preserve">
+    <value>COT</value>
+  </data>
+  <data name="Menu.CurrencyStrength" xml:space="preserve">
+    <value>Para birimi gucu</value>
+  </data>
+  <data name="Menu.Educate" xml:space="preserve">
+    <value>Egitim</value>
+  </data>
+  <data name="Menu.Home" xml:space="preserve">
+    <value>Ana sayfa</value>
+  </data>
+  <data name="Menu.MarketAnalysis" xml:space="preserve">
+    <value>Piyasa analizi</value>
+  </data>
+  <data name="Menu.Navigation" xml:space="preserve">
+    <value>Gezinme menusunu ac</value>
+  </data>
+  <data name="Menu.Serve" xml:space="preserve">
+    <value>Hizmetler</value>
+  </data>
+  <data name="Menu.SignIn" xml:space="preserve">
+    <value>Giris yap</value>
+  </data>
+  <data name="Menu.WeeklyReview" xml:space="preserve">
+    <value>Haftalik inceleme</value>
+  </data>
+  <data name="Menu.WeeklyReviewDetails" xml:space="preserve">
+    <value>Haftalik inceleme detaylari</value>
+  </data>
+  <data name="Search.Placeholder" xml:space="preserve">
+    <value>Ara</value>
+  </data>
+</root>

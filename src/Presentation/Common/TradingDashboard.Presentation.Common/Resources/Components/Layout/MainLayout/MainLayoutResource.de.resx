@@ -12,18 +12,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppName" xml:space="preserve">
-    <value>Trading-Dashboard</value>
-  </data>
-  <data name="Menu.Home" xml:space="preserve">
-    <value>Startseite</value>
-  </data>
-  <data name="Menu.Cot" xml:space="preserve">
-    <value>COT</value>
-  </data>
-  <data name="Menu.Login" xml:space="preserve">
-    <value>Anmelden</value>
-  </data>
   <data name="Common.UnhandledError" xml:space="preserve">
     <value>Ein unerwarteter Fehler ist aufgetreten.</value>
   </data>
@@ -31,7 +19,19 @@
     <value>Neu laden</value>
   </data>
   <data name="Footer.Releases" xml:space="preserve">
-    <value>Releases</value>
+    <value>Versionen</value>
+  </data>
+  <data name="Footer.HelpSupport" xml:space="preserve">
+    <value>Hilfe und Support</value>
+  </data>
+  <data name="Footer.PrivacyPolicy" xml:space="preserve">
+    <value>Datenschutz</value>
+  </data>
+  <data name="Footer.TermsConditions" xml:space="preserve">
+    <value>Allgemeine Bedingungen</value>
+  </data>
+  <data name="Footer.ContactUs" xml:space="preserve">
+    <value>Kontakt</value>
   </data>
   <data name="Footer.Version" xml:space="preserve">
     <value>Version</value>

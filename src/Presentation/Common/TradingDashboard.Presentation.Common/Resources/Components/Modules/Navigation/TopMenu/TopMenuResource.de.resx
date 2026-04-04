@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Actions.ContactUs" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
+  <data name="Actions.Search" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
+  <data name="Brand.HomeAriaLabel" xml:space="preserve">
+    <value>TerminalPrime Startseite</value>
+  </data>
+  <data name="Brand.LightLogoAlt" xml:space="preserve">
+    <value>Helles TerminalPrime-Logo</value>
+  </data>
+  <data name="Brand.LogoAlt" xml:space="preserve">
+    <value>TerminalPrime-Logo</value>
+  </data>
+  <data name="Common.Close" xml:space="preserve">
+    <value>Schliessen</value>
+  </data>
+  <data name="Info.Email" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="Info.Focus" xml:space="preserve">
+    <value>Fokus</value>
+  </data>
+  <data name="Info.FocusValue" xml:space="preserve">
+    <value>Forex-Forschung, COT-Analysen und Beobachtung der Waehrungsstaerke</value>
+  </data>
+  <data name="Info.Website" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="Language.Label" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="Language.Name.de" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="Language.Name.en" xml:space="preserve">
+    <value>Englisch</value>
+  </data>
+  <data name="Language.Name.fa" xml:space="preserve">
+    <value>Persisch</value>
+  </data>
+  <data name="Language.Name.tr" xml:space="preserve">
+    <value>Tuerkisch</value>
+  </data>
+  <data name="Language.Short.de" xml:space="preserve">
+    <value>De</value>
+  </data>
+  <data name="Language.Short.en" xml:space="preserve">
+    <value>En</value>
+  </data>
+  <data name="Language.Short.fa" xml:space="preserve">
+    <value>Fa</value>
+  </data>
+  <data name="Language.Short.tr" xml:space="preserve">
+    <value>Tr</value>
+  </data>
+  <data name="Menu.BrokerageReviews" xml:space="preserve">
+    <value>Broker-Bewertungen</value>
+  </data>
+  <data name="Menu.Cot" xml:space="preserve">
+    <value>COT</value>
+  </data>
+  <data name="Menu.CurrencyStrength" xml:space="preserve">
+    <value>Waehrungsstaerke</value>
+  </data>
+  <data name="Menu.Educate" xml:space="preserve">
+    <value>Lernen</value>
+  </data>
+  <data name="Menu.Home" xml:space="preserve">
+    <value>Startseite</value>
+  </data>
+  <data name="Menu.MarketAnalysis" xml:space="preserve">
+    <value>Marktanalyse</value>
+  </data>
+  <data name="Menu.Navigation" xml:space="preserve">
+    <value>Navigationsmenue oeffnen</value>
+  </data>
+  <data name="Menu.Serve" xml:space="preserve">
+    <value>Services</value>
+  </data>
+  <data name="Menu.SignIn" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="Menu.WeeklyReview" xml:space="preserve">
+    <value>Wochenrueckblick</value>
+  </data>
+  <data name="Menu.WeeklyReviewDetails" xml:space="preserve">
+    <value>Details zum Wochenrueckblick</value>
+  </data>
+  <data name="Search.Placeholder" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
+</root>

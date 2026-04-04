@@ -1,0 +1,173 @@
+@using TradingDashboard.Presentation.Common.Constants
+@using TradingDashboard.Presentation.Common.Routing
+
+<header class="header-section border-one index td-site-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-xl nav-shadow">
+                    <a class="navbar-brand td-navbar-brand" href="@RoutePaths.Ui.Home" aria-label="@L["Brand.HomeAriaLabel"]">
+                        <img src="@SiteBranding.Image("logo/logo-mark.svg")" class="td-navbar-brand__mark" alt="@L["Brand.LogoAlt"]" />
+                        <span class="td-navbar-brand__copy">
+                            <span class="td-navbar-brand__eyebrow">TERMINAL</span>
+                            <span class="td-navbar-brand__name">PRIME</span>
+                        </span>
+                    </a>
+                    <a class="navbar-toggler"
+                       data-bs-toggle="offcanvas"
+                       data-bs-target="#offcanvasRight"
+                       aria-controls="offcanvasRight"
+                       aria-label="@L["Menu.Navigation"]">
+                        <i class="bi bi-list"></i>
+                    </a>
+                    <div class="collapse navbar-collapse ms-auto" id="navbar-content">
+                        <div class="main-menu index-page">
+                            <ul class="navbar-nav mb-lg-0 me-auto">
+                                <li class="nav-item dropdown nav-cus-item">
+                                    <a class="nav-link" href="@RoutePaths.Ui.Home">@L["Menu.Home"]</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@RoutePaths.Ui.CotHome">@L["Menu.Cot"]</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@RoutePaths.Ui.CurrencyStrength">@L["Menu.CurrencyStrength"]</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle"
+                                       href="#"
+                                       role="button"
+                                       data-bs-toggle="dropdown"
+                                       aria-expanded="false">
+                                        @L["Menu.MarketAnalysis"]
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="@RoutePaths.Ui.CotHome">@L["Menu.WeeklyReview"]</a></li>
+                                        <li><a class="dropdown-item" href="@RoutePaths.Ui.CotHome">@L["Menu.WeeklyReviewDetails"]</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <div class="nav-right d-xl-block">
+                                <div class="nav-right__search">
+                                    <div class="language-box d-flex align-items-center justify-content-center position-relative">
+                                        <MudSelect T="string"
+                                                   Value="@_selectedCulture"
+                                                   ValueChanged="OnCultureChangedAsync"
+                                                   Variant="Variant.Text"
+                                                   Margin="Margin.Dense"
+                                                   Dense="true"
+                                                   Underline="false"
+                                                   Class="td-language-select"
+                                                   AnchorOrigin="Origin.BottomCenter"
+                                                   TransformOrigin="Origin.TopCenter">
+                                            @foreach (var language in SupportedLanguages)
+                                            {
+                                                <MudSelectItem T="string" Value="@language.Code">@GetShortLanguageLabel(language)</MudSelectItem>
+                                            }
+                                        </MudSelect>
+                                        <i class="bi bi-globe icon"></i>
+                                    </div>
+                                    <a href="javascript:void(0)"
+                                       class="cmn__search-icon nav-right__search-icon d-center"
+                                       aria-label="@L["Actions.Search"]">
+                                        <i class="bi bi-search"></i>
+                                        <span></span>
+                                    </a>
+                                    <a href="/#footer" class="btn_theme btn_theme_active">
+                                        @L["Actions.ContactUs"] <i class="bi bi-arrow-up-right"></i><span></span>
+                                    </a>
+                                </div>
+                                <div class="nav-right__search-inner">
+                                    <div class="nav-search-inner__form">
+                                        <form method="post" id="search" class="inner__form">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="@L["Search.Placeholder"]" />
+                                                <button type="submit" class="search_icon" aria-label="@L["Actions.Search"]">
+                                                    <i class="bi bi-search"></i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight">
+    <div class="offcanvas-body custom-nevbar">
+        <div class="row">
+            <div class="col-md-7 col-xl-8">
+                <div class="custom-nevbar__left">
+                    <button type="button"
+                            class="close-icon d-md-none ms-auto"
+                            data-bs-dismiss="offcanvas"
+                            aria-label="@L["Common.Close"]">
+                        <i class="bi bi-x"></i>
+                    </button>
+                    <ul class="custom-nevbar__nav mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="@RoutePaths.Ui.Home">@L["Menu.Home"]</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@RoutePaths.Ui.CotHome">@L["Menu.Cot"]</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@RoutePaths.Ui.CurrencyStrength">@L["Menu.CurrencyStrength"]</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/#broker-reviews">@L["Menu.BrokerageReviews"]</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@RoutePaths.Ui.CotHome">@L["Menu.MarketAnalysis"]</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/#video-tutorial">@L["Menu.Educate"]</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/#packages">@L["Menu.Serve"]</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@RoutePaths.Ui.Login">@L["Menu.SignIn"]</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-5 col-xl-4">
+                <div class="custom-nevbar__right">
+                    <div class="custom-nevbar__top d-none d-md-block">
+                        <button type="button"
+                                class="close-icon ms-auto"
+                                data-bs-dismiss="offcanvas"
+                                aria-label="@L["Common.Close"]">
+                            <i class="bi bi-x"></i>
+                        </button>
+                        <div class="custom-nevbar__right-thumb mb-auto">
+                            <img src="@SiteBranding.Image("logo/logo-light.svg")" alt="@L["Brand.LightLogoAlt"]" />
+                        </div>
+                    </div>
+                    <ul class="custom-nevbar__right-location">
+                        <li>
+                            <p class="mb-2">@L["Language.Label"]:</p>
+                            <div class="language-box d-flex align-items-center justify-content-center position-relative td-language-box-mobile">
+                                <MudSelect T="string"
+                                           Value="@_selectedCulture"
+                                           ValueChanged="OnCultureChangedAsync"
+                                           Variant="Variant.Outlined"
+                                           Margin="Margin.Dense"
+                                           Dense="true"
+                                           Underline="false"
+                                           Class="td-language-select td-language-select-mobile">
+                                    @foreach (var language in SupportedLanguages)
+                                    {
+                                        <MudSelectItem T="string" Value="@language.Code">@GetLanguageLabel(language)</MudSelectItem>
+                                    }
+                                </MudSelect>
+                                <i class="bi bi-globe icon"></i>
+                            </div>
+                        </li>
+                        <li>
+                            <p class="mb-2">@L["Info.Website"]:</p>
+                            <a href="@SiteBranding.BaseUrl" class="fs-4 contact">@SiteBranding.Domain</a>
+                        </li>
+                        <li class="location">
+                            <p class="mb-2">@L["Info.Email"]:</p>
+                            <a href="mailto:@SiteBranding.SupportEmail" class="fs-4 contact">@SiteBranding.SupportEmail</a>
+                        </li>
+                        <li class="location">
+                            <p class="mb-2">@L["Info.Focus"]:</p>
+                            <p class="fs-4 contact">@L["Info.FocusValue"]</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

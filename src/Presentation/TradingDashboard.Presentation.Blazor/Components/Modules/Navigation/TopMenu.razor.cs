@@ -1,0 +1,73 @@
+using System.Globalization;
+using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Localization;
+using Microsoft.JSInterop;
+using TradingDashboard.Presentation.Common.Resources.Components.Modules.Navigation.TopMenu;
+
+namespace TradingDashboard.Presentation.Blazor.Components.Modules.Navigation;
+
+public partial class TopMenu
+{
+    private string _selectedCulture = "en";
+
+    private static readonly IReadOnlyList<LanguageOption> SupportedLanguages =
+    [
+        new("en", "Language.Name.en", "Language.Short.en"),
+        new("fa", "Language.Name.fa", "Language.Short.fa"),
+        new("tr", "Language.Name.tr", "Language.Short.tr"),
+        new("de", "Language.Name.de", "Language.Short.de")
+    ];
+
+    [Inject]
+    private NavigationManager NavigationManager { get; set; } = default!;
+
+    [Inject]
+    private IJSRuntime JSRuntime { get; set; } = default!;
+
+    [Inject]
+    private IStringLocalizer<TopMenuResource> L { get; set; } = default!;
+
+    protected override void OnInitialized()
+    {
+        _selectedCulture = NormalizeCulture(CultureInfo.CurrentUICulture.Name);
+    }
+
+    private string GetLanguageLabel(LanguageOption language)
+    {
+        return L[language.LabelKey];
+    }
+
+    private string GetShortLanguageLabel(LanguageOption language)
+    {
+        return L[language.ShortLabelKey];
+    }
+
+    private async Task OnCultureChangedAsync(string culture)
+    {
+        var normalizedCulture = NormalizeCulture(culture);
+        _selectedCulture = normalizedCulture;
+
+        await JSRuntime.InvokeVoidAsync("tradingDashboardCulture.set", normalizedCulture);
+
+        var currentUri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        NavigationManager.NavigateTo(currentUri.PathAndQuery, forceLoad: true);
+    }
+
+    private static string NormalizeCulture(string? culture)
+    {
+        if (SupportedLanguages.Any(language => string.Equals(language.Code, culture, StringComparison.OrdinalIgnoreCase)))
+        {
+            return culture!;
+        }
+
+        return culture?.Split('-', StringSplitOptions.RemoveEmptyEntries)[0].ToLowerInvariant() switch
+        {
+            "fa" => "fa",
+            "tr" => "tr",
+            "de" => "de",
+            _ => "en"
+        };
+    }
+
+    private sealed record LanguageOption(string Code, string LabelKey, string ShortLabelKey);
+}
