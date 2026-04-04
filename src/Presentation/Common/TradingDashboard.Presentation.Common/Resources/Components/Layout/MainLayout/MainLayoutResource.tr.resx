@@ -33,4 +33,7 @@
   <data name="Footer.Releases" xml:space="preserve">
     <value>Sürümler</value>
   </data>
+  <data name="Footer.Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
 </root>

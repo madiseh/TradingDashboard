@@ -1,0 +1,82 @@
+@namespace TradingDashboard.Presentation.Blazor.Components.Modules.CurrencyStrength
+
+<MudPaper Class="pa-4 cot-net-position-shell">
+    @if (Snapshot is null || ChartSeries.Count == 0)
+    {
+        <MudAlert Severity="Severity.Info" Dense="true">
+            @EmptyMessage
+        </MudAlert>
+    }
+    else
+    {
+        <MudStack Spacing="2">
+            <div class="cot-net-position-legend">
+                @foreach (var series in ChartSeries)
+                {
+                    <div class="cot-net-position-legend-item">
+                        <span class="cot-net-position-swatch" style="@($"background:{series.Color};")"></span>
+                        <span>@series.CurrencyCode</span>
+                    </div>
+                }
+            </div>
+
+            <div class="currency-strength-chart-toolbar">
+                <MudTooltip Text="Zoom in">
+                    <MudIconButton Icon="@Icons.Material.Filled.Add"
+                                   Color="Color.Primary"
+                                   Variant="Variant.Outlined"
+                                   Size="Size.Small"
+                                   OnClick="ZoomInAsync" />
+                </MudTooltip>
+                <MudTooltip Text="Zoom out">
+                    <MudIconButton Icon="@Icons.Material.Filled.Remove"
+                                   Color="Color.Primary"
+                                   Variant="Variant.Outlined"
+                                   Size="Size.Small"
+                                   OnClick="ZoomOutAsync" />
+                </MudTooltip>
+                <MudTooltip Text="Reset view">
+                    <MudIconButton Icon="@Icons.Material.Filled.CenterFocusStrong"
+                                   Color="Color.Primary"
+                                   Variant="Variant.Outlined"
+                                   Size="Size.Small"
+                                   OnClick="ResetZoomAsync" />
+                </MudTooltip>
+            </div>
+
+            <div class="cot-net-position-chart">
+                <svg @ref="_svgElement"
+                     viewBox="@($"0 0 {SvgWidth.ToString("0.##", CultureInfo.InvariantCulture)} {SvgHeight.ToString("0.##", CultureInfo.InvariantCulture)}")"
+                     role="img"
+                     aria-label="Currency strength chart">
+                    <rect x="@PlotLeft" y="@PlotTop" width="@(SvgWidth - PlotLeft - PlotRight)" height="@(SvgHeight - PlotTop - PlotBottom)" class="cot-net-position-plot"></rect>
+
+                    @foreach (var label in YAxisLabels)
+                    {
+                        <line x1="@PlotLeft" x2="@(SvgWidth - PlotRight)" y1="@label.Position" y2="@label.Position" class="cot-net-position-grid-line"></line>
+                        @BuildSvgText(60m, label.Position + 4m, label.Text, false, "start")
+                    }
+
+                    <line x1="@PlotLeft" x2="@(SvgWidth - PlotRight)" y1="@ZeroLineY" y2="@ZeroLineY" class="cot-net-position-zero-line"></line>
+
+                    @foreach (var series in ChartSeries)
+                    {
+                        <polyline points="@series.Path" fill="none" stroke="@series.Color" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></polyline>
+
+                        @foreach (var point in series.Points)
+                        {
+                            <circle cx="@point.X" cy="@point.Y" r="3.5" fill="@series.Color">
+                                <title>@point.Tooltip</title>
+                            </circle>
+                        }
+                    }
+
+                    @foreach (var label in XAxisLabels)
+                    {
+                        @BuildSvgText(label.Position, SvgHeight - 18m, label.Text, true, "middle")
+                    }
+                </svg>
+            </div>
+        </MudStack>
+    }
+</MudPaper>

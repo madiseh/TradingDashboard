@@ -1,0 +1,50 @@
+.currency-strength-dashboard-shell {
+    max-width: min(1800px, calc(100vw - 32px));
+    margin-inline: auto;
+}
+
+.currency-strength-dashboard {
+    align-items: stretch;
+}
+
+.currency-strength-dashboard__summary {
+    width: min(100%, 520px);
+    margin-inline: auto;
+    text-align: center;
+}
+
+.currency-strength-dashboard__chart-anchor {
+    scroll-margin-top: 160px;
+}
+
+.currency-strength-dashboard__timeframes {
+    justify-content: center;
+}
+
+.currency-strength-dashboard__timeframes ::deep .mud-button-root {
+    min-width: 92px;
+}
+
+@media (max-width: 991.98px) {
+    .currency-strength-dashboard-shell {
+        max-width: calc(100vw - 24px);
+    }
+}
+
+@media (max-width: 767.98px) {
+    .currency-strength-dashboard-shell {
+        max-width: calc(100vw - 16px);
+    }
+
+    .currency-strength-dashboard__summary {
+        width: 100%;
+    }
+
+    .currency-strength-dashboard__timeframes {
+        justify-content: flex-start;
+    }
+
+    .currency-strength-dashboard__timeframes ::deep .mud-button-root {
+        min-width: 84px;
+    }
+}

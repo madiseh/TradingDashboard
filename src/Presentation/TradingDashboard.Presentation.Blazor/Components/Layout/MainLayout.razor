@@ -1,5 +1,6 @@
 @inherits LayoutComponentBase
 @using System.Globalization
+@using TradingDashboard.Presentation.Common.Constants
 @using TradingDashboard.Presentation.Common.Resources.Components.Layout.MainLayout
 @using TradingDashboard.Presentation.Common.Routing
 @inject NavigationManager NavigationManager
@@ -31,6 +32,9 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="@RoutePaths.Ui.CotHome">COT</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@RoutePaths.Ui.CurrencyStrength">Currency Strength</a>
                                 </li>
                                 
                                 <li class="nav-item dropdown">
@@ -100,6 +104,7 @@
                     <ul class="custom-nevbar__nav mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="@RoutePaths.Ui.Home">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="@RoutePaths.Ui.CotHome">COT</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@RoutePaths.Ui.CurrencyStrength">Currency Strength</a></li>
                         <li class="nav-item"><a class="nav-link" href="/#broker-reviews">Brokerage Reviews</a></li>
                         <li class="nav-item"><a class="nav-link" href="@RoutePaths.Ui.CotHome">Market Analysis</a></li>
                         <li class="nav-item"><a class="nav-link" href="/#video-tutorial">Educate</a></li>
@@ -196,7 +201,10 @@
         <div class="row">
             <div class="col-12">
                 <div class="footer__copyright">
-                    <p class="copyright text-center">Copyright &copy; @DateTime.UtcNow.Year <a href="@RoutePaths.Ui.Home" class="secondary_color">Tradexy</a>. Designed By <a href="https://pixner.net/" class="secondary_color">Pixelaxis</a></p>
+                    <p class="copyright text-center">
+                        Copyright &copy; @DateTime.UtcNow.Year <a href="@RoutePaths.Ui.Home" class="secondary_color">Tradexy</a>. Designed By <a href="https://pixner.net/" class="secondary_color">Pixelaxis</a>
+                        <span class="d-block mt-1">@L["Footer.Version"] @ApplicationVersions.Blazor</span>
+                    </p>
                 </div>
             </div>
         </div>

@@ -22,7 +22,7 @@
     <value>Releases</value>
   </data>
   <data name="Hero.Description" xml:space="preserve">
-    <value>A compact running log of what has shipped in Trading Dashboard, starting with the latest snapshot on April 3, 2026.</value>
+    <value>A compact running log of what has shipped in Trading Dashboard, starting with the latest release on April 4, 2026.</value>
   </data>
   <data name="Summary.Title" xml:space="preserve">
     <value>Latest snapshot</value>
@@ -38,6 +38,24 @@
   </data>
   <data name="Labels.Bullets" xml:space="preserve">
     <value>{0} highlights</value>
+  </data>
+  <data name="Entry.Version" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="Entry.Title.Version210" xml:space="preserve">
+    <value>Currency strength and keyboard navigation</value>
+  </data>
+  <data name="Entry.Description.Version210" xml:space="preserve">
+    <value>This release adds currency strength visibility and smoother COT navigation with keyboard support.</value>
+  </data>
+  <data name="Entry.Version210.Highlight.1" xml:space="preserve">
+    <value>Added Currency Strength so users can track the power of currencies inside the dashboard.</value>
+  </data>
+  <data name="Entry.Version210.Highlight.2" xml:space="preserve">
+    <value>Added left and right arrow key support to the COT experience for faster browsing.</value>
+  </data>
+  <data name="Entry.Version210.Highlight.3" xml:space="preserve">
+    <value>Surfaced the running Blazor app version in the footer for quicker release visibility.</value>
   </data>
   <data name="Entry.Title.CurrentSnapshot" xml:space="preserve">
     <value>Current product snapshot</value>
@@ -62,12 +80,6 @@
   </data>
   <data name="List.Title" xml:space="preserve">
     <value>Previous releases</value>
-  </data>
-  <data name="Entry.Version.2" xml:space="preserve">
-    <value>Version 2</value>
-  </data>
-  <data name="Entry.Version.1" xml:space="preserve">
-    <value>Version 1</value>
   </data>
   <data name="Entry.Title.Version2" xml:space="preserve">
     <value>UI polish and navigation upgrade</value>

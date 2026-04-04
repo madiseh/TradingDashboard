@@ -1,0 +1,93 @@
+.cot-net-position-shell {
+    overflow: hidden;
+}
+
+.currency-strength-chart-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.cot-net-position-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.cot-net-position-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid #d8dee6;
+    border-radius: 0.9rem;
+    background: #fbfdff;
+}
+
+.cot-net-position-swatch {
+    display: inline-block;
+    width: 0.85rem;
+    height: 0.85rem;
+    border-radius: 999px;
+}
+
+.cot-net-position-chart {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #d8dee6;
+    border-radius: 1rem;
+    background:
+        radial-gradient(circle at top left, rgba(29, 78, 216, 0.08), transparent 32%),
+        linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    padding: 0.5rem;
+}
+
+.cot-net-position-chart svg {
+    display: block;
+    width: 100%;
+    min-width: 1240px;
+    height: auto;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+}
+
+.cot-net-position-chart svg.is-dragging {
+    cursor: grabbing;
+}
+
+.cot-net-position-plot {
+    fill: rgba(255, 255, 255, 0.9);
+}
+
+.cot-net-position-grid-line {
+    stroke: #e5e7eb;
+    stroke-width: 1;
+}
+
+.cot-net-position-zero-line {
+    stroke: #94a3b8;
+    stroke-width: 1.5;
+    stroke-dasharray: 6 6;
+}
+
+.cot-net-position-axis-label {
+    fill: #475569;
+    font-size: 16px;
+}
+
+.cot-net-position-axis-label.date {
+    font-size: 14px;
+}
+
+@media (max-width: 960px) {
+    .cot-net-position-chart svg {
+        min-width: 900px;
+    }
+
+    .cot-net-position-legend-item {
+        width: 100%;
+        justify-content: space-between;
+    }
+}

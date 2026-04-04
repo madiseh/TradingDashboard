@@ -24,6 +24,227 @@
                 document.cookie = ".AspNetCore.Culture=c=" + culture + "|uic=" + culture + "; path=/; max-age=31536000; samesite=lax";
             }
         };
+
+        window.tradingDashboardViewport = {
+            scrollElementIntoView: function (element) {
+                if (!element) {
+                    return;
+                }
+
+                const top = window.scrollY + element.getBoundingClientRect().top - 24;
+                window.scrollTo({ top, behavior: "smooth" });
+            },
+
+            scrollElementIntoViewById: function (elementId) {
+                if (!elementId) {
+                    return;
+                }
+
+                const element = document.getElementById(elementId);
+                if (!element) {
+                    return;
+                }
+
+                requestAnimationFrame(function () {
+                    const header = document.querySelector(".header-section");
+                    const headerHeight = header ? header.getBoundingClientRect().height : 0;
+                    const top = window.scrollY + element.getBoundingClientRect().top - headerHeight - 24;
+                    window.scrollTo({ top, behavior: "smooth" });
+                });
+            }
+        };
+
+        window.tradingDashboardCharts = {
+            parseViewBox: function (value) {
+                const parts = (value || "").trim().split(/\s+/).map(Number);
+                if (parts.length !== 4 || parts.some(Number.isNaN)) {
+                    return { x: 0, y: 0, width: 1, height: 1 };
+                }
+
+                return {
+                    x: parts[0],
+                    y: parts[1],
+                    width: parts[2],
+                    height: parts[3]
+                };
+            },
+
+            formatViewBox: function (box) {
+                return `${box.x} ${box.y} ${box.width} ${box.height}`;
+            },
+
+            clamp: function (value, min, max) {
+                return Math.min(max, Math.max(min, value));
+            },
+
+            applyViewBox: function (svg, box) {
+                svg.setAttribute("viewBox", this.formatViewBox(box));
+            },
+
+            ensureState: function (svg) {
+                if (!svg) {
+                    return null;
+                }
+
+                const api = this;
+
+                if (!svg.__tdPanZoomState) {
+                    const state = {
+                        initialViewBox: api.parseViewBox(svg.getAttribute("viewBox")),
+                        viewBox: api.parseViewBox(svg.getAttribute("viewBox")),
+                        dragStartX: 0,
+                        dragStartY: 0,
+                        dragOriginX: 0,
+                        dragOriginY: 0,
+                        isDragging: false
+                    };
+
+                    svg.addEventListener("pointerdown", function (event) {
+                        if (event.button !== 0) {
+                            return;
+                        }
+
+                        state.isDragging = true;
+                        state.dragStartX = event.clientX;
+                        state.dragStartY = event.clientY;
+                        state.dragOriginX = state.viewBox.x;
+                        state.dragOriginY = state.viewBox.y;
+                        svg.classList.add("is-dragging");
+                        svg.setPointerCapture(event.pointerId);
+                        event.preventDefault();
+                    });
+
+                    svg.addEventListener("pointermove", function (event) {
+                        if (!state.isDragging) {
+                            return;
+                        }
+
+                        const rect = svg.getBoundingClientRect();
+                        if (rect.width <= 0 || rect.height <= 0) {
+                            return;
+                        }
+
+                        const scaleX = state.viewBox.width / rect.width;
+                        const scaleY = state.viewBox.height / rect.height;
+                        const dx = (event.clientX - state.dragStartX) * scaleX;
+                        const dy = (event.clientY - state.dragStartY) * scaleY;
+
+                        state.viewBox = {
+                            x: state.dragOriginX - dx,
+                            y: state.dragOriginY - dy,
+                            width: state.viewBox.width,
+                            height: state.viewBox.height
+                        };
+
+                        api.applyViewBox(svg, state.viewBox);
+                    });
+
+                    const endDrag = function (event) {
+                        if (!state.isDragging) {
+                            return;
+                        }
+
+                        state.isDragging = false;
+                        svg.classList.remove("is-dragging");
+                        if (event && svg.hasPointerCapture(event.pointerId)) {
+                            svg.releasePointerCapture(event.pointerId);
+                        }
+                    };
+
+                    svg.addEventListener("pointerup", endDrag);
+                    svg.addEventListener("pointercancel", endDrag);
+                    svg.addEventListener("pointerleave", endDrag);
+
+                    svg.addEventListener("wheel", function (event) {
+                        event.preventDefault();
+                        const factor = event.deltaY < 0 ? 0.88 : 1.12;
+                        api.zoom(svg, factor, event.clientX, event.clientY);
+                    }, { passive: false });
+
+                    svg.addEventListener("dblclick", function () {
+                        api.reset(svg);
+                    });
+
+                    svg.__tdPanZoomState = state;
+                }
+
+                return svg.__tdPanZoomState;
+            },
+
+            enablePanZoom: function (svg) {
+                const state = this.ensureState(svg);
+                if (!state) {
+                    return;
+                }
+
+                const currentViewBox = this.parseViewBox(svg.getAttribute("viewBox"));
+                state.initialViewBox = currentViewBox;
+                state.viewBox = { ...currentViewBox };
+                this.applyViewBox(svg, state.viewBox);
+            },
+
+            zoom: function (svg, factor, clientX, clientY) {
+                const state = this.ensureState(svg);
+                if (!state) {
+                    return;
+                }
+
+                const rect = svg.getBoundingClientRect();
+                if (rect.width <= 0 || rect.height <= 0) {
+                    return;
+                }
+
+                const minWidth = state.initialViewBox.width * 0.35;
+                const maxWidth = state.initialViewBox.width * 12;
+                const current = state.viewBox;
+                const pointerX = clientX === undefined ? rect.left + rect.width / 2 : clientX;
+                const pointerY = clientY === undefined ? rect.top + rect.height / 2 : clientY;
+                const ratioX = (pointerX - rect.left) / rect.width;
+                const ratioY = (pointerY - rect.top) / rect.height;
+                const targetWidth = this.clamp(current.width * factor, minWidth, maxWidth);
+                const appliedFactor = targetWidth / current.width;
+                const targetHeight = current.height * appliedFactor;
+                const chartX = current.x + (ratioX * current.width);
+                const chartY = current.y + (ratioY * current.height);
+
+                state.viewBox = {
+                    x: chartX - (ratioX * targetWidth),
+                    y: chartY - (ratioY * targetHeight),
+                    width: targetWidth,
+                    height: targetHeight
+                };
+
+                this.applyViewBox(svg, state.viewBox);
+            },
+
+            zoomIn: function (svg) {
+                if (!svg) {
+                    return;
+                }
+
+                const rect = svg.getBoundingClientRect();
+                this.zoom(svg, 0.88, rect.left + rect.width / 2, rect.top + rect.height / 2);
+            },
+
+            zoomOut: function (svg) {
+                if (!svg) {
+                    return;
+                }
+
+                const rect = svg.getBoundingClientRect();
+                this.zoom(svg, 1.12, rect.left + rect.width / 2, rect.top + rect.height / 2);
+            },
+
+            reset: function (svg) {
+                const state = this.ensureState(svg);
+                if (!state) {
+                    return;
+                }
+
+                state.viewBox = { ...state.initialViewBox };
+                this.applyViewBox(svg, state.viewBox);
+            }
+        };
     </script>
     <script src="/tradexy/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>

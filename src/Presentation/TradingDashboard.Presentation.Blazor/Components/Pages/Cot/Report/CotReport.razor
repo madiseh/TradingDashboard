@@ -88,11 +88,30 @@
                                     <MudPaper Outlined="true" Class="pa-4 h-100">
                                         <MudStack Spacing="2" AlignItems="AlignItems.Start">
                                             <MudText Typo="Typo.h5">AS OF: @GetAsOfDateLabel()</MudText>
-                                            <MudDatePicker Date="SelectedAsOfDate"
-                                                           DateChanged="OnSelectedAsOfDateChangedAsync"
-                                                           Label="As Of Date"
-                                                           Variant="Variant.Outlined"
-                                                           IsDateDisabledFunc="IsNotTuesday" />
+                                            <MudStack Row="true"
+                                                      Spacing="1"
+                                                      AlignItems="AlignItems.Center"
+                                                      Class="w-100">
+                                                <MudIconButton Icon="@Icons.Material.Filled.ChevronLeft"
+                                                               Color="Color.Primary"
+                                                               Disabled="@(!CanNavigateToPreviousDate)"
+                                                               OnClick="NavigateToPreviousDateAsync"
+                                                               aria-label="Go to previous available report date" />
+                                                <MudDatePicker Date="SelectedAsOfDate"
+                                                               DateChanged="OnSelectedAsOfDateChangedAsync"
+                                                               Label="As Of Date"
+                                                               Variant="Variant.Outlined"
+                                                               Editable="false"
+                                                               MinDate="MinAvailableDate"
+                                                               MaxDate="MaxAvailableDate"
+                                                               IsDateDisabledFunc="IsDateUnavailable"
+                                                               Class="flex-grow-1" />
+                                                <MudIconButton Icon="@Icons.Material.Filled.ChevronRight"
+                                                               Color="Color.Primary"
+                                                               Disabled="@(!CanNavigateToNextDate)"
+                                                               OnClick="NavigateToNextDateAsync"
+                                                               aria-label="Go to next available report date" />
+                                            </MudStack>
                                         </MudStack>
                                     </MudPaper>
                                 </MudItem>
