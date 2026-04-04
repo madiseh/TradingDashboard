@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Seo.Title" xml:space="preserve">
+    <value>TerminalPrime | هوش بازار فارکس، گزارش‌های COT و قدرت ارز</value>
+  </data>
+  <data name="Seo.Description" xml:space="preserve">
+    <value>TerminalPrime با گزارش‌های COT، تحلیل قدرت ارز و ماژول‌های پژوهشی مخصوص معامله‌گر، دید بهتری از بازار فارکس ارائه می‌دهد.</value>
+  </data>
+  <data name="Seo.Keywords" xml:space="preserve">
+    <value>TerminalPrime, هوش بازار فارکس, گزارش COT, داشبورد قدرت ارز, تحلیل فارکس, ابزار معامله‌گر</value>
+  </data>
+  <data name="Common.BadgeAlt" xml:space="preserve">
+    <value>نشان</value>
+  </data>
+  <data name="Common.IconAlt" xml:space="preserve">
+    <value>آیکن {0}</value>
+  </data>
+  <data name="Hero.Badge" xml:space="preserve">
+    <value>هوش فارکس برای معامله‌گران منضبط</value>
+  </data>
+  <data name="Hero.TitlePrefix" xml:space="preserve">
+    <value>ردیابی</value>
+  </data>
+  <data name="Hero.TitleHighlight" xml:space="preserve">
+    <value>جایگاه‌یابی COT</value>
+  </data>
+  <data name="Hero.TitleSuffix" xml:space="preserve">
+    <value>، قدرت ارز و مومنتوم کلان در یک داشبورد</value>
+  </data>
+  <data name="Hero.Description" xml:space="preserve">
+    <value>TerminalPrime با ترکیب داده‌های Commitment of Traders، تحلیل قدرت ارز و ابزارهای پژوهشی کاربردی، درک شفاف‌تری از بازار فارکس به شما می‌دهد.</value>
+  </data>
+  <data name="Hero.PrimaryCta" xml:space="preserve">
+    <value>مشاهده بازارهای COT</value>
+  </data>
+  <data name="Hero.SecondaryCta" xml:space="preserve">
+    <value>مشاهده قدرت ارز</value>
+  </data>
+  <data name="Hero.IllustrationAlt" xml:space="preserve">
+    <value>تصویر بخش اصلی</value>
+  </data>
+  <data name="Features.Badge" xml:space="preserve">
+    <value>ابزارهای اصلی بازار</value>
+  </data>
+  <data name="Features.Title" xml:space="preserve">
+    <value>از ماژول‌های متمرکز پژوهش فارکس برای برنامه‌ریزی هفتگی و اجرای روزانه استفاده کنید</value>
+  </data>
+  <data name="Features.Description" xml:space="preserve">
+    <value>جایگاه‌ها، قدرت نسبی، ساختار بازار و شرایط بروکر را با ماژول‌های کاربردی دنبال کنید تا فرآیند شما تمیز و تکرارپذیر بماند.</value>
+  </data>
+  <data name="Features.Package.WeeklyCotReview.Title" xml:space="preserve">
+    <value>مرور هفتگی COT</value>
+  </data>
+  <data name="Features.Package.WeeklyCotReview.Description" xml:space="preserve">
+    <value>ببینید معامله‌گران بازار آتی چگونه در بازارهای اصلی فارکس در حال افزایش یا کاهش اکسپوژر هستند.</value>
+  </data>
+  <data name="Features.Package.CurrencyStrengthScanner.Title" xml:space="preserve">
+    <value>اسکنر قدرت ارز</value>
+  </data>
+  <data name="Features.Package.CurrencyStrengthScanner.Description" xml:space="preserve">
+    <value>قوی‌ترین و ضعیف‌ترین ارزهای اصلی را پیش از برنامه‌ریزی ستاپ بعدی مقایسه کنید.</value>
+  </data>
+  <data name="Features.Package.MomentumShiftTracker.Title" xml:space="preserve">
+    <value>ردیاب تغییر مومنتوم</value>
+  </data>
+  <data name="Features.Package.MomentumShiftTracker.Description" xml:space="preserve">
+    <value>ببینید فشار روند چه زمانی در جفت‌ارزهای اصلی و تم‌های کلان در حال چرخش است.</value>
+  </data>
+  <data name="Features.Package.BrokerConditionWatchlist.Title" xml:space="preserve">
+    <value>واچ‌لیست شرایط بروکر</value>
+  </data>
+  <data name="Features.Package.BrokerConditionWatchlist.Description" xml:space="preserve">
+    <value>کیفیت اجرا، اسپرد و پایداری بروکر را پیش از ورود ریسک زیر نظر داشته باشید.</value>
+  </data>
+  <data name="Features.Package.TraderPlaybookLibrary.Title" xml:space="preserve">
+    <value>کتابخانه پلن معامله‌گر</value>
+  </data>
+  <data name="Features.Package.TraderPlaybookLibrary.Description" xml:space="preserve">
+    <value>مشاهدات بازار را با آموزش و گردش‌کارهای تکرارپذیر به برنامه‌های ساختاریافته تبدیل کنید.</value>
+  </data>
+  <data name="Broker.Badge" xml:space="preserve">
+    <value>بررسی بروکرهای فارکس</value>
+  </data>
+  <data name="Broker.Title" xml:space="preserve">
+    <value>بروکرها را مقایسه کنید و امن‌تر معامله کنید</value>
+  </data>
+  <data name="Broker.Description" xml:space="preserve">
+    <value>پیدا کردن بروکر مناسب برای یک تجربه معاملاتی امن و سودآور حیاتی است. ما این بخش را برای شما بررسی کرده‌ایم.</value>
+  </data>
+  <data name="Broker.CustomerReviews" xml:space="preserve">
+    <value>نظر کاربران</value>
+  </data>
+  <data name="Broker.TermsApply" xml:space="preserve">
+    <value>قوانین و شرایط اعمال می‌شود</value>
+  </data>
+  <data name="Broker.VisitSite" xml:space="preserve">
+    <value>ورود به سایت</value>
+  </data>
+  <data name="Broker.ViewMore" xml:space="preserve">
+    <value>مشاهده بیشتر</value>
+  </data>
+  <data name="Broker.ExecutionNotesTitle" xml:space="preserve">
+    <value>یادداشت‌های اجرا</value>
+  </data>
+  <data name="Broker.ExecutionNotesDescription" xml:space="preserve">
+    <value>هر بروکر را از نظر قدرت رگولاتوری، کیفیت اجرا، پایداری پلتفرم و ثبات قیمت‌گذاری بررسی کنید.</value>
+  </data>
+  <data name="Broker.SeeAllReviews" xml:space="preserve">
+    <value>مشاهده همه بررسی‌ها</value>
+  </data>
+  <data name="Broker.Highlight.RegulationExecution" xml:space="preserve">
+    <value>رگولاتوری و کیفیت اجرا</value>
+  </data>
+  <data name="Broker.Highlight.SpreadCommission" xml:space="preserve">
+    <value>شفافیت اسپرد و کمیسیون</value>
+  </data>
+  <data name="Broker.Highlight.PlatformStability" xml:space="preserve">
+    <value>پایداری پلتفرم در نوسانات</value>
+  </data>
+  <data name="Broker.Highlight.FundingWithdrawals" xml:space="preserve">
+    <value>ثبات واریز و برداشت</value>
+  </data>
+  <data name="Broker.Item.ICMarkets.Description" xml:space="preserve">
+    <value>IC Markets یک بروکر معتبر با نقدشوندگی در سطح نهادی است و یکی از بهترین محیط‌های معاملاتی را ارائه می‌دهد.</value>
+  </data>
+  <data name="Broker.Item.RoboForex.Description" xml:space="preserve">
+    <value>RoboForex به‌خاطر ساختار حساب‌های منعطف، پشتیبانی گسترده از پلتفرم‌ها و ابزارهای مناسب معامله‌گران فعال شناخته می‌شود.</value>
+  </data>
+  <data name="Broker.Item.EToro.Description" xml:space="preserve">
+    <value>eToro یک پلتفرم محبوب سوشال‌تریدینگ است که کپی‌ترید ساده را با رابط کاربری روان ارائه می‌دهد.</value>
+  </data>
+  <data name="Broker.Item.Pepperstone.Description" xml:space="preserve">
+    <value>Pepperstone اجرای سریع و هزینه معاملاتی پایین را فراهم می‌کند و برای معامله‌گران مومنتومی مناسب است.</value>
+  </data>
+  <data name="Choose.Badge" xml:space="preserve">
+    <value>چرا ما را انتخاب کنید</value>
+  </data>
+  <data name="Choose.Title" xml:space="preserve">
+    <value>تحلیل داده‌محور، گردش‌کار تمیزتر و پشتیبانی سریع‌تر برای تصمیم‌گیری معامله‌گران FX</value>
+  </data>
+  <data name="Choose.Description" xml:space="preserve">
+    <value>TerminalPrime با اتصال داده‌های جایگاه، رهبری ارزها و شرایط اجرا، برنامه هفتگی شما را در یک جریان پژوهشی یکپارچه نگه می‌دارد.</value>
+  </data>
+  <data name="Choose.Point1" xml:space="preserve">
+    <value>دید هفتگی COT برای جایگاه‌گیری کلان</value>
+  </data>
+  <data name="Choose.Point2" xml:space="preserve">
+    <value>مقایسه سریع قدرت ارزها</value>
+  </data>
+  <data name="Choose.Point3" xml:space="preserve">
+    <value>داشبوردهای تمیزتر با جمع‌بندی‌های کاربردی</value>
+  </data>
+  <data name="Choose.Point4" xml:space="preserve">
+    <value>آموزش معامله‌گر بدون شلوغی پلتفرم</value>
+  </data>
+  <data name="Choose.ReadMore" xml:space="preserve">
+    <value>بیشتر بخوانید</value>
+  </data>
+  <data name="Choose.ImageAlt" xml:space="preserve">
+    <value>چرایی انتخاب ما</value>
+  </data>
+  <data name="Choose.GlobeAlt" xml:space="preserve">
+    <value>المان کره</value>
+  </data>
+  <data name="Choose.LineAlt" xml:space="preserve">
+    <value>المان خط</value>
+  </data>
+  <data name="Workflow.Badge" xml:space="preserve">
+    <value>گردش‌کار هفتگی خود را بسازید</value>
+  </data>
+  <data name="Workflow.Title" xml:space="preserve">
+    <value>با شواهد بازار شروع کنید، با زمینه تایید بگیرید و با انضباط برنامه‌ریزی کنید</value>
+  </data>
+  <data name="Workflow.Description" xml:space="preserve">
+    <value>با TerminalPrime جایگاه بازار آتی را بررسی کنید، قدرت ارز را بسنجید، شرایط اجرا را تایید کنید و پلن هفتگی خود را آماده کنید.</value>
+  </data>
+  <data name="Workflow.Step1.Title" xml:space="preserve">
+    <value>مرور جریان COT</value>
+  </data>
+  <data name="Workflow.Step1.Description" xml:space="preserve">
+    <value>با جایگاه بازار آتی شروع کنید تا جهت‌گیری بازیگران بزرگ را بفهمید.</value>
+  </data>
+  <data name="Workflow.Step2.Title" xml:space="preserve">
+    <value>مقایسه قدرت نسبی</value>
+  </data>
+  <data name="Workflow.Step2.Description" xml:space="preserve">
+    <value>با داشبورد قدرت ارز تایید کنید کدام ارزها در حال پیشتازی و کدام در حال ضعف هستند.</value>
+  </data>
+  <data name="Workflow.Step3.Title" xml:space="preserve">
+    <value>اعتبارسنجی شرایط</value>
+  </data>
+  <data name="Workflow.Step3.Description" xml:space="preserve">
+    <value>پیش از پذیرش ریسک، کیفیت بروکر، اسپرد و دسترسی بازار را بررسی کنید.</value>
+  </data>
+  <data name="Workflow.Step4.Title" xml:space="preserve">
+    <value>ساخت پلن</value>
+  </data>
+  <data name="Workflow.Step4.Description" xml:space="preserve">
+    <value>داده‌ها را به واچ‌لیست، سطوح و ایده‌های اجرایی برای هفته تبدیل کنید.</value>
+  </data>
+  <data name="Workflow.ProcessElementAlt" xml:space="preserve">
+    <value>المان فرآیند</value>
+  </data>
+  <data name="About.Badge" xml:space="preserve">
+    <value>درباره ما</value>
+  </data>
+  <data name="About.Title" xml:space="preserve">
+    <value>برای معامله‌گرانی ساخته شده که به زمینه شفاف‌تر، داشبورد تمیزتر و زمان‌بندی قوی‌تر نیاز دارند</value>
+  </data>
+  <data name="About.Description" xml:space="preserve">
+    <value>TerminalPrime گزارش‌های COT، بینش قدرت ارز و گردش‌کارهای پژوهشی عملی را ترکیب می‌کند تا بازار فارکس را با نویز کمتر تحلیل کنید.</value>
+  </data>
+  <data name="About.Feature1.Title" xml:space="preserve">
+    <value>زمینه بازار</value>
+  </data>
+  <data name="About.Feature1.Description" xml:space="preserve">
+    <value>داده خام فارکس را به زمینه‌ای تبدیل کنید که از تصمیم‌گیری جهت‌دار بهتر پشتیبانی کند.</value>
+  </data>
+  <data name="About.Feature2.Title" xml:space="preserve">
+    <value>راهنمای عملی</value>
+  </data>
+  <data name="About.Feature2.Description" xml:space="preserve">
+    <value>روی گردش‌کارهایی متمرکز بمانید که معامله‌گران واقعا در طول هفته استفاده می‌کنند.</value>
+  </data>
+  <data name="About.Feature3.Title" xml:space="preserve">
+    <value>تحویل قابل اعتماد</value>
+  </data>
+  <data name="About.Feature3.Description" xml:space="preserve">
+    <value>ابزارهای اصلی بازار را در یک جا نگه دارید و بین برنامه‌های نامرتبط جابه‌جا نشوید.</value>
+  </data>
+  <data name="About.Feature4.Title" xml:space="preserve">
+    <value>بهبود مستمر</value>
+  </data>
+  <data name="About.Feature4.Description" xml:space="preserve">
+    <value>فرآیند خود را با جمع‌بندی‌های تمیزتر، ساختار بهتر و پژوهش تکرارپذیر تقویت کنید.</value>
+  </data>
+  <data name="About.ReadMore" xml:space="preserve">
+    <value>بیشتر بخوانید</value>
+  </data>
+  <data name="About.ImageAlt" xml:space="preserve">
+    <value>درباره TerminalPrime</value>
+  </data>
+  <data name="About.MessageElementAlt" xml:space="preserve">
+    <value>المان پیام</value>
+  </data>
+  <data name="Video.Badge" xml:space="preserve">
+    <value>آموزش ویدیویی</value>
+  </data>
+  <data name="Video.Title" xml:space="preserve">
+    <value>آموزش‌های ویدیویی فارکس با برنامه‌ریزی دقیق</value>
+  </data>
+  <data name="Video.Description" xml:space="preserve">
+    <value>ویدیوهای آموزشی فارکس را ببینید و مسیر خود را برای تبدیل شدن به معامله‌گر حرفه‌ای شروع کنید.</value>
+  </data>
+  <data name="Video.Topic1" xml:space="preserve">
+    <value>ساختار بازار ارز</value>
+  </data>
+  <data name="Video.Topic2" xml:space="preserve">
+    <value>مدیریت ریسک در شرایط زنده بازار</value>
+  </data>
+  <data name="Video.Topic3" xml:space="preserve">
+    <value>چارچوب‌های جایگاه و سنتیمنت</value>
+  </data>
+  <data name="Video.Topic4" xml:space="preserve">
+    <value>چطور ابزارها را در یک روتین ترکیب کنیم</value>
+  </data>
+  <data name="Video.WatchVideos" xml:space="preserve">
+    <value>مشاهده ویدیوها</value>
+  </data>
+  <data name="Video.PreviewAlt" xml:space="preserve">
+    <value>پیش‌نمایش ویدیوی آموزشی</value>
+  </data>
+  <data name="Testimonials.Badge" xml:space="preserve">
+    <value>نظر مشتریان</value>
+  </data>
+  <data name="Testimonials.Title" xml:space="preserve">
+    <value>داستان‌های موفقیت کاربران ما</value>
+  </data>
+  <data name="Testimonials.Description" xml:space="preserve">
+    <value>به کمک به موفقیت معامله‌گران افتخار می‌کنیم. پلتفرم ما به‌خاطر دقت و قابل اعتماد بودن مورد استفاده قرار می‌گیرد.</value>
+  </data>
+  <data name="Testimonials.Item1.Quote" xml:space="preserve">
+    <value>ترکیب زمینه COT و قدرت ارز، هر هفته ساعت‌ها در زمان من صرفه‌جویی کرد و برنامه‌ریزی فارکس من را ساختاریافته‌تر کرد.</value>
+  </data>
+  <data name="Testimonials.Item1.Role" xml:space="preserve">
+    <value>معامله‌گر سویینگ کلان</value>
+  </data>
+  <data name="Testimonials.Item2.Quote" xml:space="preserve">
+    <value>با TerminalPrime خیلی سریع واچ‌لیستم را محدود می‌کنم. داشبوردها کمک می‌کنند نویز را از مومنتوم واقعی جدا کنم.</value>
+  </data>
+  <data name="Testimonials.Item2.Role" xml:space="preserve">
+    <value>معامله‌گر درون‌روزی فارکس</value>
+  </data>
+  <data name="Testimonials.Item3.Quote" xml:space="preserve">
+    <value>بیشتر از همه شفافیت آن برایم ارزشمند است. ابزارها برای تصمیم‌گیری ساخته شده‌اند، نه فقط برای شلوغ کردن صفحه.</value>
+  </data>
+  <data name="Testimonials.Item3.Role" xml:space="preserve">
+    <value>تحلیل‌گر پژوهش بازار</value>
+  </data>
+  <data name="Download.Badge" xml:space="preserve">
+    <value>دسترسی از همه‌جا</value>
+  </data>
+  <data name="Download.Title" xml:space="preserve">
+    <value>TerminalPrime را از هر جایی که بازار را زیر نظر دارید باز کنید</value>
+  </data>
+  <data name="Download.Description" xml:space="preserve">
+    <value>مرور COT، اسکن قدرت ارز و چک‌لیست بروکر را همیشه در دسترس داشته باشید تا آمادگی بازار شما ثابت بماند.</value>
+  </data>
+  <data name="Download.Bullet1" xml:space="preserve">
+    <value>قدرت ارزها را پیش از لندن و نیویورک بررسی کنید</value>
+  </data>
+  <data name="Download.Bullet2" xml:space="preserve">
+    <value>پیش از ستاپ‌های سویینگ، جایگاه COT را بررسی کنید</value>
+  </data>
+  <data name="Download.Bullet3" xml:space="preserve">
+    <value>پیش از اجرا، شرایط بروکر را مقایسه کنید</value>
+  </data>
+  <data name="Download.Bullet4" xml:space="preserve">
+    <value>گردش‌کار هفتگی خود را روی هر صفحه‌ای در دسترس نگه دارید</value>
+  </data>
+  <data name="Download.OpenCot" xml:space="preserve">
+    <value>باز کردن COT</value>
+  </data>
+  <data name="Download.OpenStrength" xml:space="preserve">
+    <value>باز کردن قدرت ارز</value>
+  </data>
+  <data name="Download.ScreenshotAlt" xml:space="preserve">
+    <value>اسکرین‌شات برنامه</value>
+  </data>
+  <data name="Download.CircleAlt" xml:space="preserve">
+    <value>المان دایره</value>
+  </data>
+  <data name="Faq.Badge" xml:space="preserve">
+    <value>سوالات متداول</value>
+  </data>
+  <data name="Faq.Title" xml:space="preserve">
+    <value>پاسخ‌هایی برای معامله‌گرانی که از COT و قدرت ارز در گردش‌کار واقعی استفاده می‌کنند</value>
+  </data>
+  <data name="Faq.Description" xml:space="preserve">
+    <value>این پاسخ‌های کوتاه توضیح می‌دهند ابزارهای فارکس TerminalPrime چگونه در تحلیل، برنامه‌ریزی و اجرا به کار می‌آیند.</value>
+  </data>
+  <data name="Faq.Left1.Question" xml:space="preserve">
+    <value>گزارش COT چیست و چرا برای معامله‌گران فارکس مهم است؟</value>
+  </data>
+  <data name="Faq.Left1.Answer" xml:space="preserve">
+    <value>گزارش Commitment of Traders نشان می‌دهد بازیگران اصلی بازار آتی چگونه موقعیت گرفته‌اند و برای درک سنتیمنت بلندمدت مفید است.</value>
+  </data>
+  <data name="Faq.Left2.Question" xml:space="preserve">
+    <value>داده‌های COT هر چند وقت یک‌بار به‌روزرسانی می‌شوند؟</value>
+  </data>
+  <data name="Faq.Left2.Answer" xml:space="preserve">
+    <value>داده‌های COT به‌صورت هفتگی منتشر می‌شوند، بنابراین بیشتر برای زمینه تایم‌فریم بالاتر کاربرد دارند.</value>
+  </data>
+  <data name="Faq.Left3.Question" xml:space="preserve">
+    <value>چطور COT را با قدرت ارز ترکیب کنم؟</value>
+  </data>
+  <data name="Faq.Left3.Answer" xml:space="preserve">
+    <value>از COT برای درک جایگاه کلان بازار و از قدرت ارز برای تایید رهبری و ضعف کوتاه‌مدت استفاده کنید.</value>
+  </data>
+  <data name="Faq.Left4.Question" xml:space="preserve">
+    <value>کدام بازارها در بخش COT پوشش داده می‌شوند؟</value>
+  </data>
+  <data name="Faq.Left4.Answer" xml:space="preserve">
+    <value>داشبورد ابزارهای موجود را بر اساس بازار گروه‌بندی می‌کند تا سریع‌تر به قراردادها و مدل گزارش موردنظر برسید.</value>
+  </data>
+  <data name="Faq.Left5.Question" xml:space="preserve">
+    <value>آیا این ابزار برای معامله‌گران سویینگ و روزانه هر دو مفید است؟</value>
+  </data>
+  <data name="Faq.Left5.Answer" xml:space="preserve">
+    <value>بله. معامله‌گران سویینگ از COT برای جهت کلی و معامله‌گران روزانه از قدرت ارز و بررسی بروکر برای زمان‌بندی استفاده می‌کنند.</value>
+  </data>
+  <data name="Faq.Right1.Question" xml:space="preserve">
+    <value>آیا افراد مبتدی هم می‌توانند از TerminalPrime استفاده کنند؟</value>
+  </data>
+  <data name="Faq.Right1.Answer" xml:space="preserve">
+    <value>بله. داشبوردها طوری طراحی شده‌اند که خواندن داده‌های جایگاه و قدرت ارز ساده‌تر شود و محتوای کمکی هم روند استفاده را توضیح می‌دهد.</value>
+  </data>
+  <data name="Faq.Right2.Question" xml:space="preserve">
+    <value>آیا قدرت ارز بیشتر از COT به‌روزرسانی می‌شود؟</value>
+  </data>
+  <data name="Faq.Right2.Answer" xml:space="preserve">
+    <value>بله. قدرت ارز برای پایش مکررتر طراحی شده است، در حالی که COT زمینه آهسته‌تر و ساختاری بازار را نشان می‌دهد.</value>
+  </data>
+  <data name="Faq.Right3.Question" xml:space="preserve">
+    <value>آیا بررسی بروکرها برای تحلیل اهمیت دارد؟</value>
+  </data>
+  <data name="Faq.Right3.Answer" xml:space="preserve">
+    <value>برای اجرا اهمیت دارد. حتی بهترین تحلیل هم با اسپرد بد، اسلیپیج یا ناپایداری پلتفرم آسیب می‌بیند.</value>
+  </data>
+  <data name="Faq.Right4.Question" xml:space="preserve">
+    <value>آیا TerminalPrime مشاوره مالی است؟</value>
+  </data>
+  <data name="Faq.Right4.Answer" xml:space="preserve">
+    <value>خیر. TerminalPrime یک فضای پژوهش و تحلیل است و شما همچنان باید مدیریت ریسک و فرآیند تصمیم‌گیری خود را اعمال کنید.</value>
+  </data>
+  <data name="Faq.Right5.Question" xml:space="preserve">
+    <value>آیا می‌توانم این ابزارها را در روتین آماده‌سازی هفتگی استفاده کنم؟</value>
+  </data>
+  <data name="Faq.Right5.Answer" xml:space="preserve">
+    <value>بله، این یکی از بهترین روش‌های استفاده است: ابتدا جایگاه کلان را ببینید، سپس تغییرات قدرت را اسکن کنید و بعد واچ‌لیست و سطوح را بسازید.</value>
+  </data>
+</root>
