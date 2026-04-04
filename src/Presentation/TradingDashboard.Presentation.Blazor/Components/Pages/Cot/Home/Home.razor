@@ -23,7 +23,7 @@
 <section class="td-inner-hero td-inner-hero--light">
     <div class="container">
         <div class="section__content text-center">
-            <span class="section__content-sub-title headingFour"><img src="@SiteBranding.Image("element/section-badge1.png")" alt="Badge" />@L["Hero.Badge"]</span>
+            <span class="section__content-sub-title headingFour"><img src="@SiteBranding.Image("element/section-badge1.png")" alt="@L["Hero.BadgeAlt"]" />@L["Hero.Badge"]</span>
             <h1 class="section__content-title">@L["Heading.MarketsDirectory"]</h1>
             <p class="section__content-text">@L["Hero.Description"]</p>
         </div>
@@ -66,8 +66,8 @@
                                         <thead>
                                             <tr>
                                                 <th>@L["Table.Instrument"]</th>
-                                                <th class="text-center">COT Legacy</th>
-                                                <th class="text-center">COT</th>
+                                                <th class="text-center">@L["Table.CotLegacy"]</th>
+                                                <th class="text-center">@L["Table.Cot"]</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -78,13 +78,13 @@
                                                     <td class="text-center">
                                                         @if (HasModel(item, CotReportModel.CotLegacy))
                                                         {
-                                                            <MudLink Href="@BuildCotLink(item.Slug, CotReportModel.CotLegacy)">COT Legacy</MudLink>
+                                                            <MudLink Href="@BuildCotLink(item.Slug, CotReportModel.CotLegacy)">@L["Links.OpenCotLegacy"]</MudLink>
                                                         }
                                                     </td>
                                                     <td class="text-center">
                                                         @if (HasModel(item, CotReportModel.Cot))
                                                         {
-                                                            <MudLink Href="@BuildCotLink(item.Slug, CotReportModel.Cot)">COT</MudLink>
+                                                            <MudLink Href="@BuildCotLink(item.Slug, CotReportModel.Cot)">@L["Links.OpenCot"]</MudLink>
                                                         }
                                                     </td>
                                                 </tr>

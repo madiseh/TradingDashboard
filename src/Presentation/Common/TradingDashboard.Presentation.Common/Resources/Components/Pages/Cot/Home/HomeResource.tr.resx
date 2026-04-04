@@ -30,14 +30,23 @@
   <data name="Hero.Badge" xml:space="preserve">
     <value>COT Analizi</value>
   </data>
+  <data name="Hero.BadgeAlt" xml:space="preserve">
+    <value>Bolum rozeti</value>
+  </data>
   <data name="Hero.Description" xml:space="preserve">
     <value>Gruplanmis Commitment of Traders enstrumanlarini inceleyin ve TerminalPrime icinde dogrudan COT Legacy veya ayrintili COT raporlarina gecin.</value>
   </data>
   <data name="Links.MoreInCot" xml:space="preserve">
-    <value>COT'ta daha fazlasi »</value>
+    <value>COT'ta daha fazlasi</value>
   </data>
   <data name="Links.MoreInCotLegacy" xml:space="preserve">
-    <value>COT Legacy'de daha fazlasi »</value>
+    <value>COT Legacy'de daha fazlasi</value>
+  </data>
+  <data name="Links.OpenCot" xml:space="preserve">
+    <value>COT'u ac</value>
+  </data>
+  <data name="Links.OpenCotLegacy" xml:space="preserve">
+    <value>COT Legacy'yi ac</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
     <value>COT Piyasa Dizini | Commitment of Traders Kapsami | TerminalPrime</value>
@@ -50,6 +59,12 @@
   </data>
   <data name="Seo.Title" xml:space="preserve">
     <value>COT Piyasa Dizini | Commitment of Traders Kapsami | TerminalPrime</value>
+  </data>
+  <data name="Table.Cot" xml:space="preserve">
+    <value>COT</value>
+  </data>
+  <data name="Table.CotLegacy" xml:space="preserve">
+    <value>COT Legacy</value>
   </data>
   <data name="Table.Instrument" xml:space="preserve">
     <value>Enstruman</value>
