@@ -4,11 +4,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="application-name" content="@SiteBranding.BrandName" />
+    <meta name="apple-mobile-web-app-title" content="@SiteBranding.BrandName" />
+    <meta name="theme-color" content="#122C57" />
     <base href="/" />
-    <link rel="icon" type="image/png" href="/images/tradexy/logo/favicons.png" />
-    <link rel="stylesheet" href="/tradexy/assets/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="icon" type="image/svg+xml" href="@SiteBranding.Image("logo/favicon.svg")" />
+    <link rel="stylesheet" href="@SiteBranding.ThemeAsset("vendor/bootstrap/css/bootstrap.min.css")" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
-    <link rel="stylesheet" href="/tradexy/assets/css/style.css" />
+    <link rel="stylesheet" href="@SiteBranding.ThemeAsset("css/style.css")" />
     <link rel="stylesheet" href="_content/MudBlazor/MudBlazor.min.css" />
     <link rel="stylesheet" href="@Assets["app.css"]" />
     <link rel="stylesheet" href="@Assets["TradingDashboard.Presentation.Blazor.styles.css"]" />
@@ -246,7 +249,7 @@
             }
         };
     </script>
-    <script src="/tradexy/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="@SiteBranding.ThemeAsset("vendor/bootstrap/js/bootstrap.bundle.min.js")"></script>
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>
     <script src="_framework/blazor.web.js"></script>
 </body>

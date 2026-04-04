@@ -3,11 +3,27 @@
 @using TradingDashboard.Presentation.Common.Resources.Components.Pages.CurrencyStrength.Dashboard
 
 <PageTitle>@L["PageTitle"]</PageTitle>
+<HeadContent>
+    <meta name="description" content="@L["Seo.Description"]" />
+    <meta name="keywords" content="@L["Seo.Keywords"]" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="@SiteBranding.AbsoluteUrl(RoutePaths.Ui.CurrencyStrength)" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="@SiteBranding.BrandName" />
+    <meta property="og:title" content="@L["Seo.Title"]" />
+    <meta property="og:description" content="@L["Seo.Description"]" />
+    <meta property="og:url" content="@SiteBranding.AbsoluteUrl(RoutePaths.Ui.CurrencyStrength)" />
+    <meta property="og:image" content="@SiteBranding.AbsoluteUrl(SiteBranding.Image("hero/hero-thumb1.png"))" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@L["Seo.Title"]" />
+    <meta name="twitter:description" content="@L["Seo.Description"]" />
+    <meta name="twitter:image" content="@SiteBranding.AbsoluteUrl(SiteBranding.Image("hero/hero-thumb1.png"))" />
+</HeadContent>
 
 <section class="td-inner-hero td-inner-hero--light">
     <div class="container">
         <div class="section__content text-center">
-            <span class="section__content-sub-title headingFour"><img src="/images/tradexy/element/section-badge1.png" alt="Badge" />@L["Hero.Badge"]</span>
+            <span class="section__content-sub-title headingFour"><img src="@SiteBranding.Image("element/section-badge1.png")" alt="Badge" />@L["Hero.Badge"]</span>
             <h1 class="section__content-title">@L["Hero.Title"]</h1>
             <p class="section__content-text">@L["Hero.Description"]</p>
         </div>

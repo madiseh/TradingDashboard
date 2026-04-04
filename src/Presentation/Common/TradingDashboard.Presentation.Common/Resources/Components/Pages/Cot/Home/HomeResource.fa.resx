@@ -27,6 +27,12 @@
   <data name="Heading.MarketsDirectory" xml:space="preserve">
     <value>فهرست بازارها</value>
   </data>
+  <data name="Hero.Badge" xml:space="preserve">
+    <value>تحلیل COT</value>
+  </data>
+  <data name="Hero.Description" xml:space="preserve">
+    <value>بازارهای گروه‌بندی‌شده Commitment of Traders را مرور کنید و مستقیماً وارد گزارش‌های COT Legacy یا COT در TerminalPrime شوید.</value>
+  </data>
   <data name="Links.MoreInCot" xml:space="preserve">
     <value>بیشتر در COT »</value>
   </data>
@@ -34,7 +40,16 @@
     <value>بیشتر در COT Legacy »</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
-    <value>فهرست بازارها</value>
+    <value>فهرست بازارهای COT | پوشش Commitment of Traders | TerminalPrime</value>
+  </data>
+  <data name="Seo.Description" xml:space="preserve">
+    <value>فهرست بازارهای COT در TerminalPrime را بررسی کنید و بر اساس گروه بازار، نماد و مدل گزارش به داده‌های Commitment of Traders دسترسی داشته باشید.</value>
+  </data>
+  <data name="Seo.Keywords" xml:space="preserve">
+    <value>فهرست بازارهای COT, گزارش COT, تحلیل بازار فارکس, Commitment of Traders, TerminalPrime</value>
+  </data>
+  <data name="Seo.Title" xml:space="preserve">
+    <value>فهرست بازارهای COT | پوشش Commitment of Traders | TerminalPrime</value>
   </data>
   <data name="Table.Instrument" xml:space="preserve">
     <value>ابزار</value>

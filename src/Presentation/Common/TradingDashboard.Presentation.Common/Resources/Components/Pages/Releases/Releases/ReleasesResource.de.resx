@@ -22,13 +22,13 @@
     <value>Releases</value>
   </data>
   <data name="Hero.Description" xml:space="preserve">
-    <value>Ein kompakter Verlauf der ausgelieferten Änderungen in Trading Dashboard, beginnend mit dem neuesten Stand vom 3. April 2026.</value>
+    <value>Ein kompakter Verlauf der ausgelieferten Ã„nderungen in Trading Dashboard, beginnend mit dem neuesten Stand vom 3. April 2026.</value>
   </data>
   <data name="Summary.Title" xml:space="preserve">
     <value>Aktueller Stand</value>
   </data>
   <data name="Summary.Description" xml:space="preserve">
-    <value>Nutze diese Seite als tägliches Release-Feed und füge das nächste Update oberhalb des aktuellen Eintrags hinzu.</value>
+    <value>Nutze diese Seite als tÃ¤gliches Release-Feed und fÃ¼ge das nÃ¤chste Update oberhalb des aktuellen Eintrags hinzu.</value>
   </data>
   <data name="Summary.UpdatedThrough" xml:space="preserve">
     <value>Aktualisiert bis {0}</value>
@@ -40,25 +40,25 @@
     <value>{0} Highlights</value>
   </data>
   <data name="Entry.Title.CurrentSnapshot" xml:space="preserve">
-    <value>Aktuelle Produktübersicht</value>
+    <value>Aktuelle ProduktÃ¼bersicht</value>
   </data>
   <data name="Entry.Description.CurrentSnapshot" xml:space="preserve">
-    <value>Das Produkt hat sich von den grundlegenden COT-Report-Flows zu einer deutlich ausgereifteren Web-Erfahrung mit stärkerem Hosting- und Delivery-Fundament entwickelt.</value>
+    <value>Das Produkt hat sich von den grundlegenden COT-Report-Flows zu einer deutlich ausgereifteren Web-Erfahrung mit stÃ¤rkerem Hosting- und Delivery-Fundament entwickelt.</value>
   </data>
   <data name="Entry.Highlight.1" xml:space="preserve">
-    <value>Eine Tradexy-ähnliche Startseite und Hauptnavigation wurde ausgerollt, inklusive wiederhergestellter COT-Navigation und Sprachumschaltung.</value>
+    <value>Eine modernisierte Startseite und Hauptnavigation wurde ausgerollt, inklusive wiederhergestellter COT-Navigation und Sprachumschaltung.</value>
   </data>
   <data name="Entry.Highlight.2" xml:space="preserve">
-    <value>Marktverzeichnis und gruppierte Marktseiten wurden ergänzt, damit Nutzer COT- und COT-Legacy-Reports schneller erreichen.</value>
+    <value>Marktverzeichnis und gruppierte Marktseiten wurden ergÃ¤nzt, damit Nutzer COT- und COT-Legacy-Reports schneller erreichen.</value>
   </data>
   <data name="Entry.Highlight.3" xml:space="preserve">
-    <value>Die Report-Ansicht wurde mit Kennzahlen, wiederverwendbaren Long-Short-Charts und einem wählbaren Net-Position-Chart mit Verlaufsfiltern erweitert.</value>
+    <value>Die Report-Ansicht wurde mit Kennzahlen, wiederverwendbaren Long-Short-Charts und einem wÃ¤hlbaren Net-Position-Chart mit Verlaufsfiltern erweitert.</value>
   </data>
   <data name="Entry.Highlight.4" xml:space="preserve">
-    <value>Die Datenzuverlässigkeit wurde verbessert: Report-Seiten laden aus gesammelten JSON-Snapshots und historische Sync-Sonderfälle werden abgefangen.</value>
+    <value>Die DatenzuverlÃ¤ssigkeit wurde verbessert: Report-Seiten laden aus gesammelten JSON-Snapshots und historische Sync-SonderfÃ¤lle werden abgefangen.</value>
   </data>
   <data name="Entry.Highlight.5" xml:space="preserve">
-    <value>Die Auslieferung wurde gestärkt durch einen MAUI Blazor Hybrid Host und aktualisierte GitLab-CI-Schritte für Deployment und Unit-Tests.</value>
+    <value>Die Auslieferung wurde gestÃ¤rkt durch einen MAUI Blazor Hybrid Host und aktualisierte GitLab-CI-Schritte fÃ¼r Deployment und Unit-Tests.</value>
   </data>
   <data name="List.Title" xml:space="preserve">
     <value>Previous releases</value>
@@ -76,7 +76,7 @@
     <value>This release focused on shaping the product into a cleaner, more navigable experience while keeping the reporting flow stronger and easier to browse.</value>
   </data>
   <data name="Entry.Version2.Highlight.1" xml:space="preserve">
-    <value>Rolled out a Tradexy-style homepage and refreshed main layout for the web app.</value>
+    <value>Eine modernisierte Startseite und Hauptnavigation fuer die Web-App wurde ausgerollt.</value>
   </data>
   <data name="Entry.Version2.Highlight.2" xml:space="preserve">
     <value>Restored COT navigation and language switching inside the main experience.</value>

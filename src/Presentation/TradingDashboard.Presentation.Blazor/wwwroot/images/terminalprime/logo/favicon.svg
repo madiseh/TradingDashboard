@@ -1,0 +1,17 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="terminalprime-favicon-title terminalprime-favicon-desc">
+  <title id="terminalprime-favicon-title">TerminalPrime mark</title>
+  <desc id="terminalprime-favicon-desc">A compact TerminalPrime market mark with rising bars and an upward trend arrow.</desc>
+  <defs>
+    <linearGradient id="terminalprime-favicon-bars" x1="12" y1="52" x2="52" y2="12" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2AC2B7"/>
+      <stop offset="1" stop-color="#F7B733"/>
+    </linearGradient>
+  </defs>
+  <rect x="5" y="5" width="54" height="54" rx="18" fill="#122C57"/>
+  <circle cx="32" cy="32" r="20" stroke="#EAF1FF" stroke-width="2"/>
+  <rect x="18" y="29" width="5" height="13" rx="2.5" fill="url(#terminalprime-favicon-bars)"/>
+  <rect x="29" y="22" width="5" height="20" rx="2.5" fill="url(#terminalprime-favicon-bars)"/>
+  <rect x="40" y="16" width="5" height="26" rx="2.5" fill="url(#terminalprime-favicon-bars)"/>
+  <path d="M17 41L26 31L33 35L47 20" stroke="#F7B733" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M42 20H47V25" stroke="#F7B733" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

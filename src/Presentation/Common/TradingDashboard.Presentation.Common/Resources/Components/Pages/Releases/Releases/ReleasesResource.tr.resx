@@ -13,52 +13,52 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="PageTitle" xml:space="preserve">
-    <value>Sürümler</value>
+    <value>SÃ¼rÃ¼mler</value>
   </data>
   <data name="Hero.Eyebrow" xml:space="preserve">
-    <value>Ürün güncellemeleri</value>
+    <value>ÃœrÃ¼n gÃ¼ncellemeleri</value>
   </data>
   <data name="Hero.Title" xml:space="preserve">
-    <value>Sürümler</value>
+    <value>SÃ¼rÃ¼mler</value>
   </data>
   <data name="Hero.Description" xml:space="preserve">
-    <value>Trading Dashboard içinde yayınlananların kısa ve sürekli güncellenen kaydı; başlangıç noktası 3 Nisan 2026 tarihli son özet.</value>
+    <value>Trading Dashboard iÃ§inde yayÄ±nlananlarÄ±n kÄ±sa ve sÃ¼rekli gÃ¼ncellenen kaydÄ±; baÅŸlangÄ±Ã§ noktasÄ± 3 Nisan 2026 tarihli son Ã¶zet.</value>
   </data>
   <data name="Summary.Title" xml:space="preserve">
     <value>Son durum</value>
   </data>
   <data name="Summary.Description" xml:space="preserve">
-    <value>Bu sayfayı günlük release note akışı olarak kullanın ve bir sonraki güncellemeyi mevcut girişin üstüne ekleyin.</value>
+    <value>Bu sayfayÄ± gÃ¼nlÃ¼k release note akÄ±ÅŸÄ± olarak kullanÄ±n ve bir sonraki gÃ¼ncellemeyi mevcut giriÅŸin Ã¼stÃ¼ne ekleyin.</value>
   </data>
   <data name="Summary.UpdatedThrough" xml:space="preserve">
-    <value>{0} tarihine kadar güncellendi</value>
+    <value>{0} tarihine kadar gÃ¼ncellendi</value>
   </data>
   <data name="Labels.Current" xml:space="preserve">
-    <value>Güncel</value>
+    <value>GÃ¼ncel</value>
   </data>
   <data name="Labels.Bullets" xml:space="preserve">
-    <value>{0} öne çıkan</value>
+    <value>{0} Ã¶ne Ã§Ä±kan</value>
   </data>
   <data name="Entry.Title.CurrentSnapshot" xml:space="preserve">
-    <value>Güncel ürün özeti</value>
+    <value>GÃ¼ncel Ã¼rÃ¼n Ã¶zeti</value>
   </data>
   <data name="Entry.Description.CurrentSnapshot" xml:space="preserve">
-    <value>Ürün, temel COT rapor akışlarından daha cilalı bir web deneyimine ve daha güçlü barındırma/teslim altyapısına geçti.</value>
+    <value>ÃœrÃ¼n, temel COT rapor akÄ±ÅŸlarÄ±ndan daha cilalÄ± bir web deneyimine ve daha gÃ¼Ã§lÃ¼ barÄ±ndÄ±rma/teslim altyapÄ±sÄ±na geÃ§ti.</value>
   </data>
   <data name="Entry.Highlight.1" xml:space="preserve">
-    <value>Tradexy tarzı ana sayfa ve ana yerleşim yayına alındı; COT gezinmesi ve dil değiştirme geri getirildi.</value>
+    <value>Yenilenen ana sayfa ve ana yerlesim yayina alindi; COT gezinmesi ve dil degistirme geri getirildi.</value>
   </data>
   <data name="Entry.Highlight.2" xml:space="preserve">
-    <value>Pazar dizini ve gruplanmış pazar sayfaları eklendi; kullanıcılar COT ve COT Legacy raporlarına daha hızlı ulaşabiliyor.</value>
+    <value>Pazar dizini ve gruplanmÄ±ÅŸ pazar sayfalarÄ± eklendi; kullanÄ±cÄ±lar COT ve COT Legacy raporlarÄ±na daha hÄ±zlÄ± ulaÅŸabiliyor.</value>
   </data>
   <data name="Entry.Highlight.3" xml:space="preserve">
-    <value>Rapor deneyimi; özet istatistikler, yeniden kullanılabilir long-short grafikler ve tarih filtreli seçilebilir net pozisyon grafiği ile genişletildi.</value>
+    <value>Rapor deneyimi; Ã¶zet istatistikler, yeniden kullanÄ±labilir long-short grafikler ve tarih filtreli seÃ§ilebilir net pozisyon grafiÄŸi ile geniÅŸletildi.</value>
   </data>
   <data name="Entry.Highlight.4" xml:space="preserve">
-    <value>Veri güvenilirliği artırıldı; rapor sayfaları toplanan JSON snapshot'larından yükleniyor ve geçmiş senkronizasyon kenar durumları ele alınıyor.</value>
+    <value>Veri gÃ¼venilirliÄŸi artÄ±rÄ±ldÄ±; rapor sayfalarÄ± toplanan JSON snapshot'larÄ±ndan yÃ¼kleniyor ve geÃ§miÅŸ senkronizasyon kenar durumlarÄ± ele alÄ±nÄ±yor.</value>
   </data>
   <data name="Entry.Highlight.5" xml:space="preserve">
-    <value>Dağıtım temeli güçlendirildi; MAUI Blazor Hybrid host eklendi ve GitLab CI adımları deploy ile unit test kapsamı için güncellendi.</value>
+    <value>DaÄŸÄ±tÄ±m temeli gÃ¼Ã§lendirildi; MAUI Blazor Hybrid host eklendi ve GitLab CI adÄ±mlarÄ± deploy ile unit test kapsamÄ± iÃ§in gÃ¼ncellendi.</value>
   </data>
   <data name="List.Title" xml:space="preserve">
     <value>Previous releases</value>
@@ -76,7 +76,7 @@
     <value>This release focused on shaping the product into a cleaner, more navigable experience while keeping the reporting flow stronger and easier to browse.</value>
   </data>
   <data name="Entry.Version2.Highlight.1" xml:space="preserve">
-    <value>Rolled out a Tradexy-style homepage and refreshed main layout for the web app.</value>
+    <value>Web uygulamasi icin yenilenen ana sayfa ve ana yerlesim yayina alindi.</value>
   </data>
   <data name="Entry.Version2.Highlight.2" xml:space="preserve">
     <value>Restored COT navigation and language switching inside the main experience.</value>

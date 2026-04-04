@@ -1,11 +1,11 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /* ==============
  ========= css documentation =========
 
- * Template Name: Tradexy 
+ * Template Name: TerminalPrime Theme 
  * Version: 1.0
- * Author: pixelaxis
- * Author URI: https://themeforest.net/user/pixelaxis
+ * Author: TerminalPrime
+ * Author URI: https://terminalprime.com
  * Description: Forex & Stock Broker Trading Signals, Review, Tutorial Website Template
 
  01. abstracts
@@ -1693,7 +1693,7 @@ span.material-symbols-outlined {
 }
 
 .contact-area {
-  background: url(/images/tradexy/contact_bg.png);
+  background: url(/images/terminalprime/contact_bg.png);
   background-color: white;
   background-repeat: no-repeat;
   background-position: center;
@@ -2310,7 +2310,7 @@ label.error {
   font-weight: 500;
 }
 .accordion .accordion-button::after {
-  --arrow: "";
+  --arrow: "ï“¾";
   content: var(--arrow);
   font-family: "bootstrap-icons";
   font-weight: normal;
@@ -2343,7 +2343,7 @@ label.error {
   --bs-accordion-btn-icon-transform: rotate(180deg);
 }
 .accordion .accordion-button:not(.collapsed)::after {
-  --arrow: "";
+  --arrow: "ï‹ª";
   font-family: "bootstrap-icons";
   font-weight: normal;
   background: #EB7A23;
@@ -3228,7 +3228,7 @@ label.error {
 .hero {
   height: 100%;
   width: 100%;
-  padding-top: 145px;
+  padding-top: 0px;
   padding-bottom: 0;
   display: flex;
   justify-content: center;
@@ -3420,7 +3420,7 @@ label.error {
   width: 100%;
   height: 100%;
   background: none;
-  background: url(/images/tradexy/hero--secondary_bg.png);
+  background: url(/images/terminalprime/hero--secondary_bg.png);
   background-color: #03211B;
   background-repeat: no-repeat;
   background-position: bottom center;
@@ -4479,13 +4479,13 @@ label.error {
   justify-content: center;
 }
 
-.tradexy-company-footer {
+.terminalprime-company-footer {
   max-width: 366px;
   background: rgba(255, 255, 255, 0.05);
   padding: 40px 10px;
   margin-left: auto;
 }
-.tradexy-company-footer .boxes {
+.terminalprime-company-footer .boxes {
   max-width: 286px;
   text-align: center;
 }
@@ -7631,7 +7631,7 @@ label.error {
   left: 0;
   width: 100%;
   height: 56%;
-  background: url(/images/tradexy/choose_bg.png);
+  background: url(/images/terminalprime/choose_bg.png);
   background-repeat: no-repeat;
   background-position: top;
   background-size: cover;
@@ -8218,7 +8218,7 @@ label.error {
   bottom: 0;
   height: 100%;
   width: 100%;
-  background: url(/images/tradexy/choose_us_bg.png);
+  background: url(/images/terminalprime/choose_us_bg.png);
   background-color: white;
   background-repeat: no-repeat;
   background-position: center;
@@ -9459,7 +9459,7 @@ label.error {
   font-weight: 600;
 }
 .graphic-tutorial-leftwrap .curriculum-wrapper .accordion-item .accordion-header .accordion-button::after {
-  --arrow: "";
+  --arrow: "ïˆ¬";
   content: var(--arrow);
   font-family: "bootstrap-icons";
   font-weight: normal;
@@ -9489,7 +9489,7 @@ label.error {
   color: #FFF;
 }
 .graphic-tutorial-leftwrap .curriculum-wrapper .accordion-item .accordion-header .accordion-button:not(.collapsed)::after {
-  --arrow: "";
+  --arrow: "ïˆ¬";
   font-family: "bootstrap-icons";
   font-weight: normal;
   background: transparent;
@@ -9528,7 +9528,7 @@ label.error {
     padding: 18px 16px;
   }
   .graphic-tutorial-leftwrap .curriculum-wrapper .accordion-item .accordion-header .accordion-button::after {
-    --arrow: "";
+    --arrow: "ïˆ¬";
     font-size: 19px;
   }
   .graphic-tutorial-leftwrap .curriculum-wrapper .accordion-item .accordion-body .curriculum-item {
@@ -9547,7 +9547,7 @@ label.error {
     padding: 18px 16px;
   }
   .graphic-tutorial-leftwrap .curriculum-wrapper .accordion-item .accordion-header .accordion-button::after {
-    --arrow: "";
+    --arrow: "ïˆ¬";
     font-size: 19px;
   }
   .graphic-tutorial-leftwrap .curriculum-wrapper .accordion-item .accordion-body .curriculum-item {

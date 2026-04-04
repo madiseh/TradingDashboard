@@ -64,7 +64,7 @@
     <value>The product moved from core COT report flows into a more polished web experience with stronger hosting and delivery foundations.</value>
   </data>
   <data name="Entry.Highlight.1" xml:space="preserve">
-    <value>Rolled out a Tradexy-style homepage and main layout, including restored COT navigation and language switching.</value>
+    <value>Rolled out a refreshed homepage and main layout, including restored COT navigation and language switching.</value>
   </data>
   <data name="Entry.Highlight.2" xml:space="preserve">
     <value>Added market directory and grouped markets pages so users can reach COT and COT Legacy reports faster.</value>
@@ -88,7 +88,7 @@
     <value>This release focused on shaping the product into a cleaner, more navigable experience while keeping the reporting flow stronger and easier to browse.</value>
   </data>
   <data name="Entry.Version2.Highlight.1" xml:space="preserve">
-    <value>Rolled out a Tradexy-style homepage and refreshed main layout for the web app.</value>
+    <value>Rolled out a refreshed homepage and main layout for the web app.</value>
   </data>
   <data name="Entry.Version2.Highlight.2" xml:space="preserve">
     <value>Restored COT navigation and language switching inside the main experience.</value>

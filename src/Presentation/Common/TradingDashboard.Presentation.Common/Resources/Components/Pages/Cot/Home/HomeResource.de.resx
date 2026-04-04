@@ -27,6 +27,12 @@
   <data name="Heading.MarketsDirectory" xml:space="preserve">
     <value>Marktverzeichnis</value>
   </data>
+  <data name="Hero.Badge" xml:space="preserve">
+    <value>COT Analyse</value>
+  </data>
+  <data name="Hero.Description" xml:space="preserve">
+    <value>Durchsuchen Sie gruppierte Commitment-of-Traders-Instrumente und wechseln Sie in TerminalPrime direkt zu COT Legacy oder detaillierten COT-Berichten.</value>
+  </data>
   <data name="Links.MoreInCot" xml:space="preserve">
     <value>Mehr in COT »</value>
   </data>
@@ -34,7 +40,16 @@
     <value>Mehr in COT Legacy »</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
-    <value>Marktverzeichnis</value>
+    <value>COT Marktverzeichnis | Commitment of Traders Abdeckung | TerminalPrime</value>
+  </data>
+  <data name="Seo.Description" xml:space="preserve">
+    <value>Entdecken Sie im COT-Marktverzeichnis von TerminalPrime die Commitment-of-Traders-Abdeckung nach Marktgruppe, Instrument und Berichtsmodell.</value>
+  </data>
+  <data name="Seo.Keywords" xml:space="preserve">
+    <value>COT Marktverzeichnis, Commitment of Traders, Forex COT Analyse, Futures Positionierung, TerminalPrime</value>
+  </data>
+  <data name="Seo.Title" xml:space="preserve">
+    <value>COT Marktverzeichnis | Commitment of Traders Abdeckung | TerminalPrime</value>
   </data>
   <data name="Table.Instrument" xml:space="preserve">
     <value>Instrument</value>

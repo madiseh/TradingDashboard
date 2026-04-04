@@ -1,7 +1,23 @@
 @page "/"
 @using TradingDashboard.Presentation.Common.Routing
 
-<PageTitle>Tradexy</PageTitle>
+<PageTitle>@HomeSeoTitle</PageTitle>
+<HeadContent>
+    <meta name="description" content="@HomeSeoDescription" />
+    <meta name="keywords" content="@HomeSeoKeywords" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="@SiteBranding.BaseUrl/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="@SiteBranding.BrandName" />
+    <meta property="og:title" content="@HomeSeoTitle" />
+    <meta property="og:description" content="@HomeSeoDescription" />
+    <meta property="og:url" content="@SiteBranding.BaseUrl/" />
+    <meta property="og:image" content="@SiteBranding.AbsoluteUrl(SiteBranding.Image("hero/hero-thumb1.png"))" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@HomeSeoTitle" />
+    <meta name="twitter:description" content="@HomeSeoDescription" />
+    <meta name="twitter:image" content="@SiteBranding.AbsoluteUrl(SiteBranding.Image("hero/hero-thumb1.png"))" />
+</HeadContent>
 
 <section class="hero" id="hero" style="background-image: url('@Img("element/common-bg.png")');">
     <div class="container">
@@ -9,15 +25,15 @@
             <div class="col-xxl-5 col-xl-6 col-lg-6">
                 <div class="banner-content text-lg-start text-center">
                     <span class="mb-4 primary-clr d-flex align-items-center justify-content-lg-start justify-content-center gap-lg-3 gap-2 headingFour">
-                        <img src="@Img("element/section-badge1.png")" alt="Badge" /> Trading Signals And Get Stable Profits.
+                        <img src="@Img("element/section-badge1.png")" alt="Badge" /> Forex intelligence for disciplined traders.
                     </span>
                     <h1 class="mb-4">
-                        Follow Top <span class="secondary-clr2">Traders</span> And Lead In Forex Trading
+                        Track <span class="secondary-clr2">COT positioning</span>, currency strength, and macro momentum in one dashboard
                     </h1>
-                    <p>Welcome to TRADEXY, your trusted partner in forex trading. Whether you're a beginner or an expert.</p>
+                    <p>TerminalPrime helps you read the forex market with clearer context, combining Commitment of Traders data, currency strength analytics, and trader-friendly research tools.</p>
                     <div class="btn-group justify-content-center justify-content-lg-start mt_40">
-                        <a href="@RoutePaths.Ui.CotHome" class="btn_theme btn_theme_active">Start Tracking Transactions<i class="bi bi-arrow-up-right"></i><span></span></a>
-                        <a href="/#broker-reviews" class="btn_theme">Explore Reviews<i class="bi bi-arrow-up-right"></i><span></span></a>
+                        <a href="@RoutePaths.Ui.CotHome" class="btn_theme btn_theme_active">Explore COT Markets<i class="bi bi-arrow-up-right"></i><span></span></a>
+                        <a href="@RoutePaths.Ui.CurrencyStrength" class="btn_theme">View Currency Strength<i class="bi bi-arrow-up-right"></i><span></span></a>
                     </div>
                 </div>
             </div>
@@ -35,9 +51,9 @@
         <div class="row justify-content-center">
             <div class="col-12 col-lg-9 col-xxl-8">
                 <div class="section__header">
-                    <span class="section__header-sub-title headingFour"><img src="@Img("element/section-badge1.png")" alt="Badge" /> Our Packages</span>
-                    <h2 class="section__header-title">Use our successful trading signals to achieve your financial freedom</h2>
-                    <p class="section__header-content">We are dedicated to providing you with valuable services that simplify your loan search and empower you to make informed borrowing decisions. Our comprehensive range of services</p>
+                    <span class="section__header-sub-title headingFour"><img src="@Img("element/section-badge1.png")" alt="Badge" /> Core Market Tools</span>
+                    <h2 class="section__header-title">Use focused forex research modules built for weekly planning and daily execution</h2>
+                    <p class="section__header-content">Follow positioning, relative strength, market structure, and broker conditions through practical modules that keep your process clean and repeatable.</p>
                 </div>
             </div>
         </div>
@@ -114,8 +130,8 @@
                     </div>
                     <div id="@broker.CollapseId" class="view-content-wrap mt-xxl-4 mt-xl-3 mt-2 text-start collapse @(broker.IsExpanded ? "show" : null)">
                         <div class="box">
-                            <h5 class="mb-2">More Info</h5>
-                            <p class="mb-md-3 mb-3 pra-clr">It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.</p>
+                            <h5 class="mb-2">Execution Notes</h5>
+                            <p class="mb-md-3 mb-3 pra-clr">Review each broker for regulation strength, execution quality, platform stability, and pricing consistency before using it in a serious forex workflow.</p>
                             <ul class="cartified-cheking d-flex flex-wrap align-items-center gap-xxl-4 gap-xl-3 gap-2">
                                 @foreach (var point in BrokerHighlights)
                                 {
@@ -139,8 +155,8 @@
             <div class="col-xxl-6 col-xl-7 col-lg-7 col-md-6">
                 <div class="section__content">
                     <span class="section__content-sub-title headingFour mb-lg-4 mb-3"><img src="@Img("element/section-badge1.png")" alt="Badge" /> Why Choose Us</span>
-                    <h2 class="section__content-title">Profit, Service, Technology, Stability-Traders' Top Choice.</h2>
-                    <p class="section__content-text">Watch our forex trading video tutorials to jumpstart your journey into becoming a profitable forex trading expert.</p>
+                    <h2 class="section__content-title">Data-first analysis, cleaner workflows, and faster decision support for FX traders.</h2>
+                    <p class="section__content-text">TerminalPrime keeps your weekly routine aligned by connecting positioning data, currency leadership, and execution context in a single research flow.</p>
                     <ul class="section__content-list ms-0 gap-xl-4 gap-lg-3 gap-2">
                         @foreach (var reason in ChooseUsPoints)
                         {
@@ -166,9 +182,9 @@
         <div class="row justify-content-center">
             <div class="col-12 col-lg-6 col-xxl-5">
                 <div class="section__header">
-                    <span class="section__header-sub-title headingFour"><img src="@Img("element/section-badge1.png")" alt="Badge" />How to copy trades</span>
-                    <h2 class="section__header-title">Start trading with expert-provided signals</h2>
-                    <p class="section__header-content ch-xxl">Kickstart your forex trading journey with confidence by leveraging expert-provided trading signals. These signals guide you through the market.</p>
+                    <span class="section__header-sub-title headingFour"><img src="@Img("element/section-badge1.png")" alt="Badge" /> Build Your Weekly Workflow</span>
+                    <h2 class="section__header-title">Start with market evidence, confirm with context, and plan with discipline</h2>
+                    <p class="section__header-content ch-xxl">Use TerminalPrime to review futures positioning, compare currency strength, validate execution conditions, and prepare your trading playbook for the week ahead.</p>
                 </div>
             </div>
         </div>
@@ -200,8 +216,8 @@
             <div class="col-12 col-lg-7 col-xxl-6">
                 <div class="section__content">
                     <span class="section__content-sub-title headingFour mb-lg-4 mb-3"><img src="@Img("element/section-badge1.png")" alt="Badge" /> About Us</span>
-                    <h2 class="section__content-title">Trusted by Over 66,000 Traders Worldwide, TRADEXY Excels.</h2>
-                    <p class="section__content-text">Join over 66,000 traders worldwide who trust TRADEXY for reliable trading signals, expert analysis, and a secure trading environment.</p>
+                    <h2 class="section__content-title">Built for traders who want clearer context, cleaner dashboards, and stronger market timing.</h2>
+                    <p class="section__content-text">TerminalPrime combines COT reports, currency strength insights, and practical research workflows so you can interpret the forex market with less noise and more structure.</p>
                     <div class="section__content-inner">
                         @foreach (var feature in AboutFeatures)
                         {
@@ -221,7 +237,7 @@
             </div>
             <div class="col-12 col-md-8 col-lg-5 mx-auto mx-lg-0">
                 <div class="choose-us__thumb unset-xxl me-xl-4 me-xxl-0">
-                    <img src="@Img("about/about1.png")" alt="About Tradexy" />
+                    <img src="@Img("about/about1.png")" alt="About TerminalPrime" />
                 </div>
             </div>
         </div>
@@ -309,9 +325,9 @@
             </div>
             <div class="col-md-7 col-lg-6 col-xl-6 col-xxl-6">
                 <div class="section__content ms-lg-4 ms-xl-0">
-                    <span class="section__content-sub-title headingFour mb-lg-4 mb-3"><img src="@Img("element/section-badge1.png")" alt="Badge" />Download Our Apps</span>
-                    <h2 class="section__content-title">Download Our Forex Trading Apps for Seamless Experience</h2>
-                    <p class="section__content-text mb-4 pb-lg-1">Experience the power of trading on the go with our user-friendly forex trading apps. Stay updated with real-time signals, execute trades seamlessly, and access expert insights anytime, anywhere. Download now and take your trading journey to the next level</p>
+                    <span class="section__content-sub-title headingFour mb-lg-4 mb-3"><img src="@Img("element/section-badge1.png")" alt="Badge" /> Access Anywhere</span>
+                    <h2 class="section__content-title">Open TerminalPrime from anywhere you monitor the market</h2>
+                    <p class="section__content-text mb-4 pb-lg-1">Keep your COT review, currency strength scan, and broker checklist close at hand so your market prep stays consistent whether you are at your desk or on the move.</p>
                     <ul class="section__content-list02 d-grid gap-3">
                         @foreach (var bullet in DownloadBullets)
                         {
@@ -319,8 +335,8 @@
                         }
                     </ul>
                     <div class="btn-group mt_40">
-                        <a href="/#footer" class="btn_theme">Google Play<span></span></a>
-                        <a href="/#footer" class="btn_theme">App Store<span></span></a>
+                        <a href="@RoutePaths.Ui.CotHome" class="btn_theme">Open COT<span></span></a>
+                        <a href="@RoutePaths.Ui.CurrencyStrength" class="btn_theme">Open Strength<span></span></a>
                     </div>
                 </div>
             </div>
@@ -334,8 +350,8 @@
             <div class="col-12 col-lg-7 col-xxl-6">
                 <div class="section__header">
                     <span class="section__header-sub-title headingFour"><img src="@Img("element/section-badge1.png")" alt="Badge" />Frequently Asked Questions</span>
-                    <h2 class="section__header-title">Find Answers to Common Questions</h2>
-                    <p class="section__header-content">We've compiled a list of frequently asked questions to provide you with quick and helpful answers. If you have a question that is not addressed below</p>
+                    <h2 class="section__header-title">Answers for traders using COT and currency strength in real workflows</h2>
+                    <p class="section__header-content">These quick answers explain how TerminalPrime's forex tools fit into analysis, planning, and execution without turning the dashboard into noise.</p>
                 </div>
             </div>
         </div>
@@ -383,97 +399,101 @@
 </section>
 
 @code {
+    private const string HomeSeoTitle = "TerminalPrime | Forex Market Intelligence, COT Reports & Currency Strength";
+    private const string HomeSeoDescription = "TerminalPrime delivers forex market intelligence with COT reports, currency strength analytics, and trader-focused market research for global FX markets.";
+    private const string HomeSeoKeywords = "TerminalPrime, forex market intelligence, COT reports, currency strength dashboard, forex analysis, trader tools";
+
     private static readonly string[] BrokerHighlights =
     [
-        "Certified pre-approval Process",
-        "Online Application Available 24/7",
-        "Find a Quote Easily",
-        "100% Online Refinance"
+        "Regulation and execution quality",
+        "Spread and commission transparency",
+        "Platform stability during volatility",
+        "Funding and withdrawal consistency"
     ];
 
     private static readonly string[] ChooseUsPoints =
     [
-        "Excellent customer service",
-        "Trading signal tracking",
-        "Top technical analysis",
-        "First-class professional skills"
+        "Weekly COT context for macro positioning",
+        "Fast currency strength comparison",
+        "Cleaner dashboards with actionable summaries",
+        "Trader education without platform noise"
     ];
 
     private static readonly string[] VideoTopics =
     [
-        "Foreign exchange basics",
-        "Risk management in actual trading",
-        "Trading system strategy",
-        "Explanation and application"
+        "Foreign exchange market structure",
+        "Risk management in live conditions",
+        "Positioning and sentiment frameworks",
+        "How to combine tools into one routine"
     ];
 
     private static readonly string[] DownloadBullets =
     [
-        "Broker Regulation and Market Reputation",
-        "Spread Fees and Slippage Frequency",
-        "Commissions for RAW/ECN accounts",
-        "Trading Conditions Tools/Market Range"
+        "Review currency leadership before London and New York",
+        "Check COT positioning before swing setups",
+        "Compare broker conditions before execution",
+        "Keep your weekly workflow available on every screen"
     ];
 
     private static readonly PackageCard[] Packages =
     [
-        new("icon/chart.png", "Intraday short-term - profit rate (50-65)%", "TRADEXY is simply dummy text of the printing and typesetting industry."),
-        new("icon/rate.png", "EA Intelligence - Profit Rate (30-45)%", "TRADEXY is simply dummy text of the printing and typesetting industry."),
-        new("icon/interest-rate.png", "Momentum Wave - Win Rate (88-95)%", "TRADEXY is simply dummy text of the printing and typesetting industry."),
-        new("icon/business.png", "Scalper Edge - Profit Rate (45-60)%", "TRADEXY is simply dummy text of the printing and typesetting industry."),
-        new("icon/business.png", "Scalper Edge - Profit Rate (45-60)%", "TRADEXY is simply dummy text of the printing and typesetting industry.")
+        new("icon/chart.png", "Weekly COT Review", "Spot how futures traders are building or reducing exposure across major forex markets."),
+        new("icon/rate.png", "Currency Strength Scanner", "Compare the strongest and weakest major currencies before planning your next setup."),
+        new("icon/interest-rate.png", "Momentum Shift Tracker", "See when trend pressure begins to rotate across major FX pairs and macro themes."),
+        new("icon/business.png", "Broker Condition Watchlist", "Keep execution quality, spreads, and broker stability visible before risk goes live."),
+        new("icon/business.png", "Trader Playbook Library", "Turn market observations into structured plans with education and repeatable workflows.")
     ];
 
     private static readonly BrokerReview[] Brokers =
     [
         new("01", "broker/ic-markets.png", "IC Markets", "IC Markets is a trusted broker with institutional-grade liquidity, offering one of the best trading environments globally.", "44K+", "broker-detail-01", true),
-        new("02", "broker/robofores.png", "RoboForex", "RoboForex is known for its innovative tools, multiple account types, and attractive bonuses for traders of all levels. There are many variations of passages of Lorem Ipsum available", "44K+", "broker-detail-02", false),
+        new("02", "broker/robofores.png", "RoboForex", "RoboForex is known for flexible account structures, broad platform support, and tools that appeal to active forex traders.", "44K+", "broker-detail-02", false),
         new("03", "broker/etoro.png", "eToro", "eToro is a top-rated social trading platform offering an easy way to copy successful traders while enjoying a user-friendly interface.", "25K+", "broker-detail-03", false),
-        new("04", "broker/peppershone.png", "Pepperstone", "Pepperstone delivers ultra-fast execution and low-cost trading, perfect for scalpers and high-frequency traders. There are many variations of passages of Lorem Ipsum available.", "44K+", "broker-detail-04", false)
+        new("04", "broker/peppershone.png", "Pepperstone", "Pepperstone delivers ultra-fast execution and low-cost trading, making it a strong fit for scalpers and momentum-driven traders.", "44K+", "broker-detail-04", false)
     ];
 
     private static readonly WorkingStep[] WorkingSteps =
     [
-        new("01", "icon/customer-support.png", "Open Account", "Choose a good forex broker and open a trading account."),
-        new("02", "icon/choose.png", "Choose Package", "Contact customer service to choose the copy trading package service."),
-        new("03", "icon/select-account.png", "Select a fund account", "Product packaging refers to the materials and design used to protect"),
-        new("04", "icon/profit-sharing.png", "Profit Sharing", "If you choose to follow the orders by yourself through the push signal.")
+        new("01", "icon/customer-support.png", "Review COT Flows", "Start with futures positioning to understand where larger market participants are leaning."),
+        new("02", "icon/choose.png", "Compare Relative Strength", "Use the strength dashboard to confirm which currencies are leading and which are fading."),
+        new("03", "icon/select-account.png", "Validate Conditions", "Check broker quality, spreads, and market access before you commit risk."),
+        new("04", "icon/profit-sharing.png", "Build The Plan", "Translate the data into a focused watchlist, levels, and execution ideas for the week.")
     ];
 
     private static readonly AboutFeature[] AboutFeatures =
     [
-        new("icon/knowledge.png", "Expert Knowledge", "He has many years of foreign exchange trading experience."),
-        new("icon/advice.png", "Well-received Service", "We have a dedicated and friendly service team to provide you."),
-        new("icon/setting.png", "Leading Technology", "We are involved in all aspects of the foreign exchange field."),
-        new("icon/idea.png", "Innovative & Studious", "Everyone here is honest and eager to learn, never discouraged.")
+        new("icon/knowledge.png", "Market Context", "Translate raw forex data into context that supports better directional decisions."),
+        new("icon/advice.png", "Practical Guidance", "Stay focused on workflows that traders can actually use during the week."),
+        new("icon/setting.png", "Reliable Delivery", "Keep core market tools accessible in one place without jumping between disconnected apps."),
+        new("icon/idea.png", "Continuous Refinement", "Improve your process through cleaner summaries, better structure, and repeatable research.")
     ];
 
     private static readonly TestimonialCard[] Testimonials =
     [
-        new("testimonial/balogh.png", "TRADEXY has completely transformed the way I trade. The real-time signals are incredibly accurate, and I've seen a noticeable increase in my profits. Highly recommended!", "Balogh Imre", "Account Executive"),
-        new("testimonial/kende.png", "As a beginner, TRADEXY's tutorials and tools were a game changer. I've gained confidence and consistency in my trading journey. It's like having an expert guiding you every step of the way!", "Kende Attila", "President of Sales"),
-        new("testimonial/balogh.png", "Our satisfied clients have experienced success with our services and loan recommendations. Here are some of their testimonials highlighting their positive experiences and the value they received", "Eleanor Pena", "Medical Assistant")
+        new("testimonial/balogh.png", "The combination of COT context and currency strength saved me hours every week and made my FX planning far more structured.", "Balogh Imre", "Macro Swing Trader"),
+        new("testimonial/kende.png", "I use TerminalPrime to narrow my watchlist fast. The dashboards make it easier to separate noise from genuine momentum.", "Kende Attila", "Intraday FX Trader"),
+        new("testimonial/balogh.png", "What I value most is the clarity. The tools feel built for decision-making instead of just filling the screen with indicators.", "Eleanor Pena", "Market Research Analyst")
     ];
 
     private static readonly FaqItem[] LeftFaqs =
     [
-        new("How do I apply for a loan through your platform?", "Absolutely. We strive to provide reliable and up-to-date information. Our team follows strict editorial guidelines to ensure the accuracy and integrity of our content. However,", "faq-accordion-1", true),
-        new("What types of loans do you review and compare?", "Absolutely. We strive to provide reliable and up-to-date information. Our team follows strict editorial guidelines to ensure the accuracy and integrity of our content. However,", "faq-accordion-2", false),
-        new("Can I trust the information provided on your website?", "Absolutely. We strive to provide reliable and up-to-date information. Our team follows strict editorial guidelines to ensure the accuracy and integrity of our content. However,", "faq-accordion-3", false),
-        new("Do you offer financial advice or recommendations?", "Absolutely. We strive to provide reliable and up-to-date information. Our team follows strict editorial guidelines to ensure the accuracy and integrity of our content. However,", "faq-accordion-4", false),
-        new("How do I apply for a loan through your platform?", "Absolutely. We strive to provide reliable and up-to-date information. Our team follows strict editorial guidelines to ensure the accuracy and integrity of our content. However,", "faq-accordion-5", false)
+        new("What is the COT report and why does it matter for forex traders?", "The Commitment of Traders report shows how major futures participants are positioned. Traders often use it to understand longer-term sentiment, crowding, and possible reversals in currency markets.", "faq-accordion-1", true),
+        new("How often is the COT data updated?", "COT data is published weekly, so it works best as a higher-timeframe context tool rather than a tick-by-tick signal feed.", "faq-accordion-2", false),
+        new("How should I combine COT with currency strength?", "Use COT to understand broader positioning and use currency strength to confirm shorter-term leadership, weakness, and momentum changes.", "faq-accordion-3", false),
+        new("Which markets are covered in the COT section?", "The dashboard groups available instruments by market so you can move quickly through major futures contracts and the report model you want to review.", "faq-accordion-4", false),
+        new("Is this useful for swing traders as well as day traders?", "Yes. Swing traders can use COT for directional context, while day traders can use currency strength and broker checks to refine execution timing.", "faq-accordion-5", false)
     ];
 
     private static readonly FaqItem[] RightFaqs =
     [
-        new("Can I get a loan with bad credit?", "Absolutely. We strive to provide reliable and up-to-date information. Our team follows strict editorial guidelines to ensure the accuracy and integrity of our content. However,", "faq2-accordion-1", false),
-        new("Are there any fees associated with taking out a loan?", "Absolutely. We strive to provide reliable and up-to-date information. Our team follows strict editorial guidelines to ensure the accuracy and integrity of our content. However,", "faq2-accordion-2", false),
-        new("What happens if I miss a loan payment?", "Absolutely. We strive to provide reliable and up-to-date information. Our team follows strict editorial guidelines to ensure the accuracy and integrity of our content. However,", "faq2-accordion-3", false),
-        new("Can I repay my loan early?", "Absolutely. We strive to provide reliable and up-to-date information. Our team follows strict editorial guidelines to ensure the accuracy and integrity of our content. However,", "faq2-accordion-4", false),
-        new("Can I refinance my existing loan?", "Absolutely. We strive to provide reliable and up-to-date information. Our team follows strict editorial guidelines to ensure the accuracy and integrity of our content. However,", "faq2-accordion-5", false)
+        new("Can beginners use TerminalPrime effectively?", "Yes. The dashboards are designed to make positioning and strength data easier to read, while the supporting content explains how the tools fit into a real workflow.", "faq2-accordion-1", false),
+        new("Does currency strength update more often than COT?", "Yes. Currency strength is designed for more frequent monitoring, while COT provides the slower, structural context behind the move.", "faq2-accordion-2", false),
+        new("Do broker reviews matter for analysis?", "They matter for execution. Even the best market read can suffer if spreads, slippage, or platform stability are poor during active sessions.", "faq2-accordion-3", false),
+        new("Is TerminalPrime financial advice?", "No. TerminalPrime is a research and analytics workspace. You should still apply your own risk management and decision process before trading.", "faq2-accordion-4", false),
+        new("Can I use these tools as part of a weekly prep routine?", "That is one of the best ways to use them. Review the broader positioning first, scan strength changes next, then build your levels and watchlist for the week.", "faq2-accordion-5", false)
     ];
 
-    private static string Img(string relativePath) => $"/images/tradexy/{relativePath}";
+    private static string Img(string relativePath) => SiteBranding.Image(relativePath);
 
     private sealed record PackageCard(string Icon, string Title, string Description);
 

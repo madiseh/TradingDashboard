@@ -1,10 +1,10 @@
-/* ==============
+﻿/* ==============
  ========= js documentation ==========================
  
- * Template Name: Tradexy 
+ * Template Name: TerminalPrime Theme 
  * Version: 1.0
- * Author: pixelaxis
- * Author URI: https://themeforest.net/user/pixelaxis
+ * Author: TerminalPrime
+ * Author URI: https://terminalprime.com
  * Description: Forex & Stock Broker Trading Signals, Review, Tutorial Website Template
  
  * ==================================================
@@ -301,3 +301,4 @@
             }
         });
     });
+

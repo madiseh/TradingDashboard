@@ -4,10 +4,13 @@
   <resheader name="version"><value>2.0</value></resheader>
   <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
   <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
-  <data name="PageTitle" xml:space="preserve"><value>Para Birimi Gucu</value></data>
+  <data name="PageTitle" xml:space="preserve"><value>Para Birimi Gucu Paneli | Forex Guc Gostergesi | TerminalPrime</value></data>
   <data name="Hero.Badge" xml:space="preserve"><value>Para Birimi Gucu</value></data>
   <data name="Hero.Title" xml:space="preserve"><value>Para Birimi Gucu Paneli</value></data>
-  <data name="Hero.Description" xml:space="preserve"><value>Toplanan en son veri ile ana para birimlerinin guc egilerini farkli zaman pencerelerinde inceleyin.</value></data>
+  <data name="Hero.Description" xml:space="preserve"><value>Toplanan en son veri ile ana para birimlerinin guc egilerini farkli zaman pencerelerinde TerminalPrime icinde inceleyin.</value></data>
+  <data name="Seo.Title" xml:space="preserve"><value>Para Birimi Gucu Paneli | Forex Guc Gostergesi | TerminalPrime</value></data>
+  <data name="Seo.Description" xml:space="preserve"><value>Gercek zamanli para birimi guc egilerini izleyin, ana FX hareketlerini karsilastirin ve TerminalPrime guc paneli ile momentum degisimlerini yakalayin.</value></data>
+  <data name="Seo.Keywords" xml:space="preserve"><value>para birimi gucu, forex guc gostergesi, FX momentum, buyuk para birimleri, TerminalPrime</value></data>
   <data name="Actions.Retry" xml:space="preserve"><value>Tekrar Dene</value></data>
   <data name="Status.CollectedAt" xml:space="preserve"><value>Toplanma zamani: {0}</value></data>
   <data name="Status.LastPoint" xml:space="preserve"><value>Son nokta: {0}</value></data>

@@ -4,10 +4,13 @@
   <resheader name="version"><value>2.0</value></resheader>
   <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
   <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
-  <data name="PageTitle" xml:space="preserve"><value>Currency Strength</value></data>
+  <data name="PageTitle" xml:space="preserve"><value>Currency Strength Dashboard | Forex Strength Meter | TerminalPrime</value></data>
   <data name="Hero.Badge" xml:space="preserve"><value>Strength Matrix</value></data>
   <data name="Hero.Title" xml:space="preserve"><value>Currency Strength Dashboard</value></data>
-  <data name="Hero.Description" xml:space="preserve"><value>Track the latest collected strength curves across all major currencies and switch between short-term and long-term windows.</value></data>
+  <data name="Hero.Description" xml:space="preserve"><value>Track the latest collected strength curves across all major currencies and switch between short-term and long-term windows inside TerminalPrime.</value></data>
+  <data name="Seo.Title" xml:space="preserve"><value>Currency Strength Dashboard | Forex Strength Meter | TerminalPrime</value></data>
+  <data name="Seo.Description" xml:space="preserve"><value>Monitor real-time currency strength curves, compare major FX moves, and spot momentum shifts with TerminalPrime's currency strength dashboard.</value></data>
+  <data name="Seo.Keywords" xml:space="preserve"><value>currency strength dashboard, forex strength meter, FX momentum, major currencies, TerminalPrime</value></data>
   <data name="Actions.Retry" xml:space="preserve"><value>Retry</value></data>
   <data name="Status.CollectedAt" xml:space="preserve"><value>Collected at: {0}</value></data>
   <data name="Status.LastPoint" xml:space="preserve"><value>Last point: {0}</value></data>
