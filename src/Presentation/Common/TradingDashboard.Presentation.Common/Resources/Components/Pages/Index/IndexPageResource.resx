@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Seo.Title" xml:space="preserve">
+    <value>TerminalPrime | Forex Market Intelligence, COT Reports &amp; Currency Strength</value>
+  </data>
+  <data name="Seo.Description" xml:space="preserve">
+    <value>TerminalPrime delivers forex market intelligence with COT reports, currency strength analytics, and trader-focused market research for global FX markets.</value>
+  </data>
+  <data name="Seo.Keywords" xml:space="preserve">
+    <value>TerminalPrime, forex market intelligence, COT reports, currency strength dashboard, forex analysis, trader tools</value>
+  </data>
+  <data name="Common.BadgeAlt" xml:space="preserve">
+    <value>Badge</value>
+  </data>
+  <data name="Common.IconAlt" xml:space="preserve">
+    <value>{0} icon</value>
+  </data>
+  <data name="Hero.Badge" xml:space="preserve">
+    <value>Forex intelligence for disciplined traders.</value>
+  </data>
+  <data name="Hero.TitlePrefix" xml:space="preserve">
+    <value>Track</value>
+  </data>
+  <data name="Hero.TitleHighlight" xml:space="preserve">
+    <value>COT positioning</value>
+  </data>
+  <data name="Hero.TitleSuffix" xml:space="preserve">
+    <value>, currency strength, and macro momentum in one dashboard</value>
+  </data>
+  <data name="Hero.Description" xml:space="preserve">
+    <value>TerminalPrime helps you read the forex market with clearer context, combining Commitment of Traders data, currency strength analytics, and trader-friendly research tools.</value>
+  </data>
+  <data name="Hero.PrimaryCta" xml:space="preserve">
+    <value>Explore COT Markets</value>
+  </data>
+  <data name="Hero.SecondaryCta" xml:space="preserve">
+    <value>View Currency Strength</value>
+  </data>
+  <data name="Hero.IllustrationAlt" xml:space="preserve">
+    <value>Hero illustration</value>
+  </data>
+  <data name="Features.Badge" xml:space="preserve">
+    <value>Core Market Tools</value>
+  </data>
+  <data name="Features.Title" xml:space="preserve">
+    <value>Use focused forex research modules built for weekly planning and daily execution</value>
+  </data>
+  <data name="Features.Description" xml:space="preserve">
+    <value>Follow positioning, relative strength, market structure, and broker conditions through practical modules that keep your process clean and repeatable.</value>
+  </data>
+  <data name="Features.Package.WeeklyCotReview.Title" xml:space="preserve">
+    <value>Weekly COT Review</value>
+  </data>
+  <data name="Features.Package.WeeklyCotReview.Description" xml:space="preserve">
+    <value>Spot how futures traders are building or reducing exposure across major forex markets.</value>
+  </data>
+  <data name="Features.Package.CurrencyStrengthScanner.Title" xml:space="preserve">
+    <value>Currency Strength Scanner</value>
+  </data>
+  <data name="Features.Package.CurrencyStrengthScanner.Description" xml:space="preserve">
+    <value>Compare the strongest and weakest major currencies before planning your next setup.</value>
+  </data>
+  <data name="Features.Package.MomentumShiftTracker.Title" xml:space="preserve">
+    <value>Momentum Shift Tracker</value>
+  </data>
+  <data name="Features.Package.MomentumShiftTracker.Description" xml:space="preserve">
+    <value>See when trend pressure begins to rotate across major FX pairs and macro themes.</value>
+  </data>
+  <data name="Features.Package.BrokerConditionWatchlist.Title" xml:space="preserve">
+    <value>Broker Condition Watchlist</value>
+  </data>
+  <data name="Features.Package.BrokerConditionWatchlist.Description" xml:space="preserve">
+    <value>Keep execution quality, spreads, and broker stability visible before risk goes live.</value>
+  </data>
+  <data name="Features.Package.TraderPlaybookLibrary.Title" xml:space="preserve">
+    <value>Trader Playbook Library</value>
+  </data>
+  <data name="Features.Package.TraderPlaybookLibrary.Description" xml:space="preserve">
+    <value>Turn market observations into structured plans with education and repeatable workflows.</value>
+  </data>
+  <data name="Broker.Badge" xml:space="preserve">
+    <value>Forex Broker Reviews</value>
+  </data>
+  <data name="Broker.Title" xml:space="preserve">
+    <value>Compare Brokers, Trade Safely, Securely</value>
+  </data>
+  <data name="Broker.Description" xml:space="preserve">
+    <value>Finding the right forex broker is crucial for a secure and profitable trading experience. We've done the hard work for you by reviewing.</value>
+  </data>
+  <data name="Broker.CustomerReviews" xml:space="preserve">
+    <value>Customer Reviews</value>
+  </data>
+  <data name="Broker.TermsApply" xml:space="preserve">
+    <value>Terms &amp; Conditions Apply</value>
+  </data>
+  <data name="Broker.VisitSite" xml:space="preserve">
+    <value>Visit Site</value>
+  </data>
+  <data name="Broker.ViewMore" xml:space="preserve">
+    <value>View More</value>
+  </data>
+  <data name="Broker.ExecutionNotesTitle" xml:space="preserve">
+    <value>Execution Notes</value>
+  </data>
+  <data name="Broker.ExecutionNotesDescription" xml:space="preserve">
+    <value>Review each broker for regulation strength, execution quality, platform stability, and pricing consistency before using it in a serious forex workflow.</value>
+  </data>
+  <data name="Broker.SeeAllReviews" xml:space="preserve">
+    <value>See All Reviews</value>
+  </data>
+  <data name="Broker.Highlight.RegulationExecution" xml:space="preserve">
+    <value>Regulation and execution quality</value>
+  </data>
+  <data name="Broker.Highlight.SpreadCommission" xml:space="preserve">
+    <value>Spread and commission transparency</value>
+  </data>
+  <data name="Broker.Highlight.PlatformStability" xml:space="preserve">
+    <value>Platform stability during volatility</value>
+  </data>
+  <data name="Broker.Highlight.FundingWithdrawals" xml:space="preserve">
+    <value>Funding and withdrawal consistency</value>
+  </data>
+  <data name="Broker.Item.ICMarkets.Description" xml:space="preserve">
+    <value>IC Markets is a trusted broker with institutional-grade liquidity, offering one of the best trading environments globally.</value>
+  </data>
+  <data name="Broker.Item.RoboForex.Description" xml:space="preserve">
+    <value>RoboForex is known for flexible account structures, broad platform support, and tools that appeal to active forex traders.</value>
+  </data>
+  <data name="Broker.Item.EToro.Description" xml:space="preserve">
+    <value>eToro is a top-rated social trading platform offering an easy way to copy successful traders while enjoying a user-friendly interface.</value>
+  </data>
+  <data name="Broker.Item.Pepperstone.Description" xml:space="preserve">
+    <value>Pepperstone delivers ultra-fast execution and low-cost trading, making it a strong fit for scalpers and momentum-driven traders.</value>
+  </data>
+  <data name="Choose.Badge" xml:space="preserve">
+    <value>Why Choose Us</value>
+  </data>
+  <data name="Choose.Title" xml:space="preserve">
+    <value>Data-first analysis, cleaner workflows, and faster decision support for FX traders.</value>
+  </data>
+  <data name="Choose.Description" xml:space="preserve">
+    <value>TerminalPrime keeps your weekly routine aligned by connecting positioning data, currency leadership, and execution context in a single research flow.</value>
+  </data>
+  <data name="Choose.Point1" xml:space="preserve">
+    <value>Weekly COT context for macro positioning</value>
+  </data>
+  <data name="Choose.Point2" xml:space="preserve">
+    <value>Fast currency strength comparison</value>
+  </data>
+  <data name="Choose.Point3" xml:space="preserve">
+    <value>Cleaner dashboards with actionable summaries</value>
+  </data>
+  <data name="Choose.Point4" xml:space="preserve">
+    <value>Trader education without platform noise</value>
+  </data>
+  <data name="Choose.ReadMore" xml:space="preserve">
+    <value>Read More</value>
+  </data>
+  <data name="Choose.ImageAlt" xml:space="preserve">
+    <value>Why choose us</value>
+  </data>
+  <data name="Choose.GlobeAlt" xml:space="preserve">
+    <value>Globe element</value>
+  </data>
+  <data name="Choose.LineAlt" xml:space="preserve">
+    <value>Line element</value>
+  </data>
+  <data name="Workflow.Badge" xml:space="preserve">
+    <value>Build Your Weekly Workflow</value>
+  </data>
+  <data name="Workflow.Title" xml:space="preserve">
+    <value>Start with market evidence, confirm with context, and plan with discipline</value>
+  </data>
+  <data name="Workflow.Description" xml:space="preserve">
+    <value>Use TerminalPrime to review futures positioning, compare currency strength, validate execution conditions, and prepare your trading playbook for the week ahead.</value>
+  </data>
+  <data name="Workflow.Step1.Title" xml:space="preserve">
+    <value>Review COT Flows</value>
+  </data>
+  <data name="Workflow.Step1.Description" xml:space="preserve">
+    <value>Start with futures positioning to understand where larger market participants are leaning.</value>
+  </data>
+  <data name="Workflow.Step2.Title" xml:space="preserve">
+    <value>Compare Relative Strength</value>
+  </data>
+  <data name="Workflow.Step2.Description" xml:space="preserve">
+    <value>Use the strength dashboard to confirm which currencies are leading and which are fading.</value>
+  </data>
+  <data name="Workflow.Step3.Title" xml:space="preserve">
+    <value>Validate Conditions</value>
+  </data>
+  <data name="Workflow.Step3.Description" xml:space="preserve">
+    <value>Check broker quality, spreads, and market access before you commit risk.</value>
+  </data>
+  <data name="Workflow.Step4.Title" xml:space="preserve">
+    <value>Build The Plan</value>
+  </data>
+  <data name="Workflow.Step4.Description" xml:space="preserve">
+    <value>Translate the data into a focused watchlist, levels, and execution ideas for the week.</value>
+  </data>
+  <data name="Workflow.ProcessElementAlt" xml:space="preserve">
+    <value>Working process element</value>
+  </data>
+  <data name="About.Badge" xml:space="preserve">
+    <value>About Us</value>
+  </data>
+  <data name="About.Title" xml:space="preserve">
+    <value>Built for traders who want clearer context, cleaner dashboards, and stronger market timing.</value>
+  </data>
+  <data name="About.Description" xml:space="preserve">
+    <value>TerminalPrime combines COT reports, currency strength insights, and practical research workflows so you can interpret the forex market with less noise and more structure.</value>
+  </data>
+  <data name="About.Feature1.Title" xml:space="preserve">
+    <value>Market Context</value>
+  </data>
+  <data name="About.Feature1.Description" xml:space="preserve">
+    <value>Translate raw forex data into context that supports better directional decisions.</value>
+  </data>
+  <data name="About.Feature2.Title" xml:space="preserve">
+    <value>Practical Guidance</value>
+  </data>
+  <data name="About.Feature2.Description" xml:space="preserve">
+    <value>Stay focused on workflows that traders can actually use during the week.</value>
+  </data>
+  <data name="About.Feature3.Title" xml:space="preserve">
+    <value>Reliable Delivery</value>
+  </data>
+  <data name="About.Feature3.Description" xml:space="preserve">
+    <value>Keep core market tools accessible in one place without jumping between disconnected apps.</value>
+  </data>
+  <data name="About.Feature4.Title" xml:space="preserve">
+    <value>Continuous Refinement</value>
+  </data>
+  <data name="About.Feature4.Description" xml:space="preserve">
+    <value>Improve your process through cleaner summaries, better structure, and repeatable research.</value>
+  </data>
+  <data name="About.ReadMore" xml:space="preserve">
+    <value>Read More</value>
+  </data>
+  <data name="About.ImageAlt" xml:space="preserve">
+    <value>About TerminalPrime</value>
+  </data>
+  <data name="About.MessageElementAlt" xml:space="preserve">
+    <value>Message element</value>
+  </data>
+  <data name="Video.Badge" xml:space="preserve">
+    <value>Video Tutorial</value>
+  </data>
+  <data name="Video.Title" xml:space="preserve">
+    <value>Carefully planned forex training video tutorials</value>
+  </data>
+  <data name="Video.Description" xml:space="preserve">
+    <value>Watch our forex trading video tutorials to jumpstart your journey into becoming a profitable forex trading expert.</value>
+  </data>
+  <data name="Video.Topic1" xml:space="preserve">
+    <value>Foreign exchange market structure</value>
+  </data>
+  <data name="Video.Topic2" xml:space="preserve">
+    <value>Risk management in live conditions</value>
+  </data>
+  <data name="Video.Topic3" xml:space="preserve">
+    <value>Positioning and sentiment frameworks</value>
+  </data>
+  <data name="Video.Topic4" xml:space="preserve">
+    <value>How to combine tools into one routine</value>
+  </data>
+  <data name="Video.WatchVideos" xml:space="preserve">
+    <value>Watch Videos</value>
+  </data>
+  <data name="Video.PreviewAlt" xml:space="preserve">
+    <value>Video tutorial preview</value>
+  </data>
+  <data name="Testimonials.Badge" xml:space="preserve">
+    <value>Client Testimonials</value>
+  </data>
+  <data name="Testimonials.Title" xml:space="preserve">
+    <value>Success Stories Shared by Our Customers</value>
+  </data>
+  <data name="Testimonials.Description" xml:space="preserve">
+    <value>We take pride in helping our traders succeed. Our platform is trusted by thousands worldwide for its reliability and accuracy.</value>
+  </data>
+  <data name="Testimonials.Item1.Quote" xml:space="preserve">
+    <value>The combination of COT context and currency strength saved me hours every week and made my FX planning far more structured.</value>
+  </data>
+  <data name="Testimonials.Item1.Role" xml:space="preserve">
+    <value>Macro Swing Trader</value>
+  </data>
+  <data name="Testimonials.Item2.Quote" xml:space="preserve">
+    <value>I use TerminalPrime to narrow my watchlist fast. The dashboards make it easier to separate noise from genuine momentum.</value>
+  </data>
+  <data name="Testimonials.Item2.Role" xml:space="preserve">
+    <value>Intraday FX Trader</value>
+  </data>
+  <data name="Testimonials.Item3.Quote" xml:space="preserve">
+    <value>What I value most is the clarity. The tools feel built for decision-making instead of just filling the screen with indicators.</value>
+  </data>
+  <data name="Testimonials.Item3.Role" xml:space="preserve">
+    <value>Market Research Analyst</value>
+  </data>
+  <data name="Download.Badge" xml:space="preserve">
+    <value>Access Anywhere</value>
+  </data>
+  <data name="Download.Title" xml:space="preserve">
+    <value>Open TerminalPrime from anywhere you monitor the market</value>
+  </data>
+  <data name="Download.Description" xml:space="preserve">
+    <value>Keep your COT review, currency strength scan, and broker checklist close at hand so your market prep stays consistent whether you are at your desk or on the move.</value>
+  </data>
+  <data name="Download.Bullet1" xml:space="preserve">
+    <value>Review currency leadership before London and New York</value>
+  </data>
+  <data name="Download.Bullet2" xml:space="preserve">
+    <value>Check COT positioning before swing setups</value>
+  </data>
+  <data name="Download.Bullet3" xml:space="preserve">
+    <value>Compare broker conditions before execution</value>
+  </data>
+  <data name="Download.Bullet4" xml:space="preserve">
+    <value>Keep your weekly workflow available on every screen</value>
+  </data>
+  <data name="Download.OpenCot" xml:space="preserve">
+    <value>Open COT</value>
+  </data>
+  <data name="Download.OpenStrength" xml:space="preserve">
+    <value>Open Strength</value>
+  </data>
+  <data name="Download.ScreenshotAlt" xml:space="preserve">
+    <value>App screenshot</value>
+  </data>
+  <data name="Download.CircleAlt" xml:space="preserve">
+    <value>Circle element</value>
+  </data>
+  <data name="Faq.Badge" xml:space="preserve">
+    <value>Frequently Asked Questions</value>
+  </data>
+  <data name="Faq.Title" xml:space="preserve">
+    <value>Answers for traders using COT and currency strength in real workflows</value>
+  </data>
+  <data name="Faq.Description" xml:space="preserve">
+    <value>These quick answers explain how TerminalPrime's forex tools fit into analysis, planning, and execution without turning the dashboard into noise.</value>
+  </data>
+  <data name="Faq.Left1.Question" xml:space="preserve">
+    <value>What is the COT report and why does it matter for forex traders?</value>
+  </data>
+  <data name="Faq.Left1.Answer" xml:space="preserve">
+    <value>The Commitment of Traders report shows how major futures participants are positioned. Traders often use it to understand longer-term sentiment, crowding, and possible reversals in currency markets.</value>
+  </data>
+  <data name="Faq.Left2.Question" xml:space="preserve">
+    <value>How often is the COT data updated?</value>
+  </data>
+  <data name="Faq.Left2.Answer" xml:space="preserve">
+    <value>COT data is published weekly, so it works best as a higher-timeframe context tool rather than a tick-by-tick signal feed.</value>
+  </data>
+  <data name="Faq.Left3.Question" xml:space="preserve">
+    <value>How should I combine COT with currency strength?</value>
+  </data>
+  <data name="Faq.Left3.Answer" xml:space="preserve">
+    <value>Use COT to understand broader positioning and use currency strength to confirm shorter-term leadership, weakness, and momentum changes.</value>
+  </data>
+  <data name="Faq.Left4.Question" xml:space="preserve">
+    <value>Which markets are covered in the COT section?</value>
+  </data>
+  <data name="Faq.Left4.Answer" xml:space="preserve">
+    <value>The dashboard groups available instruments by market so you can move quickly through major futures contracts and the report model you want to review.</value>
+  </data>
+  <data name="Faq.Left5.Question" xml:space="preserve">
+    <value>Is this useful for swing traders as well as day traders?</value>
+  </data>
+  <data name="Faq.Left5.Answer" xml:space="preserve">
+    <value>Yes. Swing traders can use COT for directional context, while day traders can use currency strength and broker checks to refine execution timing.</value>
+  </data>
+  <data name="Faq.Right1.Question" xml:space="preserve">
+    <value>Can beginners use TerminalPrime effectively?</value>
+  </data>
+  <data name="Faq.Right1.Answer" xml:space="preserve">
+    <value>Yes. The dashboards are designed to make positioning and strength data easier to read, while the supporting content explains how the tools fit into a real workflow.</value>
+  </data>
+  <data name="Faq.Right2.Question" xml:space="preserve">
+    <value>Does currency strength update more often than COT?</value>
+  </data>
+  <data name="Faq.Right2.Answer" xml:space="preserve">
+    <value>Yes. Currency strength is designed for more frequent monitoring, while COT provides the slower, structural context behind the move.</value>
+  </data>
+  <data name="Faq.Right3.Question" xml:space="preserve">
+    <value>Do broker reviews matter for analysis?</value>
+  </data>
+  <data name="Faq.Right3.Answer" xml:space="preserve">
+    <value>They matter for execution. Even the best market read can suffer if spreads, slippage, or platform stability are poor during active sessions.</value>
+  </data>
+  <data name="Faq.Right4.Question" xml:space="preserve">
+    <value>Is TerminalPrime financial advice?</value>
+  </data>
+  <data name="Faq.Right4.Answer" xml:space="preserve">
+    <value>No. TerminalPrime is a research and analytics workspace. You should still apply your own risk management and decision process before trading.</value>
+  </data>
+  <data name="Faq.Right5.Question" xml:space="preserve">
+    <value>Can I use these tools as part of a weekly prep routine?</value>
+  </data>
+  <data name="Faq.Right5.Answer" xml:space="preserve">
+    <value>That is one of the best ways to use them. Review the broader positioning first, scan strength changes next, then build your levels and watchlist for the week.</value>
+  </data>
+</root>

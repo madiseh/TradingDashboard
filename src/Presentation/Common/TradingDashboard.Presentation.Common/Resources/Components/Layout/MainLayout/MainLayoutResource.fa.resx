@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -12,18 +12,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppName" xml:space="preserve">
-    <value>داشبورد معاملاتی</value>
-  </data>
-  <data name="Menu.Home" xml:space="preserve">
-    <value>خانه</value>
-  </data>
-  <data name="Menu.Cot" xml:space="preserve">
-    <value>گزارش COT</value>
-  </data>
-  <data name="Menu.Login" xml:space="preserve">
-    <value>ورود</value>
-  </data>
   <data name="Common.UnhandledError" xml:space="preserve">
     <value>یک خطای پیش‌بینی‌نشده رخ داد.</value>
   </data>
@@ -31,9 +19,21 @@
     <value>بارگذاری مجدد</value>
   </data>
   <data name="Footer.Releases" xml:space="preserve">
-    <value>Ø§Ù†ØªØ´Ø§Ø±Ù‡Ø§</value>
+    <value>انتشارها</value>
+  </data>
+  <data name="Footer.HelpSupport" xml:space="preserve">
+    <value>راهنما و پشتیبانی</value>
+  </data>
+  <data name="Footer.PrivacyPolicy" xml:space="preserve">
+    <value>حریم خصوصی</value>
+  </data>
+  <data name="Footer.TermsConditions" xml:space="preserve">
+    <value>قوانین و شرایط</value>
+  </data>
+  <data name="Footer.ContactUs" xml:space="preserve">
+    <value>تماس با ما</value>
   </data>
   <data name="Footer.Version" xml:space="preserve">
-    <value>Version</value>
+    <value>نسخه</value>
   </data>
 </root>

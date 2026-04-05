@@ -25,21 +25,21 @@
             <div class="col-xxl-5 col-xl-6 col-lg-6">
                 <div class="banner-content text-lg-start text-center">
                     <span class="mb-4 primary-clr d-flex align-items-center justify-content-lg-start justify-content-center gap-lg-3 gap-2 headingFour">
-                        <img src="@Img("element/section-badge1.png")" alt="Badge" /> Forex intelligence for disciplined traders.
+                        <img src="@Img("element/section-badge1.png")" alt="@T("Common.BadgeAlt")" /> @T("Hero.Badge")
                     </span>
                     <h1 class="mb-4">
-                        Track <span class="secondary-clr2">COT positioning</span>, currency strength, and macro momentum in one dashboard
+                        @T("Hero.TitlePrefix") <span class="secondary-clr2">@T("Hero.TitleHighlight")</span>@T("Hero.TitleSuffix")
                     </h1>
-                    <p>TerminalPrime helps you read the forex market with clearer context, combining Commitment of Traders data, currency strength analytics, and trader-friendly research tools.</p>
+                    <p>@T("Hero.Description")</p>
                     <div class="btn-group justify-content-center justify-content-lg-start mt_40">
-                        <a href="@RoutePaths.Ui.CotHome" class="btn_theme btn_theme_active">Explore COT Markets<i class="bi bi-arrow-up-right"></i><span></span></a>
-                        <a href="@RoutePaths.Ui.CurrencyStrength" class="btn_theme">View Currency Strength<i class="bi bi-arrow-up-right"></i><span></span></a>
+                        <a href="@RoutePaths.Ui.CotHome" class="btn_theme btn_theme_active">@T("Hero.PrimaryCta")<i class="bi bi-arrow-up-right"></i><span></span></a>
+                        <a href="@RoutePaths.Ui.CurrencyStrength" class="btn_theme">@T("Hero.SecondaryCta")<i class="bi bi-arrow-up-right"></i><span></span></a>
                     </div>
                 </div>
             </div>
             <div class="col-xxl-7 col-xl-6 col-lg-6">
                 <div class="hero__thumb">
-                    <img src="@Img("hero/hero-thumb1.png")" alt="Hero illustration" />
+                    <img src="@Img("hero/hero-thumb1.png")" alt="@T("Hero.IllustrationAlt")" />
                 </div>
             </div>
         </div>
@@ -51,9 +51,9 @@
         <div class="row justify-content-center">
             <div class="col-12 col-lg-9 col-xxl-8">
                 <div class="section__header">
-                    <span class="section__header-sub-title headingFour"><img src="@Img("element/section-badge1.png")" alt="Badge" /> Core Market Tools</span>
-                    <h2 class="section__header-title">Use focused forex research modules built for weekly planning and daily execution</h2>
-                    <p class="section__header-content">Follow positioning, relative strength, market structure, and broker conditions through practical modules that keep your process clean and repeatable.</p>
+                    <span class="section__header-sub-title headingFour"><img src="@Img("element/section-badge1.png")" alt="@T("Common.BadgeAlt")" /> @T("Features.Badge")</span>
+                    <h2 class="section__header-title">@T("Features.Title")</h2>
+                    <p class="section__header-content">@T("Features.Description")</p>
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@
                     <div class="card card--custom text-start td-card-fill">
                         <div class="d-flex align-items-start justify-content-between w-100">
                             <div class="icon">
-                                <img src="@Img(package.Icon)" alt="@package.Title icon" />
+                                <img src="@Img(package.Icon)" alt="@GetIconAlt(package.Title)" />
                             </div>
                             <a href="/#packages" class="btn_theme social_box m-0"><i class="bi bi-arrow-up-right"></i><span></span></a>
                         </div>
@@ -84,9 +84,9 @@
         <div class="row justify-content-center">
             <div class="col-12 col-lg-8 col-xxl-7">
                 <div class="section__header">
-                    <span class="section__header-sub-title headingFour"><img src="@Img("element/section-badge1.png")" alt="Badge" /> Forex Broker Reviews</span>
-                    <h2 class="section__header-title">Compare Brokers, Trade Safely, Securely</h2>
-                    <p class="section__header-content">Finding the right forex broker is crucial for a secure and profitable trading experience. We've done the hard work for you by reviewing.</p>
+                    <span class="section__header-sub-title headingFour"><img src="@Img("element/section-badge1.png")" alt="@T("Common.BadgeAlt")" /> @T("Broker.Badge")</span>
+                    <h2 class="section__header-title">@T("Broker.Title")</h2>
+                    <p class="section__header-content">@T("Broker.Description")</p>
                 </div>
             </div>
         </div>
@@ -114,24 +114,24 @@
                                 <i class="bi bi-star-half secondary-clr2"></i>
                             </div>
                             <h5 class="pra-clr">@broker.Reviews</h5>
-                            <p class="pra-clr customer-text">Customer Reviews</p>
+                            <p class="pra-clr customer-text">@T("Broker.CustomerReviews")</p>
                         </div>
                         <div class="breoker-button-area text-center">
-                            <span class="terms d-block mb-2">&middot; Terms &amp; Conditions Apply</span>
+                            <span class="terms d-block mb-2">&middot; @T("Broker.TermsApply")</span>
                             <div class="text-center mb-3">
-                                <a href="/#broker-reviews" class="btn_theme d-flex btn_theme_active">Visit Site<i class="bi bi-arrow-up-right"></i><span></span></a>
+                                <a href="/#broker-reviews" class="btn_theme d-flex btn_theme_active">@T("Broker.VisitSite")<i class="bi bi-arrow-up-right"></i><span></span></a>
                             </div>
                             <div class="detail-btn text-center">
                                 <button type="button" class="primary-clr m-auto d-flex align-items-center justify-content-center view-btn bg-transparent fw-semibold gap-2" data-bs-toggle="collapse" data-bs-target="#@broker.CollapseId" aria-expanded="@broker.IsExpanded.ToString().ToLowerInvariant()" aria-controls="@broker.CollapseId">
-                                    View More <i class="bi bi-chevron-down primary-clr"></i>
+                                    @T("Broker.ViewMore") <i class="bi bi-chevron-down primary-clr"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
                     <div id="@broker.CollapseId" class="view-content-wrap mt-xxl-4 mt-xl-3 mt-2 text-start collapse @(broker.IsExpanded ? "show" : null)">
                         <div class="box">
-                            <h5 class="mb-2">Execution Notes</h5>
-                            <p class="mb-md-3 mb-3 pra-clr">Review each broker for regulation strength, execution quality, platform stability, and pricing consistency before using it in a serious forex workflow.</p>
+                            <h5 class="mb-2">@T("Broker.ExecutionNotesTitle")</h5>
+                            <p class="mb-md-3 mb-3 pra-clr">@T("Broker.ExecutionNotesDescription")</p>
                             <ul class="cartified-cheking d-flex flex-wrap align-items-center gap-xxl-4 gap-xl-3 gap-2">
                                 @foreach (var point in BrokerHighlights)
                                 {
@@ -143,7 +143,7 @@
                 </div>
             }
             <div class="text-center mt_40">
-                <a href="/#broker-reviews" class="btn_theme btn_theme_active">See All Review<i class="bi bi-arrow-up-right"></i><span></span></a>
+                <a href="/#broker-reviews" class="btn_theme btn_theme_active">@T("Broker.SeeAllReviews")<i class="bi bi-arrow-up-right"></i><span></span></a>
             </div>
         </div>
     </div>
@@ -154,27 +154,27 @@
         <div class="row flex-row-reverse gy-5 gy-xl-0 justify-content-between align-items-lg-center">
             <div class="col-xxl-6 col-xl-7 col-lg-7 col-md-6">
                 <div class="section__content">
-                    <span class="section__content-sub-title headingFour mb-lg-4 mb-3"><img src="@Img("element/section-badge1.png")" alt="Badge" /> Why Choose Us</span>
-                    <h2 class="section__content-title">Data-first analysis, cleaner workflows, and faster decision support for FX traders.</h2>
-                    <p class="section__content-text">TerminalPrime keeps your weekly routine aligned by connecting positioning data, currency leadership, and execution context in a single research flow.</p>
+                    <span class="section__content-sub-title headingFour mb-lg-4 mb-3"><img src="@Img("element/section-badge1.png")" alt="@T("Common.BadgeAlt")" /> @T("Choose.Badge")</span>
+                    <h2 class="section__content-title">@T("Choose.Title")</h2>
+                    <p class="section__content-text">@T("Choose.Description")</p>
                     <ul class="section__content-list ms-0 gap-xl-4 gap-lg-3 gap-2">
                         @foreach (var reason in ChooseUsPoints)
                         {
                             <li class="headingFive fw-normal fw-500 d-flex align-items-center gap-2"><i class="bi bi-check2-circle"></i> @reason</li>
                         }
                     </ul>
-                    <a href="/#about-us" class="btn_theme btn_theme_active mt_40">Read More <i class="bi bi-arrow-up-right"></i><span></span></a>
+                    <a href="/#about-us" class="btn_theme btn_theme_active mt_40">@T("Choose.ReadMore") <i class="bi bi-arrow-up-right"></i><span></span></a>
                 </div>
             </div>
             <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6">
                 <div class="choose-thumb1">
-                    <img src="@Img("about/choose-thumb1.png")" alt="Why choose us" />
+                    <img src="@Img("about/choose-thumb1.png")" alt="@T("Choose.ImageAlt")" />
                 </div>
             </div>
         </div>
     </div>
-    <img src="@Img("element/choose-globe.png")" alt="Globe element" class="choose-globe d-lg-block d-none" />
-    <img src="@Img("element/choose-line.png")" alt="Line element" class="choole-line" />
+    <img src="@Img("element/choose-globe.png")" alt="@T("Choose.GlobeAlt")" class="choose-globe d-lg-block d-none" />
+    <img src="@Img("element/choose-line.png")" alt="@T("Choose.LineAlt")" class="choole-line" />
 </section>
 
 <section class="working-process-section section">
@@ -182,9 +182,9 @@
         <div class="row justify-content-center">
             <div class="col-12 col-lg-6 col-xxl-5">
                 <div class="section__header">
-                    <span class="section__header-sub-title headingFour"><img src="@Img("element/section-badge1.png")" alt="Badge" /> Build Your Weekly Workflow</span>
-                    <h2 class="section__header-title">Start with market evidence, confirm with context, and plan with discipline</h2>
-                    <p class="section__header-content ch-xxl">Use TerminalPrime to review futures positioning, compare currency strength, validate execution conditions, and prepare your trading playbook for the week ahead.</p>
+                    <span class="section__header-sub-title headingFour"><img src="@Img("element/section-badge1.png")" alt="@T("Common.BadgeAlt")" /> @T("Workflow.Badge")</span>
+                    <h2 class="section__header-title">@T("Workflow.Title")</h2>
+                    <p class="section__header-content ch-xxl">@T("Workflow.Description")</p>
                 </div>
             </div>
         </div>
@@ -194,7 +194,7 @@
                 <div class="col-12 col-sm-6 col-xxl-3">
                     <div class="card card--custom td-card-fill">
                         <div class="card__icon">
-                            <img src="@Img(step.Icon)" alt="@step.Title icon" />
+                            <img src="@Img(step.Icon)" alt="@GetIconAlt(step.Title)" />
                             <span class="number-bullet">@step.Number</span>
                         </div>
                         <div class="card__content">
@@ -206,24 +206,24 @@
             }
         </div>
     </div>
-    <img src="@Img("review/working-trades-ele.png")" alt="Working process element" class="working-process-ele" />
+    <img src="@Img("review/working-trades-ele.png")" alt="@T("Workflow.ProcessElementAlt")" class="working-process-ele" />
 </section>
 
 <section class="about-section cmn-bg2 section" id="about-us">
-    <img src="@Img("element/message-ele.png")" alt="Message element" class="message-ele" />
+    <img src="@Img("element/message-ele.png")" alt="@T("About.MessageElementAlt")" class="message-ele" />
     <div class="container">
         <div class="row gy-5 gy-lg-0 justify-content-between align-items-center">
             <div class="col-12 col-lg-7 col-xxl-6">
                 <div class="section__content">
-                    <span class="section__content-sub-title headingFour mb-lg-4 mb-3"><img src="@Img("element/section-badge1.png")" alt="Badge" /> About Us</span>
-                    <h2 class="section__content-title">Built for traders who want clearer context, cleaner dashboards, and stronger market timing.</h2>
-                    <p class="section__content-text">TerminalPrime combines COT reports, currency strength insights, and practical research workflows so you can interpret the forex market with less noise and more structure.</p>
+                    <span class="section__content-sub-title headingFour mb-lg-4 mb-3"><img src="@Img("element/section-badge1.png")" alt="@T("Common.BadgeAlt")" /> @T("About.Badge")</span>
+                    <h2 class="section__content-title">@T("About.Title")</h2>
+                    <p class="section__content-text">@T("About.Description")</p>
                     <div class="section__content-inner">
                         @foreach (var feature in AboutFeatures)
                         {
                             <div class="card card--small">
                                 <div class="card--small-icon white-bg border">
-                                    <img src="@Img(feature.Icon)" alt="@feature.Title icon" />
+                                    <img src="@Img(feature.Icon)" alt="@GetIconAlt(feature.Title)" />
                                 </div>
                                 <div class="card--small-content">
                                     <h5 class="card--small-title">@feature.Title</h5>
@@ -232,12 +232,12 @@
                             </div>
                         }
                     </div>
-                    <a href="/#about-us" class="btn_theme btn_theme_active mt_40">Read More <i class="bi bi-arrow-up-right"></i><span></span></a>
+                    <a href="/#about-us" class="btn_theme btn_theme_active mt_40">@T("About.ReadMore") <i class="bi bi-arrow-up-right"></i><span></span></a>
                 </div>
             </div>
             <div class="col-12 col-md-8 col-lg-5 mx-auto mx-lg-0">
                 <div class="choose-us__thumb unset-xxl me-xl-4 me-xxl-0">
-                    <img src="@Img("about/about1.png")" alt="About TerminalPrime" />
+                    <img src="@Img("about/about1.png")" alt="@T("About.ImageAlt")" />
                 </div>
             </div>
         </div>
@@ -249,21 +249,21 @@
         <div class="row flex-row-reverse gy-5 gy-xl-0 justify-content-between align-items-lg-center">
             <div class="col-xxl-6 col-xl-7 col-lg-7 col-md-6">
                 <div class="section__content">
-                    <span class="section__content-sub-title headingFour mb-lg-4 mb-3"><img src="@Img("element/section-badge1.png")" alt="Badge" /> Video Tutorial</span>
-                    <h2 class="section__content-title">Carefully planned forex training video tutorials</h2>
-                    <p class="section__content-text">Watch our forex trading video tutorials to jumpstart your journey into becoming a profitable forex trading expert.</p>
+                    <span class="section__content-sub-title headingFour mb-lg-4 mb-3"><img src="@Img("element/section-badge1.png")" alt="@T("Common.BadgeAlt")" /> @T("Video.Badge")</span>
+                    <h2 class="section__content-title">@T("Video.Title")</h2>
+                    <p class="section__content-text">@T("Video.Description")</p>
                     <ul class="section__content-list">
                         @foreach (var item in VideoTopics)
                         {
                             <li class="headingFive fw-500">@item</li>
                         }
                     </ul>
-                    <a href="/#video-tutorial" class="btn_theme btn_theme_active mt_40">Watch Videos <i class="bi bi-arrow-up-right"></i><span></span></a>
+                    <a href="/#video-tutorial" class="btn_theme btn_theme_active mt_40">@T("Video.WatchVideos") <i class="bi bi-arrow-up-right"></i><span></span></a>
                 </div>
             </div>
             <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6">
                 <div class="traning-plan-thumb w-100">
-                    <img src="@Img("app/apps-thumb2.png")" alt="Video tutorial preview" class="w-100" />
+                    <img src="@Img("app/apps-thumb2.png")" alt="@T("Video.PreviewAlt")" class="w-100" />
                 </div>
             </div>
         </div>
@@ -275,9 +275,9 @@
         <div class="row justify-content-center">
             <div class="col-12 col-lg-6 col-xxl-5">
                 <div class="section__header">
-                    <span class="section__header-sub-title headingFour"><img src="@Img("element/section-badge1.png")" alt="Badge" />Client Testimonials</span>
-                    <h2 class="section__header-title">Success Stories Shared by Our Customers</h2>
-                    <p class="section__header-content">We take pride in helping our traders succeed. Our platform is trusted by thousands worldwide for its reliability, accuracy.</p>
+                    <span class="section__header-sub-title headingFour"><img src="@Img("element/section-badge1.png")" alt="@T("Common.BadgeAlt")" />@T("Testimonials.Badge")</span>
+                    <h2 class="section__header-title">@T("Testimonials.Title")</h2>
+                    <p class="section__header-content">@T("Testimonials.Description")</p>
                 </div>
             </div>
         </div>
@@ -318,16 +318,16 @@
             <div class="col-md-5 col-lg-5 col-xl-5 col-xxl-5 order-1 order-lg-0">
                 <div class="download-app__thumb01">
                     <div class="thumb">
-                        <img src="@Img("app/download-app1.png")" alt="App screenshot" />
+                        <img src="@Img("app/download-app1.png")" alt="@T("Download.ScreenshotAlt")" />
                     </div>
-                    <img src="@Img("app/app-circle1.png")" alt="Circle element" class="app-circle" />
+                    <img src="@Img("app/app-circle1.png")" alt="@T("Download.CircleAlt")" class="app-circle" />
                 </div>
             </div>
             <div class="col-md-7 col-lg-6 col-xl-6 col-xxl-6">
                 <div class="section__content ms-lg-4 ms-xl-0">
-                    <span class="section__content-sub-title headingFour mb-lg-4 mb-3"><img src="@Img("element/section-badge1.png")" alt="Badge" /> Access Anywhere</span>
-                    <h2 class="section__content-title">Open TerminalPrime from anywhere you monitor the market</h2>
-                    <p class="section__content-text mb-4 pb-lg-1">Keep your COT review, currency strength scan, and broker checklist close at hand so your market prep stays consistent whether you are at your desk or on the move.</p>
+                    <span class="section__content-sub-title headingFour mb-lg-4 mb-3"><img src="@Img("element/section-badge1.png")" alt="@T("Common.BadgeAlt")" /> @T("Download.Badge")</span>
+                    <h2 class="section__content-title">@T("Download.Title")</h2>
+                    <p class="section__content-text mb-4 pb-lg-1">@T("Download.Description")</p>
                     <ul class="section__content-list02 d-grid gap-3">
                         @foreach (var bullet in DownloadBullets)
                         {
@@ -335,8 +335,8 @@
                         }
                     </ul>
                     <div class="btn-group mt_40">
-                        <a href="@RoutePaths.Ui.CotHome" class="btn_theme">Open COT<span></span></a>
-                        <a href="@RoutePaths.Ui.CurrencyStrength" class="btn_theme">Open Strength<span></span></a>
+                        <a href="@RoutePaths.Ui.CotHome" class="btn_theme">@T("Download.OpenCot")<span></span></a>
+                        <a href="@RoutePaths.Ui.CurrencyStrength" class="btn_theme">@T("Download.OpenStrength")<span></span></a>
                     </div>
                 </div>
             </div>
@@ -349,9 +349,9 @@
         <div class="row justify-content-center">
             <div class="col-12 col-lg-7 col-xxl-6">
                 <div class="section__header">
-                    <span class="section__header-sub-title headingFour"><img src="@Img("element/section-badge1.png")" alt="Badge" />Frequently Asked Questions</span>
-                    <h2 class="section__header-title">Answers for traders using COT and currency strength in real workflows</h2>
-                    <p class="section__header-content">These quick answers explain how TerminalPrime's forex tools fit into analysis, planning, and execution without turning the dashboard into noise.</p>
+                    <span class="section__header-sub-title headingFour"><img src="@Img("element/section-badge1.png")" alt="@T("Common.BadgeAlt")" />@T("Faq.Badge")</span>
+                    <h2 class="section__header-title">@T("Faq.Title")</h2>
+                    <p class="section__header-content">@T("Faq.Description")</p>
                 </div>
             </div>
         </div>
@@ -397,113 +397,3 @@
         </div>
     </div>
 </section>
-
-@code {
-    private const string HomeSeoTitle = "TerminalPrime | Forex Market Intelligence, COT Reports & Currency Strength";
-    private const string HomeSeoDescription = "TerminalPrime delivers forex market intelligence with COT reports, currency strength analytics, and trader-focused market research for global FX markets.";
-    private const string HomeSeoKeywords = "TerminalPrime, forex market intelligence, COT reports, currency strength dashboard, forex analysis, trader tools";
-
-    private static readonly string[] BrokerHighlights =
-    [
-        "Regulation and execution quality",
-        "Spread and commission transparency",
-        "Platform stability during volatility",
-        "Funding and withdrawal consistency"
-    ];
-
-    private static readonly string[] ChooseUsPoints =
-    [
-        "Weekly COT context for macro positioning",
-        "Fast currency strength comparison",
-        "Cleaner dashboards with actionable summaries",
-        "Trader education without platform noise"
-    ];
-
-    private static readonly string[] VideoTopics =
-    [
-        "Foreign exchange market structure",
-        "Risk management in live conditions",
-        "Positioning and sentiment frameworks",
-        "How to combine tools into one routine"
-    ];
-
-    private static readonly string[] DownloadBullets =
-    [
-        "Review currency leadership before London and New York",
-        "Check COT positioning before swing setups",
-        "Compare broker conditions before execution",
-        "Keep your weekly workflow available on every screen"
-    ];
-
-    private static readonly PackageCard[] Packages =
-    [
-        new("icon/chart.png", "Weekly COT Review", "Spot how futures traders are building or reducing exposure across major forex markets."),
-        new("icon/rate.png", "Currency Strength Scanner", "Compare the strongest and weakest major currencies before planning your next setup."),
-        new("icon/interest-rate.png", "Momentum Shift Tracker", "See when trend pressure begins to rotate across major FX pairs and macro themes."),
-        new("icon/business.png", "Broker Condition Watchlist", "Keep execution quality, spreads, and broker stability visible before risk goes live."),
-        new("icon/business.png", "Trader Playbook Library", "Turn market observations into structured plans with education and repeatable workflows.")
-    ];
-
-    private static readonly BrokerReview[] Brokers =
-    [
-        new("01", "broker/ic-markets.png", "IC Markets", "IC Markets is a trusted broker with institutional-grade liquidity, offering one of the best trading environments globally.", "44K+", "broker-detail-01", true),
-        new("02", "broker/robofores.png", "RoboForex", "RoboForex is known for flexible account structures, broad platform support, and tools that appeal to active forex traders.", "44K+", "broker-detail-02", false),
-        new("03", "broker/etoro.png", "eToro", "eToro is a top-rated social trading platform offering an easy way to copy successful traders while enjoying a user-friendly interface.", "25K+", "broker-detail-03", false),
-        new("04", "broker/peppershone.png", "Pepperstone", "Pepperstone delivers ultra-fast execution and low-cost trading, making it a strong fit for scalpers and momentum-driven traders.", "44K+", "broker-detail-04", false)
-    ];
-
-    private static readonly WorkingStep[] WorkingSteps =
-    [
-        new("01", "icon/customer-support.png", "Review COT Flows", "Start with futures positioning to understand where larger market participants are leaning."),
-        new("02", "icon/choose.png", "Compare Relative Strength", "Use the strength dashboard to confirm which currencies are leading and which are fading."),
-        new("03", "icon/select-account.png", "Validate Conditions", "Check broker quality, spreads, and market access before you commit risk."),
-        new("04", "icon/profit-sharing.png", "Build The Plan", "Translate the data into a focused watchlist, levels, and execution ideas for the week.")
-    ];
-
-    private static readonly AboutFeature[] AboutFeatures =
-    [
-        new("icon/knowledge.png", "Market Context", "Translate raw forex data into context that supports better directional decisions."),
-        new("icon/advice.png", "Practical Guidance", "Stay focused on workflows that traders can actually use during the week."),
-        new("icon/setting.png", "Reliable Delivery", "Keep core market tools accessible in one place without jumping between disconnected apps."),
-        new("icon/idea.png", "Continuous Refinement", "Improve your process through cleaner summaries, better structure, and repeatable research.")
-    ];
-
-    private static readonly TestimonialCard[] Testimonials =
-    [
-        new("testimonial/balogh.png", "The combination of COT context and currency strength saved me hours every week and made my FX planning far more structured.", "Balogh Imre", "Macro Swing Trader"),
-        new("testimonial/kende.png", "I use TerminalPrime to narrow my watchlist fast. The dashboards make it easier to separate noise from genuine momentum.", "Kende Attila", "Intraday FX Trader"),
-        new("testimonial/balogh.png", "What I value most is the clarity. The tools feel built for decision-making instead of just filling the screen with indicators.", "Eleanor Pena", "Market Research Analyst")
-    ];
-
-    private static readonly FaqItem[] LeftFaqs =
-    [
-        new("What is the COT report and why does it matter for forex traders?", "The Commitment of Traders report shows how major futures participants are positioned. Traders often use it to understand longer-term sentiment, crowding, and possible reversals in currency markets.", "faq-accordion-1", true),
-        new("How often is the COT data updated?", "COT data is published weekly, so it works best as a higher-timeframe context tool rather than a tick-by-tick signal feed.", "faq-accordion-2", false),
-        new("How should I combine COT with currency strength?", "Use COT to understand broader positioning and use currency strength to confirm shorter-term leadership, weakness, and momentum changes.", "faq-accordion-3", false),
-        new("Which markets are covered in the COT section?", "The dashboard groups available instruments by market so you can move quickly through major futures contracts and the report model you want to review.", "faq-accordion-4", false),
-        new("Is this useful for swing traders as well as day traders?", "Yes. Swing traders can use COT for directional context, while day traders can use currency strength and broker checks to refine execution timing.", "faq-accordion-5", false)
-    ];
-
-    private static readonly FaqItem[] RightFaqs =
-    [
-        new("Can beginners use TerminalPrime effectively?", "Yes. The dashboards are designed to make positioning and strength data easier to read, while the supporting content explains how the tools fit into a real workflow.", "faq2-accordion-1", false),
-        new("Does currency strength update more often than COT?", "Yes. Currency strength is designed for more frequent monitoring, while COT provides the slower, structural context behind the move.", "faq2-accordion-2", false),
-        new("Do broker reviews matter for analysis?", "They matter for execution. Even the best market read can suffer if spreads, slippage, or platform stability are poor during active sessions.", "faq2-accordion-3", false),
-        new("Is TerminalPrime financial advice?", "No. TerminalPrime is a research and analytics workspace. You should still apply your own risk management and decision process before trading.", "faq2-accordion-4", false),
-        new("Can I use these tools as part of a weekly prep routine?", "That is one of the best ways to use them. Review the broader positioning first, scan strength changes next, then build your levels and watchlist for the week.", "faq2-accordion-5", false)
-    ];
-
-    private static string Img(string relativePath) => SiteBranding.Image(relativePath);
-
-    private sealed record PackageCard(string Icon, string Title, string Description);
-
-    private sealed record BrokerReview(string Number, string Image, string Name, string Description, string Reviews, string CollapseId, bool IsExpanded);
-
-    private sealed record WorkingStep(string Number, string Icon, string Title, string Description);
-
-    private sealed record AboutFeature(string Icon, string Title, string Description);
-
-    private sealed record TestimonialCard(string Image, string Quote, string Name, string Role);
-
-    private sealed record FaqItem(string Question, string Answer, string CollapseId, bool Expanded);
-}

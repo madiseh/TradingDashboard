@@ -1,5 +1,67 @@
+@font-face {
+    font-family: 'TdYekanBakh';
+    src: url('/fonts/YekanBakh-Light.woff2') format('woff2');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TdYekanBakh';
+    src: url('/fonts/YekanBakhFaNum-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TdYekanBakh';
+    src: url('/fonts/YekanBakhFaNum-Bold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TdVazirmatn';
+    src: url('/fonts/Vazirmatn-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TdVazirmatn';
+    src: url('/fonts/Vazirmatn-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TdVazirmatn';
+    src: url('/fonts/Vazirmatn-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TdVazirmatn';
+    src: url('/fonts/Vazirmatn-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --td-font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --td-font-heading: var(--td-font-body);
+    --td-font-ui: var(--td-font-body);
+}
+
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: var(--td-font-body);
 }
 
 a, .btn-link {
@@ -61,6 +123,220 @@ h1:focus {
 
 .td-site-main {
     min-height: 100vh;
+}
+
+html[lang^="fa"] {
+    --td-font-body: 'TdVazirmatn', Tahoma, 'Segoe UI', sans-serif;
+    --td-font-heading: 'TdYekanBakh', 'TdVazirmatn', Tahoma, 'Segoe UI', sans-serif;
+    --td-font-ui: 'TdYekanBakh', 'TdVazirmatn', Tahoma, 'Segoe UI', sans-serif;
+}
+
+html[lang^="fa"] body {
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+html[lang^="fa"] p,
+html[lang^="fa"] th,
+html[lang^="fa"] td,
+html[lang^="fa"] li,
+html[lang^="fa"] input,
+html[lang^="fa"] textarea,
+html[lang^="fa"] select,
+html[lang^="fa"] label,
+html[lang^="fa"] blockquote,
+html[lang^="fa"] .td-release-accordion__content p,
+html[lang^="fa"] .copyright {
+    font-family: var(--td-font-body);
+    letter-spacing: normal;
+    line-height: 1.8;
+}
+
+html[lang^="fa"] a,
+html[lang^="fa"] button,
+html[lang^="fa"] .btn_theme,
+html[lang^="fa"] .main-menu .navbar-nav .nav-item .nav-link,
+html[lang^="fa"] .main-menu .dropdown-menu .dropdown-item,
+html[lang^="fa"] .custom-nevbar__nav .nav-link,
+html[lang^="fa"] .section__header-sub-title,
+html[lang^="fa"] .section__content-sub-title,
+html[lang^="fa"] .headingFour,
+html[lang^="fa"] .headingFive,
+html[lang^="fa"] .headingSix,
+html[lang^="fa"] .card__title,
+html[lang^="fa"] .td-release-accordion__version,
+html[lang^="fa"] .td-release-list-title,
+html[lang^="fa"] .mud-typography,
+html[lang^="fa"] .mud-button-label,
+html[lang^="fa"] .mud-input-input,
+html[lang^="fa"] .mud-input-slot,
+html[lang^="fa"] .mud-select-item,
+html[lang^="fa"] .mud-chip,
+html[lang^="fa"] .mud-table,
+html[lang^="fa"] .mud-list,
+html[lang^="fa"] .mud-popover,
+html[lang^="fa"] .cot-net-position-chart svg {
+    font-family: var(--td-font-ui);
+    letter-spacing: normal;
+}
+
+html[lang^="fa"] h1,
+html[lang^="fa"] h2,
+html[lang^="fa"] h3,
+html[lang^="fa"] h4,
+html[lang^="fa"] h5,
+html[lang^="fa"] h6,
+html[lang^="fa"] .cmn-display,
+html[lang^="fa"] .headingTwo,
+html[lang^="fa"] .headingThree,
+html[lang^="fa"] .section__header-title,
+html[lang^="fa"] .section__content-title,
+html[lang^="fa"] .banner__content-title,
+html[lang^="fa"] .td-release-accordion__content h3 {
+    font-family: var(--td-font-heading);
+    letter-spacing: normal;
+}
+
+html[lang^="fa"] h1,
+html[lang^="fa"] .cmn-display,
+html[lang^="fa"] .section__content-title,
+html[lang^="fa"] .banner__content-title {
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 1.55;
+}
+
+html[lang^="fa"] h2,
+html[lang^="fa"] .headingTwo,
+html[lang^="fa"] .section__header-title {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.65;
+}
+
+html[lang^="fa"] h3,
+html[lang^="fa"] .headingThree,
+html[lang^="fa"] .td-release-accordion__content h3 {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.65;
+}
+
+html[lang^="fa"] h4,
+html[lang^="fa"] .card__title,
+html[lang^="fa"] .td-release-list-title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+html[lang^="fa"] .headingFour,
+html[lang^="fa"] .section__header-sub-title,
+html[lang^="fa"] .section__content-sub-title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.7;
+}
+
+html[lang^="fa"] h5,
+html[lang^="fa"] .headingFive,
+html[lang^="fa"] .btn_theme,
+html[lang^="fa"] .main-menu .navbar-nav .nav-item .nav-link,
+html[lang^="fa"] .main-menu .dropdown-menu .dropdown-item,
+html[lang^="fa"] .custom-nevbar__nav .nav-link,
+html[lang^="fa"] .td-release-accordion__version,
+html[lang^="fa"] .mud-button-label,
+html[lang^="fa"] .mud-select-item {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.8;
+}
+
+html[lang^="fa"] h6,
+html[lang^="fa"] .headingSix,
+html[lang^="fa"] .td-release-accordion__date,
+html[lang^="fa"] .cot-net-position-axis-label {
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+html[lang^="fa"] .cot-net-position-axis-label {
+    font-family: var(--td-font-ui);
+}
+
+html[lang^="fa"] .td-release-accordion__date {
+    font-family: var(--td-font-body);
+}
+
+html[lang^="fa"] .td-navbar-brand__eyebrow,
+html[lang^="fa"] .td-navbar-brand__name {
+    font-family: "Jost", sans-serif;
+}
+
+@media (max-width: 1199.98px) {
+    html[lang^="fa"] h1,
+    html[lang^="fa"] .cmn-display,
+    html[lang^="fa"] .section__content-title,
+    html[lang^="fa"] .banner__content-title {
+        font-size: 36px;
+    }
+
+    html[lang^="fa"] h2,
+    html[lang^="fa"] .headingTwo,
+    html[lang^="fa"] .section__header-title {
+        font-size: 28px;
+    }
+
+    html[lang^="fa"] h3,
+    html[lang^="fa"] .headingThree,
+    html[lang^="fa"] .td-release-accordion__content h3 {
+        font-size: 24px;
+    }
+
+    html[lang^="fa"] h4,
+    html[lang^="fa"] .card__title,
+    html[lang^="fa"] .td-release-list-title {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    html[lang^="fa"] h1,
+    html[lang^="fa"] .cmn-display,
+    html[lang^="fa"] .section__content-title,
+    html[lang^="fa"] .banner__content-title {
+        font-size: 30px;
+    }
+
+    html[lang^="fa"] h2,
+    html[lang^="fa"] .headingTwo,
+    html[lang^="fa"] .section__header-title {
+        font-size: 24px;
+    }
+
+    html[lang^="fa"] h3,
+    html[lang^="fa"] .headingThree,
+    html[lang^="fa"] .td-release-accordion__content h3 {
+        font-size: 20px;
+    }
+
+    html[lang^="fa"] h4,
+    html[lang^="fa"] .card__title,
+    html[lang^="fa"] .td-release-list-title {
+        font-size: 18px;
+    }
+
+    html[lang^="fa"] .headingFour,
+    html[lang^="fa"] .section__header-sub-title,
+    html[lang^="fa"] .section__content-sub-title,
+    html[lang^="fa"] h5,
+    html[lang^="fa"] .headingFive,
+    html[lang^="fa"] .btn_theme,
+    html[lang^="fa"] .main-menu .navbar-nav .nav-item .nav-link,
+    html[lang^="fa"] .main-menu .dropdown-menu .dropdown-item,
+    html[lang^="fa"] .custom-nevbar__nav .nav-link {
+        font-size: 15px;
+    }
 }
 
 .td-site-header {

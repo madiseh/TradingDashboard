@@ -36,6 +36,19 @@ public static class IocRegistration
         }
 
         roots.Add(Path.Combine(AppContext.BaseDirectory, "storage", "currency-strength"));
+        roots.Add(Path.GetFullPath(Path.Combine(
+            AppContext.BaseDirectory,
+            "..",
+            "currency-strength-collect",
+            "storage",
+            "currency-strength")));
+        roots.Add(Path.GetFullPath(Path.Combine(
+            AppContext.BaseDirectory,
+            "..",
+            "..",
+            "currency-strength-collect",
+            "storage",
+            "currency-strength")));
 
         var collectServiceBinRoot = Path.GetFullPath(Path.Combine(
             AppContext.BaseDirectory,
