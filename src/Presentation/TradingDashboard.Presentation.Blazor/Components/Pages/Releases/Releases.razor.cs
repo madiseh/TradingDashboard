@@ -7,8 +7,9 @@ namespace TradingDashboard.Presentation.Blazor.Components.Pages.Releases;
 
 public partial class Releases
 {
-    private static readonly DateOnly LatestReleaseDate = new(2026, 4, 4);
-    private static readonly DateOnly PreviousReleaseDate = new(2026, 4, 3);
+    private static readonly DateOnly LatestReleaseDate = new(2026, 4, 6);
+    private static readonly DateOnly PreviousReleaseDate = new(2026, 4, 4);
+    private static readonly DateOnly EarlierReleaseDate = new(2026, 4, 3);
     private static readonly DateOnly InitialReleaseDate = new(2026, 4, 1);
 
     [Inject]
@@ -22,9 +23,22 @@ public partial class Releases
         new(
             L["Entry.Version", ApplicationVersions.Blazor],
             LatestReleaseDate.ToString("MMMM d, yyyy", CultureInfo.CurrentUICulture),
+            L["Entry.Title.Version211"],
+            L["Entry.Description.Version211"],
+            true,
+            [
+                L["Entry.Version211.Highlight.1"],
+                L["Entry.Version211.Highlight.2"],
+                L["Entry.Version211.Highlight.3"],
+                L["Entry.Version211.Highlight.4"],
+                L["Entry.Version211.Highlight.5"]
+            ]),
+        new(
+            L["Entry.Version", "2.1.0"],
+            PreviousReleaseDate.ToString("MMMM d, yyyy", CultureInfo.CurrentUICulture),
             L["Entry.Title.Version210"],
             L["Entry.Description.Version210"],
-            true,
+            false,
             [
                 L["Entry.Version210.Highlight.1"],
                 L["Entry.Version210.Highlight.2"],
@@ -32,7 +46,7 @@ public partial class Releases
             ]),
         new(
             L["Entry.Version", "2.0.0"],
-            PreviousReleaseDate.ToString("MMMM d, yyyy", CultureInfo.CurrentUICulture),
+            EarlierReleaseDate.ToString("MMMM d, yyyy", CultureInfo.CurrentUICulture),
             L["Entry.Title.Version2"],
             L["Entry.Description.Version2"],
             false,

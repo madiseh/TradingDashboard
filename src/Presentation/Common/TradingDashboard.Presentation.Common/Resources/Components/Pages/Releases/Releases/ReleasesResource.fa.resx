@@ -22,7 +22,7 @@
     <value>Ø§Ù†ØªØ´Ø§Ø±Ù‡Ø§</value>
   </data>
   <data name="Hero.Description" xml:space="preserve">
-    <value>ÛŒÚ© Ù�?Ø§Ú¯ Ø®Ù�?Ø§ØµÙ‡ Ùˆ Ù¾ÛŒÙˆØ³ØªÙ‡ Ø§Ø² Ú†ÛŒØ²Ù‡Ø§ÛŒÛŒ Ú©Ù‡ Ø¯Ø± Trading Dashboard Ù…Ù†ØªØ´Ø± Ø´Ø¯Ù‡ Ø§Ø³ØªØ› Ø´Ø±ÙˆØ¹ Ø§Ø² Ø¢Ø®Ø±ÛŒÙ† ÙˆØ¶Ø¹ÛŒØª Ø¯Ø± 2026-04-03.</value>
+    <value>ÛŒÚ© Ù�?Ø§Ú¯ Ø®Ù�?Ø§ØµÙ‡ Ùˆ Ù¾ÛŒÙˆØ³ØªÙ‡ Ø§Ø² Ú†ÛŒØ²Ù‡Ø§ÛŒÛŒ Ú©Ù‡ Ø¯Ø± Trading Dashboard Ù…Ù†ØªØ´Ø± Ø´Ø¯Ù‡ Ø§Ø³ØªØ› Ø´Ø±ÙˆØ¹ Ø§Ø² Ø¢Ø®Ø±ÛŒÙ† ÙˆØ¶Ø¹ÛŒØª Ø¯Ø± 2026-04-06.</value>
   </data>
   <data name="Summary.Title" xml:space="preserve">
     <value>Ø¢Ø®Ø±ÛŒÙ† ÙˆØ¶Ø¹ÛŒØª</value>
@@ -128,5 +128,26 @@
   </data>
   <data name="Entry.Version210.Highlight.3" xml:space="preserve">
     <value>Surfaced the running Blazor app version in the footer for quicker release visibility.</value>
+  </data>
+  <data name="Entry.Title.Version211" xml:space="preserve">
+    <value>TerminalPrime rollout and release polish</value>
+  </data>
+  <data name="Entry.Description.Version211" xml:space="preserve">
+    <value>This patch packages the post-2.1.0 web refresh work into a cleaner branded experience with stronger localization, deployment readiness, and a faster COT workflow.</value>
+  </data>
+  <data name="Entry.Version211.Highlight.1" xml:space="preserve">
+    <value>Rebranded the public Blazor experience to TerminalPrime and refreshed home, COT, and Currency Strength SEO content.</value>
+  </data>
+  <data name="Entry.Version211.Highlight.2" xml:space="preserve">
+    <value>Updated GitLab CI and production settings so Currency Strength deployment is ready in the release pipeline.</value>
+  </data>
+  <data name="Entry.Version211.Highlight.3" xml:space="preserve">
+    <value>Extracted a reusable TopMenu module and cleaned up shared localization resources across the main navigation flow.</value>
+  </data>
+  <data name="Entry.Version211.Highlight.4" xml:space="preserve">
+    <value>Localized the landing page content and added dedicated Persian fonts for a more polished Persian web experience.</value>
+  </data>
+  <data name="Entry.Version211.Highlight.5" xml:space="preserve">
+    <value>Added a direct COT Legacy toggle so users can switch report mode faster from the COT report page.</value>
   </data>
 </root>

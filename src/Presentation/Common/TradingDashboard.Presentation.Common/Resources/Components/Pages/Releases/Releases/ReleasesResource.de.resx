@@ -22,7 +22,7 @@
     <value>Releases</value>
   </data>
   <data name="Hero.Description" xml:space="preserve">
-    <value>Ein kompakter Verlauf der ausgelieferten Ã„nderungen in Trading Dashboard, beginnend mit dem neuesten Stand vom 3. April 2026.</value>
+    <value>Ein kompakter Verlauf der ausgelieferten Ã„nderungen in Trading Dashboard, beginnend mit dem neuesten Stand vom 6. April 2026.</value>
   </data>
   <data name="Summary.Title" xml:space="preserve">
     <value>Aktueller Stand</value>
@@ -128,5 +128,26 @@
   </data>
   <data name="Entry.Version210.Highlight.3" xml:space="preserve">
     <value>Surfaced the running Blazor app version in the footer for quicker release visibility.</value>
+  </data>
+  <data name="Entry.Title.Version211" xml:space="preserve">
+    <value>TerminalPrime rollout and release polish</value>
+  </data>
+  <data name="Entry.Description.Version211" xml:space="preserve">
+    <value>This patch packages the post-2.1.0 web refresh work into a cleaner branded experience with stronger localization, deployment readiness, and a faster COT workflow.</value>
+  </data>
+  <data name="Entry.Version211.Highlight.1" xml:space="preserve">
+    <value>Rebranded the public Blazor experience to TerminalPrime and refreshed home, COT, and Currency Strength SEO content.</value>
+  </data>
+  <data name="Entry.Version211.Highlight.2" xml:space="preserve">
+    <value>Updated GitLab CI and production settings so Currency Strength deployment is ready in the release pipeline.</value>
+  </data>
+  <data name="Entry.Version211.Highlight.3" xml:space="preserve">
+    <value>Extracted a reusable TopMenu module and cleaned up shared localization resources across the main navigation flow.</value>
+  </data>
+  <data name="Entry.Version211.Highlight.4" xml:space="preserve">
+    <value>Localized the landing page content and added dedicated Persian fonts for a more polished Persian web experience.</value>
+  </data>
+  <data name="Entry.Version211.Highlight.5" xml:space="preserve">
+    <value>Added a direct COT Legacy toggle so users can switch report mode faster from the COT report page.</value>
   </data>
 </root>
