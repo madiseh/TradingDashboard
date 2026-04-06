@@ -1,4 +1,5 @@
 using System.Globalization;
+using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
 namespace TradingDashboard.Presentation.Blazor.Components.Pages.Cot.Report;
@@ -11,6 +12,7 @@ public partial class CotReport
     private List<DateOnly> _availableDates = [];
     private string? _lastInstrumentSlug;
     private string? _lastModel;
+    private string? _lastReportDate;
     private bool _hasExplicitDateSelection;
 
     private DateTime? _selectedAsOfDate;
@@ -27,10 +29,21 @@ public partial class CotReport
     [SupplyParameterFromQuery(Name = "model")]
     public string? Model { get; set; }
 
+    [SupplyParameterFromQuery(Name = "reportDate")]
+    public string? ReportDate { get; set; }
+
+    [Inject]
+    private NavigationManager NavigationManager { get; set; } = default!;
+
     private CotReportModel ReportModel =>
         CotReportModelExtensions.TryParse(Model, out CotReportModel parsed)
             ? parsed
             : CotReportModel.Cot;
+
+    private string GetPageTitle()
+    {
+        return $"{GetSelectedModelHeading()}: {GetDisplayName(InstrumentSlug)}";
+    }
 
     private DateTime? MinAvailableDate => _availableDates.Count == 0
         ? null
@@ -47,12 +60,17 @@ public partial class CotReport
     protected override async Task OnParametersSetAsync()
     {
         if (!string.Equals(_lastInstrumentSlug, InstrumentSlug, StringComparison.OrdinalIgnoreCase) ||
-            !string.Equals(_lastModel, Model, StringComparison.Ordinal))
+            !string.Equals(_lastModel, Model, StringComparison.Ordinal) ||
+            !string.Equals(_lastReportDate, ReportDate, StringComparison.Ordinal))
         {
             _lastInstrumentSlug = InstrumentSlug;
             _lastModel = Model;
-            _hasExplicitDateSelection = false;
-            _selectedAsOfDate = null;
+            _lastReportDate = ReportDate;
+            _isLoading = true;
+            _errorMessage = null;
+            _report = null;
+            _selectedAsOfDate = ParseReportDateQuery(ReportDate);
+            _hasExplicitDateSelection = _selectedAsOfDate is not null;
             _availableDates.Clear();
         }
 
@@ -65,6 +83,20 @@ public partial class CotReport
         return ReportModel == CotReportModel.CotLegacy
             ? "COT Legacy Report: Futures Only"
             : "Futures Only";
+    }
+
+    private string GetSelectedModelHeading()
+    {
+        return ReportModel == CotReportModel.CotLegacy
+            ? "COT Legacy Report"
+            : "COT Report";
+    }
+
+    private string GetModelSwitchButtonClass(CotReportModel model)
+    {
+        return model == ReportModel
+            ? "td-cot-model-switch__button td-cot-model-switch__button--active"
+            : "td-cot-model-switch__button";
     }
 
     private string GetModelDescription()
@@ -146,6 +178,23 @@ public partial class CotReport
         return date.Value.Date.AddDays(-offset);
     }
 
+    private static DateTime? ParseReportDateQuery(string? value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return null;
+        }
+
+        return DateTime.TryParseExact(
+            value,
+            "yyyy-MM-dd",
+            CultureInfo.InvariantCulture,
+            DateTimeStyles.None,
+            out var parsed)
+            ? NormalizeReportDate(parsed)
+            : null;
+    }
+
     private string GetDisplayName(string slug)
     {
         if (!string.IsNullOrWhiteSpace(_report?.InstrumentName))
@@ -160,6 +209,16 @@ public partial class CotReport
 
         return string.Join(' ', slug.Split('-', StringSplitOptions.RemoveEmptyEntries))
             .ToUpperInvariant();
+    }
+
+    private void SwitchReportModel(CotReportModel model)
+    {
+        if (model == ReportModel)
+        {
+            return;
+        }
+
+        NavigationManager.NavigateTo(BuildReportPageUri(model));
     }
 
     private async Task LoadReportAsync()
@@ -312,5 +371,20 @@ public partial class CotReport
             .Replace("{instrumentSlug}", Uri.EscapeDataString(InstrumentSlug), StringComparison.Ordinal);
 
         return $"{route}?model={Uri.EscapeDataString(ReportModel.ToContractValue())}";
+    }
+
+    private string BuildReportPageUri(CotReportModel model)
+    {
+        var queryParts = new List<string>
+        {
+            $"model={Uri.EscapeDataString(model.ToContractValue())}"
+        };
+
+        if (_hasExplicitDateSelection && SelectedAsOfDate is not null)
+        {
+            queryParts.Add($"reportDate={Uri.EscapeDataString(SelectedAsOfDate.Value.ToString("yyyy-MM-dd"))}");
+        }
+
+        return $"{RoutePaths.Ui.CotReports}/{Uri.EscapeDataString(InstrumentSlug)}?{string.Join("&", queryParts)}";
     }
 }
