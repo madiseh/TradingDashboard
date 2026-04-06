@@ -48,7 +48,8 @@
                             </ul>
                             <div class="nav-right d-xl-block">
                                 <div class="nav-right__search">
-                                    <div class="language-box d-flex align-items-center justify-content-center position-relative">
+                                    <div class="language-box td-language-box d-inline-flex align-items-center">
+                                        <i class="bi bi-globe icon" aria-hidden="true"></i>
                                         <MudSelect T="string"
                                                    Value="@_selectedCulture"
                                                    ValueChanged="OnCultureChangedAsync"
@@ -64,7 +65,6 @@
                                                 <MudSelectItem T="string" Value="@language.Code">@GetShortLanguageLabel(language)</MudSelectItem>
                                             }
                                         </MudSelect>
-                                        <i class="bi bi-globe icon"></i>
                                     </div>
                                     <a href="javascript:void(0)"
                                        class="cmn__search-icon nav-right__search-icon d-center"
@@ -136,7 +136,8 @@
                     <ul class="custom-nevbar__right-location">
                         <li>
                             <p class="mb-2">@L["Language.Label"]:</p>
-                            <div class="language-box d-flex align-items-center justify-content-center position-relative td-language-box-mobile">
+                            <div class="language-box td-language-box-mobile d-flex align-items-center">
+                                <i class="bi bi-globe icon" aria-hidden="true"></i>
                                 <MudSelect T="string"
                                            Value="@_selectedCulture"
                                            ValueChanged="OnCultureChangedAsync"
@@ -150,7 +151,6 @@
                                         <MudSelectItem T="string" Value="@language.Code">@GetLanguageLabel(language)</MudSelectItem>
                                     }
                                 </MudSelect>
-                                <i class="bi bi-globe icon"></i>
                             </div>
                         </li>
                         <li>

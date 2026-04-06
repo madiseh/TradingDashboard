@@ -2310,7 +2310,7 @@ label.error {
   font-weight: 500;
 }
 .accordion .accordion-button::after {
-  --arrow: "ï“¾";
+  --arrow: "\f4fe";
   content: var(--arrow);
   font-family: "bootstrap-icons";
   font-weight: normal;
@@ -2343,7 +2343,7 @@ label.error {
   --bs-accordion-btn-icon-transform: rotate(180deg);
 }
 .accordion .accordion-button:not(.collapsed)::after {
-  --arrow: "ï‹ª";
+  --arrow: "\f2ea";
   font-family: "bootstrap-icons";
   font-weight: normal;
   background: #EB7A23;
