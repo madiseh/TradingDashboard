@@ -38,6 +38,12 @@ public sealed class CurrencyStrengthFileQueryRepository : ICurrencyStrengthSnaps
                     return snapshot;
                 }
             }
+
+            var fallbackSnapshot = await TryReadLatestSnapshotBackupAsync(timeframeDirectory, timeframe, cancellationToken);
+            if (fallbackSnapshot is not null)
+            {
+                return fallbackSnapshot;
+            }
         }
 
         return null;
@@ -50,7 +56,13 @@ public sealed class CurrencyStrengthFileQueryRepository : ICurrencyStrengthSnaps
     {
         try
         {
-            await using var stream = File.OpenRead(filePath);
+            await using var stream = new FileStream(
+                filePath,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.ReadWrite | FileShare.Delete,
+                bufferSize: 4096,
+                options: FileOptions.Asynchronous | FileOptions.SequentialScan);
             using var document = await JsonDocument.ParseAsync(stream, cancellationToken: cancellationToken);
             if (document.RootElement.ValueKind != JsonValueKind.Array)
             {
@@ -105,6 +117,33 @@ public sealed class CurrencyStrengthFileQueryRepository : ICurrencyStrengthSnaps
         {
             return null;
         }
+    }
+
+    private static async Task<CurrencyStrengthSnapshot?> TryReadLatestSnapshotBackupAsync(
+        string timeframeDirectory,
+        CurrencyStrengthTimeframeDefinition timeframe,
+        CancellationToken cancellationToken)
+    {
+        var snapshotsDirectory = Path.Combine(timeframeDirectory, "snapshots");
+        if (!Directory.Exists(snapshotsDirectory))
+        {
+            return null;
+        }
+
+        var candidateFiles = Directory
+            .EnumerateFiles(snapshotsDirectory, "*.json", SearchOption.AllDirectories)
+            .OrderByDescending(File.GetLastWriteTimeUtc);
+
+        foreach (var candidateFile in candidateFiles)
+        {
+            var snapshot = await TryReadSnapshotAsync(candidateFile, timeframe, cancellationToken);
+            if (snapshot is not null)
+            {
+                return snapshot;
+            }
+        }
+
+        return null;
     }
 
     private static bool TryReadInt64(JsonElement element, out long value)

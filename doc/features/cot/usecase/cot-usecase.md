@@ -55,6 +55,7 @@ Define application-level use cases for COT dashboard and API.
 - Input: source file/records, `reportDate`, `model`
 - Behavior: normalize -> validate -> upsert report and positions.
 - Output: ingestion summary and validation issues.
+- Runtime: triggered by the Quartz-based `CotCollectJob` hosted in `TradingDashboard.Presentation.BackgroundJobs`.
 
 ### Rebuild Aggregates
 
@@ -69,6 +70,7 @@ Define application-level use cases for COT dashboard and API.
 3. Reject date not in available report dates.
 4. Reject `from > to`.
 5. Return consistent error contract from API layer.
+6. Background collection state is persisted in the COT database and updated on every scheduled run.
 
 ## Blazor Flow
 

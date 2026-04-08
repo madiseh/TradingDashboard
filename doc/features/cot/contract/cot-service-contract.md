@@ -36,3 +36,5 @@ Methods:
 
 - Interface details are owned by module contracts and must be documented here.
 - Every interface and method in code must include XML `summary`.
+- Scheduled COT raw collection now runs as a Quartz job inside `TradingDashboard.Presentation.BackgroundJobs`.
+- The background host is responsible for COT database migration, collector-state bootstrap, and recurring execution.

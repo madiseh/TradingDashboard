@@ -1,6 +1,4 @@
 using System.Globalization;
-using Microsoft.JSInterop;
-
 namespace TradingDashboard.Presentation.Blazor.Components.Modules.CurrencyStrength;
 
 public partial class CurrencyStrengthChart
@@ -34,37 +32,10 @@ public partial class CurrencyStrengthChart
     [Parameter]
     public string EmptyMessage { get; set; } = "No data available.";
 
-    [Inject]
-    private IJSRuntime JS { get; set; } = default!;
-
-    private ElementReference _svgElement;
-    private string? _lastPanZoomSignature;
-
     private IReadOnlyList<CurrencyStrengthChartSeriesViewModel> ChartSeries => BuildChartSeries();
     private IReadOnlyList<CurrencyStrengthAxisLabelViewModel> YAxisLabels => BuildYAxisLabels();
     private IReadOnlyList<CurrencyStrengthAxisLabelViewModel> XAxisLabels => BuildXAxisLabels();
     private decimal ZeroLineY => GetZeroLineY();
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (Snapshot is null)
-        {
-            return;
-        }
-
-        var currentSignature = BuildSnapshotSignature();
-        if (!firstRender && string.Equals(_lastPanZoomSignature, currentSignature, StringComparison.Ordinal))
-        {
-            return;
-        }
-
-        _lastPanZoomSignature = currentSignature;
-        await JS.InvokeVoidAsync("tradingDashboardCharts.enablePanZoom", _svgElement);
-    }
-
-    private Task ZoomInAsync() => JS.InvokeVoidAsync("tradingDashboardCharts.zoomIn", _svgElement).AsTask();
-    private Task ZoomOutAsync() => JS.InvokeVoidAsync("tradingDashboardCharts.zoomOut", _svgElement).AsTask();
-    private Task ResetZoomAsync() => JS.InvokeVoidAsync("tradingDashboardCharts.reset", _svgElement).AsTask();
 
     private IReadOnlyList<CurrencyStrengthChartSeriesViewModel> BuildChartSeries()
     {
@@ -244,11 +215,5 @@ public partial class CurrencyStrengthChart
     {
         var cssClass = isDate ? "cot-net-position-axis-label date" : "cot-net-position-axis-label";
         return (MarkupString)$"<text x=\"{x.ToString("0.##", CultureInfo.InvariantCulture)}\" y=\"{y.ToString("0.##", CultureInfo.InvariantCulture)}\" text-anchor=\"{anchor}\" class=\"{cssClass}\">{System.Net.WebUtility.HtmlEncode(text)}</text>";
-    }
-
-    private string BuildSnapshotSignature()
-    {
-        var pointCount = Snapshot?.Series.Sum(series => series.Points.Count) ?? 0;
-        return $"{Snapshot?.TimeframeKey}|{Snapshot?.CollectedAtUtc:O}|{pointCount}";
     }
 }

@@ -2,12 +2,6 @@
     overflow: hidden;
 }
 
-.currency-strength-chart-toolbar {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.5rem;
-}
-
 .cot-net-position-legend {
     display: flex;
     flex-wrap: wrap;
@@ -48,13 +42,6 @@
     width: 100%;
     min-width: 1240px;
     height: auto;
-    cursor: grab;
-    touch-action: none;
-    user-select: none;
-}
-
-.cot-net-position-chart svg.is-dragging {
-    cursor: grabbing;
 }
 
 .cot-net-position-plot {

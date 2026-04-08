@@ -2,7 +2,7 @@
 
 This `doc` directory contains three main documentation groups:
 
-- `governance/*`: Project-level rules, architecture direction, and repository structure decisions.
+- `governance/*`: Project-level rules, architecture direction, repository structure decisions, and release authoring rules.
 - `features/*`: Feature-level specifications, API/domain/use case docs, and FRD documents.
 - `uiComponent/*`: UI component guidelines, design notes, and reusable frontend patterns.
 
@@ -11,6 +11,7 @@ This `doc` directory contains three main documentation groups:
 
 # How To Implement Changes
 - Start by reviewing `governance/*` and understand the overall implementation direction.
+- For release work, review `governance/release-process.md` before updating version numbers or release entries.
 - If there is no existing governance document for a specific implementation topic, document the requirement and implementation plan before starting.
 - Follow the documented governance process exactly.
 - After governance is clear, move on to `features/*`.
@@ -23,4 +24,3 @@ This `doc` directory contains three main documentation groups:
 1.1. If a new UI component is needed, document it under `uiComponent/*`.
 1.2. Then add a new module for that component inside `TradingDashboard.Presentation.Blazor` under `Components -> Modules`, making it reusable for others.
 1.3. For each new UI page, which will likely use several existing modules or components, create a Resource file. Use the `Localization.md` documentation for the resource setup.
-
