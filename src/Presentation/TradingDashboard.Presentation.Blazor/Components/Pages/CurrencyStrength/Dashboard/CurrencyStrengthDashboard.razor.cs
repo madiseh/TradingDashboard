@@ -9,6 +9,7 @@ public partial class CurrencyStrengthDashboard
 {
     private const string ChartAnchorId = "currency-strength-chart-anchor";
     private readonly CancellationTokenSource _autoRefreshCts = new();
+    private DateTime _currentUtcNow = DateTime.UtcNow;
     private bool _isLoadingTimeframes = true;
     private bool _isLoadingSnapshot;
     private bool _scrollChartIntoViewRequested;
@@ -16,6 +17,7 @@ public partial class CurrencyStrengthDashboard
     private string? _selectedTimeframeKey;
     private CurrencyStrengthSnapshotResponse? _snapshot;
     private Task? _autoRefreshTask;
+    private Task? _utcClockTask;
     private List<CurrencyStrengthTimeframeViewModel> _timeframes = [];
 
     [Inject]
@@ -26,6 +28,7 @@ public partial class CurrencyStrengthDashboard
 
     protected override async Task OnInitializedAsync()
     {
+        _utcClockTask = StartUtcClockAsync(_autoRefreshCts.Token);
         await ReloadAsync();
         _autoRefreshTask = StartAutoRefreshLoopAsync(_autoRefreshCts.Token);
     }
@@ -151,6 +154,25 @@ public partial class CurrencyStrengthDashboard
         }
     }
 
+    private async Task StartUtcClockAsync(CancellationToken cancellationToken)
+    {
+        try
+        {
+            using var timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+            while (await timer.WaitForNextTickAsync(cancellationToken))
+            {
+                await InvokeAsync(() =>
+                {
+                    _currentUtcNow = DateTime.UtcNow;
+                    StateHasChanged();
+                });
+            }
+        }
+        catch (OperationCanceledException)
+        {
+        }
+    }
+
     public async ValueTask DisposeAsync()
     {
         if (!_autoRefreshCts.IsCancellationRequested)
@@ -163,6 +185,17 @@ public partial class CurrencyStrengthDashboard
             try
             {
                 await _autoRefreshTask;
+            }
+            catch (OperationCanceledException)
+            {
+            }
+        }
+
+        if (_utcClockTask is not null)
+        {
+            try
+            {
+                await _utcClockTask;
             }
             catch (OperationCanceledException)
             {

@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text;
 using Microsoft.Extensions.Options;
 
 namespace TradingDashboard.Presentation.BackgroundJobs.Jobs.CurrencyStrength;
@@ -55,8 +56,8 @@ public sealed class CurrencyStrengthCollectionRunner
                 Directory.CreateDirectory(timeframeDirectory);
                 Directory.CreateDirectory(snapshotsDirectory);
 
-                await File.WriteAllTextAsync(Path.Combine(snapshotsDirectory, $"{now:HH-mm-ss}.json"), payload, cancellationToken);
-                await File.WriteAllTextAsync(Path.Combine(timeframeDirectory, "latest.json"), payload, cancellationToken);
+                await WriteTextAtomicallyAsync(Path.Combine(snapshotsDirectory, $"{now:HH-mm-ss}.json"), payload, cancellationToken);
+                await WriteTextAtomicallyAsync(Path.Combine(timeframeDirectory, "latest.json"), payload, cancellationToken);
 
                 savedFileCount += 2;
                 successfulFetchCount++;
@@ -102,6 +103,38 @@ public sealed class CurrencyStrengthCollectionRunner
         catch (JsonException)
         {
             return false;
+        }
+    }
+
+    private static async Task WriteTextAtomicallyAsync(string filePath, string payload, CancellationToken cancellationToken)
+    {
+        var directory = Path.GetDirectoryName(filePath)
+            ?? throw new InvalidOperationException("Target directory could not be determined.");
+
+        Directory.CreateDirectory(directory);
+
+        var temporaryFilePath = Path.Combine(directory, $"{Path.GetFileName(filePath)}.{Guid.NewGuid():N}.tmp");
+
+        try
+        {
+            await File.WriteAllTextAsync(temporaryFilePath, payload, Encoding.UTF8, cancellationToken);
+            File.Move(temporaryFilePath, filePath, overwrite: true);
+        }
+        finally
+        {
+            if (File.Exists(temporaryFilePath))
+            {
+                try
+                {
+                    File.Delete(temporaryFilePath);
+                }
+                catch (IOException)
+                {
+                }
+                catch (UnauthorizedAccessException)
+                {
+                }
+            }
         }
     }
 }

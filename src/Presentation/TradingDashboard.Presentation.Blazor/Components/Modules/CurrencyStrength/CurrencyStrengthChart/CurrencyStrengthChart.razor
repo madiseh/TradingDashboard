@@ -20,33 +20,8 @@
                 }
             </div>
 
-            <div class="currency-strength-chart-toolbar">
-                <MudTooltip Text="Zoom in">
-                    <MudIconButton Icon="@Icons.Material.Filled.Add"
-                                   Color="Color.Primary"
-                                   Variant="Variant.Outlined"
-                                   Size="Size.Small"
-                                   OnClick="ZoomInAsync" />
-                </MudTooltip>
-                <MudTooltip Text="Zoom out">
-                    <MudIconButton Icon="@Icons.Material.Filled.Remove"
-                                   Color="Color.Primary"
-                                   Variant="Variant.Outlined"
-                                   Size="Size.Small"
-                                   OnClick="ZoomOutAsync" />
-                </MudTooltip>
-                <MudTooltip Text="Reset view">
-                    <MudIconButton Icon="@Icons.Material.Filled.CenterFocusStrong"
-                                   Color="Color.Primary"
-                                   Variant="Variant.Outlined"
-                                   Size="Size.Small"
-                                   OnClick="ResetZoomAsync" />
-                </MudTooltip>
-            </div>
-
             <div class="cot-net-position-chart">
-                <svg @ref="_svgElement"
-                     viewBox="@($"0 0 {SvgWidth.ToString("0.##", CultureInfo.InvariantCulture)} {SvgHeight.ToString("0.##", CultureInfo.InvariantCulture)}")"
+                <svg viewBox="@($"0 0 {SvgWidth.ToString("0.##", CultureInfo.InvariantCulture)} {SvgHeight.ToString("0.##", CultureInfo.InvariantCulture)}")"
                      role="img"
                      aria-label="Currency strength chart">
                     <rect x="@PlotLeft" y="@PlotTop" width="@(SvgWidth - PlotLeft - PlotRight)" height="@(SvgHeight - PlotTop - PlotBottom)" class="cot-net-position-plot"></rect>

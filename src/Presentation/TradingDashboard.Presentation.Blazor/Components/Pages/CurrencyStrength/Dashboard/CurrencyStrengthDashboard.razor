@@ -69,6 +69,11 @@
                             </MudStack>
                         </MudPaper>
 
+                        <div class="currency-strength-dashboard__utc-clock" aria-live="polite">
+                            <span class="currency-strength-dashboard__utc-clock-label">Live UTC</span>
+                            <span class="currency-strength-dashboard__utc-clock-value">@_currentUtcNow.ToString("yyyy-MM-dd HH:mm:ss 'UTC'")</span>
+                        </div>
+
                         <div id="currency-strength-chart-anchor" class="currency-strength-dashboard__chart-anchor">
                             <CurrencyStrengthChart Snapshot="_snapshot" EmptyMessage="@L["Chart.Empty"]" />
                         </div>

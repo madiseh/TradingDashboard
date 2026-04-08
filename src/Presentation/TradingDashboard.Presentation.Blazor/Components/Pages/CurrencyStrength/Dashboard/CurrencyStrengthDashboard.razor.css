@@ -13,6 +13,36 @@
     text-align: center;
 }
 
+.currency-strength-dashboard__utc-clock {
+    width: fit-content;
+    min-width: min(100%, 320px);
+    margin-inline: auto;
+    padding: 0.8rem 1.4rem;
+    border: 1px solid rgba(18, 44, 87, 0.12);
+    border-radius: 999px;
+    background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+    box-shadow: 0 10px 24px rgba(18, 44, 87, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.currency-strength-dashboard__utc-clock-label {
+    color: #ff3b63;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.currency-strength-dashboard__utc-clock-value {
+    color: #122c57;
+    font-size: 1rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
 .currency-strength-dashboard__chart-anchor {
     scroll-margin-top: 160px;
 }
@@ -38,6 +68,15 @@
 
     .currency-strength-dashboard__summary {
         width: 100%;
+    }
+
+    .currency-strength-dashboard__utc-clock {
+        width: 100%;
+        min-width: 0;
+        padding-inline: 1rem;
+        flex-direction: column;
+        gap: 0.3rem;
+        border-radius: 1rem;
     }
 
     .currency-strength-dashboard__timeframes {
