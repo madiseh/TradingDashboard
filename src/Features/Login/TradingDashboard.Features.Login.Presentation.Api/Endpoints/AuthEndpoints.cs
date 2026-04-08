@@ -176,6 +176,8 @@ public static class AuthEndpoints
                 email,
                 passwordHash,
                 passwordSalt,
+                AppUserRole.Guest,
+                AppUserStatus.Active,
                 SignupAppPlatform.Google,
                 true,
                 DateTime.UtcNow);
@@ -186,13 +188,20 @@ public static class AuthEndpoints
         }
         else
         {
+            if (user.Status != AppUserStatus.Active)
+            {
+                await httpContext.SignOutAsync("External");
+                var failedUrl = QueryHelpers.AddQueryString(normalizedReturnUrl, "authError", "This account is disabled.");
+                return Results.Redirect(failedUrl);
+            }
+
             user.MarkLogin(DateTime.UtcNow);
             userCommandRepository.SaveChanges();
         }
 
         await httpContext.SignOutAsync("External");
 
-        var tokenResult = jwtTokenService.GenerateToken(new AuthUserResponse(user.Id, user.Username, user.Email.Value));
+        var tokenResult = jwtTokenService.GenerateToken(new AuthUserResponse(user.Id, user.Username, user.Email.Value, user.Role.ToString()));
         var redirectUrl = QueryHelpers.AddQueryString(normalizedReturnUrl, new Dictionary<string, string?>
         {
             ["accessToken"] = tokenResult.AccessToken,

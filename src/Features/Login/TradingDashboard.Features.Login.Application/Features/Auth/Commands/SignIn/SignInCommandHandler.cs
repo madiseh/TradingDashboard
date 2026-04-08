@@ -3,6 +3,7 @@ using MediatR;
 using TradingDashboard.Application.Common.Results;
 using TradingDashboard.Application.Common.Security;
 using TradingDashboard.Application.Repository.Auth;
+using TradingDashboard.Domain.Enums;
 
 namespace TradingDashboard.Application.Features.Auth.Commands.SignIn;
 
@@ -35,6 +36,14 @@ public sealed class SignInCommandHandler(
                     "Username/email or password is invalid.");
             }
 
+            if (user.Status != AppUserStatus.Active)
+            {
+                return OperationalResult<AuthUserResponse>.Fail(
+                    "Account is disabled",
+                    "ACCOUNT_DISABLED",
+                    "This account is disabled and cannot sign in.");
+            }
+
             var isPasswordValid = passwordHashingService.Verify(request.Password, user.PasswordHash, user.PasswordSalt);
             if (!isPasswordValid)
             {
@@ -48,7 +57,7 @@ public sealed class SignInCommandHandler(
             userCommandRepository.SaveChanges();
 
             return OperationalResult<AuthUserResponse>.Success(
-                new AuthUserResponse(user.Id, user.Username, user.Email.Value),
+                new AuthUserResponse(user.Id, user.Username, user.Email.Value, user.Role.ToString()),
                 "Signed in successfully.");
         }
         catch (Exception ex)

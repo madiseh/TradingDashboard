@@ -1,3 +1,3 @@
 namespace TradingDashboard.Application.Features.Auth;
 
-public sealed record AuthUserResponse(Guid UserId, string Username, string Email);
+public sealed record AuthUserResponse(Guid UserId, string Username, string Email, string Role);

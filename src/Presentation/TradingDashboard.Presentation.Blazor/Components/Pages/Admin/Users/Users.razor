@@ -1,0 +1,247 @@
+@page "/admin/users"
+@inherits TradingDashboard.Presentation.Blazor.Components.Pages.PageComponentBase
+@using TradingDashboard.Presentation.Common.Resources.Components.Pages.Admin.Users
+
+<PageTitle>@L["PageTitle"]</PageTitle>
+
+<section class="admin-users-page">
+    <div class="admin-users-page__shell">
+        <aside class="admin-users-page__sidebar">
+            <div class="admin-users-page__brand">
+                <div class="admin-users-page__brand-badge">TP</div>
+                <div>
+                    <p class="admin-users-page__brand-eyebrow">@L["Nav.BrandEyebrow"]</p>
+                    <h2 class="admin-users-page__brand-title">@L["Nav.BrandTitle"]</h2>
+                </div>
+            </div>
+
+            <nav class="admin-users-page__nav">
+                @foreach (var item in GetNavigationItems())
+                {
+                    <a class="@GetNavigationItemClass(item)"
+                       href="@GetNavigationHref(item)"
+                       aria-current="@(item.IsActive ? "page" : null)">
+                        <span class="@item.IconClass" aria-hidden="true"></span>
+                        <span>@item.Label</span>
+                        @if (!item.IsAvailable)
+                        {
+                            <span class="admin-users-page__nav-badge">@L["Nav.ComingSoon"]</span>
+                        }
+                    </a>
+                }
+            </nav>
+        </aside>
+
+        <div class="admin-users-page__content">
+            <MudPaper Class="admin-users-page__hero" Elevation="0">
+                <span class="admin-users-page__hero-eyebrow">@L["Shell.Eyebrow"]</span>
+                <h1 class="admin-users-page__hero-title">@L["Shell.Title"]</h1>
+                <p class="admin-users-page__hero-text">@L["Shell.Description"]</p>
+            </MudPaper>
+
+            @if (_adminUsers is not null)
+            {
+                <div class="admin-users-page__stats">
+                    @foreach (var card in GetSummaryCards(_adminUsers))
+                    {
+                        <MudPaper Class="admin-users-page__stat-card" Elevation="0">
+                            <span class="admin-users-page__stat-label">@card.Label</span>
+                            <strong class="admin-users-page__stat-value">@card.Value</strong>
+                            <p class="admin-users-page__stat-description">@card.Description</p>
+                        </MudPaper>
+                    }
+                </div>
+            }
+
+            <MudPaper Class="admin-users-page__panel" Elevation="0">
+                <div class="admin-users-page__panel-header">
+                    <div>
+                        <MudText Typo="Typo.h4">@L["Panel.Title"]</MudText>
+                        <MudText Typo="Typo.body2" Class="mt-1">@L["Panel.Description"]</MudText>
+                    </div>
+                </div>
+
+                @if (!AuthSession.IsAuthenticated)
+                {
+                    <MudAlert Severity="Severity.Warning" Variant="Variant.Outlined" Dense="true" Class="mt-4">
+                        <div class="admin-users-page__alert-block">
+                            <strong>@L["States.AuthRequired"]</strong>
+                            <span>@L["States.AuthRequiredDescription"]</span>
+                        </div>
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-3" Href="@RoutePaths.Ui.Login">
+                            @L["Actions.SignIn"]
+                        </MudButton>
+                    </MudAlert>
+                }
+                else
+                {
+                    <form class="admin-users-page__toolbar" @onsubmit="HandleSearchAsync" @onsubmit:preventDefault>
+                        <MudTextField T="string"
+                                      Value="@_searchText"
+                                      ValueChanged="OnSearchTextChanged"
+                                      Placeholder="@L["Search.Placeholder"]"
+                                      Variant="Variant.Outlined"
+                                      Margin="Margin.Dense"
+                                      Adornment="Adornment.Start"
+                                      AdornmentIcon="@Icons.Material.Filled.Search"
+                                      Class="admin-users-page__search" />
+
+                        <div class="admin-users-page__toolbar-actions">
+                            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">
+                                @L["Actions.Search"]
+                            </MudButton>
+                            <MudButton Variant="Variant.Text" Color="Color.Default" OnClick="ResetSearchAsync">
+                                @L["Actions.Reset"]
+                            </MudButton>
+                            <MudButton Variant="Variant.Outlined" Color="Color.Default" OnClick="RefreshAsync">
+                                @L["Actions.Refresh"]
+                            </MudButton>
+                        </div>
+                    </form>
+
+                    @if (_isLoading)
+                    {
+                        <div class="admin-users-page__loading">
+                            <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+                            <MudText Typo="Typo.body1">@L["States.Loading"]</MudText>
+                        </div>
+                    }
+                    else if (_isForbidden)
+                    {
+                        <MudAlert Severity="Severity.Error" Variant="Variant.Outlined" Dense="true" Class="mt-4">
+                            <div class="admin-users-page__alert-block">
+                                <strong>@L["States.Forbidden"]</strong>
+                                <span>@L["States.ForbiddenDescription"]</span>
+                            </div>
+                        </MudAlert>
+                    }
+                    else if (!string.IsNullOrWhiteSpace(_errorMessage))
+                    {
+                        <MudAlert Severity="Severity.Error" Variant="Variant.Outlined" Dense="true" Class="mt-4">
+                            <div class="admin-users-page__alert-block">
+                                <strong>@L["Errors.LoadUsers"]</strong>
+                                <span>@_errorMessage</span>
+                            </div>
+                            <MudButton Variant="Variant.Outlined" Size="Size.Small" Class="mt-3" OnClick="RefreshAsync">
+                                @L["Actions.Retry"]
+                            </MudButton>
+                        </MudAlert>
+                    }
+                    else if (_adminUsers is null || _adminUsers.Users is null || _adminUsers.Users.Count == 0)
+                    {
+                        <MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Dense="true" Class="mt-4">
+                            <div class="admin-users-page__alert-block">
+                                <strong>@L["States.Empty"]</strong>
+                                <span>@L["States.EmptyDescription"]</span>
+                            </div>
+                        </MudAlert>
+                    }
+                    else
+                    {
+                        <div class="admin-users-page__table-wrap">
+                            <table class="admin-users-page__table">
+                                <thead>
+                                    <tr>
+                                        <th>@L["Table.User"]</th>
+                                        <th>@L["Table.Email"]</th>
+                                        <th>@L["Table.Role"]</th>
+                                        <th>@L["Table.Status"]</th>
+                                        <th>@L["Table.Platform"]</th>
+                                        <th>@L["Table.Verified"]</th>
+                                        <th>@L["Table.LastLogin"]</th>
+                                        <th>@L["Table.Created"]</th>
+                                        <th>@L["Table.Actions"]</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var user in _adminUsers.Users)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <div class="admin-users-page__user-cell">
+                                                    <span class="admin-users-page__user-avatar">@GetInitials(user.Username)</span>
+                                                    <div>
+                                                        <strong>@user.Username</strong>
+                                                        <span>@user.UserId</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>@user.Email</td>
+                                            <td>
+                                                <MudChip T="string" Variant="Variant.Outlined" Color="@GetRoleColor(user.Role)">
+                                                    @GetRoleLabel(user.Role)
+                                                </MudChip>
+                                            </td>
+                                            <td>
+                                                <MudChip T="string" Variant="Variant.Filled" Color="@GetStatusColor(user.Status)">
+                                                    @GetStatusLabel(user.Status)
+                                                </MudChip>
+                                            </td>
+                                            <td>@user.SignupPlatform</td>
+                                            <td>
+                                                <MudChip T="string" Variant="Variant.Outlined" Color="@(user.IsEmailVerified ? Color.Success : Color.Warning)">
+                                                    @(user.IsEmailVerified ? L["Common.Yes"] : L["Common.No"])
+                                                </MudChip>
+                                            </td>
+                                            <td>@FormatDate(user.LastLoginAtUtc)</td>
+                                            <td>@FormatDate(user.CreatedAtUtc)</td>
+                                            <td>
+                                                <MudButton Variant="Variant.Text"
+                                                           Color="Color.Primary"
+                                                           Size="Size.Small"
+                                                           OnClick="@(() => TogglePasswordEditor(user))">
+                                                    @L["Actions.ChangePassword"]
+                                                </MudButton>
+                                            </td>
+                                        </tr>
+
+                                        @if (IsPasswordEditorOpen(user))
+                                        {
+                                            <tr class="admin-users-page__password-row">
+                                                <td colspan="9">
+                                                    <div class="admin-users-page__password-card">
+                                                        <div>
+                                                            <strong>@L["Password.Title"]</strong>
+                                                            <p>@L["Password.Description", user.Username ?? string.Empty]</p>
+                                                        </div>
+
+                                                        <div class="admin-users-page__password-grid">
+                                                            <MudTextField T="string"
+                                                                          @bind-Value="_newPassword"
+                                                                          Label="@L["Password.NewPassword"]"
+                                                                          Variant="Variant.Outlined"
+                                                                          InputType="InputType.Password" />
+                                                            <MudTextField T="string"
+                                                                          @bind-Value="_confirmPassword"
+                                                                          Label="@L["Password.ConfirmPassword"]"
+                                                                          Variant="Variant.Outlined"
+                                                                          InputType="InputType.Password" />
+                                                        </div>
+
+                                                        <p class="admin-users-page__password-hint">@L["Password.Hint"]</p>
+
+                                                        <div class="admin-users-page__password-actions">
+                                                            <MudButton Variant="Variant.Text" Color="Color.Default" OnClick="ClosePasswordEditor">
+                                                                @L["Actions.Cancel"]
+                                                            </MudButton>
+                                                            <MudButton Variant="Variant.Filled"
+                                                                       Color="Color.Primary"
+                                                                       Disabled="@(_isSavingPassword)"
+                                                                       OnClick="@(() => ChangePasswordAsync(user))">
+                                                                @L["Actions.SavePassword"]
+                                                            </MudButton>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                }
+            </MudPaper>
+        </div>
+    </div>
+</section>
