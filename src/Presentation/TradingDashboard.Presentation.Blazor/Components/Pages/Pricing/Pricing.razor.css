@@ -1,0 +1,265 @@
+.pricing-page {
+    max-width: min(1280px, calc(100vw - 32px));
+    margin: 0 auto;
+    padding: 3.5rem 0 4rem;
+}
+
+.pricing-page__hero {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.pricing-page__kicker {
+    display: inline-flex;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    background: rgba(18, 44, 87, 0.08);
+    color: #12345d;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.pricing-page__title {
+    margin: 1rem 0 0.8rem;
+    color: #091a32;
+    font-size: clamp(2.4rem, 4.4vw, 4.2rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+}
+
+.pricing-page__subtitle {
+    max-width: 720px;
+    margin: 0 auto;
+    color: #5d6f84;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.pricing-page__subscription-alert {
+    max-width: 720px;
+    margin: 0 auto 1.5rem;
+}
+
+.pricing-page__surface {
+    padding: 1rem;
+    border-radius: 2rem;
+    background:
+        radial-gradient(circle at top left, rgba(255, 92, 124, 0.12), transparent 30%),
+        linear-gradient(180deg, #ffffff 0%, #f3f7fb 100%);
+    box-shadow: 0 30px 80px rgba(18, 44, 87, 0.12);
+}
+
+.pricing-page__grid {
+    display: grid;
+    grid-template-columns: minmax(320px, 1.05fr) minmax(320px, 1fr);
+    gap: 1.25rem;
+}
+
+.pricing-page__offer,
+.pricing-page__features-card {
+    height: 100%;
+    padding: 2rem;
+    border-radius: 1.6rem;
+    background: #ffffff;
+}
+
+.pricing-page__offer {
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(160deg, rgba(18, 44, 87, 0.96) 0%, rgba(21, 79, 131, 0.92) 100%);
+    color: #ffffff;
+}
+
+.pricing-page__offer::after {
+    content: "";
+    position: absolute;
+    inset: auto -5rem -6rem auto;
+    width: 16rem;
+    height: 16rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.pricing-page__offer-header {
+    position: relative;
+    z-index: 1;
+}
+
+.pricing-page__offer-header h2 {
+    margin: 0.9rem 0 0.8rem;
+    font-size: clamp(2rem, 3.2vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+}
+
+.pricing-page__offer-header p,
+.pricing-page__plan-note,
+.pricing-page__auth-note {
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.8;
+}
+
+.pricing-page__badge {
+    display: inline-flex;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.pricing-page__cycle-picker {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 0.75rem;
+    margin: 1.7rem 0 1.5rem;
+}
+
+.pricing-page__cycle-button {
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 999px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0.8rem 1.2rem;
+    transition: all 0.2s ease;
+}
+
+.pricing-page__cycle-button--active {
+    background: #ffffff;
+    color: #12345d;
+    box-shadow: 0 14px 32px rgba(8, 19, 37, 0.25);
+}
+
+.pricing-page__price-block {
+    position: relative;
+    z-index: 1;
+    padding: 1.4rem 0 1rem;
+}
+
+.pricing-page__price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.pricing-page__price {
+    font-size: clamp(2.4rem, 4vw, 4rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.05em;
+}
+
+.pricing-page__price-unit {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.pricing-page__billing-label {
+    margin: 0.7rem 0 0;
+    color: rgba(255, 255, 255, 0.74);
+}
+
+.pricing-page__savings {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-top: 1rem;
+    padding: 0.55rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.pricing-page__savings strong {
+    color: #ffd166;
+}
+
+.pricing-page__cta {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-height: 56px;
+    margin-top: 1rem;
+}
+
+.pricing-page__auth-note {
+    position: relative;
+    z-index: 1;
+    margin-top: 0.9rem;
+    font-size: 0.92rem;
+}
+
+.pricing-page__features-card {
+    border: 1px solid rgba(18, 44, 87, 0.08);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.pricing-page__features-card h3 {
+    margin: 0 0 1.2rem;
+    color: #102645;
+    font-size: 1.55rem;
+    font-weight: 800;
+}
+
+.pricing-page__features-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.95rem;
+}
+
+.pricing-page__features-card li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.85rem;
+    align-items: start;
+    color: #4d6178;
+    line-height: 1.75;
+}
+
+.pricing-page__features-card i {
+    color: #1d9a6c;
+    font-size: 1.2rem;
+    margin-top: 0.15rem;
+}
+
+.pricing-page__loading {
+    min-height: 240px;
+    border-radius: 1.5rem;
+}
+
+@media (max-width: 991.98px) {
+    .pricing-page__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .pricing-page {
+        max-width: calc(100vw - 18px);
+        padding-top: 2rem;
+    }
+
+    .pricing-page__surface {
+        padding: 0.75rem;
+        border-radius: 1.5rem;
+    }
+
+    .pricing-page__offer,
+    .pricing-page__features-card {
+        padding: 1.3rem;
+    }
+
+    .pricing-page__cycle-picker {
+        flex-direction: column;
+    }
+}

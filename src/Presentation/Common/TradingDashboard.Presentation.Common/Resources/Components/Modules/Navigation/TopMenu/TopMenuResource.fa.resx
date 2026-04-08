@@ -96,6 +96,9 @@
   <data name="Menu.Navigation" xml:space="preserve">
     <value>باز کردن منوی ناوبری</value>
   </data>
+  <data name="Menu.Pricing" xml:space="preserve">
+    <value>قیمت‌گذاری</value>
+  </data>
   <data name="Menu.Serve" xml:space="preserve">
     <value>خدمات</value>
   </data>

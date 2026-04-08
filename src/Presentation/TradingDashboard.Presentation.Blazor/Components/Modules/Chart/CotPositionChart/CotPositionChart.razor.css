@@ -2,6 +2,16 @@
     overflow: hidden;
 }
 
+.cot-net-position-shell ::deep .mud-tabs-toolbar {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+}
+
+.cot-net-position-shell ::deep .mud-tabs-toolbar::-webkit-scrollbar {
+    display: none;
+}
+
 .cot-position-filter-panel {
     border-radius: 1rem;
     background: #fff;
@@ -142,5 +152,57 @@
     .cot-net-position-legend-item {
         width: 100%;
         justify-content: space-between;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .cot-net-position-shell {
+        padding: 1rem !important;
+    }
+
+    .cot-net-position-shell ::deep .mud-tab {
+        min-width: max-content;
+        padding-inline: 0.9rem;
+    }
+
+    .cot-position-filter-panel {
+        border-radius: 0.9rem;
+        padding: 1rem !important;
+    }
+
+    .cot-position-filter-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .cot-position-filter-panel ::deep .cot-position-filter-action.mud-button-root {
+        width: auto;
+        min-width: 120px;
+    }
+
+    .cot-net-position-legend {
+        gap: 0.5rem;
+    }
+
+    .cot-net-position-legend-item {
+        padding: 0.45rem 0.6rem;
+        font-size: 0.9rem;
+    }
+
+    .cot-net-position-chart {
+        padding: 0.35rem;
+    }
+
+    .cot-net-position-chart svg {
+        min-width: 0;
+    }
+
+    .cot-net-position-axis-label {
+        font-size: 12px;
+    }
+
+    .cot-net-position-axis-label.date {
+        font-size: 10px;
     }
 }

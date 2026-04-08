@@ -70,3 +70,22 @@
         height: 260px;
     }
 }
+
+@media (max-width: 767.98px) {
+    .cot-long-short-shell {
+        padding: 1rem !important;
+    }
+
+    .cot-long-short-grid {
+        gap: 1rem;
+    }
+
+    .cot-long-short-item {
+        flex-basis: calc(50% - 0.5rem);
+        min-width: 0;
+    }
+
+    .cot-long-short-bar {
+        height: 200px;
+    }
+}

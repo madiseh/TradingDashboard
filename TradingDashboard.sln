@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
 VisualStudioVersion = 18.4.11626.88
@@ -46,15 +46,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingDashboard.Features.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingDashboard.Features.Cot.Presentation.Api", "src\Features\Cot\TradingDashboard.Features.Cot.Presentation.Api\TradingDashboard.Features.Cot.Presentation.Api.csproj", "{DA8DE195-4B2F-473D-8940-BCEC4A8A3F21}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Login", "Login", "{7207AF9D-9CAF-8834-F77F-08A59F2F6B3E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserManagement", "UserManagement", "{7207AF9D-9CAF-8834-F77F-08A59F2F6B3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingDashboard.Features.Login.Domain", "src\Features\Login\TradingDashboard.Features.Login.Domain\TradingDashboard.Features.Login.Domain.csproj", "{10619B32-BFAC-4F71-8869-D031B69E2AA5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingDashboard.Features.UserManagement.Domain", "src\Features\UserManagement\TradingDashboard.Features.UserManagement.Domain\TradingDashboard.Features.UserManagement.Domain.csproj", "{10619B32-BFAC-4F71-8869-D031B69E2AA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingDashboard.Features.Login.Application", "src\Features\Login\TradingDashboard.Features.Login.Application\TradingDashboard.Features.Login.Application.csproj", "{E0F23A4C-E012-4A9E-851A-0BCC23B97F04}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingDashboard.Features.UserManagement.Application", "src\Features\UserManagement\TradingDashboard.Features.UserManagement.Application\TradingDashboard.Features.UserManagement.Application.csproj", "{E0F23A4C-E012-4A9E-851A-0BCC23B97F04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingDashboard.Features.Login.Infrastructure", "src\Features\Login\TradingDashboard.Features.Login.Infrastructure\TradingDashboard.Features.Login.Infrastructure.csproj", "{46376D9F-42ED-48C9-9245-4E156FCF3320}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingDashboard.Features.UserManagement.Infrastructure", "src\Features\UserManagement\TradingDashboard.Features.UserManagement.Infrastructure\TradingDashboard.Features.UserManagement.Infrastructure.csproj", "{46376D9F-42ED-48C9-9245-4E156FCF3320}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingDashboard.Features.Login.Presentation.Api", "src\Features\Login\TradingDashboard.Features.Login.Presentation.Api\TradingDashboard.Features.Login.Presentation.Api.csproj", "{3DE6DF6E-D4D7-48B0-A948-ED9D27DA64E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingDashboard.Features.UserManagement.Presentation.Api", "src\Features\UserManagement\TradingDashboard.Features.UserManagement.Presentation.Api\TradingDashboard.Features.UserManagement.Presentation.Api.csproj", "{3DE6DF6E-D4D7-48B0-A948-ED9D27DA64E5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingDashboard.Domain.Common", "src\Domain\TradingDashboard.Domain.Common\TradingDashboard.Domain.Common.csproj", "{CC2C9F58-F6E7-4E2F-A60E-D7B56C3D3B35}"
 EndProject

@@ -20,19 +20,19 @@
     <meta name="twitter:image" content="@SiteBranding.AbsoluteUrl(SiteBranding.Image("hero/hero-thumb1.png"))" />
 </HeadContent>
 
-<section class="td-inner-hero td-inner-hero--light">
+<section class="td-inner-hero td-inner-hero--light currency-strength-dashboard-hero-section">
     <div class="container">
-        <div class="section__content text-center">
+        <div class="section__content text-center currency-strength-dashboard-hero">
             <span class="section__content-sub-title headingFour"><img src="@SiteBranding.Image("element/section-badge1.png")" alt="Badge" />@L["Hero.Badge"]</span>
             <h1 class="section__content-title">@L["Hero.Title"]</h1>
-            <p class="section__content-text">@L["Hero.Description"]</p>
+            <p class="section__content-text currency-strength-dashboard-hero__text">@L["Hero.Description"]</p>
         </div>
     </div>
 </section>
 
 <section class="section td-cot-section">
     <div class="container-fluid currency-strength-dashboard-shell">
-        <div class="td-cot-panel">
+        <div class="td-cot-panel currency-strength-dashboard-panel">
             <MudStack Spacing="4" Class="currency-strength-dashboard">
                 @if (_isLoadingTimeframes)
                 {
@@ -59,12 +59,12 @@
                     {
                         <MudPaper Class="pa-4 currency-strength-dashboard__summary">
                             <MudStack Spacing="1">
-                                <MudText Typo="Typo.h4">@_snapshot.TimeframeLabel</MudText>
-                                <MudText Typo="Typo.body2" Color="Color.Secondary">@_snapshot.Description</MudText>
-                                <MudText Typo="Typo.body2">@L["Status.CollectedAt", _snapshot.CollectedAtUtc.ToString("yyyy-MM-dd HH:mm:ss 'UTC'")]</MudText>
+                                <MudText Typo="Typo.h4" Class="currency-strength-dashboard__summary-title">@_snapshot.TimeframeLabel</MudText>
+                                <MudText Typo="Typo.body2" Color="Color.Secondary" Class="currency-strength-dashboard__summary-copy">@_snapshot.Description</MudText>
+                                <MudText Typo="Typo.body2" Class="currency-strength-dashboard__summary-copy">@L["Status.CollectedAt", _snapshot.CollectedAtUtc.ToString("yyyy-MM-dd HH:mm:ss 'UTC'")]</MudText>
                                 @if (_snapshot.LastPointAtUtc is not null)
                                 {
-                                    <MudText Typo="Typo.body2">@L["Status.LastPoint", _snapshot.LastPointAtUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'")]</MudText>
+                                    <MudText Typo="Typo.body2" Class="currency-strength-dashboard__summary-copy">@L["Status.LastPoint", _snapshot.LastPointAtUtc.Value.ToString("yyyy-MM-dd HH:mm:ss 'UTC'")]</MudText>
                                 }
                             </MudStack>
                         </MudPaper>
@@ -85,6 +85,7 @@
                             <MudButton Variant="Variant.Filled"
                                        Color="@(timeframe.Key == _selectedTimeframeKey ? Color.Warning : Color.Primary)"
                                        Size="Size.Small"
+                                       Class="currency-strength-dashboard__timeframe-button"
                                        OnClick="@(() => OnTimeframeSelectedAsync(timeframe.Key))">
                                 @timeframe.Label
                             </MudButton>
