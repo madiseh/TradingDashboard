@@ -90,6 +90,9 @@
   <data name="Menu.Navigation" xml:space="preserve">
     <value>Gezinme menusunu ac</value>
   </data>
+  <data name="Menu.Pricing" xml:space="preserve">
+    <value>Fiyatlandirma</value>
+  </data>
   <data name="Menu.Serve" xml:space="preserve">
     <value>Hizmetler</value>
   </data>

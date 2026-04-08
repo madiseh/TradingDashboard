@@ -36,4 +36,4 @@ Provide authentication services for local credentials and Google OAuth.
 - `Authentication:Google:ClientId`
 - `Authentication:Google:ClientSecret`
 - `Jwt:*`
-- `ConnectionStrings:LoginDatabase`
+- `ConnectionStrings:UserManagementDatabase`

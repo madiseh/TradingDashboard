@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Actions.BuyMonthly" xml:space="preserve">
+    <value>Buy monthly</value>
+  </data>
+  <data name="Actions.BuyYearly" xml:space="preserve">
+    <value>Buy yearly</value>
+  </data>
+  <data name="Actions.Retry" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="Actions.SignInToSubscribe" xml:space="preserve">
+    <value>Sign in to subscribe</value>
+  </data>
+  <data name="Empty.NoPlans" xml:space="preserve">
+    <value>No pricing plans are available right now.</value>
+  </data>
+  <data name="Errors.LoadPlans" xml:space="preserve">
+    <value>Failed to load pricing plans.</value>
+  </data>
+  <data name="Errors.LoadPlansWithMessage" xml:space="preserve">
+    <value>Failed to load pricing plans. {0}</value>
+  </data>
+  <data name="Errors.Purchase" xml:space="preserve">
+    <value>We could not complete the subscription request.</value>
+  </data>
+  <data name="Errors.PurchaseWithMessage" xml:space="preserve">
+    <value>We could not complete the subscription request. {0}</value>
+  </data>
+  <data name="Features.Item1" xml:space="preserve">
+    <value>Weekly COT coverage across major futures markets</value>
+  </data>
+  <data name="Features.Item2" xml:space="preserve">
+    <value>Macro and intermarket context for directional bias</value>
+  </data>
+  <data name="Features.Item3" xml:space="preserve">
+    <value>Currency Strength dashboard with fast timeframe switching</value>
+  </data>
+  <data name="Features.Item4" xml:space="preserve">
+    <value>Key levels, pattern playbooks, and harmonic review notes</value>
+  </data>
+  <data name="Features.Item5" xml:space="preserve">
+    <value>Economic calendar and live-news context for active sessions</value>
+  </data>
+  <data name="Features.Item6" xml:space="preserve">
+    <value>Members-only research updates and roadmap briefings</value>
+  </data>
+  <data name="Features.Item7" xml:space="preserve">
+    <value>Mobile and tablet-ready access for on-the-go review</value>
+  </data>
+  <data name="Features.Item8" xml:space="preserve">
+    <value>One account, one active subscription, and seamless renewal</value>
+  </data>
+  <data name="Features.Title" xml:space="preserve">
+    <value>What you unlock</value>
+  </data>
+  <data name="Hero.Kicker" xml:space="preserve">
+    <value>TerminalPrime Membership</value>
+  </data>
+  <data name="Hero.Subtitle" xml:space="preserve">
+    <value>Choose the billing rhythm that fits your workflow and unlock the full TerminalPrime research stack.</value>
+  </data>
+  <data name="Hero.Title" xml:space="preserve">
+    <value>Pricing</value>
+  </data>
+  <data name="Labels.BilledMonthly" xml:space="preserve">
+    <value>Billed monthly</value>
+  </data>
+  <data name="Labels.BilledYearly" xml:space="preserve">
+    <value>Billed yearly</value>
+  </data>
+  <data name="Labels.Monthly" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="Labels.PerMonth" xml:space="preserve">
+    <value>per month</value>
+  </data>
+  <data name="Labels.PerYear" xml:space="preserve">
+    <value>per year</value>
+  </data>
+  <data name="Labels.Savings" xml:space="preserve">
+    <value>Annual savings</value>
+  </data>
+  <data name="Labels.Yearly" xml:space="preserve">
+    <value>Yearly</value>
+  </data>
+  <data name="Note.AuthRequired" xml:space="preserve">
+    <value>You need to sign in before the subscription can be activated.</value>
+  </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Pricing</value>
+  </data>
+  <data name="Plan.Badge" xml:space="preserve">
+    <value>Premium</value>
+  </data>
+  <data name="Plan.Description" xml:space="preserve">
+    <value>Designed for traders who want consistent macro context, COT insight, and a cleaner decision workflow.</value>
+  </data>
+  <data name="Plan.Name" xml:space="preserve">
+    <value>TerminalPrime Premium</value>
+  </data>
+  <data name="Plan.TrialNote" xml:space="preserve">
+    <value>Annual billing automatically applies your discount. Monthly billing keeps the entry point flexible.</value>
+  </data>
+  <data name="State.Processing" xml:space="preserve">
+    <value>Processing...</value>
+  </data>
+  <data name="Status.ActiveSummary" xml:space="preserve">
+    <value>Your {0} subscription is active until {1}.</value>
+  </data>
+  <data name="Status.ActiveTitle" xml:space="preserve">
+    <value>Subscription active</value>
+  </data>
+  <data name="Status.RenewalSummary" xml:space="preserve">
+    <value>Latest charge: {0}</value>
+  </data>
+  <data name="Success.PurchaseMonthly" xml:space="preserve">
+    <value>Your monthly subscription is active now.</value>
+  </data>
+  <data name="Success.PurchaseYearly" xml:space="preserve">
+    <value>Your yearly subscription is active now.</value>
+  </data>
+</root>

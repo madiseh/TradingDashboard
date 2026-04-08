@@ -6,6 +6,7 @@ public static class RoutePaths
     {
         public const string Home = "/";
         public const string Login = "/login";
+        public const string Pricing = "/pricing";
         public const string Releases = "/releases";
         public const string CurrencyStrength = "/currency-strength";
         
@@ -50,6 +51,10 @@ public static class RoutePaths
             public const string Me = $"{LoginBase}/me";
             public const string GoogleStart = $"{LoginBase}/google/start";
             public const string GoogleCallback = $"{LoginBase}/google/callback";
+            public const string SubscriptionsBase = $"{LoginBase}/subscriptions";
+            public const string SubscriptionPlans = $"{SubscriptionsBase}/plans";
+            public const string SubscriptionPurchase = $"{SubscriptionsBase}/purchase";
+            public const string MySubscription = $"{SubscriptionsBase}/me";
         }
     }
 }

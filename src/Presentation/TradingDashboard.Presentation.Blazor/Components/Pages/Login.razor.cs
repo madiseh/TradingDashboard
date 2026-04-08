@@ -4,7 +4,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.WebUtilities;
 using MudBlazor;
 using TradingDashboard.Presentation.Blazor.Services;
-using LoginContracts = TradingDashboard.Presentation.Blazor.Contracts.Login.Generated;
+using UserManagementContracts = TradingDashboard.Presentation.Blazor.Contracts.UserManagement.Generated;
 
 namespace TradingDashboard.Presentation.Blazor.Components.Pages;
 
@@ -31,8 +31,8 @@ public partial class Login
 
     private bool _isSubmitting;
     private string? _errorMessage;
-    private LoginContracts.AuthTokenResult? _authResult;
-    private LoginContracts.MeResponse? _meResult;
+    private UserManagementContracts.AuthTokenResult? _authResult;
+    private UserManagementContracts.MeResponse? _meResult;
 
     protected override async Task OnInitializedAsync()
     {
@@ -44,7 +44,7 @@ public partial class Login
         _errorMessage = null;
 
         var apiBaseUrl = Configuration[$"{HttpClientNames.ApiLogin}:BaseUrl"] ?? "https://localhost:7181";
-        var returnUrl = NavigationManager.ToAbsoluteUri(RoutePaths.Ui.Login).ToString();
+        var returnUrl = NavigationManager.ToAbsoluteUri(NavigationManager.Uri).ToString();
         var startUrl = QueryHelpers.AddQueryString(
             $"{apiBaseUrl.TrimEnd('/')}{RoutePaths.Api.Login.GoogleStart}",
             "returnUrl",
@@ -57,7 +57,7 @@ public partial class Login
     {
         await AuthenticateAsync(
             RoutePaths.Api.Login.SignIn,
-            new LoginContracts.SignInRequest
+            new UserManagementContracts.SignInRequest
             {
                 Identity = _signInIdentity,
                 Password = _signInPassword
@@ -68,7 +68,7 @@ public partial class Login
     {
         await AuthenticateAsync(
             RoutePaths.Api.Login.SignUp,
-            new LoginContracts.SignUpRequest
+            new UserManagementContracts.SignUpRequest
             {
                 Username = _signUpUsername,
                 Email = _signUpEmail,
@@ -96,7 +96,7 @@ public partial class Login
                 return;
             }
 
-            var authResult = await response.Content.ReadFromJsonAsync<LoginContracts.AuthTokenResult>();
+            var authResult = await response.Content.ReadFromJsonAsync<UserManagementContracts.AuthTokenResult>();
             if (authResult is null)
             {
                 _errorMessage = "Authentication response is empty.";
@@ -120,6 +120,7 @@ public partial class Login
 
             Snackbar.Add("Authentication succeeded.", Severity.Success);
             await LoadCurrentUserAsync();
+            NavigateAfterAuthIfNeeded();
         }
         catch (Exception ex)
         {
@@ -152,12 +153,12 @@ public partial class Login
             return;
         }
 
-        _meResult = await response.Content.ReadFromJsonAsync<LoginContracts.MeResponse>();
+        _meResult = await response.Content.ReadFromJsonAsync<UserManagementContracts.MeResponse>();
     }
 
     private static async Task<string> ExtractErrorAsync(HttpResponseMessage response)
     {
-        var payload = await response.Content.ReadFromJsonAsync<LoginContracts.ApiErrorResponse>();
+        var payload = await response.Content.ReadFromJsonAsync<UserManagementContracts.ApiErrorResponse>();
         if (payload is null)
         {
             return $"Request failed with status {(int)response.StatusCode}.";
@@ -218,7 +219,7 @@ public partial class Login
             : string.Empty;
 
         AuthSession.SetToken(accessToken, expiresAtUtc.ToUniversalTime());
-        _authResult = new LoginContracts.AuthTokenResult
+        _authResult = new UserManagementContracts.AuthTokenResult
         {
             AccessToken = accessToken,
             ExpiresAtUtc = expiresAtUtc.ToUniversalTime(),
@@ -229,5 +230,51 @@ public partial class Login
 
         Snackbar.Add("Signed in with Google successfully.", Severity.Success);
         await LoadCurrentUserAsync();
+        NavigateAfterAuthIfNeeded();
+    }
+
+    private void NavigateAfterAuthIfNeeded()
+    {
+        var redirectPath = GetSafeRedirectPath();
+        if (string.IsNullOrWhiteSpace(redirectPath))
+        {
+            return;
+        }
+
+        NavigationManager.NavigateTo(redirectPath, forceLoad: true);
+    }
+
+    private string? GetSafeRedirectPath()
+    {
+        var currentUri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        var query = QueryHelpers.ParseQuery(currentUri.Query);
+        if (!query.TryGetValue("returnUrl", out var returnUrlValue))
+        {
+            return null;
+        }
+
+        var rawReturnUrl = returnUrlValue.ToString();
+        if (string.IsNullOrWhiteSpace(rawReturnUrl))
+        {
+            return null;
+        }
+
+        if (rawReturnUrl.StartsWith("/", StringComparison.Ordinal))
+        {
+            return rawReturnUrl;
+        }
+
+        if (!Uri.TryCreate(rawReturnUrl, UriKind.Absolute, out var absoluteUri))
+        {
+            return null;
+        }
+
+        var appBaseUri = NavigationManager.ToAbsoluteUri(NavigationManager.BaseUri);
+        var isSameHost =
+            string.Equals(appBaseUri.Scheme, absoluteUri.Scheme, StringComparison.OrdinalIgnoreCase) &&
+            string.Equals(appBaseUri.Host, absoluteUri.Host, StringComparison.OrdinalIgnoreCase) &&
+            appBaseUri.Port == absoluteUri.Port;
+
+        return isSameHost ? absoluteUri.PathAndQuery : null;
     }
 }
