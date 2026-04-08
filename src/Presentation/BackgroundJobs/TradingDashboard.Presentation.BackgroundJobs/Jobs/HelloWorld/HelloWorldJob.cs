@@ -1,6 +1,6 @@
 using Quartz;
 
-namespace TradingDashboard.Presentation.BackgroundJobs;
+namespace TradingDashboard.Presentation.BackgroundJobs.Jobs.HelloWorld;
 
 public sealed class HelloWorldJob : IJob
 {

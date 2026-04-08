@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Quartz;
+using TradingDashboard.Presentation.BackgroundJobs.Jobs.HelloWorld;
 using TradingDashboard.Presentation.BackgroundJobs.Persistence.Context;
 using TradingDashboard.Presentation.BackgroundJobs.Scheduler;
 
@@ -26,16 +27,7 @@ public static class Program
 
     public static async Task AddJob_HelloWorld(IScheduler scheduler, BackgroundJobsDbContext dbContext)
     {
-        var job = JobBuilder.Create<HelloWorldJob>()
-            .WithIdentity("hello-world-job")
-            .Build();
-
-        var trigger = TriggerBuilder.Create()
-            .WithIdentity("hello-world-trigger")
-            .StartNow()
-            .Build();
-
-        await BackgroundJobRegistrar.AddJobAsync(scheduler, dbContext, job, trigger);
+        await HelloWorldJobRegistration.RegisterAsync(scheduler, dbContext);
     }
 
     private static void AddPersistence(IServiceCollection services, IConfiguration configuration)
