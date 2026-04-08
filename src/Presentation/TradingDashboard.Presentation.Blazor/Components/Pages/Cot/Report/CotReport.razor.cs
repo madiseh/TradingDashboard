@@ -106,6 +106,11 @@ public partial class CotReport
             : "futures only";
     }
 
+    private string GetSeoDescription()
+    {
+        return $"Review the latest {GetSelectedModelHeading()} for {GetDisplayName(InstrumentSlug)}, including open interest, trader positioning, and historical COT context.";
+    }
+
     private string GetAsOfDateLabel()
     {
         return SelectedAsOfDate?.ToString("yyyy-MM-dd") ?? "N/A";
@@ -375,12 +380,22 @@ public partial class CotReport
 
     private string BuildReportPageUri(CotReportModel model)
     {
+        return BuildReportPageUri(model, includeSelectedDate: true);
+    }
+
+    private string BuildCanonicalUrl()
+    {
+        return SiteBranding.AbsoluteUrl(BuildReportPageUri(ReportModel, includeSelectedDate: false));
+    }
+
+    private string BuildReportPageUri(CotReportModel model, bool includeSelectedDate)
+    {
         var queryParts = new List<string>
         {
             $"model={Uri.EscapeDataString(model.ToContractValue())}"
         };
 
-        if (_hasExplicitDateSelection && SelectedAsOfDate is not null)
+        if (includeSelectedDate && _hasExplicitDateSelection && SelectedAsOfDate is not null)
         {
             queryParts.Add($"reportDate={Uri.EscapeDataString(SelectedAsOfDate.Value.ToString("yyyy-MM-dd"))}");
         }

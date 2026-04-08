@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using TradingDashboard.Presentation.Blazor.Services;
+using TradingDashboard.Presentation.Blazor.Services.SiteIndexing;
 
 namespace TradingDashboard.Presentation.Blazor.DependencyInjection;
 
@@ -29,6 +30,7 @@ public static class IocRegistration
         });
 
         services.AddScoped<AuthSession>();
+        services.AddScoped<ISiteIndexingService, SiteIndexingService>();
 
         return services;
     }
