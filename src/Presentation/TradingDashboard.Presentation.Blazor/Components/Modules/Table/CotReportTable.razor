@@ -12,132 +12,136 @@
         var total = GetCategory("total");
         var nonReportable = GetCategory("nonreportable");
 
-        <table class="cot-grid">
-            <thead>
-                <tr>
-                    <th colspan="3">Non-Commercial</th>
-                    <th colspan="2">Commercial</th>
-                    <th colspan="2">Total</th>
-                    <th colspan="2">Non-Reportable</th>
-                </tr>
-                <tr>
-                    <th>Long</th>
-                    <th>Short</th>
-                    <th>Spreads</th>
-                    <th>Long</th>
-                    <th>Short</th>
-                    <th>Long</th>
-                    <th>Short</th>
-                    <th>Long</th>
-                    <th>Short</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="5">@Report.ContractUnits</td>
-                    <td colspan="4" class="align-right">Open Interest: <strong>@FormatNumber(Report.OpenInterestAll)</strong></td>
-                </tr>
-                <tr>
-                    <td><strong>@FormatNumber(nonCommercial?.Long?.Positions)</strong></td>
-                    <td><strong>@FormatNumber(nonCommercial?.Short?.Positions)</strong></td>
-                    <td><strong>@FormatNumber(nonCommercial?.Spread?.Positions)</strong></td>
-                    <td><strong>@FormatNumber(commercial?.Long?.Positions)</strong></td>
-                    <td><strong>@FormatNumber(commercial?.Short?.Positions)</strong></td>
-                    <td><strong>@FormatNumber(total?.Long?.Positions)</strong></td>
-                    <td><strong>@FormatNumber(total?.Short?.Positions)</strong></td>
-                    <td><strong>@FormatNumber(nonReportable?.Long?.Positions)</strong></td>
-                    <td><strong>@FormatNumber(nonReportable?.Short?.Positions)</strong></td>
-                </tr>
-                <tr>
-                    <td colspan="5">Changes</td>
-                    <td colspan="4" class="align-right">
-                        (Change In Open Interest:
-                        <span class="@GetChangeCss(Report.ChangeInOpenInterestAll)">@FormatSigned(Report.ChangeInOpenInterestAll)</span>)
-                    </td>
-                </tr>
-                <tr>
-                    <td><span class="@GetChangeCss(nonCommercial?.Long?.Change)">@FormatSigned(nonCommercial?.Long?.Change)</span></td>
-                    <td><span class="@GetChangeCss(nonCommercial?.Short?.Change)">@FormatSigned(nonCommercial?.Short?.Change)</span></td>
-                    <td><span class="@GetChangeCss(nonCommercial?.Spread?.Change)">@FormatSigned(nonCommercial?.Spread?.Change)</span></td>
-                    <td><span class="@GetChangeCss(commercial?.Long?.Change)">@FormatSigned(commercial?.Long?.Change)</span></td>
-                    <td><span class="@GetChangeCss(commercial?.Short?.Change)">@FormatSigned(commercial?.Short?.Change)</span></td>
-                    <td><span class="@GetChangeCss(total?.Long?.Change)">@FormatSigned(total?.Long?.Change)</span></td>
-                    <td><span class="@GetChangeCss(total?.Short?.Change)">@FormatSigned(total?.Short?.Change)</span></td>
-                    <td><span class="@GetChangeCss(nonReportable?.Long?.Change)">@FormatSigned(nonReportable?.Long?.Change)</span></td>
-                    <td><span class="@GetChangeCss(nonReportable?.Short?.Change)">@FormatSigned(nonReportable?.Short?.Change)</span></td>
-                </tr>
-                <tr>
-                    <td colspan="9">Percent of Open Interest for Each Category of Traders</td>
-                </tr>
-                <tr>
-                    <td><strong>@FormatPercent(nonCommercial?.Long?.PercentOfOpenInterest)</strong></td>
-                    <td><strong>@FormatPercent(nonCommercial?.Short?.PercentOfOpenInterest)</strong></td>
-                    <td><strong>@FormatPercent(nonCommercial?.Spread?.PercentOfOpenInterest)</strong></td>
-                    <td><strong>@FormatPercent(commercial?.Long?.PercentOfOpenInterest)</strong></td>
-                    <td><strong>@FormatPercent(commercial?.Short?.PercentOfOpenInterest)</strong></td>
-                    <td><strong>@FormatPercent(total?.Long?.PercentOfOpenInterest)</strong></td>
-                    <td><strong>@FormatPercent(total?.Short?.PercentOfOpenInterest)</strong></td>
-                    <td><strong>@FormatPercent(nonReportable?.Long?.PercentOfOpenInterest)</strong></td>
-                    <td><strong>@FormatPercent(nonReportable?.Short?.PercentOfOpenInterest)</strong></td>
-                </tr>
-                <tr>
-                    <td colspan="5">Number of Traders in Each Category</td>
-                    <td colspan="4" class="align-right">(Total Traders: <strong>@FormatNumber(Report.TotalTraders)</strong>)</td>
-                </tr>
-                <tr>
-                    <td><strong>@FormatNumber(nonCommercial?.Long?.Traders)</strong></td>
-                    <td><strong>@FormatNumber(nonCommercial?.Short?.Traders)</strong></td>
-                    <td><strong>@FormatNumber(nonCommercial?.Spread?.Traders)</strong></td>
-                    <td><strong>@FormatNumber(commercial?.Long?.Traders)</strong></td>
-                    <td><strong>@FormatNumber(commercial?.Short?.Traders)</strong></td>
-                    <td><strong>@FormatNumber(total?.Long?.Traders)</strong></td>
-                    <td><strong>@FormatNumber(total?.Short?.Traders)</strong></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="cot-table-shell">
+            <table class="cot-grid cot-grid--legacy">
+                <thead>
+                    <tr>
+                        <th colspan="3">Non-Commercial</th>
+                        <th colspan="2">Commercial</th>
+                        <th colspan="2">Total</th>
+                        <th colspan="2">Non-Reportable</th>
+                    </tr>
+                    <tr>
+                        <th>Long</th>
+                        <th>Short</th>
+                        <th>Spreads</th>
+                        <th>Long</th>
+                        <th>Short</th>
+                        <th>Long</th>
+                        <th>Short</th>
+                        <th>Long</th>
+                        <th>Short</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5">@Report.ContractUnits</td>
+                        <td colspan="4" class="align-right">Open Interest: <strong>@FormatNumber(Report.OpenInterestAll)</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@FormatNumber(nonCommercial?.Long?.Positions)</strong></td>
+                        <td><strong>@FormatNumber(nonCommercial?.Short?.Positions)</strong></td>
+                        <td><strong>@FormatNumber(nonCommercial?.Spread?.Positions)</strong></td>
+                        <td><strong>@FormatNumber(commercial?.Long?.Positions)</strong></td>
+                        <td><strong>@FormatNumber(commercial?.Short?.Positions)</strong></td>
+                        <td><strong>@FormatNumber(total?.Long?.Positions)</strong></td>
+                        <td><strong>@FormatNumber(total?.Short?.Positions)</strong></td>
+                        <td><strong>@FormatNumber(nonReportable?.Long?.Positions)</strong></td>
+                        <td><strong>@FormatNumber(nonReportable?.Short?.Positions)</strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">Changes</td>
+                        <td colspan="4" class="align-right">
+                            (Change In Open Interest:
+                            <span class="@GetChangeCss(Report.ChangeInOpenInterestAll)">@FormatSigned(Report.ChangeInOpenInterestAll)</span>)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="@GetChangeCss(nonCommercial?.Long?.Change)">@FormatSigned(nonCommercial?.Long?.Change)</span></td>
+                        <td><span class="@GetChangeCss(nonCommercial?.Short?.Change)">@FormatSigned(nonCommercial?.Short?.Change)</span></td>
+                        <td><span class="@GetChangeCss(nonCommercial?.Spread?.Change)">@FormatSigned(nonCommercial?.Spread?.Change)</span></td>
+                        <td><span class="@GetChangeCss(commercial?.Long?.Change)">@FormatSigned(commercial?.Long?.Change)</span></td>
+                        <td><span class="@GetChangeCss(commercial?.Short?.Change)">@FormatSigned(commercial?.Short?.Change)</span></td>
+                        <td><span class="@GetChangeCss(total?.Long?.Change)">@FormatSigned(total?.Long?.Change)</span></td>
+                        <td><span class="@GetChangeCss(total?.Short?.Change)">@FormatSigned(total?.Short?.Change)</span></td>
+                        <td><span class="@GetChangeCss(nonReportable?.Long?.Change)">@FormatSigned(nonReportable?.Long?.Change)</span></td>
+                        <td><span class="@GetChangeCss(nonReportable?.Short?.Change)">@FormatSigned(nonReportable?.Short?.Change)</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="9">Percent of Open Interest for Each Category of Traders</td>
+                    </tr>
+                    <tr>
+                        <td><strong>@FormatPercent(nonCommercial?.Long?.PercentOfOpenInterest)</strong></td>
+                        <td><strong>@FormatPercent(nonCommercial?.Short?.PercentOfOpenInterest)</strong></td>
+                        <td><strong>@FormatPercent(nonCommercial?.Spread?.PercentOfOpenInterest)</strong></td>
+                        <td><strong>@FormatPercent(commercial?.Long?.PercentOfOpenInterest)</strong></td>
+                        <td><strong>@FormatPercent(commercial?.Short?.PercentOfOpenInterest)</strong></td>
+                        <td><strong>@FormatPercent(total?.Long?.PercentOfOpenInterest)</strong></td>
+                        <td><strong>@FormatPercent(total?.Short?.PercentOfOpenInterest)</strong></td>
+                        <td><strong>@FormatPercent(nonReportable?.Long?.PercentOfOpenInterest)</strong></td>
+                        <td><strong>@FormatPercent(nonReportable?.Short?.PercentOfOpenInterest)</strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">Number of Traders in Each Category</td>
+                        <td colspan="4" class="align-right">(Total Traders: <strong>@FormatNumber(Report.TotalTraders)</strong>)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>@FormatNumber(nonCommercial?.Long?.Traders)</strong></td>
+                        <td><strong>@FormatNumber(nonCommercial?.Short?.Traders)</strong></td>
+                        <td><strong>@FormatNumber(nonCommercial?.Spread?.Traders)</strong></td>
+                        <td><strong>@FormatNumber(commercial?.Long?.Traders)</strong></td>
+                        <td><strong>@FormatNumber(commercial?.Short?.Traders)</strong></td>
+                        <td><strong>@FormatNumber(total?.Long?.Traders)</strong></td>
+                        <td><strong>@FormatNumber(total?.Short?.Traders)</strong></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     }
     else
     {
-        <table class="cot-grid">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th colspan="3">Long</th>
-                    <th colspan="3">Short</th>
-                    <th colspan="3">Spread</th>
-                </tr>
-                <tr>
-                    <th></th>
-                    <th>Positions</th>
-                    <th>Open Int</th>
-                    <th># Traders</th>
-                    <th>Positions</th>
-                    <th>Open Int</th>
-                    <th># Traders</th>
-                    <th>Positions</th>
-                    <th>Open Int</th>
-                    <th># Traders</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var category in Categories)
-                {
+        <div class="cot-table-shell">
+            <table class="cot-grid cot-grid--detailed">
+                <thead>
                     <tr>
-                        <td><strong>@category.Label</strong></td>
-                        <td><strong>@FormatNumber(category.Long?.Positions)</strong><br /><span class="@GetChangeCss(category.Long?.Change)">@FormatSigned(category.Long?.Change)</span></td>
-                        <td><strong>@FormatPercent(category.Long?.PercentOfOpenInterest)</strong></td>
-                        <td><strong>@FormatNumber(category.Long?.Traders)</strong></td>
-                        <td><strong>@FormatNumber(category.Short?.Positions)</strong><br /><span class="@GetChangeCss(category.Short?.Change)">@FormatSigned(category.Short?.Change)</span></td>
-                        <td><strong>@FormatPercent(category.Short?.PercentOfOpenInterest)</strong></td>
-                        <td><strong>@FormatNumber(category.Short?.Traders)</strong></td>
-                        <td><strong>@FormatNumber(category.Spread?.Positions)</strong><br /><span class="@GetChangeCss(category.Spread?.Change)">@FormatSigned(category.Spread?.Change)</span></td>
-                        <td><strong>@FormatPercent(category.Spread?.PercentOfOpenInterest)</strong></td>
-                        <td><strong>@FormatNumber(category.Spread?.Traders)</strong></td>
+                        <th></th>
+                        <th colspan="3">Long</th>
+                        <th colspan="3">Short</th>
+                        <th colspan="3">Spread</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                    <tr>
+                        <th></th>
+                        <th>Positions</th>
+                        <th>Open Int</th>
+                        <th># Traders</th>
+                        <th>Positions</th>
+                        <th>Open Int</th>
+                        <th># Traders</th>
+                        <th>Positions</th>
+                        <th>Open Int</th>
+                        <th># Traders</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var category in Categories)
+                    {
+                        <tr>
+                            <td><strong>@category.Label</strong></td>
+                            <td><strong>@FormatNumber(category.Long?.Positions)</strong><br /><span class="@GetChangeCss(category.Long?.Change)">@FormatSigned(category.Long?.Change)</span></td>
+                            <td><strong>@FormatPercent(category.Long?.PercentOfOpenInterest)</strong></td>
+                            <td><strong>@FormatNumber(category.Long?.Traders)</strong></td>
+                            <td><strong>@FormatNumber(category.Short?.Positions)</strong><br /><span class="@GetChangeCss(category.Short?.Change)">@FormatSigned(category.Short?.Change)</span></td>
+                            <td><strong>@FormatPercent(category.Short?.PercentOfOpenInterest)</strong></td>
+                            <td><strong>@FormatNumber(category.Short?.Traders)</strong></td>
+                            <td><strong>@FormatNumber(category.Spread?.Positions)</strong><br /><span class="@GetChangeCss(category.Spread?.Change)">@FormatSigned(category.Spread?.Change)</span></td>
+                            <td><strong>@FormatPercent(category.Spread?.PercentOfOpenInterest)</strong></td>
+                            <td><strong>@FormatNumber(category.Spread?.Traders)</strong></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     }
 

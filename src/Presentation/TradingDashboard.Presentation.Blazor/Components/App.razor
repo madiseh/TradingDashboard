@@ -57,6 +57,21 @@
             }
         };
 
+        window.tradingDashboardNavigation = {
+            closeOffcanvas: function (offcanvasId) {
+                if (!offcanvasId || typeof bootstrap === "undefined" || !bootstrap.Offcanvas) {
+                    return;
+                }
+
+                const offcanvasElement = document.getElementById(offcanvasId);
+                if (!offcanvasElement) {
+                    return;
+                }
+
+                bootstrap.Offcanvas.getOrCreateInstance(offcanvasElement).hide();
+            }
+        };
+
     </script>
     <script src="@SiteBranding.ThemeAsset("vendor/bootstrap/js/bootstrap.bundle.min.js")"></script>
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>

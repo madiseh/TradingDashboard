@@ -1,0 +1,108 @@
+.td-cot-report-hero {
+    max-width: 980px;
+}
+
+.td-cot-report-hero-text {
+    max-width: 760px;
+    margin-inline: auto;
+}
+
+.td-cot-report-shell {
+    overflow: hidden;
+}
+
+.td-cot-report-summary-card {
+    background: linear-gradient(180deg, rgba(248, 251, 255, 0.98) 0%, #ffffff 100%);
+}
+
+.td-cot-report-market-label,
+.td-cot-report-contract-units,
+.td-cot-report-meta-row,
+.td-cot-report-intro {
+    overflow-wrap: anywhere;
+}
+
+.td-cot-report-kpis {
+    width: 100%;
+}
+
+.td-cot-report-kpi {
+    margin: 0;
+}
+
+.td-cot-report-change-chip {
+    vertical-align: middle;
+}
+
+.td-cot-report-date-controls {
+    flex-wrap: nowrap;
+}
+
+.td-cot-report-date-controls :deep(.mud-input-control) {
+    min-width: 0;
+}
+
+@media (max-width: 767.98px) {
+    .td-cot-report-hero-section {
+        padding: 104px 0 44px;
+    }
+
+    .td-cot-report-hero {
+        max-width: 100%;
+    }
+
+    .td-cot-report-hero :deep(.breadcrumb) {
+        justify-content: center;
+        row-gap: 0.25rem;
+    }
+
+    .td-cot-report-hero-text {
+        font-size: 0.98rem;
+    }
+
+    .td-cot-report-shell {
+        padding: 1rem !important;
+    }
+
+    .td-cot-report-summary-grid {
+        margin-top: 0 !important;
+    }
+
+    .td-cot-report-summary-card {
+        padding: 1rem !important;
+    }
+
+    .td-cot-report-market-label {
+        font-size: 1.55rem;
+        line-height: 1.2;
+    }
+
+    .td-cot-report-date-title {
+        font-size: 1.15rem;
+    }
+
+    .td-cot-report-date-controls {
+        gap: 0.25rem;
+    }
+
+    .td-cot-report-date-controls :deep(.mud-icon-button) {
+        width: 2.25rem;
+        height: 2.25rem;
+        padding: 0.25rem;
+    }
+
+    .td-cot-report-kpis {
+        flex-direction: column;
+        align-items: stretch !important;
+        gap: 0.75rem !important;
+    }
+
+    .td-cot-report-kpi {
+        width: 100%;
+    }
+
+    .td-cot-report-intro {
+        margin-top: 1rem !important;
+        font-size: 0.95rem;
+    }
+}

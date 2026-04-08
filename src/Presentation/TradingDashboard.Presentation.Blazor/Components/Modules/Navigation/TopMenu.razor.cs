@@ -18,6 +18,18 @@ public partial class TopMenu
         new("de", "Language.Name.de", "Language.Short.de")
     ];
 
+    private IReadOnlyList<NavigationItem> NavigationItems =>
+    [
+        new("Menu.Home", RoutePaths.Ui.Home),
+        new("Menu.Cot", RoutePaths.Ui.CotHome),
+        new("Menu.CurrencyStrength", RoutePaths.Ui.CurrencyStrength),
+        new("Menu.BrokerageReviews", "/#broker-reviews"),
+        new("Menu.MarketAnalysis", RoutePaths.Ui.CotHome),
+        new("Menu.Educate", "/#video-tutorial"),
+        new("Menu.Serve", "/#packages"),
+        new("Menu.SignIn", RoutePaths.Ui.Login)
+    ];
+
     [Inject]
     private NavigationManager NavigationManager { get; set; } = default!;
 
@@ -40,6 +52,18 @@ public partial class TopMenu
     private string GetShortLanguageLabel(LanguageOption language)
     {
         return L[language.ShortLabelKey];
+    }
+
+    private string GetNavigationLabel(NavigationItem item)
+    {
+        return L[item.LabelKey];
+    }
+
+    private async Task NavigateFromMobileMenuAsync(string href)
+    {
+        await JSRuntime.InvokeVoidAsync("tradingDashboardNavigation.closeOffcanvas", "offcanvasRight");
+        await Task.Delay(200);
+        NavigationManager.NavigateTo(href);
     }
 
     private async Task OnCultureChangedAsync(string culture)
@@ -70,4 +94,6 @@ public partial class TopMenu
     }
 
     private sealed record LanguageOption(string Code, string LabelKey, string ShortLabelKey);
+
+    private sealed record NavigationItem(string LabelKey, string Href);
 }
