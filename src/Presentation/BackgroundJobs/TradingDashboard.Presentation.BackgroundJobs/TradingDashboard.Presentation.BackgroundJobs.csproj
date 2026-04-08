@@ -15,4 +15,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
     <PackageReference Include="Quartz" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Features\Cot\TradingDashboard.Features.Cot.Infrastructure\TradingDashboard.Features.Cot.Infrastructure.csproj" />
+  </ItemGroup>
 </Project>

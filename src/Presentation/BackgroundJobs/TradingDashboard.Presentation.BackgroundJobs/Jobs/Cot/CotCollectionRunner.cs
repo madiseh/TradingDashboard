@@ -1,31 +1,29 @@
-using Microsoft.AspNetCore.WebUtilities;
-using TradingDashboard.Features.Cot.CollectService.Abstractions;
-using TradingDashboard.Features.Cot.CollectService.Models;
-using TradingDashboard.Features.Cot.CollectService.Options;
 using System.Globalization;
+using System.Text.Json;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using TradingDashboard.Application.Common.Models;
+using TradingDashboard.Domain.Entities;
+using TradingDashboard.Infrastructure.Persistence.Implementation.Context;
+using TradingDashboard.Infrastructure.Persistence.Implementation.Seed;
 
-namespace TradingDashboard.Features.Cot.CollectService.Services;
+namespace TradingDashboard.Presentation.BackgroundJobs.Jobs.Cot;
 
-public sealed class CotCollectionCoordinator : ICotCollectionCoordinator
+public sealed class CotCollectionRunner
 {
     private readonly IHttpClientFactory _httpClientFactory;
-    private readonly ILogger<CotCollectionCoordinator> _logger;
+    private readonly ILogger<CotCollectionRunner> _logger;
     private readonly CotCollectorOptions _options;
     private readonly IServiceScopeFactory _scopeFactory;
-    private readonly SemaphoreSlim _gate = new(1, 1);
     private readonly Dictionary<string, DateOnly> _datasetLatestReportDateCache = new(StringComparer.OrdinalIgnoreCase);
     private readonly Dictionary<string, IReadOnlyDictionary<string, string>> _datasetLatestAliasCache = new(StringComparer.OrdinalIgnoreCase);
 
-    private volatile bool _isRunning;
-    private string _lastTriggerReason = "none";
-    private DateTime? _currentRunStartedAtUtc;
-    private DateTime? _nextScheduledRunAtUtc;
-
-    public CotCollectionCoordinator(
+    public CotCollectionRunner(
         IServiceScopeFactory scopeFactory,
         IHttpClientFactory httpClientFactory,
         IOptions<CotCollectorOptions> options,
-        ILogger<CotCollectionCoordinator> logger)
+        ILogger<CotCollectionRunner> logger)
     {
         _scopeFactory = scopeFactory;
         _httpClientFactory = httpClientFactory;
@@ -33,46 +31,32 @@ public sealed class CotCollectionCoordinator : ICotCollectionCoordinator
         _options = options.Value;
     }
 
-    public async Task<CotCollectionStatusResponse> GetStatusAsync(CancellationToken cancellationToken)
+    public async Task<CotCollectionResult> RunOnceAsync(CancellationToken cancellationToken)
     {
         await using var scope = _scopeFactory.CreateAsyncScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<CotDbContext>();
-        var state = await dbContext.CotCollectionJobStates.FindAsync([CotInstrumentSeedBootstrapper.CollectorStateId], cancellationToken);
+        var state = await EnsureJobStateAsync(dbContext, cancellationToken);
+        var startedAtUtc = DateTime.UtcNow;
+        var includeHistoricalBackfill = state.LastStartedAtUtc is null;
 
-        return MapStatus(state);
-    }
+        state.RecordStart(startedAtUtc);
+        await dbContext.SaveChangesAsync(cancellationToken);
 
-    public async Task<CotCollectionStatusResponse> RunOnceAsync(string reason, CancellationToken cancellationToken)
-    {
-        if (!_gate.Wait(0))
-        {
-            throw new InvalidOperationException("Collector is already running.");
-        }
-
-        _isRunning = true;
-        _lastTriggerReason = string.IsNullOrWhiteSpace(reason) ? "manual" : reason.Trim();
-        _currentRunStartedAtUtc = DateTime.UtcNow;
+        var savedFileCount = 0;
+        var fetchedProfileCount = 0;
+        string? error = null;
 
         try
         {
-            await using var scope = _scopeFactory.CreateAsyncScope();
-            var dbContext = scope.ServiceProvider.GetRequiredService<CotDbContext>();
-            var state = await EnsureJobStateAsync(dbContext, cancellationToken);
-            state.RecordStart(_currentRunStartedAtUtc.Value);
-            await dbContext.SaveChangesAsync(cancellationToken);
-
             var profiles = await dbContext.CotInstrumentCollectionProfiles
                 .Include(x => x.Instrument)
                 .OrderBy(x => x.Instrument!.InstrumentSlug)
                 .ToListAsync(cancellationToken);
 
-            var httpClient = _httpClientFactory.CreateClient(nameof(CotCollectionCoordinator));
+            var httpClient = _httpClientFactory.CreateClient(CotJobRegistration.HttpClientName);
             var storageRoot = ResolveStorageRoot();
             Directory.CreateDirectory(storageRoot);
-            var includeHistoricalBackfill = ShouldBackfillHistory(_lastTriggerReason);
 
-            var savedFileCount = 0;
-            var fetchedProfileCount = 0;
             var failures = new List<string>();
 
             foreach (var profile in profiles)
@@ -124,35 +108,30 @@ public sealed class CotCollectionCoordinator : ICotCollectionCoordinator
                 }
             }
 
-            var completedAtUtc = DateTime.UtcNow;
-            if (failures.Count > 0)
-            {
-                state.RecordFailure(completedAtUtc, string.Join(" | ", failures.Take(5)), savedFileCount, fetchedProfileCount);
-            }
-            else
-            {
-                state.RecordSuccess(completedAtUtc, savedFileCount, fetchedProfileCount);
-            }
-
-            await dbContext.SaveChangesAsync(cancellationToken);
-            return MapStatus(state);
+            error = failures.Count == 0 ? null : string.Join(" | ", failures.Take(5));
+            return new CotCollectionResult(savedFileCount, fetchedProfileCount, error);
+        }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        {
+            error = ex.Message;
+            throw;
         }
         finally
         {
-            _isRunning = false;
-            _currentRunStartedAtUtc = null;
-            _gate.Release();
+            var completedAtUtc = DateTime.UtcNow;
+
+            if (string.IsNullOrWhiteSpace(error))
+            {
+                state.RecordSuccess(completedAtUtc, savedFileCount, fetchedProfileCount);
+            }
+            else
+            {
+                state.RecordFailure(completedAtUtc, error, savedFileCount, fetchedProfileCount);
+                _logger.LogWarning("COT collection completed with errors: {Error}", error);
+            }
+
+            await dbContext.SaveChangesAsync(cancellationToken);
         }
-    }
-
-    private bool ShouldBackfillHistory(string reason)
-    {
-        return string.Equals(reason, "startup", StringComparison.OrdinalIgnoreCase);
-    }
-
-    public void SetNextScheduledRun(DateTime? nextScheduledRunAtUtc)
-    {
-        _nextScheduledRunAtUtc = nextScheduledRunAtUtc;
     }
 
     private async Task<CotCollectionJobState> EnsureJobStateAsync(CotDbContext dbContext, CancellationToken cancellationToken)
@@ -199,7 +178,6 @@ public sealed class CotCollectionCoordinator : ICotCollectionCoordinator
 
         try
         {
-            var offset = 0;
             var savedFileCount = 0;
             DateOnly? latestAvailableReportDate = null;
             string? latestAvailablePayload = null;
@@ -208,7 +186,7 @@ public sealed class CotCollectionCoordinator : ICotCollectionCoordinator
 
             foreach (var alias in aliases)
             {
-                offset = 0;
+                var offset = 0;
 
                 while (true)
                 {
@@ -263,12 +241,7 @@ public sealed class CotCollectionCoordinator : ICotCollectionCoordinator
                         }
                     }
 
-                    if (batchCount == 0)
-                    {
-                        break;
-                    }
-
-                    if (batchCount < modeOptions.Limit)
+                    if (batchCount == 0 || batchCount < modeOptions.Limit)
                     {
                         break;
                     }
@@ -442,6 +415,7 @@ public sealed class CotCollectionCoordinator : ICotCollectionCoordinator
 
         var latestDateValue = latestDateElement.GetString();
         if (string.IsNullOrWhiteSpace(latestDateValue) ||
+            latestDateValue.Length < 10 ||
             !DateOnly.TryParseExact(
                 latestDateValue[..10],
                 "yyyy-MM-dd",
@@ -472,7 +446,7 @@ public sealed class CotCollectionCoordinator : ICotCollectionCoordinator
         {
             ["$where"] = string.Join(" AND ", filters),
             ["$order"] = "report_date_as_yyyy_mm_dd ASC",
-            ["$limit"] = modeOptions.Limit.ToString()
+            ["$limit"] = modeOptions.Limit.ToString(CultureInfo.InvariantCulture)
         };
 
         if (offset > 0)
@@ -620,22 +594,6 @@ public sealed class CotCollectionCoordinator : ICotCollectionCoordinator
     private static string BuildReportFilePath(string targetDirectory, DateOnly reportDate)
     {
         return Path.Combine(targetDirectory, $"{reportDate:yyyy-MM-dd}.json");
-    }
-
-    private CotCollectionStatusResponse MapStatus(CotCollectionJobState? state)
-    {
-        return new CotCollectionStatusResponse(
-            _isRunning,
-            _lastTriggerReason,
-            _currentRunStartedAtUtc,
-            _nextScheduledRunAtUtc,
-            state?.LastStartedAtUtc,
-            state?.LastCompletedAtUtc,
-            state?.LastSucceededAtUtc,
-            state?.LastSavedFileCount ?? 0,
-            state?.LastFetchedProfileCount ?? 0,
-            state?.LastError,
-            _options.IntervalMinutes);
     }
 
     private static string EscapeSingleQuotes(string input)

@@ -1,4 +1,4 @@
-namespace TradingDashboard.Features.Cot.CollectService.Options;
+namespace TradingDashboard.Presentation.BackgroundJobs.Jobs.Cot;
 
 public sealed class CotCollectorOptions
 {

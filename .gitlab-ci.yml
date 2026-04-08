@@ -27,19 +27,16 @@ build-release:
     - apt-get update && apt-get install -y zip
     # Restoring the whole solution pulls in the MAUI host, which needs workloads
     # that are not installed in this Linux runner. Restore only deployable projects.
-    - dotnet restore src/Features/Cot/TradingDashboard.Features.Cot.CollectService/TradingDashboard.Features.Cot.CollectService.csproj
     - dotnet restore src/Features/Cot/TradingDashboard.Features.Cot.Presentation.Api/TradingDashboard.Features.Cot.Presentation.Api.csproj
     - dotnet restore src/Features/CurrencyStrength/TradingDashboard.Features.CurrencyStrength.Presentation.Api/TradingDashboard.Features.CurrencyStrength.Presentation.Api.csproj
     - dotnet restore src/Features/Login/TradingDashboard.Features.Login.Presentation.Api/TradingDashboard.Features.Login.Presentation.Api.csproj
     - dotnet restore src/Presentation/BackgroundJobs/TradingDashboard.Presentation.BackgroundJobs/TradingDashboard.Presentation.BackgroundJobs.csproj
     - dotnet restore src/Presentation/TradingDashboard.Presentation.Blazor/TradingDashboard.Presentation.Blazor.csproj
-    - dotnet publish src/Features/Cot/TradingDashboard.Features.Cot.CollectService/TradingDashboard.Features.Cot.CollectService.csproj -c Release -o out/cot-collect --no-restore
     - dotnet publish src/Features/Cot/TradingDashboard.Features.Cot.Presentation.Api/TradingDashboard.Features.Cot.Presentation.Api.csproj -c Release -o out/cot --no-restore
     - dotnet publish src/Features/CurrencyStrength/TradingDashboard.Features.CurrencyStrength.Presentation.Api/TradingDashboard.Features.CurrencyStrength.Presentation.Api.csproj -c Release -o out/currency-strength --no-restore
     - dotnet publish src/Features/Login/TradingDashboard.Features.Login.Presentation.Api/TradingDashboard.Features.Login.Presentation.Api.csproj -c Release -o out/login --no-restore
     - dotnet publish src/Presentation/BackgroundJobs/TradingDashboard.Presentation.BackgroundJobs/TradingDashboard.Presentation.BackgroundJobs.csproj -c Release -o out/backgroundjobs --no-restore
     - dotnet publish src/Presentation/TradingDashboard.Presentation.Blazor/TradingDashboard.Presentation.Blazor.csproj -c Release -o out/blazor --no-restore
-    - (cd out/cot-collect && zip -r ../cot-collect.zip .)
     - (cd out/cot && zip -r ../cot.zip .)
     - (cd out/currency-strength && zip -r ../currency-strength.zip .)
     - (cd out/login && zip -r ../login.zip .)
@@ -48,7 +45,6 @@ build-release:
   artifacts:
     name: "terminalprime-release-$CI_COMMIT_SHORT_SHA"
     paths:
-      - out/cot-collect.zip
       - out/cot.zip
       - out/currency-strength.zip
       - out/login.zip
@@ -70,7 +66,6 @@ deploy-production:
     - chmod 600 ~/.ssh/id_rsa
     - ssh-keyscan -H "$VPS_HOST" >> ~/.ssh/known_hosts
   script:
-    - scp out/cot-collect.zip "$VPS_USER@$VPS_HOST:/tmp/terminalprime-cot-collect.zip"
     - scp out/cot.zip "$VPS_USER@$VPS_HOST:/tmp/terminalprime-cot.zip"
     - scp out/currency-strength.zip "$VPS_USER@$VPS_HOST:/tmp/terminalprime-currency-strength.zip"
     - scp out/login.zip "$VPS_USER@$VPS_HOST:/tmp/terminalprime-login.zip"
@@ -85,7 +80,6 @@ deploy-production:
       sudo systemctl stop terminalprime-currency-strength || true
       sudo systemctl stop terminalprime-login
       sudo systemctl stop terminalprime-blazor
-      sudo mkdir -p /var/www/terminalprime/cot-collect
       sudo mkdir -p /var/www/terminalprime/backgroundjobs
       sudo mkdir -p /var/www/terminalprime/currency-strength
       sudo rm -rf /var/www/terminalprime/cot-collect/*
@@ -94,26 +88,23 @@ deploy-production:
       sudo rm -rf /var/www/terminalprime/currency-strength/*
       sudo rm -rf /var/www/terminalprime/login/*
       sudo rm -rf /var/www/terminalprime/blazor/*
-      sudo unzip -oq /tmp/terminalprime-cot-collect.zip -d /var/www/terminalprime/cot-collect
       sudo unzip -oq /tmp/terminalprime-cot.zip -d /var/www/terminalprime/cot
       sudo unzip -oq /tmp/terminalprime-backgroundjobs.zip -d /var/www/terminalprime/backgroundjobs
       sudo unzip -oq /tmp/terminalprime-currency-strength.zip -d /var/www/terminalprime/currency-strength
       sudo unzip -oq /tmp/terminalprime-login.zip -d /var/www/terminalprime/login
       sudo unzip -oq /tmp/terminalprime-blazor.zip -d /var/www/terminalprime/blazor
       sudo chown -R terminalprime:terminalprime /var/www/terminalprime
-      sudo systemctl start terminalprime-cot-collect
       sudo systemctl start terminalprime-cot
       sudo systemctl start terminalprime-backgroundjobs
       sudo systemctl start terminalprime-currency-strength
       sudo systemctl start terminalprime-login
       sudo systemctl start terminalprime-blazor
-      sudo systemctl --no-pager --full status terminalprime-cot-collect
       sudo systemctl --no-pager --full status terminalprime-cot
       sudo systemctl --no-pager --full status terminalprime-backgroundjobs
       sudo systemctl --no-pager --full status terminalprime-currency-strength
       sudo systemctl --no-pager --full status terminalprime-login
       sudo systemctl --no-pager --full status terminalprime-blazor
-      rm -f /tmp/terminalprime-cot-collect.zip /tmp/terminalprime-cot.zip /tmp/terminalprime-backgroundjobs.zip /tmp/terminalprime-currency-strength.zip /tmp/terminalprime-login.zip /tmp/terminalprime-blazor.zip
+      rm -f /tmp/terminalprime-cot.zip /tmp/terminalprime-backgroundjobs.zip /tmp/terminalprime-currency-strength.zip /tmp/terminalprime-login.zip /tmp/terminalprime-blazor.zip
       '
   environment:
     name: production

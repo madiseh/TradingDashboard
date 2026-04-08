@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Quartz;
+using TradingDashboard.Presentation.BackgroundJobs.Jobs.Cot;
 using TradingDashboard.Presentation.BackgroundJobs.Jobs.CurrencyStrength;
 using TradingDashboard.Presentation.BackgroundJobs.Jobs.HelloWorld;
 using TradingDashboard.Presentation.BackgroundJobs.Persistence.Context;
@@ -39,6 +40,14 @@ public static class Program
         await CurrencyStrengthJobRegistration.RegisterAsync(scheduler, dbContext, services);
     }
 
+    public static async Task AddJob_Cot(
+        IScheduler scheduler,
+        BackgroundJobsDbContext dbContext,
+        IServiceProvider services)
+    {
+        await CotJobRegistration.RegisterAsync(scheduler, dbContext, services);
+    }
+
     private static void AddPersistence(IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("BackgroundJobsDatabase");
@@ -53,6 +62,7 @@ public static class Program
 
     private static void AddJobs(IServiceCollection services, IConfiguration configuration)
     {
+        CotJobRegistration.AddServices(services, configuration);
         CurrencyStrengthJobRegistration.AddServices(services, configuration);
     }
 
@@ -73,10 +83,12 @@ public static class Program
         await using var scope = host.Services.CreateAsyncScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<BackgroundJobsDbContext>();
         await dbContext.Database.MigrateAsync();
+        await CotJobRegistration.EnsureInfrastructureAsync(scope.ServiceProvider);
 
         var scheduler = await QuartzSchedulerBuilder.CreateAsync(scope.ServiceProvider);
         await AddJob_HelloWorld(scheduler, dbContext);
         await AddJob_CurrencyStrength(scheduler, dbContext, host.Services);
+        await AddJob_Cot(scheduler, dbContext, host.Services);
         await scheduler.Start();
 
         var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();

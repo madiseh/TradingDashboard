@@ -168,6 +168,11 @@ Base route: `/api/v1/cot`
 - Charting library.
 - Storage provider.
 
+## Ingestion Runtime
+
+- Raw COT collection runs in `TradingDashboard.Presentation.BackgroundJobs` as a Quartz job.
+- The job owns startup backfill, incremental collection, COT database migration, and collector-state logging.
+
 ## Risks
 
 - Data normalization inconsistencies.
