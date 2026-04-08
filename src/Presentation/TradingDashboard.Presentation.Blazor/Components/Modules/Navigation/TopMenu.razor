@@ -23,31 +23,12 @@
                     <div class="collapse navbar-collapse ms-auto" id="navbar-content">
                         <div class="main-menu index-page">
                             <ul class="navbar-nav mb-lg-0 me-auto">
-                                <li class="nav-item dropdown nav-cus-item">
-                                    <a class="nav-link" href="@RoutePaths.Ui.Home">@L["Menu.Home"]</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@RoutePaths.Ui.CotHome">@L["Menu.Cot"]</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@RoutePaths.Ui.CurrencyStrength">@L["Menu.CurrencyStrength"]</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@RoutePaths.Ui.Pricing">@L["Menu.Pricing"]</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle"
-                                       href="#"
-                                       role="button"
-                                       data-bs-toggle="dropdown"
-                                       aria-expanded="false">
-                                        @L["Menu.MarketAnalysis"]
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="@RoutePaths.Ui.CotHome">@L["Menu.WeeklyReview"]</a></li>
-                                        <li><a class="dropdown-item" href="@RoutePaths.Ui.CotHome">@L["Menu.WeeklyReviewDetails"]</a></li>
-                                    </ul>
-                                </li>
+                                @foreach (var item in NavigationItems)
+                                {
+                                    <li class="nav-item nav-cus-item">
+                                        <a class="nav-link" href="@item.Href">@GetNavigationLabel(item)</a>
+                                    </li>
+                                }
                             </ul>
                             <div class="nav-right d-xl-block">
                                 <div class="nav-right__search">
@@ -112,15 +93,15 @@
                         <i class="bi bi-x"></i>
                     </button>
                     <ul class="custom-nevbar__nav mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="@RoutePaths.Ui.Home">@L["Menu.Home"]</a></li>
-                        <li class="nav-item"><a class="nav-link" href="@RoutePaths.Ui.CotHome">@L["Menu.Cot"]</a></li>
-                        <li class="nav-item"><a class="nav-link" href="@RoutePaths.Ui.CurrencyStrength">@L["Menu.CurrencyStrength"]</a></li>
-                        <li class="nav-item"><a class="nav-link" href="@RoutePaths.Ui.Pricing">@L["Menu.Pricing"]</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/#broker-reviews">@L["Menu.BrokerageReviews"]</a></li>
-                        <li class="nav-item"><a class="nav-link" href="@RoutePaths.Ui.CotHome">@L["Menu.MarketAnalysis"]</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/#video-tutorial">@L["Menu.Educate"]</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/#packages">@L["Menu.Serve"]</a></li>
-                        <li class="nav-item"><a class="nav-link" href="@RoutePaths.Ui.Login">@L["Menu.SignIn"]</a></li>
+                        @foreach (var item in NavigationItems)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   href="@item.Href"
+                                   @onclick="() => NavigateFromMobileMenuAsync(item.Href)"
+                                   @onclick:preventDefault="true">@GetNavigationLabel(item)</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
