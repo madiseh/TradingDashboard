@@ -288,6 +288,9 @@
           },
           "email": {
             "type": "string"
+          },
+          "role": {
+            "type": "string"
           }
         }
       },
@@ -352,6 +355,10 @@
             "nullable": true
           },
           "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
             "type": "string",
             "nullable": true
           }

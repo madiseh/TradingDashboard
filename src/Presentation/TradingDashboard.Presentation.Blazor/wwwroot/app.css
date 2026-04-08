@@ -554,6 +554,27 @@ html[lang^="fa"] .td-navbar-brand__name {
     box-shadow: inset 0 0 0 1px rgba(21, 48, 90, 0.14);
 }
 
+.td-auth-action--secondary span {
+    background-color: #eef4ff;
+}
+
+.td-auth-action--secondary:hover,
+.td-auth-action--secondary:focus {
+    border-color: #2660b5;
+    color: #15305a;
+    box-shadow: inset 0 0 0 1px rgba(38, 96, 181, 0.22);
+}
+
+.td-auth-action.btn_theme_active,
+.td-auth-action.btn_theme_active:hover,
+.td-auth-action.btn_theme_active:focus {
+    color: #fff;
+}
+
+.td-auth-action.btn_theme_active span {
+    background-color: #1d4f97;
+}
+
 .td-login-overview {
     border-radius: 28px;
     background: linear-gradient(145deg, #0f2642 0%, #1c416e 100%);

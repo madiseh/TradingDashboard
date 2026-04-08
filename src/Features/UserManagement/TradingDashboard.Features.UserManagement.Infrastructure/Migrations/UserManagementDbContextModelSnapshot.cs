@@ -52,6 +52,11 @@ namespace TradingDashboard.Features.UserManagement.Infrastructure.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
+
                     b.Property<int>("SignupAppPlatform")
                         .HasColumnType("int");
 

@@ -8,7 +8,7 @@ using TradingDashboard.Domain.Entities;
 using TradingDashboard.Domain.Enums;
 using TradingDashboard.Infrastructure.Persistence.Implementation.Context;
 using TradingDashboard.Infrastructure.Persistence.Implementation.Seed;
-using TradingDashboard.Presentation.Api.Login.Services;
+using TradingDashboard.Presentation.Api.UserManagement.Services;
 
 namespace TradingDashboard.UnitTests.Features.Login;
 
@@ -42,11 +42,11 @@ public sealed class AuthAccessTests
         using var connection = new SqliteConnection("Data Source=:memory:");
         connection.Open();
 
-        var options = new DbContextOptionsBuilder<LoginDbContext>()
+        var options = new DbContextOptionsBuilder<UserManagementDbContext>()
             .UseSqlite(connection)
             .Options;
 
-        using var dbContext = new LoginDbContext(options);
+        using var dbContext = new UserManagementDbContext(options);
         dbContext.Database.EnsureCreated();
 
         var affectedRows = AdminUserSeedBootstrapper.SeedMissingAdmin(dbContext, new PasswordHashingService());

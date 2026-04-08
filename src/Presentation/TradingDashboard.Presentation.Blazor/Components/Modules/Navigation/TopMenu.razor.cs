@@ -23,12 +23,7 @@ public partial class TopMenu
     [
         new("Menu.Home", RoutePaths.Ui.Home),
         new("Menu.Cot", RoutePaths.Ui.CotHome),
-        new("Menu.CurrencyStrength", RoutePaths.Ui.CurrencyStrength),
-        new("Menu.BrokerageReviews", "/#broker-reviews"),
-        new("Menu.MarketAnalysis", RoutePaths.Ui.CotHome),
-        new("Menu.Educate", "/#video-tutorial"),
-        new("Menu.Serve", "/#packages"),
-        new("Menu.SignIn", RoutePaths.Ui.Login)
+        new("Menu.CurrencyStrength", RoutePaths.Ui.CurrencyStrength)
     ];
 
     [Inject]

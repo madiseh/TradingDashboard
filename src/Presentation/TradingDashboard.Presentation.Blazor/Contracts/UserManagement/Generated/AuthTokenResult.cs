@@ -13,12 +13,12 @@ public sealed class AuthTokenResult
     [JsonPropertyName("expiresAtUtc")]
     public DateTime ExpiresAtUtc { get; set; }
 
+    [JsonPropertyName("role")]
+    public string? Role { get; set; }
+
     [JsonPropertyName("userId")]
     public string? UserId { get; set; }
 
     [JsonPropertyName("username")]
     public string? Username { get; set; }
-
-    [JsonPropertyName("role")]
-    public string? Role { get; set; }
 }

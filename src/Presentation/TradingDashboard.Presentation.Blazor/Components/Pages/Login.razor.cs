@@ -41,8 +41,8 @@ public partial class Login
     private int _activeTabIndex;
     private bool _isSubmitting;
     private string? _errorMessage;
-    private LoginContracts.AuthTokenResult? _authResult;
-    private LoginContracts.MeResponse? _meResult;
+    private UserManagementContracts.AuthTokenResult? _authResult;
+    private UserManagementContracts.MeResponse? _meResult;
     private string? _lastProcessedQuery;
 
     private IReadOnlyList<PortalDestinationCard> PortalDestinations =>
@@ -248,7 +248,7 @@ public partial class Login
             ? userIdValue.ToString()
             : string.Empty;
 
-        _authResult = new LoginContracts.AuthTokenResult
+        _authResult = new UserManagementContracts.AuthTokenResult
         {
             AccessToken = accessToken,
             ExpiresAtUtc = expiresAtUtc.ToUniversalTime(),
