@@ -63,6 +63,9 @@ namespace TradingDashboard.Features.Login.Infrastructure.Migrations.v1._0._2
                     b.Property<int>("SignupAppPlatform")
                         .HasColumnType("int");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("UpdatedAtUtc")
                         .HasColumnType("datetime2");
 

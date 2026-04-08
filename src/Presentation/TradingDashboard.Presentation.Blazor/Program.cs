@@ -1,5 +1,6 @@
 using TradingDashboard.Presentation.Blazor.Components;
 using TradingDashboard.Presentation.Blazor.DependencyInjection;
+using TradingDashboard.Presentation.Blazor.Services.SiteIndexing;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
 using MudBlazor.Services;
@@ -13,6 +14,7 @@ var supportedCultures = new[] { "en", "fa", "tr", "de" }
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddLocalization();
+builder.Services.AddMemoryCache();
 builder.Services.AddMudServices();
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
@@ -49,6 +51,7 @@ app.UseHttpsRedirection();
 app.UseAntiforgery();
 
 app.MapStaticAssets();
+app.MapSiteIndexingEndpoints();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 

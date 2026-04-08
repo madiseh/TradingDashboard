@@ -20,7 +20,24 @@ public static class AdminUserSeedBootstrapper
 
         if (adminExists)
         {
-            return 0;
+            var existingAdmin = dbContext.AppUsers.First(x =>
+                x.Username == AdminUserSeedData.Username ||
+                x.Email == normalizedEmail!);
+
+            var changed = false;
+            if (existingAdmin.Role != AppUserRole.SuperAdmin)
+            {
+                existingAdmin.SetRole(AppUserRole.SuperAdmin, DateTime.UtcNow);
+                changed = true;
+            }
+
+            if (existingAdmin.Status != AppUserStatus.Active)
+            {
+                existingAdmin.SetStatus(AppUserStatus.Active, DateTime.UtcNow);
+                changed = true;
+            }
+
+            return changed ? dbContext.SaveChanges() : 0;
         }
 
         var (passwordHash, passwordSalt) = passwordHashingService.CreateHash(AdminUserSeedData.Password);
@@ -32,6 +49,7 @@ public static class AdminUserSeedBootstrapper
             passwordHash,
             passwordSalt,
             AppUserRole.SuperAdmin,
+            AppUserStatus.Active,
             SignupAppPlatform.Local,
             true,
             DateTime.UtcNow);

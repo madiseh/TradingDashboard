@@ -55,6 +55,7 @@ public sealed class SignUpCommandHandler(
                 passwordHash,
                 passwordSalt,
                 AppUserRole.Guest,
+                AppUserStatus.Active,
                 SignupAppPlatform.Local,
                 false,
                 DateTime.UtcNow);
@@ -63,7 +64,7 @@ public sealed class SignUpCommandHandler(
             userCommandRepository.SaveChanges();
 
             return OperationalResult<AuthUserResponse>.Success(
-                new AuthUserResponse(user.Id, user.Username, user.Email.Value, user.Role),
+                new AuthUserResponse(user.Id, user.Username, user.Email.Value, user.Role.ToString()),
                 "Account created successfully.");
         }
         catch (Exception ex)

@@ -9,6 +9,7 @@ public static class RoutePaths
         public const string Admin = "/admin";
         public const string TradingPanel = "/trading-panel";
         public const string Pricing = "/pricing";
+        public const string AdminUsers = "/admin/users";
         public const string Releases = "/releases";
         public const string CurrencyStrength = "/currency-strength";
         
@@ -57,6 +58,7 @@ public static class RoutePaths
             public const string SubscriptionPlans = $"{SubscriptionsBase}/plans";
             public const string SubscriptionPurchase = $"{SubscriptionsBase}/purchase";
             public const string MySubscription = $"{SubscriptionsBase}/me";
+            public const string AdminUsers = $"{LoginBase}/admin/users";
         }
     }
 }

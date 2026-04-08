@@ -9,11 +9,11 @@ using TradingDashboard.Application.Features.Auth;
 using TradingDashboard.Application.Repository.Auth;
 using TradingDashboard.Domain.Entities;
 using TradingDashboard.Domain.Enums;
-using TradingDashboard.Presentation.Api.UserManagement.Contracts;
-using TradingDashboard.Presentation.Api.UserManagement.Services;
+using TradingDashboard.Presentation.Api.Login.Contracts;
+using TradingDashboard.Presentation.Api.Login.Services;
 using TradingDashboard.Presentation.Common.Contracts;
 
-namespace TradingDashboard.Presentation.Api.UserManagement.Endpoints;
+namespace TradingDashboard.Presentation.Api.Login.Endpoints;
 
 public static class AuthEndpoints
 {
@@ -95,9 +95,8 @@ public static class AuthEndpoints
         var userId = user.FindFirstValue(ClaimTypes.NameIdentifier) ?? user.FindFirstValue(ClaimTypes.Name);
         var username = user.FindFirstValue(ClaimTypes.Name) ?? user.FindFirstValue(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.UniqueName);
         var email = user.FindFirstValue(ClaimTypes.Email) ?? user.FindFirstValue(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Email);
-        var role = user.FindFirstValue(ClaimTypes.Role) ?? user.FindFirstValue("role");
 
-        return TypedResults.Ok(new MeResponse(userId, username, email, role));
+        return TypedResults.Ok(new MeResponse(userId, username, email));
     }
 
     private static async Task<IResult> BeginGoogleSignInAsync(
@@ -178,6 +177,7 @@ public static class AuthEndpoints
                 passwordHash,
                 passwordSalt,
                 AppUserRole.Guest,
+                AppUserStatus.Active,
                 SignupAppPlatform.Google,
                 true,
                 DateTime.UtcNow);
@@ -188,21 +188,27 @@ public static class AuthEndpoints
         }
         else
         {
+            if (user.Status != AppUserStatus.Active)
+            {
+                await httpContext.SignOutAsync("External");
+                var failedUrl = QueryHelpers.AddQueryString(normalizedReturnUrl, "authError", "This account is disabled.");
+                return Results.Redirect(failedUrl);
+            }
+
             user.MarkLogin(DateTime.UtcNow);
             userCommandRepository.SaveChanges();
         }
 
         await httpContext.SignOutAsync("External");
 
-        var tokenResult = jwtTokenService.GenerateToken(new AuthUserResponse(user.Id, user.Username, user.Email.Value, user.Role));
+        var tokenResult = jwtTokenService.GenerateToken(new AuthUserResponse(user.Id, user.Username, user.Email.Value, user.Role.ToString()));
         var redirectUrl = QueryHelpers.AddQueryString(normalizedReturnUrl, new Dictionary<string, string?>
         {
             ["accessToken"] = tokenResult.AccessToken,
             ["expiresAtUtc"] = tokenResult.ExpiresAtUtc.ToString("O"),
             ["userId"] = tokenResult.UserId.ToString(),
             ["username"] = tokenResult.Username,
-            ["email"] = tokenResult.Email,
-            ["role"] = tokenResult.Role
+            ["email"] = tokenResult.Email
         });
 
         return Results.Redirect(redirectUrl);

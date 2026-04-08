@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Localization;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using TradingDashboard.Presentation.Common.Resources.Components.Pages.CurrencyStrength.Dashboard;
 
@@ -18,7 +19,11 @@ public partial class CurrencyStrengthDashboard
     private CurrencyStrengthSnapshotResponse? _snapshot;
     private Task? _autoRefreshTask;
     private Task? _utcClockTask;
+    private string? _lastTimeframeQuery;
     private List<CurrencyStrengthTimeframeViewModel> _timeframes = [];
+
+    [SupplyParameterFromQuery(Name = "timeframe")]
+    public string? Timeframe { get; set; }
 
     [Inject]
     private IStringLocalizer<CurrencyStrengthDashboardResource> L { get; set; } = default!;
@@ -26,11 +31,38 @@ public partial class CurrencyStrengthDashboard
     [Inject]
     private IJSRuntime JS { get; set; } = default!;
 
+    [Inject]
+    private NavigationManager NavigationManager { get; set; } = default!;
+
     protected override async Task OnInitializedAsync()
     {
         _utcClockTask = StartUtcClockAsync(_autoRefreshCts.Token);
         await ReloadAsync();
         _autoRefreshTask = StartAutoRefreshLoopAsync(_autoRefreshCts.Token);
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (_timeframes.Count == 0)
+        {
+            return;
+        }
+
+        if (string.Equals(_lastTimeframeQuery, Timeframe, StringComparison.Ordinal))
+        {
+            return;
+        }
+
+        _lastTimeframeQuery = Timeframe;
+
+        var resolvedTimeframeKey = ResolveRequestedTimeframeKey();
+        if (string.Equals(resolvedTimeframeKey, _selectedTimeframeKey, StringComparison.OrdinalIgnoreCase))
+        {
+            return;
+        }
+
+        _selectedTimeframeKey = resolvedTimeframeKey;
+        await LoadSnapshotAsync(resolvedTimeframeKey);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -65,7 +97,8 @@ public partial class CurrencyStrengthDashboard
                 .Select(item => new CurrencyStrengthTimeframeViewModel(item.Key, item.Label, item.Description, item.IsDefault))
                 .ToList();
 
-            _selectedTimeframeKey = _timeframes.FirstOrDefault(item => item.IsDefault)?.Key ?? _timeframes[0].Key;
+            _selectedTimeframeKey = ResolveRequestedTimeframeKey();
+            _lastTimeframeQuery = Timeframe;
             await LoadSnapshotAsync(_selectedTimeframeKey);
         }
         catch (Exception ex)
@@ -79,16 +112,15 @@ public partial class CurrencyStrengthDashboard
         }
     }
 
-    private async Task OnTimeframeSelectedAsync(string timeframeKey)
+    private void OnTimeframeSelected(string timeframeKey)
     {
         if (string.Equals(_selectedTimeframeKey, timeframeKey, StringComparison.OrdinalIgnoreCase))
         {
             return;
         }
 
-        _selectedTimeframeKey = timeframeKey;
         _scrollChartIntoViewRequested = true;
-        await LoadSnapshotAsync(timeframeKey);
+        NavigationManager.NavigateTo(BuildPageUri(timeframeKey));
     }
 
     private async Task LoadSnapshotAsync(string timeframeKey, bool silentRefresh = false)
@@ -171,6 +203,51 @@ public partial class CurrencyStrengthDashboard
         catch (OperationCanceledException)
         {
         }
+    }
+
+    private string BuildCanonicalUrl()
+    {
+        return SiteBranding.AbsoluteUrl(BuildPageUri(_selectedTimeframeKey));
+    }
+
+    private string BuildPageUri(string? timeframeKey)
+    {
+        var normalizedTimeframeKey = NormalizeTimeframeKey(timeframeKey);
+        if (string.IsNullOrWhiteSpace(normalizedTimeframeKey) || IsDefaultTimeframe(normalizedTimeframeKey))
+        {
+            return RoutePaths.Ui.CurrencyStrength;
+        }
+
+        return $"{RoutePaths.Ui.CurrencyStrength}?timeframe={Uri.EscapeDataString(normalizedTimeframeKey)}";
+    }
+
+    private string ResolveRequestedTimeframeKey()
+    {
+        var requestedKey = NormalizeTimeframeKey(Timeframe);
+        if (!string.IsNullOrWhiteSpace(requestedKey))
+        {
+            var matchingKey = _timeframes
+                .FirstOrDefault(item => string.Equals(item.Key, requestedKey, StringComparison.OrdinalIgnoreCase))
+                ?.Key;
+
+            if (!string.IsNullOrWhiteSpace(matchingKey))
+            {
+                return matchingKey;
+            }
+        }
+
+        return _timeframes.FirstOrDefault(item => item.IsDefault)?.Key ?? _timeframes[0].Key;
+    }
+
+    private bool IsDefaultTimeframe(string timeframeKey)
+    {
+        var defaultTimeframe = _timeframes.FirstOrDefault(item => item.IsDefault)?.Key ?? _timeframes[0].Key;
+        return string.Equals(defaultTimeframe, timeframeKey, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static string? NormalizeTimeframeKey(string? timeframeKey)
+    {
+        return string.IsNullOrWhiteSpace(timeframeKey) ? null : timeframeKey.Trim();
     }
 
     public async ValueTask DisposeAsync()
