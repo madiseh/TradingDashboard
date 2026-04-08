@@ -7,6 +7,7 @@ namespace TradingDashboard.Presentation.Blazor.Components.Pages.Releases;
 
 public partial class Releases
 {
+    private static readonly DateOnly CurrentReleaseDate = new(2026, 4, 8);
     private static readonly DateOnly LatestReleaseDate = new(2026, 4, 6);
     private static readonly DateOnly PreviousReleaseDate = new(2026, 4, 4);
     private static readonly DateOnly EarlierReleaseDate = new(2026, 4, 3);
@@ -16,16 +17,29 @@ public partial class Releases
     private IStringLocalizer<ReleasesResource> L { get; set; } = default!;
 
     private string LatestReleaseDateLabel =>
-        LatestReleaseDate.ToString("MMMM d, yyyy", CultureInfo.CurrentUICulture);
+        CurrentReleaseDate.ToString("MMMM d, yyyy", CultureInfo.CurrentUICulture);
 
     private IReadOnlyList<ReleaseEntryViewModel> ReleaseEntries =>
     [
         new(
             L["Entry.Version", ApplicationVersions.Blazor],
+            CurrentReleaseDate.ToString("MMMM d, yyyy", CultureInfo.CurrentUICulture),
+            L["Entry.Title.Version212"],
+            L["Entry.Description.Version212"],
+            true,
+            [
+                L["Entry.Version212.Highlight.1"],
+                L["Entry.Version212.Highlight.2"],
+                L["Entry.Version212.Highlight.3"],
+                L["Entry.Version212.Highlight.4"],
+                L["Entry.Version212.Highlight.5"]
+            ]),
+        new(
+            L["Entry.Version", "2.1.1"],
             LatestReleaseDate.ToString("MMMM d, yyyy", CultureInfo.CurrentUICulture),
             L["Entry.Title.Version211"],
             L["Entry.Description.Version211"],
-            true,
+            false,
             [
                 L["Entry.Version211.Highlight.1"],
                 L["Entry.Version211.Highlight.2"],
