@@ -56,9 +56,14 @@
                                         <i class="bi bi-search"></i>
                                         <span></span>
                                     </a>
-                                    <a href="/#footer" class="btn_theme btn_theme_active">
-                                        @L["Actions.ContactUs"] <i class="bi bi-arrow-up-right"></i><span></span>
-                                    </a>
+                                    <div class="td-auth-actions">
+                                        @foreach (var action in AuthActions)
+                                        {
+                                            <a href="@action.Href" class="@action.CssClass">
+                                                @action.Label <i class="bi bi-arrow-up-right"></i><span></span>
+                                            </a>
+                                        }
+                                    </div>
                                 </div>
                                 <div class="nav-right__search-inner">
                                     <div class="nav-search-inner__form">

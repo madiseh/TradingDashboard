@@ -29,6 +29,7 @@ public static class IocRegistration
         });
 
         services.AddScoped<AuthSession>();
+        services.AddScoped<PortalNavigationService>();
 
         return services;
     }

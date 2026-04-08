@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Page.Title" xml:space="preserve"><value>Admin Panel</value></data>
+  <data name="Hero.Badge" xml:space="preserve"><value>Admin Template</value></data>
+  <data name="Hero.Title" xml:space="preserve"><value>Role-aware admin workspace is ready for the next management modules.</value></data>
+  <data name="Hero.Description" xml:space="preserve"><value>This isolated shell already enforces SuperAdmin access, seeds the admin account correctly, and leaves room for user management and analytics.</value></data>
+  <data name="Summary.Roles" xml:space="preserve"><value>Defined roles</value></data>
+  <data name="Summary.RolesCaption" xml:space="preserve"><value>SuperAdmin, Analyzer, and Guest are now modeled in the user table.</value></data>
+  <data name="Summary.DefaultSignup" xml:space="preserve"><value>Default signup role</value></data>
+  <data name="Summary.DefaultSignupCaption" xml:space="preserve"><value>Every new signup is created as Guest until you define promotion rules.</value></data>
+  <data name="Summary.AdminSeed" xml:space="preserve"><value>Seeded admin role</value></data>
+  <data name="Summary.AdminSeedCaption" xml:space="preserve"><value>The built-in admin account is seeded as SuperAdmin.</value></data>
+  <data name="Queue.Title" xml:space="preserve"><value>Next admin modules</value></data>
+  <data name="Queue.Item1.Title" xml:space="preserve"><value>User management</value></data>
+  <data name="Queue.Item1.Description" xml:space="preserve"><value>Add promotion and demotion flows for Analyzer and other future roles.</value></data>
+  <data name="Queue.Item2.Title" xml:space="preserve"><value>Audit controls</value></data>
+  <data name="Queue.Item2.Description" xml:space="preserve"><value>Track sensitive access changes and important admin actions.</value></data>
+  <data name="Queue.Item3.Title" xml:space="preserve"><value>Operational widgets</value></data>
+  <data name="Queue.Item3.Description" xml:space="preserve"><value>Drop analytics, queue health, or approval widgets into the main area later.</value></data>
+</root>

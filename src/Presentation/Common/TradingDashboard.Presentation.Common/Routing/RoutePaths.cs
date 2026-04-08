@@ -6,6 +6,8 @@ public static class RoutePaths
     {
         public const string Home = "/";
         public const string Login = "/login";
+        public const string Admin = "/admin";
+        public const string TradingPanel = "/trading-panel";
         public const string Pricing = "/pricing";
         public const string Releases = "/releases";
         public const string CurrencyStrength = "/currency-strength";

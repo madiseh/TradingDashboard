@@ -1,0 +1,29 @@
+.td-portal-shell--trading {
+    background:
+        radial-gradient(circle at top right, rgba(255, 166, 77, 0.24), transparent 34%),
+        linear-gradient(135deg, #1e2330 0%, #283347 45%, #354966 100%);
+}
+
+.td-portal-shell__brand-mark--trading {
+    background: linear-gradient(135deg, #ffb95e 0%, #ff7e45 100%);
+}
+
+.td-portal-shell__nav-item--trading:hover {
+    background: rgba(255, 185, 94, 0.18);
+}
+
+.td-portal-shell__meta--trading {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.td-portal-shell__main--trading {
+    background: linear-gradient(180deg, rgba(255, 248, 241, 0.98) 0%, #fff6ed 100%);
+}
+
+.td-portal-shell__topbar--trading {
+    background: linear-gradient(135deg, #ffffff 0%, #fff0e0 100%);
+}
+
+.td-portal-shell__kicker--trading {
+    color: #d96a1f !important;
+}

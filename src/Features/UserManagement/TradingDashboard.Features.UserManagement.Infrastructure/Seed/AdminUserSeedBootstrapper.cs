@@ -31,8 +31,9 @@ public static class AdminUserSeedBootstrapper
             AdminUserSeedData.Email,
             passwordHash,
             passwordSalt,
+            AppUserRole.SuperAdmin,
             SignupAppPlatform.Local,
-            false,
+            true,
             DateTime.UtcNow);
 
         dbContext.AppUsers.Add(admin);

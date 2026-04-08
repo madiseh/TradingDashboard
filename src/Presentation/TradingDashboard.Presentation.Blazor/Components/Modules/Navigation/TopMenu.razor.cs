@@ -2,6 +2,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using Microsoft.JSInterop;
+using TradingDashboard.Presentation.Blazor.Services;
 using TradingDashboard.Presentation.Common.Resources.Components.Modules.Navigation.TopMenu;
 
 namespace TradingDashboard.Presentation.Blazor.Components.Modules.Navigation;
@@ -38,6 +39,15 @@ public partial class TopMenu
 
     [Inject]
     private IStringLocalizer<TopMenuResource> L { get; set; } = default!;
+
+    [Inject]
+    private PortalNavigationService PortalNavigation { get; set; } = default!;
+
+    private IReadOnlyList<AuthActionItem> AuthActions =>
+    [
+        new(L["Actions.Login"], PortalNavigation.BuildLoginUrl(), "btn_theme td-auth-action td-auth-action--secondary"),
+        new(L["Actions.SignUp"], PortalNavigation.BuildLoginUrl(mode: "signup"), "btn_theme btn_theme_active td-auth-action")
+    ];
 
     protected override void OnInitialized()
     {

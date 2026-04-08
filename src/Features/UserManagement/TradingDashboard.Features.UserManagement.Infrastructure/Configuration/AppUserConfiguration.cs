@@ -32,6 +32,11 @@ public sealed class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
             .HasMaxLength(256)
             .IsRequired();
 
+        entity.Property(x => x.Role)
+            .HasConversion<string>()
+            .HasMaxLength(32)
+            .IsRequired();
+
         entity.Property(x => x.SignupAppPlatform)
             .IsRequired();
 

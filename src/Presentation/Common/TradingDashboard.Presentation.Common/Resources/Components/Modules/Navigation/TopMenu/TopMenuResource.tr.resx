@@ -15,8 +15,14 @@
   <data name="Actions.ContactUs" xml:space="preserve">
     <value>Bize Ulasin</value>
   </data>
+  <data name="Actions.Login" xml:space="preserve">
+    <value>Giris yap</value>
+  </data>
   <data name="Actions.Search" xml:space="preserve">
     <value>Ara</value>
+  </data>
+  <data name="Actions.SignUp" xml:space="preserve">
+    <value>Kayit ol</value>
   </data>
   <data name="Brand.HomeAriaLabel" xml:space="preserve">
     <value>TerminalPrime ana sayfasi</value>
@@ -98,6 +104,9 @@
   </data>
   <data name="Menu.SignIn" xml:space="preserve">
     <value>Giris yap</value>
+  </data>
+  <data name="Menu.SignUp" xml:space="preserve">
+    <value>Kayit ol</value>
   </data>
   <data name="Menu.WeeklyReview" xml:space="preserve">
     <value>Haftalik inceleme</value>

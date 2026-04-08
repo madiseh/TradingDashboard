@@ -22,6 +22,8 @@ public sealed class JwtTokenService(IOptions<JwtOptions> options) : IJwtTokenSer
             new(JwtRegisteredClaimNames.Sub, user.UserId.ToString()),
             new(JwtRegisteredClaimNames.UniqueName, user.Username),
             new(JwtRegisteredClaimNames.Email, user.Email),
+            new(ClaimTypes.Role, user.Role.ToString()),
+            new("role", user.Role.ToString()),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new(ClaimTypes.NameIdentifier, user.UserId.ToString()),
             new(ClaimTypes.Name, user.Username),
@@ -43,6 +45,6 @@ public sealed class JwtTokenService(IOptions<JwtOptions> options) : IJwtTokenSer
 
         var accessToken = new JwtSecurityTokenHandler().WriteToken(token);
 
-        return new AuthTokenResult(accessToken, expiresAt, user.UserId, user.Username, user.Email);
+        return new AuthTokenResult(accessToken, expiresAt, user.UserId, user.Username, user.Email, user.Role.ToString());
     }
 }
