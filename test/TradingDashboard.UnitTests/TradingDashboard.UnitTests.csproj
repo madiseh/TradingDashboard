@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="xunit" />
     <PackageReference Include="xunit.runner.visualstudio">
@@ -20,6 +21,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Features\Cot\TradingDashboard.Features.Cot.Application\TradingDashboard.Features.Cot.Application.csproj" />
     <ProjectReference Include="..\..\src\Features\Cot\TradingDashboard.Features.Cot.Domain\TradingDashboard.Features.Cot.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Features\Login\TradingDashboard.Features.Login.Application\TradingDashboard.Features.Login.Application.csproj" />
+    <ProjectReference Include="..\..\src\Features\Login\TradingDashboard.Features.Login.Domain\TradingDashboard.Features.Login.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Features\Login\TradingDashboard.Features.Login.Infrastructure\TradingDashboard.Features.Login.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

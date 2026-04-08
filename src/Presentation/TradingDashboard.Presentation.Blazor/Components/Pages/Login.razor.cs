@@ -1,6 +1,6 @@
-using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Globalization;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.WebUtilities;
 using MudBlazor;
 using TradingDashboard.Presentation.Blazor.Services;
@@ -10,6 +10,12 @@ namespace TradingDashboard.Presentation.Blazor.Components.Pages;
 
 public partial class Login
 {
+    [SupplyParameterFromQuery(Name = "mode")]
+    public string? Mode { get; set; }
+
+    [SupplyParameterFromQuery(Name = "returnUrl")]
+    public string? ReturnUrl { get; set; }
+
     [Inject]
     private NavigationManager NavigationManager { get; set; } = default!;
 
@@ -22,6 +28,9 @@ public partial class Login
     [Inject]
     private ISnackbar Snackbar { get; set; } = default!;
 
+    [Inject]
+    private PortalNavigationService PortalNavigation { get; set; } = default!;
+
     private string _signInIdentity = string.Empty;
     private string _signInPassword = string.Empty;
 
@@ -29,13 +38,23 @@ public partial class Login
     private string _signUpEmail = string.Empty;
     private string _signUpPassword = string.Empty;
 
+    private int _activeTabIndex;
     private bool _isSubmitting;
     private string? _errorMessage;
     private LoginContracts.AuthTokenResult? _authResult;
     private LoginContracts.MeResponse? _meResult;
+    private string? _lastProcessedQuery;
 
-    protected override async Task OnInitializedAsync()
+    private IReadOnlyList<PortalDestinationCard> PortalDestinations =>
+    [
+        new("SuperAdmin", "Full isolated admin environment with left navigation and dashboard controls.", RoutePaths.Ui.Admin),
+        new("Analyzer", "Trading workspace access without admin entry.", RoutePaths.Ui.TradingPanel),
+        new("Guest", "Default signup role with Trading Panel access.", RoutePaths.Ui.TradingPanel)
+    ];
+
+    protected override async Task OnParametersSetAsync()
     {
+        _activeTabIndex = string.Equals(Mode, "signup", StringComparison.OrdinalIgnoreCase) ? 1 : 0;
         await HandleGoogleSignInCallbackAsync();
     }
 
@@ -44,7 +63,8 @@ public partial class Login
         _errorMessage = null;
 
         var apiBaseUrl = Configuration[$"{HttpClientNames.ApiLogin}:BaseUrl"] ?? "https://localhost:7181";
-        var returnUrl = NavigationManager.ToAbsoluteUri(RoutePaths.Ui.Login).ToString();
+        var currentUri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        var returnUrl = BuildGoogleCallbackUrl(currentUri);
         var startUrl = QueryHelpers.AddQueryString(
             $"{apiBaseUrl.TrimEnd('/')}{RoutePaths.Api.Login.GoogleStart}",
             "returnUrl",
@@ -116,10 +136,11 @@ public partial class Login
                 return;
             }
 
-            AuthSession.SetToken(authResult.AccessToken, authResult.ExpiresAtUtc);
+            AuthSession.SetAuthenticatedUser(authResult);
 
             Snackbar.Add("Authentication succeeded.", Severity.Success);
             await LoadCurrentUserAsync();
+            NavigateToAuthorizedPortal();
         }
         catch (Exception ex)
         {
@@ -143,7 +164,7 @@ public partial class Login
         }
 
         var client = HttpClientFactory.CreateClient(HttpClientNames.ApiLogin);
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthSession.AccessToken);
+        AuthSession.Apply(client);
 
         var response = await client.GetAsync(RoutePaths.Api.Login.Me);
         if (!response.IsSuccessStatusCode)
@@ -171,6 +192,12 @@ public partial class Login
     private async Task HandleGoogleSignInCallbackAsync()
     {
         var currentUri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        if (string.Equals(_lastProcessedQuery, currentUri.Query, StringComparison.Ordinal))
+        {
+            return;
+        }
+
+        _lastProcessedQuery = currentUri.Query;
         var query = QueryHelpers.ParseQuery(currentUri.Query);
 
         if (query.TryGetValue("authError", out var errorValue))
@@ -213,21 +240,55 @@ public partial class Login
             ? emailValue.ToString()
             : string.Empty;
 
+        var role = query.TryGetValue("role", out var roleValue)
+            ? roleValue.ToString()
+            : string.Empty;
+
         var userId = query.TryGetValue("userId", out var userIdValue)
             ? userIdValue.ToString()
             : string.Empty;
 
-        AuthSession.SetToken(accessToken, expiresAtUtc.ToUniversalTime());
         _authResult = new LoginContracts.AuthTokenResult
         {
             AccessToken = accessToken,
             ExpiresAtUtc = expiresAtUtc.ToUniversalTime(),
             UserId = userId,
             Username = username,
-            Email = email
+            Email = email,
+            Role = role
         };
+        AuthSession.SetAuthenticatedUser(_authResult);
 
         Snackbar.Add("Signed in with Google successfully.", Severity.Success);
         await LoadCurrentUserAsync();
+        NavigateToAuthorizedPortal();
+    }
+
+    private void NavigateToAuthorizedPortal()
+    {
+        var role = _meResult?.Role ?? _authResult?.Role ?? AuthSession.Role;
+        var targetRoute = PortalNavigation.ResolvePostLoginRoute(ReturnUrl, role);
+        NavigationManager.NavigateTo(targetRoute);
+    }
+
+    private static string BuildGoogleCallbackUrl(Uri currentUri)
+    {
+        var callbackBase = currentUri.GetLeftPart(UriPartial.Path);
+        var currentQuery = QueryHelpers.ParseQuery(currentUri.Query);
+        var preservedQuery = new Dictionary<string, string?>();
+
+        if (currentQuery.TryGetValue("mode", out var modeValue))
+        {
+            preservedQuery["mode"] = modeValue.ToString();
+        }
+
+        if (currentQuery.TryGetValue("returnUrl", out var returnUrlValue))
+        {
+            preservedQuery["returnUrl"] = returnUrlValue.ToString();
+        }
+
+        return preservedQuery.Count == 0
+            ? callbackBase
+            : QueryHelpers.AddQueryString(callbackBase, preservedQuery);
     }
 }

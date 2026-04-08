@@ -537,6 +537,88 @@ html[lang^="fa"] .td-navbar-brand__name {
     min-width: 180px;
 }
 
+.td-auth-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.td-auth-action {
+    min-width: 132px;
+    justify-content: center;
+}
+
+.td-auth-action--secondary {
+    background: #fff;
+    color: #15305a;
+    box-shadow: inset 0 0 0 1px rgba(21, 48, 90, 0.14);
+}
+
+.td-login-overview {
+    border-radius: 28px;
+    background: linear-gradient(145deg, #0f2642 0%, #1c416e 100%);
+    color: #f4f8ff;
+}
+
+.td-login-panel {
+    border-radius: 28px;
+}
+
+.td-login-role-grid {
+    display: grid;
+    gap: 16px;
+}
+
+.td-login-role-card {
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #f4f8ff;
+}
+
+.td-portal-dashboard {
+    display: grid;
+    gap: 24px;
+}
+
+.td-portal-dashboard__hero {
+    padding: 28px 32px;
+    border-radius: 28px;
+    background: linear-gradient(135deg, #ffffff 0%, #f5f9ff 100%);
+    box-shadow: 0 20px 48px rgba(17, 39, 67, 0.08);
+}
+
+.td-portal-dashboard__grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.td-portal-dashboard__card {
+    border-radius: 24px;
+    background: #ffffff;
+    box-shadow: 0 18px 40px rgba(17, 39, 67, 0.08);
+}
+
+.td-portal-dashboard__card--trading {
+    background: linear-gradient(180deg, #fffdf9 0%, #fff4e7 100%);
+}
+
+.td-portal-dashboard__queue {
+    display: grid;
+    gap: 16px;
+}
+
+.td-portal-dashboard__queue-item {
+    padding: 18px 20px;
+    border-radius: 18px;
+    background: rgba(14, 92, 201, 0.06);
+}
+
+.td-portal-dashboard__card--trading .td-portal-dashboard__queue-item,
+.td-portal-dashboard__card.td-portal-dashboard__card--trading .td-portal-dashboard__queue-item {
+    background: rgba(217, 106, 31, 0.08);
+}
+
 .testimonials .card--custom {
     background-position: top right;
 }
@@ -544,6 +626,10 @@ html[lang^="fa"] .td-navbar-brand__name {
 @media (max-width: 991.98px) {
     .td-inner-hero {
         padding: 150px 0 80px;
+    }
+
+    .td-auth-actions {
+        display: none;
     }
 
     .td-cot-panel {

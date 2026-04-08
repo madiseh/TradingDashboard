@@ -72,9 +72,14 @@
                                         <i class="bi bi-search"></i>
                                         <span></span>
                                     </a>
-                                    <a href="/#footer" class="btn_theme btn_theme_active">
-                                        @L["Actions.ContactUs"] <i class="bi bi-arrow-up-right"></i><span></span>
-                                    </a>
+                                    <div class="td-auth-actions">
+                                        @foreach (var action in AuthActions)
+                                        {
+                                            <a href="@action.Href" class="@action.CssClass">
+                                                @action.Label <i class="bi bi-arrow-up-right"></i><span></span>
+                                            </a>
+                                        }
+                                    </div>
                                 </div>
                                 <div class="nav-right__search-inner">
                                     <div class="nav-search-inner__form">
@@ -117,6 +122,7 @@
                         <li class="nav-item"><a class="nav-link" href="/#video-tutorial">@L["Menu.Educate"]</a></li>
                         <li class="nav-item"><a class="nav-link" href="/#packages">@L["Menu.Serve"]</a></li>
                         <li class="nav-item"><a class="nav-link" href="@RoutePaths.Ui.Login">@L["Menu.SignIn"]</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@PortalNavigation.BuildLoginUrl(mode: "signup")">@L["Menu.SignUp"]</a></li>
                     </ul>
                 </div>
             </div>

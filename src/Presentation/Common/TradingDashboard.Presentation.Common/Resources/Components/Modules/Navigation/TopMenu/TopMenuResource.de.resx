@@ -15,8 +15,14 @@
   <data name="Actions.ContactUs" xml:space="preserve">
     <value>Kontakt</value>
   </data>
+  <data name="Actions.Login" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
   <data name="Actions.Search" xml:space="preserve">
     <value>Suchen</value>
+  </data>
+  <data name="Actions.SignUp" xml:space="preserve">
+    <value>Registrieren</value>
   </data>
   <data name="Brand.HomeAriaLabel" xml:space="preserve">
     <value>TerminalPrime Startseite</value>
@@ -95,6 +101,9 @@
   </data>
   <data name="Menu.SignIn" xml:space="preserve">
     <value>Anmelden</value>
+  </data>
+  <data name="Menu.SignUp" xml:space="preserve">
+    <value>Registrieren</value>
   </data>
   <data name="Menu.WeeklyReview" xml:space="preserve">
     <value>Wochenrueckblick</value>

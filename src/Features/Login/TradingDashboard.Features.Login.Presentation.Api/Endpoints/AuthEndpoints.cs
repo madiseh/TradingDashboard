@@ -95,8 +95,9 @@ public static class AuthEndpoints
         var userId = user.FindFirstValue(ClaimTypes.NameIdentifier) ?? user.FindFirstValue(ClaimTypes.Name);
         var username = user.FindFirstValue(ClaimTypes.Name) ?? user.FindFirstValue(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.UniqueName);
         var email = user.FindFirstValue(ClaimTypes.Email) ?? user.FindFirstValue(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Email);
+        var role = user.FindFirstValue(ClaimTypes.Role) ?? user.FindFirstValue("role");
 
-        return TypedResults.Ok(new MeResponse(userId, username, email));
+        return TypedResults.Ok(new MeResponse(userId, username, email, role));
     }
 
     private static async Task<IResult> BeginGoogleSignInAsync(
@@ -176,6 +177,7 @@ public static class AuthEndpoints
                 email,
                 passwordHash,
                 passwordSalt,
+                AppUserRole.Guest,
                 SignupAppPlatform.Google,
                 true,
                 DateTime.UtcNow);
@@ -192,14 +194,15 @@ public static class AuthEndpoints
 
         await httpContext.SignOutAsync("External");
 
-        var tokenResult = jwtTokenService.GenerateToken(new AuthUserResponse(user.Id, user.Username, user.Email.Value));
+        var tokenResult = jwtTokenService.GenerateToken(new AuthUserResponse(user.Id, user.Username, user.Email.Value, user.Role));
         var redirectUrl = QueryHelpers.AddQueryString(normalizedReturnUrl, new Dictionary<string, string?>
         {
             ["accessToken"] = tokenResult.AccessToken,
             ["expiresAtUtc"] = tokenResult.ExpiresAtUtc.ToString("O"),
             ["userId"] = tokenResult.UserId.ToString(),
             ["username"] = tokenResult.Username,
-            ["email"] = tokenResult.Email
+            ["email"] = tokenResult.Email,
+            ["role"] = tokenResult.Role
         });
 
         return Results.Redirect(redirectUrl);

@@ -12,4 +12,5 @@ public sealed record AuthTokenResult(
     DateTime ExpiresAtUtc,
     Guid UserId,
     string Username,
-    string Email);
+    string Email,
+    string Role);

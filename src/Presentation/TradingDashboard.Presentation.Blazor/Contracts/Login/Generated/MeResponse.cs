@@ -12,4 +12,7 @@ public sealed class MeResponse
 
     [JsonPropertyName("username")]
     public string? Username { get; set; }
+
+    [JsonPropertyName("role")]
+    public string? Role { get; set; }
 }
