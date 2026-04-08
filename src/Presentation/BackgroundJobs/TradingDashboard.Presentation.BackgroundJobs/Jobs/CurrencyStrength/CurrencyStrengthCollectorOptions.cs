@@ -1,4 +1,4 @@
-namespace TradingDashboard.Features.CurrencyStrength.CollectService.Options;
+namespace TradingDashboard.Presentation.BackgroundJobs.Jobs.CurrencyStrength;
 
 public sealed class CurrencyStrengthCollectorOptions
 {

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.4.11626.88 stable
+VisualStudioVersion = 18.4.11626.88
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
 EndProject
@@ -76,13 +76,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingDashboard.Features.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingDashboard.Features.CurrencyStrength.Application", "src\Features\CurrencyStrength\TradingDashboard.Features.CurrencyStrength.Application\TradingDashboard.Features.CurrencyStrength.Application.csproj", "{C39799BC-5DFF-4898-A7B2-6975F175038B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TradingDashboard.Application", "TradingDashboard.Application", "{BD94EC08-8532-9896-5CFB-1271939A9120}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingDashboard.Features.CurrencyStrength.Infrastructure", "src\Features\CurrencyStrength\TradingDashboard.Features.CurrencyStrength.Infrastructure\TradingDashboard.Features.CurrencyStrength.Infrastructure.csproj", "{69BA15CC-AD9C-4472-864A-4ED912356696}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingDashboard.Features.CurrencyStrength.Presentation.Api", "src\Features\CurrencyStrength\TradingDashboard.Features.CurrencyStrength.Presentation.Api\TradingDashboard.Features.CurrencyStrength.Presentation.Api.csproj", "{A33804BB-24D1-432D-B1EB-2AFCAF6CB028}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingDashboard.Features.CurrencyStrength.CollectService", "src\Features\CurrencyStrength\TradingDashboard.Features.CurrencyStrength.CollectService\TradingDashboard.Features.CurrencyStrength.CollectService.csproj", "{2AEDB5BB-E2E9-4300-AD28-7CBF51E6733B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackgroundJobs", "BackgroundJobs", "{43911DBE-E910-E2CD-2ABD-5B3D8076C196}"
 EndProject
@@ -362,18 +358,6 @@ Global
 		{A33804BB-24D1-432D-B1EB-2AFCAF6CB028}.Release|x64.Build.0 = Release|Any CPU
 		{A33804BB-24D1-432D-B1EB-2AFCAF6CB028}.Release|x86.ActiveCfg = Release|Any CPU
 		{A33804BB-24D1-432D-B1EB-2AFCAF6CB028}.Release|x86.Build.0 = Release|Any CPU
-		{2AEDB5BB-E2E9-4300-AD28-7CBF51E6733B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2AEDB5BB-E2E9-4300-AD28-7CBF51E6733B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2AEDB5BB-E2E9-4300-AD28-7CBF51E6733B}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{2AEDB5BB-E2E9-4300-AD28-7CBF51E6733B}.Debug|x64.Build.0 = Debug|Any CPU
-		{2AEDB5BB-E2E9-4300-AD28-7CBF51E6733B}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{2AEDB5BB-E2E9-4300-AD28-7CBF51E6733B}.Debug|x86.Build.0 = Debug|Any CPU
-		{2AEDB5BB-E2E9-4300-AD28-7CBF51E6733B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2AEDB5BB-E2E9-4300-AD28-7CBF51E6733B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2AEDB5BB-E2E9-4300-AD28-7CBF51E6733B}.Release|x64.ActiveCfg = Release|Any CPU
-		{2AEDB5BB-E2E9-4300-AD28-7CBF51E6733B}.Release|x64.Build.0 = Release|Any CPU
-		{2AEDB5BB-E2E9-4300-AD28-7CBF51E6733B}.Release|x86.ActiveCfg = Release|Any CPU
-		{2AEDB5BB-E2E9-4300-AD28-7CBF51E6733B}.Release|x86.Build.0 = Release|Any CPU
 		{F4B766D3-E544-4CB9-9AF1-B676792DA773}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F4B766D3-E544-4CB9-9AF1-B676792DA773}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4B766D3-E544-4CB9-9AF1-B676792DA773}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -423,10 +407,8 @@ Global
 		{522C6011-3132-D44F-A64D-3EBEB5AF6DBB} = {E81CAA0A-8D6A-E3B6-28B3-AB416E1657A7}
 		{E398E714-801F-4889-ADE2-4DBB3F3674DA} = {522C6011-3132-D44F-A64D-3EBEB5AF6DBB}
 		{C39799BC-5DFF-4898-A7B2-6975F175038B} = {522C6011-3132-D44F-A64D-3EBEB5AF6DBB}
-		{BD94EC08-8532-9896-5CFB-1271939A9120} = {22BAF98C-8415-17C4-B26A-D537657BC863}
 		{69BA15CC-AD9C-4472-864A-4ED912356696} = {522C6011-3132-D44F-A64D-3EBEB5AF6DBB}
 		{A33804BB-24D1-432D-B1EB-2AFCAF6CB028} = {522C6011-3132-D44F-A64D-3EBEB5AF6DBB}
-		{2AEDB5BB-E2E9-4300-AD28-7CBF51E6733B} = {522C6011-3132-D44F-A64D-3EBEB5AF6DBB}
 		{43911DBE-E910-E2CD-2ABD-5B3D8076C196} = {6996BBF7-DB31-59BC-C7DD-9A7CCC6138C4}
 		{F4B766D3-E544-4CB9-9AF1-B676792DA773} = {43911DBE-E910-E2CD-2ABD-5B3D8076C196}
 	EndGlobalSection

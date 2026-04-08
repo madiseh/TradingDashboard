@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Quartz;
+using TradingDashboard.Presentation.BackgroundJobs.Jobs.CurrencyStrength;
 using TradingDashboard.Presentation.BackgroundJobs.Jobs.HelloWorld;
 using TradingDashboard.Presentation.BackgroundJobs.Persistence.Context;
 using TradingDashboard.Presentation.BackgroundJobs.Scheduler;
@@ -30,6 +31,14 @@ public static class Program
         await HelloWorldJobRegistration.RegisterAsync(scheduler, dbContext);
     }
 
+    public static async Task AddJob_CurrencyStrength(
+        IScheduler scheduler,
+        BackgroundJobsDbContext dbContext,
+        IServiceProvider services)
+    {
+        await CurrencyStrengthJobRegistration.RegisterAsync(scheduler, dbContext, services);
+    }
+
     private static void AddPersistence(IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("BackgroundJobsDatabase");
@@ -42,6 +51,11 @@ public static class Program
             options.UseSqlServer(connectionString, sql => sql.EnableRetryOnFailure()));
     }
 
+    private static void AddJobs(IServiceCollection services, IConfiguration configuration)
+    {
+        CurrencyStrengthJobRegistration.AddServices(services, configuration);
+    }
+
     private static async Task RunAsync(string[] args)
     {
         var builder = new HostApplicationBuilder(new HostApplicationBuilderSettings
@@ -52,6 +66,7 @@ public static class Program
         });
 
         AddPersistence(builder.Services, builder.Configuration);
+        AddJobs(builder.Services, builder.Configuration);
 
         using var host = builder.Build();
 
@@ -61,6 +76,7 @@ public static class Program
 
         var scheduler = await QuartzSchedulerBuilder.CreateAsync(scope.ServiceProvider);
         await AddJob_HelloWorld(scheduler, dbContext);
+        await AddJob_CurrencyStrength(scheduler, dbContext, host.Services);
         await scheduler.Start();
 
         var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();

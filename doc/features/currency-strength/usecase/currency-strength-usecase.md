@@ -16,7 +16,7 @@
 
 ## UC3: Collect Snapshots
 
-1. Background service wakes up every 1 minute.
+1. Background jobs host triggers the Currency Strength collect job every 1 minute.
 2. Collector fetches each configured URL.
 3. Collector validates the JSON shape.
 4. Collector writes `latest.json` and a timestamped snapshot file.

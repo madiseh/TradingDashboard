@@ -10,6 +10,7 @@ public static class QuartzSchedulerBuilder
     {
         var schedulerFactory = new StdSchedulerFactory();
         var scheduler = await schedulerFactory.GetScheduler();
+        scheduler.JobFactory = ActivatorUtilities.CreateInstance<ScopedBackgroundJobFactory>(services);
         var listener = ActivatorUtilities.CreateInstance<BackgroundJobExecutionListener>(services);
         scheduler.ListenerManager.AddJobListener(listener);
         return scheduler;

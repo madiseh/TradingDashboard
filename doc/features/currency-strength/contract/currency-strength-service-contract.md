@@ -2,10 +2,10 @@
 
 ## Collector Responsibilities
 
+- Run as a scheduled Quartz job inside `TradingDashboard.Presentation.BackgroundJobs`.
 - Poll all configured timeframe endpoints every 1 minute.
 - Save the newest payload to `latest.json`.
 - Save timestamped snapshot files for traceability.
-- Expose operational status and manual run endpoints.
 
 ## Storage Layout
 
