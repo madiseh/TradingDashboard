@@ -7,23 +7,23 @@ namespace TradingDashboard.Presentation.Blazor.Components.Pages.Releases;
 
 public partial class Releases
 {
-    private static readonly DateOnly CurrentReleaseDate = new(2026, 4, 8);
-    private static readonly DateOnly LatestReleaseDate = new(2026, 4, 6);
-    private static readonly DateOnly PreviousReleaseDate = new(2026, 4, 4);
-    private static readonly DateOnly EarlierReleaseDate = new(2026, 4, 3);
-    private static readonly DateOnly InitialReleaseDate = new(2026, 4, 1);
+    private static readonly DateOnly Version212ReleaseDate = new(2026, 4, 8);
+    private static readonly DateOnly Version211ReleaseDate = new(2026, 4, 6);
+    private static readonly DateOnly Version210ReleaseDate = new(2026, 4, 4);
+    private static readonly DateOnly Version200ReleaseDate = new(2026, 4, 3);
+    private static readonly DateOnly Version100ReleaseDate = new(2026, 4, 1);
 
     [Inject]
     private IStringLocalizer<ReleasesResource> L { get; set; } = default!;
 
     private string LatestReleaseDateLabel =>
-        CurrentReleaseDate.ToString("MMMM d, yyyy", CultureInfo.CurrentUICulture);
+        Version212ReleaseDate.ToString("MMMM d, yyyy", CultureInfo.CurrentUICulture);
 
     private IReadOnlyList<ReleaseEntryViewModel> ReleaseEntries =>
     [
         new(
             L["Entry.Version", ApplicationVersions.Blazor],
-            CurrentReleaseDate.ToString("MMMM d, yyyy", CultureInfo.CurrentUICulture),
+            Version212ReleaseDate.ToString("MMMM d, yyyy", CultureInfo.CurrentUICulture),
             L["Entry.Title.Version212"],
             L["Entry.Description.Version212"],
             true,
@@ -36,7 +36,7 @@ public partial class Releases
             ]),
         new(
             L["Entry.Version", "2.1.1"],
-            LatestReleaseDate.ToString("MMMM d, yyyy", CultureInfo.CurrentUICulture),
+            Version211ReleaseDate.ToString("MMMM d, yyyy", CultureInfo.CurrentUICulture),
             L["Entry.Title.Version211"],
             L["Entry.Description.Version211"],
             false,
@@ -49,7 +49,7 @@ public partial class Releases
             ]),
         new(
             L["Entry.Version", "2.1.0"],
-            PreviousReleaseDate.ToString("MMMM d, yyyy", CultureInfo.CurrentUICulture),
+            Version210ReleaseDate.ToString("MMMM d, yyyy", CultureInfo.CurrentUICulture),
             L["Entry.Title.Version210"],
             L["Entry.Description.Version210"],
             false,
@@ -60,7 +60,7 @@ public partial class Releases
             ]),
         new(
             L["Entry.Version", "2.0.0"],
-            EarlierReleaseDate.ToString("MMMM d, yyyy", CultureInfo.CurrentUICulture),
+            Version200ReleaseDate.ToString("MMMM d, yyyy", CultureInfo.CurrentUICulture),
             L["Entry.Title.Version2"],
             L["Entry.Description.Version2"],
             false,
@@ -73,7 +73,7 @@ public partial class Releases
             ]),
         new(
             L["Entry.Version", "1.0.0"],
-            InitialReleaseDate.ToString("MMMM d, yyyy", CultureInfo.CurrentUICulture),
+            Version100ReleaseDate.ToString("MMMM d, yyyy", CultureInfo.CurrentUICulture),
             L["Entry.Title.Version1"],
             L["Entry.Description.Version1"],
             false,

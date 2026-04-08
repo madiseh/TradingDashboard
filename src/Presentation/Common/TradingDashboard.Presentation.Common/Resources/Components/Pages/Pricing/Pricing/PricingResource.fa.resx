@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Actions.BuyMonthly" xml:space="preserve">
+    <value>خرید ماهانه</value>
+  </data>
+  <data name="Actions.BuyYearly" xml:space="preserve">
+    <value>خرید سالانه</value>
+  </data>
+  <data name="Actions.Retry" xml:space="preserve">
+    <value>تلاش دوباره</value>
+  </data>
+  <data name="Actions.SignInToSubscribe" xml:space="preserve">
+    <value>برای اشتراک وارد شوید</value>
+  </data>
+  <data name="Empty.NoPlans" xml:space="preserve">
+    <value>در حال حاضر هیچ پلن قیمتی در دسترس نیست.</value>
+  </data>
+  <data name="Errors.LoadPlans" xml:space="preserve">
+    <value>بارگذاری پلن‌های قیمت‌گذاری انجام نشد.</value>
+  </data>
+  <data name="Errors.LoadPlansWithMessage" xml:space="preserve">
+    <value>بارگذاری پلن‌های قیمت‌گذاری انجام نشد. {0}</value>
+  </data>
+  <data name="Errors.Purchase" xml:space="preserve">
+    <value>ثبت درخواست اشتراک انجام نشد.</value>
+  </data>
+  <data name="Errors.PurchaseWithMessage" xml:space="preserve">
+    <value>ثبت درخواست اشتراک انجام نشد. {0}</value>
+  </data>
+  <data name="Features.Item1" xml:space="preserve">
+    <value>پوشش هفتگی COT برای بازارهای اصلی فیوچرز</value>
+  </data>
+  <data name="Features.Item2" xml:space="preserve">
+    <value>زمینه ماکرو و بین‌بازاری برای تشخیص بایاس جهت‌دار</value>
+  </data>
+  <data name="Features.Item3" xml:space="preserve">
+    <value>داشبورد قدرت ارزها با جابه‌جایی سریع بین تایم‌فریم‌ها</value>
+  </data>
+  <data name="Features.Item4" xml:space="preserve">
+    <value>سطوح کلیدی، پلن‌های الگو و یادداشت‌های هارمونیک</value>
+  </data>
+  <data name="Features.Item5" xml:space="preserve">
+    <value>تقویم اقتصادی و زمینه خبر زنده برای سشن‌های فعال</value>
+  </data>
+  <data name="Features.Item6" xml:space="preserve">
+    <value>به‌روزرسانی‌های اختصاصی اعضا و مرور نقشه راه</value>
+  </data>
+  <data name="Features.Item7" xml:space="preserve">
+    <value>دسترسی آماده موبایل و تبلت برای بررسی در حرکت</value>
+  </data>
+  <data name="Features.Item8" xml:space="preserve">
+    <value>یک حساب، یک اشتراک فعال و تمدید بدون اصطکاک</value>
+  </data>
+  <data name="Features.Title" xml:space="preserve">
+    <value>چه چیزی باز می‌شود</value>
+  </data>
+  <data name="Hero.Kicker" xml:space="preserve">
+    <value>عضویت TerminalPrime</value>
+  </data>
+  <data name="Hero.Subtitle" xml:space="preserve">
+    <value>ریتم پرداخت متناسب با سبک کاری خودت را انتخاب کن و به کل بسته پژوهشی TerminalPrime دسترسی بگیر.</value>
+  </data>
+  <data name="Hero.Title" xml:space="preserve">
+    <value>قیمت‌گذاری</value>
+  </data>
+  <data name="Labels.BilledMonthly" xml:space="preserve">
+    <value>پرداخت ماهانه</value>
+  </data>
+  <data name="Labels.BilledYearly" xml:space="preserve">
+    <value>پرداخت سالانه</value>
+  </data>
+  <data name="Labels.Monthly" xml:space="preserve">
+    <value>ماهانه</value>
+  </data>
+  <data name="Labels.PerMonth" xml:space="preserve">
+    <value>در ماه</value>
+  </data>
+  <data name="Labels.PerYear" xml:space="preserve">
+    <value>در سال</value>
+  </data>
+  <data name="Labels.Savings" xml:space="preserve">
+    <value>صرفه‌جویی سالانه</value>
+  </data>
+  <data name="Labels.Yearly" xml:space="preserve">
+    <value>سالانه</value>
+  </data>
+  <data name="Note.AuthRequired" xml:space="preserve">
+    <value>برای فعال‌سازی اشتراک باید ابتدا وارد حساب خودت شوی.</value>
+  </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>قیمت‌گذاری</value>
+  </data>
+  <data name="Plan.Badge" xml:space="preserve">
+    <value>پریمیوم</value>
+  </data>
+  <data name="Plan.Description" xml:space="preserve">
+    <value>برای معامله‌گرانی که زمینه ماکرو، بینش COT و یک جریان تصمیم‌گیری تمیزتر می‌خواهند طراحی شده است.</value>
+  </data>
+  <data name="Plan.Name" xml:space="preserve">
+    <value>TerminalPrime Premium</value>
+  </data>
+  <data name="Plan.TrialNote" xml:space="preserve">
+    <value>در پرداخت سالانه تخفیف به‌صورت خودکار اعمال می‌شود. پرداخت ماهانه ورودی منعطف‌تری می‌دهد.</value>
+  </data>
+  <data name="State.Processing" xml:space="preserve">
+    <value>در حال پردازش...</value>
+  </data>
+  <data name="Status.ActiveSummary" xml:space="preserve">
+    <value>اشتراک {0} شما تا {1} فعال است.</value>
+  </data>
+  <data name="Status.ActiveTitle" xml:space="preserve">
+    <value>اشتراک فعال شد</value>
+  </data>
+  <data name="Status.RenewalSummary" xml:space="preserve">
+    <value>آخرین پرداخت: {0}</value>
+  </data>
+  <data name="Success.PurchaseMonthly" xml:space="preserve">
+    <value>اشتراک ماهانه شما هم‌اکنون فعال شد.</value>
+  </data>
+  <data name="Success.PurchaseYearly" xml:space="preserve">
+    <value>اشتراک سالانه شما هم‌اکنون فعال شد.</value>
+  </data>
+</root>

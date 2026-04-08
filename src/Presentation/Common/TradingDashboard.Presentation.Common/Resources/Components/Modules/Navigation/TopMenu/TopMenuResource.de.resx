@@ -90,6 +90,9 @@
   <data name="Menu.Navigation" xml:space="preserve">
     <value>Navigationsmenue oeffnen</value>
   </data>
+  <data name="Menu.Pricing" xml:space="preserve">
+    <value>Preise</value>
+  </data>
   <data name="Menu.Serve" xml:space="preserve">
     <value>Services</value>
   </data>
