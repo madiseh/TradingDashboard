@@ -2,6 +2,21 @@
 @inherits TradingDashboard.Presentation.Blazor.Components.Pages.PageComponentBase
 
 <PageTitle>@GetPageTitle()</PageTitle>
+<HeadContent>
+    <meta name="description" content="@GetSeoDescription()" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="@BuildCanonicalUrl()" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="@SiteBranding.BrandName" />
+    <meta property="og:title" content="@GetPageTitle()" />
+    <meta property="og:description" content="@GetSeoDescription()" />
+    <meta property="og:url" content="@BuildCanonicalUrl()" />
+    <meta property="og:image" content="@SiteBranding.AbsoluteUrl(SiteBranding.Image("hero/hero-thumb1.png"))" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@GetPageTitle()" />
+    <meta name="twitter:description" content="@GetSeoDescription()" />
+    <meta name="twitter:image" content="@SiteBranding.AbsoluteUrl(SiteBranding.Image("hero/hero-thumb1.png"))" />
+</HeadContent>
 
 <section class="td-inner-hero td-inner-hero--light">
     <div class="container">
