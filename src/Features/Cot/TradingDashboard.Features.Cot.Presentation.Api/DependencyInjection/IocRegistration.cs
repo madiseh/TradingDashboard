@@ -76,6 +76,24 @@ public static class IocRegistration
 
         roots.Add(Path.Combine(AppContext.BaseDirectory, "storage", "cot-raw"));
 
+        var backgroundJobsBinRoot = Path.GetFullPath(Path.Combine(
+            AppContext.BaseDirectory,
+            "..",
+            "..",
+            "..",
+            "..",
+            "..",
+            "..",
+            "Presentation",
+            "BackgroundJobs",
+            "TradingDashboard.Presentation.BackgroundJobs",
+            "bin"));
+
+        if (Directory.Exists(backgroundJobsBinRoot))
+        {
+            roots.AddRange(Directory.GetDirectories(backgroundJobsBinRoot, "cot-raw", SearchOption.AllDirectories));
+        }
+
         var collectServiceBinRoot = Path.GetFullPath(Path.Combine(
             AppContext.BaseDirectory,
             "..",

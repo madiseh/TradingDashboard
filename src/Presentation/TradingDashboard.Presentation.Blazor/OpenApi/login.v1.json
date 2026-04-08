@@ -6,6 +6,16 @@
     "version": "v1"
   },
   "paths": {
+    "/": {
+      "get": {
+        "operationId": "Get",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/api/v1/login/signup": {
       "post": {
         "tags": [

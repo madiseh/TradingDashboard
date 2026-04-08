@@ -32,6 +32,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseOpenApi();
     app.UseSwaggerUi();
+    app.MapGet("/", () => Results.Redirect("/swagger"));
 }
 
 app.UseForwardedHeaders();

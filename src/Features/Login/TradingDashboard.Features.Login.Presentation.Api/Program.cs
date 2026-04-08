@@ -113,6 +113,7 @@ public partial class Program
         {
             app.UseOpenApi();
             app.UseSwaggerUi();
+            app.MapGet("/", () => Results.Redirect("/swagger"));
         }
 
         app.UseForwardedHeaders();
