@@ -22,6 +22,7 @@ public partial class TopMenu
     private IReadOnlyList<NavigationItem> NavigationItems =>
     [
         new("Menu.Home", RoutePaths.Ui.Home),
+        new("Menu.Pricing", RoutePaths.Ui.Pricing),
         new("Menu.Cot", RoutePaths.Ui.CotHome),
         new("Menu.CurrencyStrength", RoutePaths.Ui.CurrencyStrength)
     ];
