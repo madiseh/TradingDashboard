@@ -4,7 +4,8 @@ using Microsoft.Extensions.Localization;
 using MudBlazor;
 using TradingDashboard.Presentation.Blazor.Services;
 using TradingDashboard.Presentation.Common.Resources.Components.Pages.Admin.Users;
-using LoginContracts = TradingDashboard.Presentation.Blazor.Contracts.Login.Generated;
+using LoginContracts = TradingDashboard.Presentation.Blazor.Contracts.UserManagement.Generated;
+using UserManagementContracts = TradingDashboard.Presentation.Blazor.Contracts.UserManagement.Generated;
 
 namespace TradingDashboard.Presentation.Blazor.Components.Pages.Admin.Users;
 
@@ -295,7 +296,7 @@ public partial class Users
 
     private async Task<string> ExtractErrorAsync(HttpResponseMessage response)
     {
-        var payload = await response.Content.ReadFromJsonAsync<LoginContracts.ApiErrorResponse>();
+        var payload = await response.Content.ReadFromJsonAsync<UserManagementContracts.ApiErrorResponse>();
         if (payload is null)
         {
             return L["Errors.RequestFailedWithStatus", (int)response.StatusCode];

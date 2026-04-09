@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TradingDashboard.Presentation.Blazor.Contracts.Login.Generated;
+namespace TradingDashboard.Presentation.Blazor.Contracts.UserManagement.Generated;
 
 public sealed class ChangeUserPasswordRequest
 {

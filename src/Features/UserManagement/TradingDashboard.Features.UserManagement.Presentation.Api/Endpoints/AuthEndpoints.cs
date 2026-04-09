@@ -9,11 +9,11 @@ using TradingDashboard.Application.Features.Auth;
 using TradingDashboard.Application.Repository.Auth;
 using TradingDashboard.Domain.Entities;
 using TradingDashboard.Domain.Enums;
-using TradingDashboard.Presentation.Api.Login.Contracts;
-using TradingDashboard.Presentation.Api.Login.Services;
+using TradingDashboard.Presentation.Api.UserManagement.Contracts;
+using TradingDashboard.Presentation.Api.UserManagement.Services;
 using TradingDashboard.Presentation.Common.Contracts;
 
-namespace TradingDashboard.Presentation.Api.Login.Endpoints;
+namespace TradingDashboard.Presentation.Api.UserManagement.Endpoints;
 
 public static class AuthEndpoints
 {
@@ -96,7 +96,9 @@ public static class AuthEndpoints
         var username = user.FindFirstValue(ClaimTypes.Name) ?? user.FindFirstValue(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.UniqueName);
         var email = user.FindFirstValue(ClaimTypes.Email) ?? user.FindFirstValue(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Email);
 
-        return TypedResults.Ok(new MeResponse(userId, username, email));
+        var role = user.FindFirstValue(ClaimTypes.Role) ?? user.FindFirstValue("role");
+
+        return TypedResults.Ok(new MeResponse(userId, username, email, role));
     }
 
     private static async Task<IResult> BeginGoogleSignInAsync(
@@ -201,7 +203,7 @@ public static class AuthEndpoints
 
         await httpContext.SignOutAsync("External");
 
-        var tokenResult = jwtTokenService.GenerateToken(new AuthUserResponse(user.Id, user.Username, user.Email.Value, user.Role.ToString()));
+        var tokenResult = jwtTokenService.GenerateToken(new AuthUserResponse(user.Id, user.Username, user.Email.Value, user.Role));
         var redirectUrl = QueryHelpers.AddQueryString(normalizedReturnUrl, new Dictionary<string, string?>
         {
             ["accessToken"] = tokenResult.AccessToken,

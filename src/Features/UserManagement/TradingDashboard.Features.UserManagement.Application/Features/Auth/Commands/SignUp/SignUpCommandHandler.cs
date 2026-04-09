@@ -64,7 +64,7 @@ public sealed class SignUpCommandHandler(
             userCommandRepository.SaveChanges();
 
             return OperationalResult<AuthUserResponse>.Success(
-                new AuthUserResponse(user.Id, user.Username, user.Email.Value, user.Role.ToString()),
+                new AuthUserResponse(user.Id, user.Username, user.Email.Value, user.Role),
                 "Account created successfully.");
         }
         catch (Exception ex)

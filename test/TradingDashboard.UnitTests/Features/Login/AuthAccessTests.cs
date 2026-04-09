@@ -88,6 +88,17 @@ public sealed class AuthAccessTests
         {
             return Task.FromResult<AppUser?>(null);
         }
+
+        public Task<AppUser?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        {
+            return Task.FromResult<AppUser?>(null);
+        }
+
+        public Task<IReadOnlyList<AppUser>> SearchAsync(string? search, CancellationToken cancellationToken)
+        {
+            IReadOnlyList<AppUser> users = [];
+            return Task.FromResult(users);
+        }
     }
 
     private sealed class FakeAppUserCommandRepository : IAppUserCommandRepository

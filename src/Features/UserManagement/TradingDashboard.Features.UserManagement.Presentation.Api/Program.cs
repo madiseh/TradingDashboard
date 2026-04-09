@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.IdentityModel.Tokens;
 using TradingDashboard.Application.Common.Security;
 using TradingDashboard.Infrastructure.Persistence.Implementation.Seed;
-using TradingDashboard.Presentation.Api.Login.DependencyInjection;
-using TradingDashboard.Presentation.Api.Login.Endpoints;
-using TradingDashboard.Presentation.Api.Login.Options;
+using TradingDashboard.Presentation.Api.UserManagement.DependencyInjection;
+using TradingDashboard.Presentation.Api.UserManagement.Endpoints;
+using TradingDashboard.Presentation.Api.UserManagement.Options;
 
 var builder = Program.CreateHostBuilder(args).Build();
 var app = Program.ConfigureApp(builder);
@@ -28,7 +28,7 @@ public partial class Program
         builder.Services.AddOpenApiDocument(options =>
         {
             options.DocumentName = "v1";
-            options.Title = "Trading Dashboard API - Login";
+            options.Title = "Trading Dashboard API - User Management";
             options.Version = "v1";
         });
         builder.Services.AddHealthChecks();
@@ -101,7 +101,7 @@ public partial class Program
         if (!skipDbInit)
         {
             using var scope = app.Services.CreateScope();
-            var dbContext = scope.ServiceProvider.GetRequiredService<LoginDbContext>();
+            var dbContext = scope.ServiceProvider.GetRequiredService<UserManagementDbContext>();
             var passwordHashingService = scope.ServiceProvider.GetRequiredService<IPasswordHashingService>();
            
 

@@ -57,7 +57,7 @@ public sealed class SignInCommandHandler(
             userCommandRepository.SaveChanges();
 
             return OperationalResult<AuthUserResponse>.Success(
-                new AuthUserResponse(user.Id, user.Username, user.Email.Value, user.Role.ToString()),
+                new AuthUserResponse(user.Id, user.Username, user.Email.Value, user.Role),
                 "Signed in successfully.");
         }
         catch (Exception ex)

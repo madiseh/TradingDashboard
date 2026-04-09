@@ -171,72 +171,72 @@
         }
       }
     },
-    "/api/v1/login/subscriptions/plans": {
+    "/api/v1/login/admin/users": {
       "get": {
         "tags": [
-          "Subscriptions"
+          "Admin Users"
         ],
-        "operationId": "GetSubscriptionPlans",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/SubscriptionPlanResponse"
-                  }
-                }
-              }
-            }
+        "operationId": "AdminUsersList",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
           }
-        }
-      }
-    },
-    "/api/v1/login/subscriptions/me": {
-      "get": {
-        "tags": [
-          "Subscriptions"
         ],
-        "operationId": "GetCurrentSubscription",
         "responses": {
           "200": {
             "description": "",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SubscriptionResponse"
+                  "$ref": "#/components/schemas/GetAdminUsersResponse"
                 }
               }
             }
-          },
-          "204": {
-            "description": ""
           },
           "401": {
             "description": ""
+          },
+          "403": {
+            "description": ""
           }
         }
       }
     },
-    "/api/v1/login/subscriptions/purchase": {
+    "/api/v1/login/admin/users/{userId}/change-password": {
       "post": {
         "tags": [
-          "Subscriptions"
+          "Admin Users"
         ],
-        "operationId": "PurchaseSubscription",
+        "operationId": "AdminUsersChangePassword",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
         "requestBody": {
           "x-name": "request",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PurchaseSubscriptionRequest"
+                "$ref": "#/components/schemas/ChangeUserPasswordRequest"
               }
             }
           },
           "required": true,
-          "x-position": 1
+          "x-position": 2
         },
         "responses": {
           "200": {
@@ -244,7 +244,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SubscriptionResponse"
+                  "$ref": "#/components/schemas/ChangeUserPasswordResponse"
                 }
               }
             }
@@ -259,7 +259,20 @@
               }
             }
           },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
           "401": {
+            "description": ""
+          },
+          "403": {
             "description": ""
           }
         }
@@ -364,84 +377,93 @@
           }
         }
       },
-      "SubscriptionPlanResponse": {
+      "GetAdminUsersResponse": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "planCode": {
-            "type": "string"
+          "totalUsers": {
+            "type": "integer",
+            "format": "int32"
           },
-          "planName": {
-            "type": "string"
+          "activeUsers": {
+            "type": "integer",
+            "format": "int32"
           },
-          "monthlyPriceUsd": {
-            "type": "number",
-            "format": "decimal"
+          "disabledUsers": {
+            "type": "integer",
+            "format": "int32"
           },
-          "yearlyPriceUsd": {
-            "type": "number",
-            "format": "decimal"
+          "superAdminUsers": {
+            "type": "integer",
+            "format": "int32"
           },
-          "yearlyDiscountPercentage": {
-            "type": "number",
-            "format": "decimal"
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminUserItemResponse"
+            }
           }
         }
       },
-      "SubscriptionResponse": {
+      "AdminUserItemResponse": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "subscriptionId": {
-            "type": "string",
-            "format": "guid"
-          },
           "userId": {
             "type": "string",
             "format": "guid"
           },
-          "planCode": {
+          "username": {
             "type": "string"
           },
-          "planName": {
+          "email": {
             "type": "string"
           },
-          "billingCycle": {
+          "role": {
             "type": "string"
           },
           "status": {
             "type": "string"
           },
-          "basePriceUsd": {
-            "type": "number",
-            "format": "decimal"
+          "signupPlatform": {
+            "type": "string"
           },
-          "discountPercentage": {
-            "type": "number",
-            "format": "decimal"
+          "isEmailVerified": {
+            "type": "boolean"
           },
-          "finalPriceUsd": {
-            "type": "number",
-            "format": "decimal"
-          },
-          "startsAtUtc": {
+          "createdAtUtc": {
             "type": "string",
             "format": "date-time"
           },
-          "expiresAtUtc": {
+          "updatedAtUtc": {
             "type": "string",
             "format": "date-time"
+          },
+          "lastLoginAtUtc": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         }
       },
-      "PurchaseSubscriptionRequest": {
+      "ChangeUserPasswordResponse": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "planCode": {
-            "type": "string"
+          "userId": {
+            "type": "string",
+            "format": "guid"
           },
-          "billingCycle": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "ChangeUserPasswordRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "newPassword": {
             "type": "string"
           }
         }

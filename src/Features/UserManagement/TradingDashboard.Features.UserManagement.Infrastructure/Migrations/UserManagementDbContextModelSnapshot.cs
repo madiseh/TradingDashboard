@@ -60,6 +60,11 @@ namespace TradingDashboard.Features.UserManagement.Infrastructure.Migrations
                     b.Property<int>("SignupAppPlatform")
                         .HasColumnType("int");
 
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
+
                     b.Property<DateTime>("UpdatedAtUtc")
                         .HasColumnType("datetime2");
 

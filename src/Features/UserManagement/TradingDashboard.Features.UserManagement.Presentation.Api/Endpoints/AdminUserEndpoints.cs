@@ -3,10 +3,10 @@ using TradingDashboard.Application.Common.Results;
 using TradingDashboard.Application.Features.AdminUsers.Commands.ChangeUserPassword;
 using TradingDashboard.Application.Features.AdminUsers.Queries.GetAdminUsers;
 using TradingDashboard.Domain.Enums;
-using TradingDashboard.Presentation.Api.Login.Contracts;
+using TradingDashboard.Presentation.Api.UserManagement.Contracts;
 using TradingDashboard.Presentation.Common.Contracts;
 
-namespace TradingDashboard.Presentation.Api.Login.Endpoints;
+namespace TradingDashboard.Presentation.Api.UserManagement.Endpoints;
 
 public static class AdminUserEndpoints
 {

@@ -13,6 +13,10 @@
     <ProjectReference Include="..\TradingDashboard.Features.UserManagement.Domain\TradingDashboard.Features.UserManagement.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\Login\TradingDashboard.Features.Login.Application\Features\AdminUsers\**\*.cs"
+             Link="Features\AdminUsers\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Common\Results\" />
   </ItemGroup>
 </Project>
