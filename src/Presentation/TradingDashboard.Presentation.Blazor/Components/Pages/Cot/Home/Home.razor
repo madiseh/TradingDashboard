@@ -53,16 +53,30 @@
                         @foreach (var group in _groups)
                         {
                             <MudItem xs="12" md="6">
-                                <MudPaper Class="pa-3" Elevation="1">
-                                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+                                <MudPaper Class="pa-3 td-cot-directory-card" Elevation="1">
+                                    <MudStack Class="td-cot-directory-card-header" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
                                         <MudText Typo="Typo.h5">@group.Type</MudText>
-                                        <MudStack Row="true" Spacing="2">
-                                            <MudLink Href="@BuildMarketsLink(group.Type, CotReportModel.CotLegacy)">@L["Links.MoreInCotLegacy"]</MudLink>
-                                            <MudLink Href="@BuildMarketsLink(group.Type, CotReportModel.Cot)">@L["Links.MoreInCot"]</MudLink>
+                                        <MudStack Row="true" Spacing="1" Class="td-cot-directory-card-actions">
+                                            <MudButton Href="@BuildMarketsLink(group.Type, CotReportModel.CotLegacy)"
+                                                       Variant="Variant.Outlined"
+                                                       Color="Color.Primary"
+                                                       Size="Size.Small"
+                                                       StartIcon="@Icons.Material.Filled.GridView"
+                                                       Class="td-cot-directory-scope-btn">
+                                                @L["Table.CotLegacy"]
+                                            </MudButton>
+                                            <MudButton Href="@BuildMarketsLink(group.Type, CotReportModel.Cot)"
+                                                       Variant="Variant.Outlined"
+                                                       Color="Color.Primary"
+                                                       Size="Size.Small"
+                                                       StartIcon="@Icons.Material.Filled.GridView"
+                                                       Class="td-cot-directory-scope-btn">
+                                                @L["Table.Cot"]
+                                            </MudButton>
                                         </MudStack>
                                     </MudStack>
 
-                                    <MudSimpleTable Dense="true" Class="mt-2">
+                                    <MudSimpleTable Dense="true" Class="mt-2 td-cot-directory-table">
                                         <thead>
                                             <tr>
                                                 <th>@L["Table.Instrument"]</th>
@@ -74,17 +88,33 @@
                                             @foreach (var item in group.Items)
                                             {
                                                 <tr>
-                                                    <td>@item.Name</td>
+                                                    <td class="td-cot-directory-instrument">@item.Name</td>
                                                     <td class="text-center">
                                                         @if (HasModel(item, CotReportModel.CotLegacy))
                                                         {
-                                                            <MudLink Href="@BuildCotLink(item.Slug, CotReportModel.CotLegacy)">@L["Links.OpenCotLegacy"]</MudLink>
+                                                            <MudTooltip Text="@L["Links.OpenCotLegacy"]">
+                                                                <MudIconButton Href="@BuildCotLink(item.Slug, CotReportModel.CotLegacy)"
+                                                                               Icon="@Icons.Material.Filled.ArrowOutward"
+                                                                               Variant="Variant.Outlined"
+                                                                               Color="Color.Primary"
+                                                                               Size="Size.Small"
+                                                                               Class="td-cot-directory-icon-action"
+                                                                               aria-label="@L["Links.OpenCotLegacy"]" />
+                                                            </MudTooltip>
                                                         }
                                                     </td>
                                                     <td class="text-center">
                                                         @if (HasModel(item, CotReportModel.Cot))
                                                         {
-                                                            <MudLink Href="@BuildCotLink(item.Slug, CotReportModel.Cot)">@L["Links.OpenCot"]</MudLink>
+                                                            <MudTooltip Text="@L["Links.OpenCot"]">
+                                                                <MudIconButton Href="@BuildCotLink(item.Slug, CotReportModel.Cot)"
+                                                                               Icon="@Icons.Material.Filled.ArrowOutward"
+                                                                               Variant="Variant.Outlined"
+                                                                               Color="Color.Primary"
+                                                                               Size="Size.Small"
+                                                                               Class="td-cot-directory-icon-action"
+                                                                               aria-label="@L["Links.OpenCot"]" />
+                                                            </MudTooltip>
                                                         }
                                                     </td>
                                                 </tr>

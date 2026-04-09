@@ -12,6 +12,6 @@ global using PageComponentBase = TradingDashboard.Presentation.Blazor.Components
 global using TradingDashboard.Presentation.Blazor.Contracts.Cot.Generated;
 global using TradingDashboard.Presentation.Blazor.Contracts.Cot.Owned;
 global using TradingDashboard.Presentation.Blazor.Contracts.CurrencyStrength.Owned;
-global using TradingDashboard.Presentation.Blazor.Contracts.Login.Generated;
+global using TradingDashboard.Presentation.Blazor.Contracts.UserManagement.Generated;
 global using TradingDashboard.Presentation.Common.Constants;
 global using TradingDashboard.Presentation.Common.Routing;

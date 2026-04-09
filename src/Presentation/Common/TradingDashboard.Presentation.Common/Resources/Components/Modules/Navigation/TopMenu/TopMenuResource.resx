@@ -15,8 +15,14 @@
   <data name="Actions.ContactUs" xml:space="preserve">
     <value>Contact Us</value>
   </data>
+  <data name="Actions.Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
   <data name="Actions.Search" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="Actions.SignUp" xml:space="preserve">
+    <value>Sign Up</value>
   </data>
   <data name="Brand.HomeAriaLabel" xml:space="preserve">
     <value>TerminalPrime home</value>
@@ -90,11 +96,17 @@
   <data name="Menu.Navigation" xml:space="preserve">
     <value>Open navigation menu</value>
   </data>
+  <data name="Menu.Pricing" xml:space="preserve">
+    <value>Pricing</value>
+  </data>
   <data name="Menu.Serve" xml:space="preserve">
     <value>Serve</value>
   </data>
   <data name="Menu.SignIn" xml:space="preserve">
     <value>Sign In</value>
+  </data>
+  <data name="Menu.SignUp" xml:space="preserve">
+    <value>Sign Up</value>
   </data>
   <data name="Menu.WeeklyReview" xml:space="preserve">
     <value>Weekly Review</value>

@@ -3,6 +3,19 @@
     margin-inline: auto;
 }
 
+.currency-strength-dashboard-hero {
+    max-width: 880px;
+}
+
+.currency-strength-dashboard-hero__text {
+    max-width: 760px;
+    margin-inline: auto;
+}
+
+.currency-strength-dashboard-panel {
+    overflow: hidden;
+}
+
 .currency-strength-dashboard {
     align-items: stretch;
 }
@@ -11,6 +24,7 @@
     width: min(100%, 520px);
     margin-inline: auto;
     text-align: center;
+    background: linear-gradient(180deg, rgba(248, 251, 255, 0.98) 0%, #ffffff 100%);
 }
 
 .currency-strength-dashboard__utc-clock {
@@ -55,6 +69,12 @@
     min-width: 92px;
 }
 
+.currency-strength-dashboard__summary-title,
+.currency-strength-dashboard__summary-copy,
+.currency-strength-dashboard__utc-clock-value {
+    overflow-wrap: anywhere;
+}
+
 @media (max-width: 991.98px) {
     .currency-strength-dashboard-shell {
         max-width: calc(100vw - 24px);
@@ -66,8 +86,29 @@
         max-width: calc(100vw - 16px);
     }
 
+    .currency-strength-dashboard-hero-section {
+        padding: 104px 0 44px;
+    }
+
+    .currency-strength-dashboard-hero {
+        max-width: 100%;
+    }
+
+    .currency-strength-dashboard-hero__text {
+        font-size: 0.98rem;
+    }
+
+    .currency-strength-dashboard-panel {
+        padding: 1rem !important;
+    }
+
     .currency-strength-dashboard__summary {
         width: 100%;
+        padding: 1rem !important;
+    }
+
+    .currency-strength-dashboard__summary-title {
+        font-size: 1.55rem;
     }
 
     .currency-strength-dashboard__utc-clock {
@@ -80,10 +121,21 @@
     }
 
     .currency-strength-dashboard__timeframes {
-        justify-content: flex-start;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.5rem;
+        align-items: stretch;
     }
 
     .currency-strength-dashboard__timeframes ::deep .mud-button-root {
-        min-width: 84px;
+        min-width: 0;
+        width: 100%;
+        margin: 0;
+    }
+}
+
+@media (max-width: 479.98px) {
+    .currency-strength-dashboard__timeframes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }

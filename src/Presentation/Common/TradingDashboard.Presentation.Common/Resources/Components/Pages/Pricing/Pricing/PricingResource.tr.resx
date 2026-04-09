@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Actions.BuyMonthly" xml:space="preserve">
+    <value>Aylik satin al</value>
+  </data>
+  <data name="Actions.BuyYearly" xml:space="preserve">
+    <value>Yillik satin al</value>
+  </data>
+  <data name="Actions.Retry" xml:space="preserve">
+    <value>Tekrar dene</value>
+  </data>
+  <data name="Actions.SignInToSubscribe" xml:space="preserve">
+    <value>Abonelik icin giris yap</value>
+  </data>
+  <data name="Empty.NoPlans" xml:space="preserve">
+    <value>Su anda kullanilabilir bir fiyat plani yok.</value>
+  </data>
+  <data name="Errors.LoadPlans" xml:space="preserve">
+    <value>Fiyat planlari yuklenemedi.</value>
+  </data>
+  <data name="Errors.LoadPlansWithMessage" xml:space="preserve">
+    <value>Fiyat planlari yuklenemedi. {0}</value>
+  </data>
+  <data name="Errors.Purchase" xml:space="preserve">
+    <value>Abonelik istegi tamamlanamadi.</value>
+  </data>
+  <data name="Errors.PurchaseWithMessage" xml:space="preserve">
+    <value>Abonelik istegi tamamlanamadi. {0}</value>
+  </data>
+  <data name="Features.Item1" xml:space="preserve">
+    <value>Buyuk vadeli piyasalarda haftalik COT kapsami</value>
+  </data>
+  <data name="Features.Item2" xml:space="preserve">
+    <value>Yon bulmak icin makro ve piyasalararasi baglam</value>
+  </data>
+  <data name="Features.Item3" xml:space="preserve">
+    <value>Hizli zaman araligi gecisli Currency Strength paneli</value>
+  </data>
+  <data name="Features.Item4" xml:space="preserve">
+    <value>Ana seviyeler, pattern planlari ve harmonik inceleme notlari</value>
+  </data>
+  <data name="Features.Item5" xml:space="preserve">
+    <value>Aktif seanslar icin ekonomik takvim ve canli haber baglami</value>
+  </data>
+  <data name="Features.Item6" xml:space="preserve">
+    <value>Uyelere ozel arastirma guncellemeleri ve yol haritasi brifingleri</value>
+  </data>
+  <data name="Features.Item7" xml:space="preserve">
+    <value>Hareket halindeyken inceleme icin mobil ve tablet uyumlu erisim</value>
+  </data>
+  <data name="Features.Item8" xml:space="preserve">
+    <value>Tek hesap, tek aktif abonelik ve sorunsuz yenileme</value>
+  </data>
+  <data name="Features.Title" xml:space="preserve">
+    <value>Acilan imkanlar</value>
+  </data>
+  <data name="Hero.Kicker" xml:space="preserve">
+    <value>TerminalPrime Uyelik</value>
+  </data>
+  <data name="Hero.Subtitle" xml:space="preserve">
+    <value>Calisma ritmine uyan odeme sekline karar ver ve TerminalPrime arastirma paketinin tamamini ac.</value>
+  </data>
+  <data name="Hero.Title" xml:space="preserve">
+    <value>Fiyatlandirma</value>
+  </data>
+  <data name="Labels.BilledMonthly" xml:space="preserve">
+    <value>Aylik faturalandirilir</value>
+  </data>
+  <data name="Labels.BilledYearly" xml:space="preserve">
+    <value>Yillik faturalandirilir</value>
+  </data>
+  <data name="Labels.Monthly" xml:space="preserve">
+    <value>Aylik</value>
+  </data>
+  <data name="Labels.PerMonth" xml:space="preserve">
+    <value>aylik</value>
+  </data>
+  <data name="Labels.PerYear" xml:space="preserve">
+    <value>yillik</value>
+  </data>
+  <data name="Labels.Savings" xml:space="preserve">
+    <value>Yillik tasarruf</value>
+  </data>
+  <data name="Labels.Yearly" xml:space="preserve">
+    <value>Yillik</value>
+  </data>
+  <data name="Note.AuthRequired" xml:space="preserve">
+    <value>Aboneligi etkinlestirmek icin once giris yapman gerekir.</value>
+  </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Fiyatlandirma</value>
+  </data>
+  <data name="Plan.Badge" xml:space="preserve">
+    <value>Premium</value>
+  </data>
+  <data name="Plan.Description" xml:space="preserve">
+    <value>Makro baglam, COT gorusu ve daha temiz bir karar akisi isteyen traderlar icin tasarlandi.</value>
+  </data>
+  <data name="Plan.Name" xml:space="preserve">
+    <value>TerminalPrime Premium</value>
+  </data>
+  <data name="Plan.TrialNote" xml:space="preserve">
+    <value>Yillik odemede indirim otomatik uygulanir. Aylik odeme daha esnek bir giris noktasi sunar.</value>
+  </data>
+  <data name="State.Processing" xml:space="preserve">
+    <value>Isleniyor...</value>
+  </data>
+  <data name="Status.ActiveSummary" xml:space="preserve">
+    <value>{0} aboneligin {1} tarihine kadar aktif.</value>
+  </data>
+  <data name="Status.ActiveTitle" xml:space="preserve">
+    <value>Abonelik aktif</value>
+  </data>
+  <data name="Status.RenewalSummary" xml:space="preserve">
+    <value>Son odeme: {0}</value>
+  </data>
+  <data name="Success.PurchaseMonthly" xml:space="preserve">
+    <value>Aylik aboneligin hemen aktif oldu.</value>
+  </data>
+  <data name="Success.PurchaseYearly" xml:space="preserve">
+    <value>Yillik aboneligin hemen aktif oldu.</value>
+  </data>
+</root>

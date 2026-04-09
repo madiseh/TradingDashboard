@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="PageTitle" xml:space="preserve"><value>مدیریت کاربران</value></data>
+  <data name="Shell.Eyebrow" xml:space="preserve"><value>ناحیه سوپر ادمین</value></data>
+  <data name="Shell.Title" xml:space="preserve"><value>مدیریت کاربران، رمز عبور و وضعیت دسترسی</value></data>
+  <data name="Shell.Description" xml:space="preserve"><value>کاربرها را جست‌وجو کنید، وضعیت و نقش را ببینید و رمز عبور را مستقیم از لیست تغییر دهید.</value></data>
+  <data name="Nav.BrandEyebrow" xml:space="preserve"><value>محیط محدود</value></data>
+  <data name="Nav.BrandTitle" xml:space="preserve"><value>پنل ادمین</value></data>
+  <data name="Nav.Dashboard" xml:space="preserve"><value>داشبورد</value></data>
+  <data name="Nav.Users" xml:space="preserve"><value>کاربران</value></data>
+  <data name="Nav.AccessControl" xml:space="preserve"><value>کنترل دسترسی</value></data>
+  <data name="Nav.Analytics" xml:space="preserve"><value>آنالیتیکس</value></data>
+  <data name="Nav.ComingSoon" xml:space="preserve"><value>به‌زودی</value></data>
+  <data name="Summary.TotalUsers" xml:space="preserve"><value>کل کاربران</value></data>
+  <data name="Summary.TotalUsersDescription" xml:space="preserve"><value>همه اکانت‌هایی که الان در سیستم لاگین ثبت شده‌اند.</value></data>
+  <data name="Summary.ActiveUsers" xml:space="preserve"><value>اکانت‌های فعال</value></data>
+  <data name="Summary.ActiveUsersDescription" xml:space="preserve"><value>کاربرانی که در حال حاضر می‌توانند وارد شوند.</value></data>
+  <data name="Summary.DisabledUsers" xml:space="preserve"><value>اکانت‌های غیرفعال</value></data>
+  <data name="Summary.DisabledUsersDescription" xml:space="preserve"><value>اکانت‌هایی که در لیست هستند ولی اجازه ورود ندارند.</value></data>
+  <data name="Summary.SuperAdmins" xml:space="preserve"><value>سوپر ادمین‌ها</value></data>
+  <data name="Summary.SuperAdminsDescription" xml:space="preserve"><value>کاربران با بیشترین سطح دسترسی برای عملیات مدیریتی.</value></data>
+  <data name="Panel.Title" xml:space="preserve"><value>فهرست کاربران</value></data>
+  <data name="Panel.Description" xml:space="preserve"><value>این لیست به Login API وصل است و جست‌وجو از سمت سرور انجام می‌شود.</value></data>
+  <data name="Search.Placeholder" xml:space="preserve"><value>جست‌وجو بر اساس نام کاربری، ایمیل، نقش یا وضعیت</value></data>
+  <data name="Actions.Search" xml:space="preserve"><value>جست‌وجو</value></data>
+  <data name="Actions.Reset" xml:space="preserve"><value>پاک‌کردن</value></data>
+  <data name="Actions.Refresh" xml:space="preserve"><value>بروزرسانی</value></data>
+  <data name="Actions.SignIn" xml:space="preserve"><value>رفتن به ورود</value></data>
+  <data name="Actions.ChangePassword" xml:space="preserve"><value>تغییر رمز عبور</value></data>
+  <data name="Actions.Cancel" xml:space="preserve"><value>انصراف</value></data>
+  <data name="Actions.SavePassword" xml:space="preserve"><value>ذخیره رمز</value></data>
+  <data name="Actions.Retry" xml:space="preserve"><value>تلاش دوباره</value></data>
+  <data name="Table.User" xml:space="preserve"><value>کاربر</value></data>
+  <data name="Table.Email" xml:space="preserve"><value>ایمیل</value></data>
+  <data name="Table.Role" xml:space="preserve"><value>نقش</value></data>
+  <data name="Table.Status" xml:space="preserve"><value>وضعیت</value></data>
+  <data name="Table.Platform" xml:space="preserve"><value>پلتفرم</value></data>
+  <data name="Table.Verified" xml:space="preserve"><value>تایید شده</value></data>
+  <data name="Table.LastLogin" xml:space="preserve"><value>آخرین ورود</value></data>
+  <data name="Table.Created" xml:space="preserve"><value>ایجاد شده</value></data>
+  <data name="Table.Actions" xml:space="preserve"><value>عملیات</value></data>
+  <data name="Password.Title" xml:space="preserve"><value>تغییر رمز عبور</value></data>
+  <data name="Password.Description" xml:space="preserve"><value>برای {0} یک رمز عبور جدید ثبت کنید.</value></data>
+  <data name="Password.NewPassword" xml:space="preserve"><value>رمز جدید</value></data>
+  <data name="Password.ConfirmPassword" xml:space="preserve"><value>تکرار رمز</value></data>
+  <data name="Password.Hint" xml:space="preserve"><value>رمز عبور باید حداقل ۸ کاراکتر باشد.</value></data>
+  <data name="Status.Active" xml:space="preserve"><value>فعال</value></data>
+  <data name="Status.Disabled" xml:space="preserve"><value>غیرفعال</value></data>
+  <data name="Role.SuperAdmin" xml:space="preserve"><value>سوپر ادمین</value></data>
+  <data name="Role.Analyzer" xml:space="preserve"><value>تحلیل‌گر</value></data>
+  <data name="Role.Guest" xml:space="preserve"><value>مهمان</value></data>
+  <data name="Common.Yes" xml:space="preserve"><value>بله</value></data>
+  <data name="Common.No" xml:space="preserve"><value>خیر</value></data>
+  <data name="Common.Never" xml:space="preserve"><value>هرگز</value></data>
+  <data name="States.Loading" xml:space="preserve"><value>در حال بارگذاری کاربران...</value></data>
+  <data name="States.AuthRequired" xml:space="preserve"><value>نیاز به ورود</value></data>
+  <data name="States.AuthRequiredDescription" xml:space="preserve"><value>اول با اکانت ادمین وارد شوید و بعد دوباره این صفحه را باز کنید.</value></data>
+  <data name="States.Forbidden" xml:space="preserve"><value>عدم دسترسی</value></data>
+  <data name="States.ForbiddenDescription" xml:space="preserve"><value>این صفحه فقط برای کاربرانی با نقش SuperAdmin در دسترس است.</value></data>
+  <data name="States.Empty" xml:space="preserve"><value>کاربری پیدا نشد</value></data>
+  <data name="States.EmptyDescription" xml:space="preserve"><value>جست‌وجو را پاک کنید یا از صفحه ورود یک اکانت جدید بسازید.</value></data>
+  <data name="Errors.LoadUsers" xml:space="preserve"><value>بارگذاری کاربران انجام نشد</value></data>
+  <data name="Errors.EmptyResponse" xml:space="preserve"><value>پاسخ API برای کاربران خالی بود.</value></data>
+  <data name="Errors.LoadUsersWithMessage" xml:space="preserve"><value>بارگذاری کاربران انجام نشد. {0}</value></data>
+  <data name="Errors.ChangePasswordWithMessage" xml:space="preserve"><value>تغییر رمز عبور انجام نشد. {0}</value></data>
+  <data name="Errors.RequestFailedWithStatus" xml:space="preserve"><value>درخواست با وضعیت {0} شکست خورد.</value></data>
+  <data name="Messages.PasswordChanged" xml:space="preserve"><value>رمز عبور با موفقیت تغییر کرد.</value></data>
+  <data name="Messages.PasswordMismatch" xml:space="preserve"><value>رمز جدید و تکرار آن باید یکسان باشند.</value></data>
+  <data name="Messages.PasswordRequired" xml:space="preserve"><value>قبل از ذخیره، رمز عبور جدید را وارد کنید.</value></data>
+</root>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Brand.Badge" xml:space="preserve"><value>Restricted Workspace</value></data>
+  <data name="Brand.Title" xml:space="preserve"><value>Admin Panel</value></data>
+  <data name="Nav.Dashboard" xml:space="preserve"><value>Dashboard</value></data>
+  <data name="Nav.Users" xml:space="preserve"><value>Users</value></data>
+  <data name="Nav.Access" xml:space="preserve"><value>Access Control</value></data>
+  <data name="Nav.Analytics" xml:space="preserve"><value>Analytics</value></data>
+  <data name="Sidebar.Role" xml:space="preserve"><value>Role</value></data>
+  <data name="Sidebar.UnknownRole" xml:space="preserve"><value>Unknown</value></data>
+  <data name="Sidebar.User" xml:space="preserve"><value>Signed in as</value></data>
+  <data name="Actions.Logout" xml:space="preserve"><value>Logout</value></data>
+  <data name="Header.Kicker" xml:space="preserve"><value>SuperAdmin Zone</value></data>
+  <data name="Header.Title" xml:space="preserve"><value>Control access, roles, and future platform operations.</value></data>
+  <data name="Header.Description" xml:space="preserve"><value>This environment is isolated from the public site and reserved for the seeded SuperAdmin account.</value></data>
+</root>

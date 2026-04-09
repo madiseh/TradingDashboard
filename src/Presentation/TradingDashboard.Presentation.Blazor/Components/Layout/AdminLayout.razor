@@ -1,0 +1,62 @@
+@inherits LayoutComponentBase
+
+@if (_canRender)
+{
+    <div class="td-portal-shell td-portal-shell--admin">
+        <aside class="td-portal-shell__sidebar">
+            <div>
+                <div class="td-portal-shell__brand">
+                    <span class="td-portal-shell__brand-mark">TP</span>
+                    <div>
+                        <p class="td-portal-shell__eyebrow">@L["Brand.Badge"]</p>
+                        <h2 class="td-portal-shell__title">@L["Brand.Title"]</h2>
+                    </div>
+                </div>
+
+                <nav class="td-portal-shell__nav">
+                    @foreach (var item in NavigationItems)
+                    {
+                        if (item.IsEnabled && !string.IsNullOrWhiteSpace(item.Href))
+                        {
+                            <a href="@item.Href" class="td-portal-shell__nav-item">
+                                <i class="@item.Icon"></i>
+                                <span>@item.Label</span>
+                            </a>
+                        }
+                        else
+                        {
+                            <span class="td-portal-shell__nav-item td-portal-shell__nav-item--disabled">
+                                <i class="@item.Icon"></i>
+                                <span>@item.Label</span>
+                            </span>
+                        }
+                    }
+                </nav>
+            </div>
+
+            <div class="td-portal-shell__meta">
+                <p>@L["Sidebar.Role"]</p>
+                <strong>@(AuthSession.Role ?? L["Sidebar.UnknownRole"])</strong>
+                <p class="mt-3">@L["Sidebar.User"]</p>
+                <strong>@(AuthSession.Username ?? "-")</strong>
+                <MudButton Variant="Variant.Filled" Color="Color.Error" Class="mt-4" OnClick="Logout">
+                    @L["Actions.Logout"]
+                </MudButton>
+            </div>
+        </aside>
+
+        <section class="td-portal-shell__main">
+            <header class="td-portal-shell__topbar">
+                <div>
+                    <p class="td-portal-shell__kicker">@L["Header.Kicker"]</p>
+                    <h1>@L["Header.Title"]</h1>
+                    <p>@L["Header.Description"]</p>
+                </div>
+            </header>
+
+            <div class="td-portal-shell__body">
+                @Body
+            </div>
+        </section>
+    </div>
+}

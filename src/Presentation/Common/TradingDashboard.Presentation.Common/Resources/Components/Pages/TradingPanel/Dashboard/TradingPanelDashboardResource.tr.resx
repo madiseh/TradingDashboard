@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Page.Title" xml:space="preserve"><value>Trading Panel</value></data>
+  <data name="Hero.Badge" xml:space="preserve"><value>Trading Template</value></data>
+  <data name="Hero.Title" xml:space="preserve"><value>The trading workspace is ready for Guest, Analyzer, and SuperAdmin accounts.</value></data>
+  <data name="Hero.Description" xml:space="preserve"><value>This separate shell gives you a clean left panel and main area so we can add market tools feature by feature.</value></data>
+  <data name="Metrics.Role" xml:space="preserve"><value>Current role</value></data>
+  <data name="Metrics.RoleCaption" xml:space="preserve"><value>Any authenticated role from Guest upward can enter this panel.</value></data>
+  <data name="Metrics.Readiness" xml:space="preserve"><value>Template status</value></data>
+  <data name="Metrics.ReadinessValue" xml:space="preserve"><value>Ready</value></data>
+  <data name="Metrics.ReadinessCaption" xml:space="preserve"><value>Left panel, main workspace, and guarded routing are all in place.</value></data>
+  <data name="Metrics.Access" xml:space="preserve"><value>Default destination</value></data>
+  <data name="Metrics.AccessValue" xml:space="preserve"><value>Post-login landing</value></data>
+  <data name="Metrics.AccessCaption" xml:space="preserve"><value>Guest and Analyzer users are redirected here after successful authentication.</value></data>
+  <data name="Focus.Title" xml:space="preserve"><value>Next trading modules</value></data>
+  <data name="Focus.Item1.Title" xml:space="preserve"><value>Market overview</value></data>
+  <data name="Focus.Item1.Description" xml:space="preserve"><value>Place upcoming COT, strength, and macro summary cards in this area.</value></data>
+  <data name="Focus.Item2.Title" xml:space="preserve"><value>Execution board</value></data>
+  <data name="Focus.Item2.Description" xml:space="preserve"><value>Add watchlists, signal panels, or session preparation widgets when ready.</value></data>
+  <data name="Focus.Item3.Title" xml:space="preserve"><value>Trader notes</value></data>
+  <data name="Focus.Item3.Description" xml:space="preserve"><value>Use the main section for journal, checklists, or planning tools in the next iteration.</value></data>
+</root>

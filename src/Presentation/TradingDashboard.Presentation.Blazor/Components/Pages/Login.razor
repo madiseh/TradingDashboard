@@ -3,61 +3,86 @@
 
 <PageTitle>Login</PageTitle>
 
-<MudPaper Class="pa-6 mx-auto" Style="max-width: 560px;">
-    <MudText Typo="Typo.h4">Authentication</MudText>
-    <MudText Typo="Typo.body2" Class="mt-1 mb-4">Sign in with Google or with username/email, or create a new account.</MudText>
+<MudContainer MaxWidth="MaxWidth.Large" Class="py-12">
+    <MudGrid Spacing="4">
+        <MudItem xs="12" md="5">
+            <MudPaper Class="pa-6 h-100 td-login-overview" Elevation="0">
+                <MudChip T="string" Color="Color.Primary" Variant="Variant.Outlined">Portal Access</MudChip>
+                <MudText Typo="Typo.h3" Class="mt-4">Login and route each user to the correct dashboard.</MudText>
+                <MudText Typo="Typo.body1" Class="mt-3">
+                    SuperAdmin enters the isolated Admin panel. Guest and Analyzer users enter the Trading Panel. New signups are created as Guest by default.
+                </MudText>
 
-    <MudTabs Rounded="true" Elevation="0">
-        <MudTabPanel Text="Sign In">
-            <MudButton Variant="Variant.Outlined" Color="Color.Primary" OnClick="BeginGoogleSignIn" Disabled="_isSubmitting" Class="mt-1 mb-3">
-                Sign in with Google
-            </MudButton>
-            <MudDivider Class="mb-3" />
+                <div class="td-login-role-grid mt-6">
+                    @foreach (var destination in PortalDestinations)
+                    {
+                        <MudPaper Class="pa-4 td-login-role-card" Elevation="0">
+                            <MudText Typo="Typo.subtitle2">@destination.Role</MudText>
+                            <MudText Typo="Typo.body2" Class="mt-2">@destination.Description</MudText>
+                            <MudText Typo="Typo.caption" Class="mt-3 d-block">@destination.Destination</MudText>
+                        </MudPaper>
+                    }
+                </div>
+            </MudPaper>
+        </MudItem>
 
-            <MudTextField @bind-Value="_signInIdentity" Label="Username or Email" Variant="Variant.Outlined" Required="true" />
-            <MudTextField @bind-Value="_signInPassword" Label="Password" Variant="Variant.Outlined" Required="true" InputType="InputType.Password" Class="mt-2" />
-            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SignInAsync" Disabled="_isSubmitting" Class="mt-4">
-                Sign In
-            </MudButton>
-        </MudTabPanel>
+        <MudItem xs="12" md="7">
+            <MudPaper Class="pa-6 mx-auto td-login-panel" Elevation="1">
+                <MudText Typo="Typo.h4">Authentication</MudText>
+                <MudText Typo="Typo.body2" Class="mt-1 mb-4">Sign in with Google or with username/email, or create a new account.</MudText>
 
-        <MudTabPanel Text="Sign Up">
-            <MudTextField @bind-Value="_signUpUsername" Label="Username" Variant="Variant.Outlined" Required="true" />
-            <MudTextField @bind-Value="_signUpEmail" Label="Email" Variant="Variant.Outlined" Required="true" Class="mt-2" />
-            <MudTextField @bind-Value="_signUpPassword" Label="Password" Variant="Variant.Outlined" Required="true" InputType="InputType.Password" Class="mt-2" />
-            <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="SignUpAsync" Disabled="_isSubmitting" Class="mt-4">
-                Sign Up
-            </MudButton>
-        </MudTabPanel>
-    </MudTabs>
+                <MudTabs Rounded="true" Elevation="0" @bind-ActivePanelIndex="_activeTabIndex">
+                    <MudTabPanel Text="Sign In">
+                        <MudButton Variant="Variant.Outlined" Color="Color.Primary" OnClick="BeginGoogleSignIn" Disabled="_isSubmitting" Class="mt-1 mb-3">
+                            Sign in with Google
+                        </MudButton>
+                        <MudDivider Class="mb-3" />
 
-    @if (!string.IsNullOrWhiteSpace(_errorMessage))
-    {
-        <MudAlert Severity="Severity.Error" Variant="Variant.Outlined" Dense="true" Class="mt-4">
-            @_errorMessage
-        </MudAlert>
-    }
+                        <MudTextField @bind-Value="_signInIdentity" Label="Username or Email" Variant="Variant.Outlined" Required="true" />
+                        <MudTextField @bind-Value="_signInPassword" Label="Password" Variant="Variant.Outlined" Required="true" InputType="InputType.Password" Class="mt-2" />
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SignInAsync" Disabled="_isSubmitting" Class="mt-4">
+                            Sign In
+                        </MudButton>
+                    </MudTabPanel>
 
-    @if (_authResult is not null)
-    {
-        <MudAlert Severity="Severity.Success" Variant="Variant.Filled" Dense="true" Class="mt-4">
-            Authenticated as <b>@_authResult.Username</b> (@_authResult.Email)
-        </MudAlert>
+                    <MudTabPanel Text="Sign Up">
+                        <MudTextField @bind-Value="_signUpUsername" Label="Username" Variant="Variant.Outlined" Required="true" />
+                        <MudTextField @bind-Value="_signUpEmail" Label="Email" Variant="Variant.Outlined" Required="true" Class="mt-2" />
+                        <MudTextField @bind-Value="_signUpPassword" Label="Password" Variant="Variant.Outlined" Required="true" InputType="InputType.Password" Class="mt-2" />
+                        <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="SignUpAsync" Disabled="_isSubmitting" Class="mt-4">
+                            Sign Up
+                        </MudButton>
+                    </MudTabPanel>
+                </MudTabs>
 
-        <MudText Typo="Typo.caption" Class="mt-2 d-block">
-            Expires: @_authResult.ExpiresAtUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")
-        </MudText>
-        <MudText Typo="Typo.caption" Class="mt-1 d-block">
-            Token: @(_authResult.AccessToken ?? string.Empty)[..Math.Min(40, (_authResult.AccessToken ?? string.Empty).Length)]...
-        </MudText>
+                @if (!string.IsNullOrWhiteSpace(_errorMessage))
+                {
+                    <MudAlert Severity="Severity.Error" Variant="Variant.Outlined" Dense="true" Class="mt-4">
+                        @_errorMessage
+                    </MudAlert>
+                }
 
-        @if (_meResult is not null)
-        {
-            <MudDivider Class="my-3" />
-            <MudText Typo="Typo.subtitle2">/me response</MudText>
-            <MudText Typo="Typo.body2">UserId: @_meResult.UserId</MudText>
-            <MudText Typo="Typo.body2">Username: @_meResult.Username</MudText>
-            <MudText Typo="Typo.body2">Email: @_meResult.Email</MudText>
-        }
-    }
-</MudPaper>
+                @if (_authResult is not null)
+                {
+                    <MudAlert Severity="Severity.Success" Variant="Variant.Filled" Dense="true" Class="mt-4">
+                        Authenticated as <b>@_authResult.Username</b> (@_authResult.Email) with role <b>@_authResult.Role</b>
+                    </MudAlert>
+
+                    <MudText Typo="Typo.caption" Class="mt-2 d-block">
+                        Expires: @_authResult.ExpiresAtUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")
+                    </MudText>
+
+                    @if (_meResult is not null)
+                    {
+                        <MudDivider Class="my-3" />
+                        <MudText Typo="Typo.subtitle2">/me response</MudText>
+                        <MudText Typo="Typo.body2">UserId: @_meResult.UserId</MudText>
+                        <MudText Typo="Typo.body2">Username: @_meResult.Username</MudText>
+                        <MudText Typo="Typo.body2">Email: @_meResult.Email</MudText>
+                        <MudText Typo="Typo.body2">Role: @_meResult.Role</MudText>
+                    }
+                }
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>

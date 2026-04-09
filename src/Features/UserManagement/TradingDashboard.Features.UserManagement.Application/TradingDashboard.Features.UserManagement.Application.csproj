@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" />
+    <PackageReference Include="MediatR" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Application\TradingDashboard.Application\TradingDashboard.Application.Abstraction.csproj" />
+    <ProjectReference Include="..\TradingDashboard.Features.UserManagement.Domain\TradingDashboard.Features.UserManagement.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Login\TradingDashboard.Features.Login.Application\Features\AdminUsers\**\*.cs"
+             Link="Features\AdminUsers\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\Results\" />
+  </ItemGroup>
+</Project>

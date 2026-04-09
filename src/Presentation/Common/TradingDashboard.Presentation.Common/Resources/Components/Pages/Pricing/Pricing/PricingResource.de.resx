@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Actions.BuyMonthly" xml:space="preserve">
+    <value>Monatlich kaufen</value>
+  </data>
+  <data name="Actions.BuyYearly" xml:space="preserve">
+    <value>Jaehrlich kaufen</value>
+  </data>
+  <data name="Actions.Retry" xml:space="preserve">
+    <value>Erneut versuchen</value>
+  </data>
+  <data name="Actions.SignInToSubscribe" xml:space="preserve">
+    <value>Zum Abonnieren anmelden</value>
+  </data>
+  <data name="Empty.NoPlans" xml:space="preserve">
+    <value>Derzeit sind keine Preisplaene verfuegbar.</value>
+  </data>
+  <data name="Errors.LoadPlans" xml:space="preserve">
+    <value>Preisplaene konnten nicht geladen werden.</value>
+  </data>
+  <data name="Errors.LoadPlansWithMessage" xml:space="preserve">
+    <value>Preisplaene konnten nicht geladen werden. {0}</value>
+  </data>
+  <data name="Errors.Purchase" xml:space="preserve">
+    <value>Die Abonnement-Anfrage konnte nicht abgeschlossen werden.</value>
+  </data>
+  <data name="Errors.PurchaseWithMessage" xml:space="preserve">
+    <value>Die Abonnement-Anfrage konnte nicht abgeschlossen werden. {0}</value>
+  </data>
+  <data name="Features.Item1" xml:space="preserve">
+    <value>Woechentliche COT-Abdeckung fuer wichtige Futures-Maerkte</value>
+  </data>
+  <data name="Features.Item2" xml:space="preserve">
+    <value>Makro- und Intermarket-Kontext fuer den Richtungsbias</value>
+  </data>
+  <data name="Features.Item3" xml:space="preserve">
+    <value>Currency-Strength-Dashboard mit schnellem Zeitrahmenwechsel</value>
+  </data>
+  <data name="Features.Item4" xml:space="preserve">
+    <value>Schluesselzonen, Pattern-Playbooks und harmonische Review-Notizen</value>
+  </data>
+  <data name="Features.Item5" xml:space="preserve">
+    <value>Wirtschaftskalender und Live-News-Kontext fuer aktive Sessions</value>
+  </data>
+  <data name="Features.Item6" xml:space="preserve">
+    <value>Exklusive Research-Updates und Roadmap-Briefings fuer Mitglieder</value>
+  </data>
+  <data name="Features.Item7" xml:space="preserve">
+    <value>Mobil- und tabletfreundlicher Zugriff fuer unterwegs</value>
+  </data>
+  <data name="Features.Item8" xml:space="preserve">
+    <value>Ein Konto, ein aktives Abo und nahtlose Verlaengerung</value>
+  </data>
+  <data name="Features.Title" xml:space="preserve">
+    <value>Was freigeschaltet wird</value>
+  </data>
+  <data name="Hero.Kicker" xml:space="preserve">
+    <value>TerminalPrime Mitgliedschaft</value>
+  </data>
+  <data name="Hero.Subtitle" xml:space="preserve">
+    <value>Waehle den Abrechnungsrhythmus, der zu deinem Workflow passt, und schalte den gesamten TerminalPrime-Research-Stack frei.</value>
+  </data>
+  <data name="Hero.Title" xml:space="preserve">
+    <value>Preise</value>
+  </data>
+  <data name="Labels.BilledMonthly" xml:space="preserve">
+    <value>Monatliche Abrechnung</value>
+  </data>
+  <data name="Labels.BilledYearly" xml:space="preserve">
+    <value>Jaehrliche Abrechnung</value>
+  </data>
+  <data name="Labels.Monthly" xml:space="preserve">
+    <value>Monatlich</value>
+  </data>
+  <data name="Labels.PerMonth" xml:space="preserve">
+    <value>pro Monat</value>
+  </data>
+  <data name="Labels.PerYear" xml:space="preserve">
+    <value>pro Jahr</value>
+  </data>
+  <data name="Labels.Savings" xml:space="preserve">
+    <value>Jaehrliche Ersparnis</value>
+  </data>
+  <data name="Labels.Yearly" xml:space="preserve">
+    <value>Jaehrlich</value>
+  </data>
+  <data name="Note.AuthRequired" xml:space="preserve">
+    <value>Du musst dich anmelden, bevor das Abonnement aktiviert werden kann.</value>
+  </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Preise</value>
+  </data>
+  <data name="Plan.Badge" xml:space="preserve">
+    <value>Premium</value>
+  </data>
+  <data name="Plan.Description" xml:space="preserve">
+    <value>Fuer Trader entwickelt, die konstanten Makro-Kontext, COT-Einblicke und einen klareren Entscheidungsprozess wollen.</value>
+  </data>
+  <data name="Plan.Name" xml:space="preserve">
+    <value>TerminalPrime Premium</value>
+  </data>
+  <data name="Plan.TrialNote" xml:space="preserve">
+    <value>Bei jaehrlicher Abrechnung wird dein Rabatt automatisch angewendet. Monatliche Zahlung bleibt der flexible Einstieg.</value>
+  </data>
+  <data name="State.Processing" xml:space="preserve">
+    <value>Wird verarbeitet...</value>
+  </data>
+  <data name="Status.ActiveSummary" xml:space="preserve">
+    <value>Dein {0}-Abo ist bis {1} aktiv.</value>
+  </data>
+  <data name="Status.ActiveTitle" xml:space="preserve">
+    <value>Abonnement aktiv</value>
+  </data>
+  <data name="Status.RenewalSummary" xml:space="preserve">
+    <value>Letzte Abbuchung: {0}</value>
+  </data>
+  <data name="Success.PurchaseMonthly" xml:space="preserve">
+    <value>Dein monatliches Abonnement ist jetzt aktiv.</value>
+  </data>
+  <data name="Success.PurchaseYearly" xml:space="preserve">
+    <value>Dein jaehrliches Abonnement ist jetzt aktiv.</value>
+  </data>
+</root>

@@ -1,0 +1,112 @@
+@page "/pricing"
+@inherits PageComponentBase
+@using TradingDashboard.Presentation.Common.Resources.Components.Pages.Pricing.Pricing
+
+<PageTitle>@L["PageTitle"]</PageTitle>
+
+<section class="pricing-page">
+    <div class="pricing-page__hero">
+        <span class="pricing-page__kicker">@L["Hero.Kicker"]</span>
+        <h1 class="pricing-page__title">@L["Hero.Title"]</h1>
+        <p class="pricing-page__subtitle">@L["Hero.Subtitle"]</p>
+    </div>
+
+    @if (_subscription is not null)
+    {
+        <MudAlert Severity="Severity.Success" Variant="Variant.Filled" Dense="true" Class="pricing-page__subscription-alert">
+            <MudText Typo="Typo.subtitle2">@L["Status.ActiveTitle"]</MudText>
+            <MudText Typo="Typo.body2">@L["Status.ActiveSummary", GetLocalizedCycleLabel(_subscription.BillingCycle), FormatDate(_subscription.ExpiresAtUtc)]</MudText>
+            <MudText Typo="Typo.caption">@L["Status.RenewalSummary", FormatUsd(_subscription.FinalPriceUsd)]</MudText>
+        </MudAlert>
+    }
+
+    <div class="pricing-page__surface">
+        @if (_isLoading)
+        {
+            <MudPaper Class="pricing-page__loading pa-6 d-flex justify-center">
+                <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+            </MudPaper>
+        }
+        else if (!string.IsNullOrWhiteSpace(_errorMessage))
+        {
+            <MudAlert Severity="Severity.Error" Dense="true">
+                @_errorMessage
+                <MudButton Class="ml-2" Variant="Variant.Outlined" Size="Size.Small" OnClick="LoadAsync">@L["Actions.Retry"]</MudButton>
+            </MudAlert>
+        }
+        else if (_plan is null)
+        {
+            <MudAlert Severity="Severity.Warning" Dense="true">
+                @L["Empty.NoPlans"]
+            </MudAlert>
+        }
+        else
+        {
+            <div class="pricing-page__grid">
+                <article class="pricing-page__offer">
+                    <div class="pricing-page__offer-header">
+                        <span class="pricing-page__badge">@L["Plan.Badge"]</span>
+                        <h2>@L["Plan.Name"]</h2>
+                        <p>@L["Plan.Description"]</p>
+                    </div>
+
+                    <div class="pricing-page__cycle-picker">
+                        <button class="@GetCycleButtonClass(PricingBillingCycle.Monthly)" type="button" @onclick="() => SelectCycle(PricingBillingCycle.Monthly)">
+                            @L["Labels.Monthly"]
+                        </button>
+                        <button class="@GetCycleButtonClass(PricingBillingCycle.Yearly)" type="button" @onclick="() => SelectCycle(PricingBillingCycle.Yearly)">
+                            @L["Labels.Yearly"]
+                        </button>
+                    </div>
+
+                    <div class="pricing-page__price-block">
+                        <div class="pricing-page__price-row">
+                            <span class="pricing-page__price">@FormatUsd(GetSelectedPrice())</span>
+                            <span class="pricing-page__price-unit">@GetSelectedPriceUnitText()</span>
+                        </div>
+                        <p class="pricing-page__billing-label">@GetSelectedBillingLabel()</p>
+
+                        @if (IsYearlySelected)
+                        {
+                            <div class="pricing-page__savings">
+                                <span>@L["Labels.Savings"]</span>
+                                <strong>@FormatPercentage(_plan.YearlyDiscountPercentage)</strong>
+                            </div>
+                        }
+                    </div>
+
+                    <p class="pricing-page__plan-note">@L["Plan.TrialNote"]</p>
+
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               Size="Size.Large"
+                               OnClick="HandlePrimaryActionAsync"
+                               Disabled="@(_isSubmitting || _plan is null)"
+                               Class="pricing-page__cta">
+                        @GetPrimaryActionText()
+                    </MudButton>
+
+                    @if (!AuthSession.IsAuthenticated)
+                    {
+                        <p class="pricing-page__auth-note">@L["Note.AuthRequired"]</p>
+                    }
+                </article>
+
+                <aside class="pricing-page__features">
+                    <div class="pricing-page__features-card">
+                        <h3>@L["Features.Title"]</h3>
+                        <ul>
+                            @foreach (var featureKey in FeatureKeys)
+                            {
+                                <li>
+                                    <i class="bi bi-check2" aria-hidden="true"></i>
+                                    <span>@L[featureKey]</span>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        }
+    </div>
+</section>

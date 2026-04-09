@@ -1,0 +1,57 @@
+.td-cot-directory-card {
+    height: 100%;
+    border-radius: 24px;
+}
+
+.td-cot-directory-card-header {
+    row-gap: 0.75rem;
+}
+
+.td-cot-directory-card-actions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.td-cot-directory-scope-btn {
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-transform: none;
+}
+
+.td-cot-directory-table {
+    table-layout: fixed;
+}
+
+.td-cot-directory-table :deep(th),
+.td-cot-directory-table :deep(td) {
+    vertical-align: middle;
+}
+
+.td-cot-directory-table :deep(th:not(:first-child)),
+.td-cot-directory-table :deep(td:not(:first-child)) {
+    width: 96px;
+}
+
+.td-cot-directory-instrument {
+    font-weight: 600;
+}
+
+.td-cot-directory-icon-action {
+    border-radius: 14px;
+}
+
+@media (max-width: 959.98px) {
+    .td-cot-directory-card-header {
+        align-items: flex-start !important;
+    }
+
+    .td-cot-directory-card-actions {
+        justify-content: flex-start;
+    }
+
+    .td-cot-directory-table :deep(th:not(:first-child)),
+    .td-cot-directory-table :deep(td:not(:first-child)) {
+        width: 72px;
+    }
+}
