@@ -275,14 +275,29 @@ public partial class Pricing
 
     private static async Task<string> ExtractErrorAsync(HttpResponseMessage response, string fallback)
     {
-        var payload = await response.Content.ReadFromJsonAsync<UserManagementApiErrorResponse>();
-        if (payload is null)
+        if (response.Content is null)
         {
             return fallback;
         }
 
-        return payload.Errors is { Count: > 0 }
-            ? string.Join(" | ", payload.Errors)
-            : payload.Message ?? fallback;
+        try
+        {
+            var payload = await response.Content.ReadFromJsonAsync<UserManagementApiErrorResponse>();
+            if (payload is null)
+            {
+                return fallback;
+            }
+
+            return payload.Errors is { Count: > 0 }
+                ? string.Join(" | ", payload.Errors)
+                : payload.Message ?? fallback;
+        }
+        catch
+        {
+            var rawPayload = await response.Content.ReadAsStringAsync();
+            return string.IsNullOrWhiteSpace(rawPayload)
+                ? fallback
+                : rawPayload;
+        }
     }
 }

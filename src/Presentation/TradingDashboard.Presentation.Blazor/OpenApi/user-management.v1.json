@@ -277,6 +277,100 @@
           }
         }
       }
+    },
+    "/api/v1/login/subscriptions/plans": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "GetSubscriptionPlans",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SubscriptionPlanResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/login/subscriptions/me": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "GetCurrentSubscription",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/login/subscriptions/purchase": {
+      "post": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "PurchaseSubscription",
+        "requestBody": {
+          "x-name": "request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseSubscriptionRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "components": {
@@ -464,6 +558,88 @@
         "additionalProperties": false,
         "properties": {
           "newPassword": {
+            "type": "string"
+          }
+        }
+      },
+      "SubscriptionPlanResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "planCode": {
+            "type": "string"
+          },
+          "planName": {
+            "type": "string"
+          },
+          "monthlyPriceUsd": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "yearlyPriceUsd": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "yearlyDiscountPercentage": {
+            "type": "number",
+            "format": "decimal"
+          }
+        }
+      },
+      "SubscriptionResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "subscriptionId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "userId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "planCode": {
+            "type": "string"
+          },
+          "planName": {
+            "type": "string"
+          },
+          "billingCycle": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "basePriceUsd": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "discountPercentage": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "finalPriceUsd": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "startsAtUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expiresAtUtc": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "PurchaseSubscriptionRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "planCode": {
+            "type": "string"
+          },
+          "billingCycle": {
             "type": "string"
           }
         }

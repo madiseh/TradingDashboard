@@ -124,6 +124,7 @@ public partial class Program
         app.MapHealthChecks(RoutePaths.ApiCommon.Health);
         app.MapAuthEndpoints();
         app.MapAdminUserEndpoints();
+        app.MapSubscriptionEndpoints();
 
         return app;
     }
