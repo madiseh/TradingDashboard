@@ -1,7 +1,5 @@
 using System.Net.Http.Json;
-using System.Globalization;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.WebUtilities;
 using MudBlazor;
 using TradingDashboard.Presentation.Blazor.Services;
 using UserManagementContracts = TradingDashboard.Presentation.Blazor.Contracts.UserManagement.Generated;
@@ -20,9 +18,6 @@ public partial class Login
     private NavigationManager NavigationManager { get; set; } = default!;
 
     [Inject]
-    private IConfiguration Configuration { get; set; } = default!;
-
-    [Inject]
     private AuthSession AuthSession { get; set; } = default!;
 
     [Inject]
@@ -31,68 +26,70 @@ public partial class Login
     [Inject]
     private PortalNavigationService PortalNavigation { get; set; } = default!;
 
-    private string _signInIdentity = string.Empty;
-    private string _signInPassword = string.Empty;
-
-    private string _signUpUsername = string.Empty;
-    private string _signUpEmail = string.Empty;
-    private string _signUpPassword = string.Empty;
-
+    private readonly SignInFormModel _signInModel = new();
+    private readonly SignUpFormModel _signUpModel = new();
+    private MudForm? _signInForm;
+    private MudForm? _signUpForm;
     private int _activeTabIndex;
     private bool _isSubmitting;
     private string? _errorMessage;
     private UserManagementContracts.AuthTokenResult? _authResult;
     private UserManagementContracts.MeResponse? _meResult;
-    private string? _lastProcessedQuery;
 
-    private IReadOnlyList<PortalDestinationCard> PortalDestinations =>
-    [
-        new("SuperAdmin", "Full isolated admin environment with left navigation and dashboard controls.", RoutePaths.Ui.Admin),
-        new("Analyzer", "Trading workspace access without admin entry.", RoutePaths.Ui.TradingPanel),
-        new("Guest", "Default signup role with Trading Panel access.", RoutePaths.Ui.TradingPanel)
-    ];
+    private bool IsSignInDisabled =>
+        _isSubmitting
+        || string.IsNullOrWhiteSpace(_signInModel.Identity)
+        || string.IsNullOrWhiteSpace(_signInModel.Password);
 
-    protected override async Task OnParametersSetAsync()
+    private bool IsSignUpDisabled =>
+        _isSubmitting
+        || string.IsNullOrWhiteSpace(_signUpModel.Username)
+        || string.IsNullOrWhiteSpace(_signUpModel.Email)
+        || string.IsNullOrWhiteSpace(_signUpModel.Password);
+
+    protected override void OnParametersSet()
     {
         _activeTabIndex = string.Equals(Mode, "signup", StringComparison.OrdinalIgnoreCase) ? 1 : 0;
-        await HandleGoogleSignInCallbackAsync();
-    }
-
-    private void BeginGoogleSignIn()
-    {
-        _errorMessage = null;
-
-        var apiBaseUrl = Configuration[$"{HttpClientNames.ApiLogin}:BaseUrl"] ?? "https://localhost:7181";
-        var currentUri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
-        var returnUrl = BuildGoogleCallbackUrl(currentUri);
-        var startUrl = QueryHelpers.AddQueryString(
-            $"{apiBaseUrl.TrimEnd('/')}{RoutePaths.Api.Login.GoogleStart}",
-            "returnUrl",
-            returnUrl);
-
-        NavigationManager.NavigateTo(startUrl, forceLoad: true);
     }
 
     private async Task SignInAsync()
     {
+        if (_signInForm is not null)
+        {
+            await _signInForm.Validate();
+            if (!_signInForm.IsValid)
+            {
+                return;
+            }
+        }
+
         await AuthenticateAsync(
             RoutePaths.Api.Login.SignIn,
             new UserManagementContracts.SignInRequest
             {
-                Identity = _signInIdentity,
-                Password = _signInPassword
+                Identity = _signInModel.Identity.Trim(),
+                Password = _signInModel.Password
             });
     }
 
     private async Task SignUpAsync()
     {
+        if (_signUpForm is not null)
+        {
+            await _signUpForm.Validate();
+            if (!_signUpForm.IsValid)
+            {
+                return;
+            }
+        }
+
         await AuthenticateAsync(
             RoutePaths.Api.Login.SignUp,
             new UserManagementContracts.SignUpRequest
             {
-                Username = _signUpUsername,
-                Email = _signUpEmail,
-                Password = _signUpPassword
+                Username = _signUpModel.Username.Trim(),
+                Email = _signUpModel.Email.Trim(),
+                Password = _signUpModel.Password
             });
     }
 
@@ -189,106 +186,10 @@ public partial class Login
             : payload.Message ?? $"Request failed with status {(int)response.StatusCode}.";
     }
 
-    private async Task HandleGoogleSignInCallbackAsync()
-    {
-        var currentUri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
-        if (string.Equals(_lastProcessedQuery, currentUri.Query, StringComparison.Ordinal))
-        {
-            return;
-        }
-
-        _lastProcessedQuery = currentUri.Query;
-        var query = QueryHelpers.ParseQuery(currentUri.Query);
-
-        if (query.TryGetValue("authError", out var errorValue))
-        {
-            _errorMessage = errorValue.ToString();
-            Snackbar.Add(_errorMessage, Severity.Error);
-            return;
-        }
-
-        if (!query.TryGetValue("accessToken", out var accessTokenValue))
-        {
-            return;
-        }
-
-        var accessToken = accessTokenValue.ToString();
-        if (string.IsNullOrWhiteSpace(accessToken))
-        {
-            _errorMessage = "Google authentication returned an empty token.";
-            Snackbar.Add(_errorMessage, Severity.Error);
-            return;
-        }
-
-        if (!query.TryGetValue("expiresAtUtc", out var expiresAtValue)
-            || !DateTime.TryParse(
-                expiresAtValue.ToString(),
-                CultureInfo.InvariantCulture,
-                DateTimeStyles.RoundtripKind,
-                out var expiresAtUtc))
-        {
-            _errorMessage = "Google authentication returned an invalid expiration timestamp.";
-            Snackbar.Add(_errorMessage, Severity.Error);
-            return;
-        }
-
-        var username = query.TryGetValue("username", out var usernameValue)
-            ? usernameValue.ToString()
-            : string.Empty;
-
-        var email = query.TryGetValue("email", out var emailValue)
-            ? emailValue.ToString()
-            : string.Empty;
-
-        var role = query.TryGetValue("role", out var roleValue)
-            ? roleValue.ToString()
-            : string.Empty;
-
-        var userId = query.TryGetValue("userId", out var userIdValue)
-            ? userIdValue.ToString()
-            : string.Empty;
-
-        _authResult = new UserManagementContracts.AuthTokenResult
-        {
-            AccessToken = accessToken,
-            ExpiresAtUtc = expiresAtUtc.ToUniversalTime(),
-            UserId = userId,
-            Username = username,
-            Email = email,
-            Role = role
-        };
-        AuthSession.SetAuthenticatedUser(_authResult);
-
-        Snackbar.Add("Signed in with Google successfully.", Severity.Success);
-        await LoadCurrentUserAsync();
-        NavigateToAuthorizedPortal();
-    }
-
     private void NavigateToAuthorizedPortal()
     {
         var role = _meResult?.Role ?? _authResult?.Role ?? AuthSession.Role;
         var targetRoute = PortalNavigation.ResolvePostLoginRoute(ReturnUrl, role);
         NavigationManager.NavigateTo(targetRoute);
-    }
-
-    private static string BuildGoogleCallbackUrl(Uri currentUri)
-    {
-        var callbackBase = currentUri.GetLeftPart(UriPartial.Path);
-        var currentQuery = QueryHelpers.ParseQuery(currentUri.Query);
-        var preservedQuery = new Dictionary<string, string?>();
-
-        if (currentQuery.TryGetValue("mode", out var modeValue))
-        {
-            preservedQuery["mode"] = modeValue.ToString();
-        }
-
-        if (currentQuery.TryGetValue("returnUrl", out var returnUrlValue))
-        {
-            preservedQuery["returnUrl"] = returnUrlValue.ToString();
-        }
-
-        return preservedQuery.Count == 0
-            ? callbackBase
-            : QueryHelpers.AddQueryString(callbackBase, preservedQuery);
     }
 }
