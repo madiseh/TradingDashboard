@@ -41,7 +41,7 @@ public partial class Program
 
         builder.Services.AddIocRegistration(builder.Configuration);
 
-        var jwtOptions = builder.Configuration.GetSection(JwtOptions.SectionName).Get<JwtOptions>() ?? new JwtOptions();
+        var jwtOptions = JwtOptions.ReadAndValidate(builder.Configuration);
         var keyBytes = Encoding.UTF8.GetBytes(jwtOptions.SigningKey);
 
         var authenticationBuilder = builder.Services

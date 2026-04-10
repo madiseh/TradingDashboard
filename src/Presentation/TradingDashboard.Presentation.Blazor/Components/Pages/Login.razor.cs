@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using System.Text.Json;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using TradingDashboard.Presentation.Blazor.Services;
@@ -8,6 +9,11 @@ namespace TradingDashboard.Presentation.Blazor.Components.Pages;
 
 public partial class Login
 {
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        PropertyNameCaseInsensitive = true
+    };
+
     [SupplyParameterFromQuery(Name = "mode")]
     public string? Mode { get; set; }
 
@@ -103,20 +109,21 @@ public partial class Login
         {
             var client = HttpClientFactory.CreateClient(HttpClientNames.ApiLogin);
             var response = await client.PostAsJsonAsync(route, payload);
+            var content = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
             {
-                _errorMessage = await ExtractErrorAsync(response);
+                _errorMessage = ExtractError(response, content);
                 Snackbar.Add(_errorMessage, Severity.Error);
                 _authResult = null;
                 AuthSession.Clear();
                 return;
             }
 
-            var authResult = await response.Content.ReadFromJsonAsync<UserManagementContracts.AuthTokenResult>();
+            var authResult = DeserializeJson<UserManagementContracts.AuthTokenResult>(content);
             if (authResult is null)
             {
-                _errorMessage = "Authentication response is empty.";
+                _errorMessage = BuildInvalidSuccessPayloadMessage(response, content);
                 Snackbar.Add(_errorMessage, Severity.Error);
                 _authResult = null;
                 AuthSession.Clear();
@@ -173,17 +180,49 @@ public partial class Login
         _meResult = await response.Content.ReadFromJsonAsync<UserManagementContracts.MeResponse>();
     }
 
-    private static async Task<string> ExtractErrorAsync(HttpResponseMessage response)
+    private static string ExtractError(HttpResponseMessage response, string content)
     {
-        var payload = await response.Content.ReadFromJsonAsync<UserManagementContracts.ApiErrorResponse>();
+        var payload = DeserializeJson<UserManagementContracts.ApiErrorResponse>(content);
         if (payload is null)
         {
-            return $"Request failed with status {(int)response.StatusCode}.";
+            return string.IsNullOrWhiteSpace(content)
+                ? $"Request failed with status {(int)response.StatusCode}."
+                : $"Request failed with status {(int)response.StatusCode}.";
         }
 
         return payload.Errors is { Count: > 0 }
             ? string.Join(" | ", payload.Errors)
             : payload.Message ?? $"Request failed with status {(int)response.StatusCode}.";
+    }
+
+    private static T? DeserializeJson<T>(string content)
+    {
+        if (string.IsNullOrWhiteSpace(content))
+        {
+            return default;
+        }
+
+        try
+        {
+            return JsonSerializer.Deserialize<T>(content, JsonOptions);
+        }
+        catch (JsonException)
+        {
+            return default;
+        }
+    }
+
+    private static string BuildInvalidSuccessPayloadMessage(HttpResponseMessage response, string content)
+    {
+        if (string.IsNullOrWhiteSpace(content))
+        {
+            return $"Authentication response is empty (status {(int)response.StatusCode}).";
+        }
+
+        var mediaType = response.Content.Headers.ContentType?.MediaType;
+        return string.IsNullOrWhiteSpace(mediaType)
+            ? "Authentication response is not valid JSON."
+            : $"Authentication response is not valid JSON (content-type: {mediaType}).";
     }
 
     private void NavigateToAuthorizedPortal()

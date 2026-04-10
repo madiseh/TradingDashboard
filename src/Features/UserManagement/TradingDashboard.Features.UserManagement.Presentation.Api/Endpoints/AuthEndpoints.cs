@@ -67,8 +67,20 @@ public static class AuthEndpoints
             return TypedResults.BadRequest(new ApiErrorResponse(result.Message, result.ErrorCode, result.Errors));
         }
 
-        var token = jwtTokenService.GenerateToken(result.Data);
-        return TypedResults.Ok(token);
+        try
+        {
+            var token = jwtTokenService.GenerateToken(result.Data);
+            return TypedResults.Ok(token);
+        }
+        catch (Exception ex)
+        {
+            return TypedResults.Json(
+                new ApiErrorResponse(
+                    "Authentication token generation failed.",
+                    "TOKEN_GENERATION_FAILED",
+                    [ex.Message]),
+                statusCode: StatusCodes.Status500InternalServerError);
+        }
     }
 
     private static async Task<IResult> SignInAsync(
@@ -86,8 +98,20 @@ public static class AuthEndpoints
             return TypedResults.BadRequest(new ApiErrorResponse(result.Message, result.ErrorCode, result.Errors));
         }
 
-        var token = jwtTokenService.GenerateToken(result.Data);
-        return TypedResults.Ok(token);
+        try
+        {
+            var token = jwtTokenService.GenerateToken(result.Data);
+            return TypedResults.Ok(token);
+        }
+        catch (Exception ex)
+        {
+            return TypedResults.Json(
+                new ApiErrorResponse(
+                    "Authentication token generation failed.",
+                    "TOKEN_GENERATION_FAILED",
+                    [ex.Message]),
+                statusCode: StatusCodes.Status500InternalServerError);
+        }
     }
 
     private static IResult GetCurrentUser(ClaimsPrincipal user)
