@@ -11,6 +11,7 @@ This `doc` directory contains three main documentation groups:
 
 # How To Implement Changes
 - Start by reviewing `governance/*` and understand the overall implementation direction.
+- For production deployment paths, env file locations, systemd unit locations, and server folder mapping, review `governance/production-deployment-layout.md`.
 - For release work, review `governance/release-process.md` before updating version numbers or release entries.
 - If there is no existing governance document for a specific implementation topic, document the requirement and implementation plan before starting.
 - Follow the documented governance process exactly.
