@@ -10,6 +10,7 @@ Provide a currency-strength collector job and dashboard that continuously captur
 - Persist the raw payloads per timeframe under feature-owned storage folders.
 - Expose read-only Web API endpoints for timeframe metadata and latest collected snapshot.
 - Render a dedicated Blazor page with timeframe switching and a multi-series currency chart.
+- Let users select which currency series are visible from the chart legend; all currencies are visible by default.
 
 ## Out of Scope
 
@@ -31,6 +32,7 @@ Provide a currency-strength collector job and dashboard that continuously captur
 5. API must return the latest collected multi-currency series for a selected timeframe.
 6. Blazor must render one dedicated page under the main project menu.
 7. Blazor must call the feature API only and must not read storage directly.
+8. Blazor must let the chart legend filter visible currency series while keeping all currencies selected by default.
 
 ## Non-Functional Requirements
 
@@ -53,3 +55,4 @@ Provide a currency-strength collector job and dashboard that continuously captur
 4. API returns a valid latest snapshot for each configured timeframe.
 5. Blazor shows a dedicated Currency Strength page and chart.
 6. The project menu contains a direct link to the new page.
+7. Currency legend chips can filter the chart to the user-selected currencies, starting with all currencies visible.

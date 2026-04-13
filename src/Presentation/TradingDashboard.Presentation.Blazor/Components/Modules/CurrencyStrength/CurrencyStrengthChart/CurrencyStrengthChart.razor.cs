@@ -26,16 +26,83 @@ public partial class CurrencyStrengthChart
         ["CAD"] = "#7c3aed"
     };
 
+    private string _snapshotFilterSignature = string.Empty;
+    private HashSet<string> _selectedCurrencyCodes = new(StringComparer.OrdinalIgnoreCase);
+
     [Parameter]
     public CurrencyStrengthSnapshotResponse? Snapshot { get; set; }
 
     [Parameter]
     public string EmptyMessage { get; set; } = "No data available.";
 
+    private IReadOnlyList<CurrencyStrengthCurrencyFilterViewModel> CurrencyFilters => BuildCurrencyFilters();
     private IReadOnlyList<CurrencyStrengthChartSeriesViewModel> ChartSeries => BuildChartSeries();
     private IReadOnlyList<CurrencyStrengthAxisLabelViewModel> YAxisLabels => BuildYAxisLabels();
     private IReadOnlyList<CurrencyStrengthAxisLabelViewModel> XAxisLabels => BuildXAxisLabels();
     private decimal ZeroLineY => GetZeroLineY();
+
+    protected override void OnParametersSet()
+    {
+        var signature = BuildSnapshotFilterSignature();
+        if (string.Equals(_snapshotFilterSignature, signature, StringComparison.Ordinal))
+        {
+            return;
+        }
+
+        _snapshotFilterSignature = signature;
+        _selectedCurrencyCodes = BuildAvailableCurrencyCodes().ToHashSet(StringComparer.OrdinalIgnoreCase);
+    }
+
+    private IReadOnlyList<CurrencyStrengthCurrencyFilterViewModel> BuildCurrencyFilters()
+    {
+        return BuildAvailableCurrencyCodes()
+            .Select(currencyCode => new CurrencyStrengthCurrencyFilterViewModel(
+                currencyCode,
+                CurrencyColors.TryGetValue(currencyCode, out var color) ? color : "#334155",
+                IsCurrencySelected(currencyCode)))
+            .ToArray();
+    }
+
+    private void OnCurrencyFilterClicked(string currencyCode)
+    {
+        var normalizedCurrencyCode = NormalizeCurrencyCode(currencyCode);
+        if (string.IsNullOrWhiteSpace(normalizedCurrencyCode))
+        {
+            return;
+        }
+
+        var availableCurrencyCodes = BuildAvailableCurrencyCodes();
+        if (!availableCurrencyCodes.Contains(normalizedCurrencyCode, StringComparer.OrdinalIgnoreCase))
+        {
+            return;
+        }
+
+        if (AreAllCurrenciesSelected(availableCurrencyCodes))
+        {
+            _selectedCurrencyCodes = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { normalizedCurrencyCode };
+            return;
+        }
+
+        var nextSelectedCurrencyCodes = new HashSet<string>(_selectedCurrencyCodes, StringComparer.OrdinalIgnoreCase);
+        if (!nextSelectedCurrencyCodes.Add(normalizedCurrencyCode))
+        {
+            nextSelectedCurrencyCodes.Remove(normalizedCurrencyCode);
+        }
+
+        if (nextSelectedCurrencyCodes.Count == 0)
+        {
+            nextSelectedCurrencyCodes.UnionWith(availableCurrencyCodes);
+        }
+
+        _selectedCurrencyCodes = nextSelectedCurrencyCodes;
+    }
+
+    private string GetCurrencyFilterClass(CurrencyStrengthCurrencyFilterViewModel filter)
+    {
+        return filter.IsSelected
+            ? "cot-net-position-legend-button is-selected"
+            : "cot-net-position-legend-button";
+    }
 
     private IReadOnlyList<CurrencyStrengthChartSeriesViewModel> BuildChartSeries()
     {
@@ -44,7 +111,13 @@ public partial class CurrencyStrengthChart
             return [];
         }
 
-        var allTimestamps = Snapshot.Series
+        var visibleSeries = GetVisibleSnapshotSeries();
+        if (visibleSeries.Count == 0)
+        {
+            return [];
+        }
+
+        var allTimestamps = visibleSeries
             .SelectMany(series => series.Points)
             .Select(point => point.Timestamp)
             .Distinct()
@@ -56,7 +129,7 @@ public partial class CurrencyStrengthChart
             return [];
         }
 
-        var validSeries = Snapshot.Series
+        var validSeries = visibleSeries
             .Where(series => !string.IsNullOrWhiteSpace(series.CurrencyCode) && series.Points.Count > 0)
             .OrderBy(series => series.CurrencyCode)
             .ToArray();
@@ -104,7 +177,7 @@ public partial class CurrencyStrengthChart
 
     private IReadOnlyList<CurrencyStrengthAxisLabelViewModel> BuildYAxisLabels()
     {
-        var values = Snapshot?.Series.SelectMany(series => series.Points).Select(point => point.Value).ToArray() ?? [];
+        var values = GetVisibleSnapshotSeries().SelectMany(series => series.Points).Select(point => point.Value).ToArray();
         if (values.Length == 0)
         {
             return [];
@@ -128,7 +201,7 @@ public partial class CurrencyStrengthChart
 
     private IReadOnlyList<CurrencyStrengthAxisLabelViewModel> BuildXAxisLabels()
     {
-        var timestamps = Snapshot?.Series.SelectMany(series => series.Points).Select(point => point.Timestamp).Distinct().OrderBy(value => value).ToArray() ?? [];
+        var timestamps = GetVisibleSnapshotSeries().SelectMany(series => series.Points).Select(point => point.Timestamp).Distinct().OrderBy(value => value).ToArray();
         if (timestamps.Length == 0)
         {
             return [];
@@ -155,7 +228,7 @@ public partial class CurrencyStrengthChart
 
     private decimal GetZeroLineY()
     {
-        var values = Snapshot?.Series.SelectMany(series => series.Points).Select(point => point.Value).ToArray() ?? [];
+        var values = GetVisibleSnapshotSeries().SelectMany(series => series.Points).Select(point => point.Value).ToArray();
         if (values.Length == 0)
         {
             return PlotTop;
@@ -167,6 +240,61 @@ public partial class CurrencyStrengthChart
         var innerPlotHeight = plotHeight * (1m - (VerticalPlotPaddingFactor * 2m));
         var range = axisMax - axisMin;
         return innerPlotTop + (innerPlotHeight * axisMax / range);
+    }
+
+    private IReadOnlyList<CurrencyStrengthSeriesResponse> GetVisibleSnapshotSeries()
+    {
+        if (Snapshot?.Series is null || Snapshot.Series.Count == 0)
+        {
+            return [];
+        }
+
+        if (_selectedCurrencyCodes.Count == 0)
+        {
+            return Snapshot.Series
+                .Where(series => !string.IsNullOrWhiteSpace(series.CurrencyCode) && series.Points.Count > 0)
+                .ToArray();
+        }
+
+        return Snapshot.Series
+            .Where(series =>
+                !string.IsNullOrWhiteSpace(series.CurrencyCode) &&
+                _selectedCurrencyCodes.Contains(NormalizeCurrencyCode(series.CurrencyCode)) &&
+                series.Points.Count > 0)
+            .ToArray();
+    }
+
+    private IReadOnlyList<string> BuildAvailableCurrencyCodes()
+    {
+        return Snapshot?.Series
+            .Where(series => !string.IsNullOrWhiteSpace(series.CurrencyCode) && series.Points.Count > 0)
+            .Select(series => NormalizeCurrencyCode(series.CurrencyCode))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(currencyCode => currencyCode, StringComparer.OrdinalIgnoreCase)
+            .ToArray() ?? [];
+    }
+
+    private string BuildSnapshotFilterSignature()
+    {
+        var timeframeKey = Snapshot?.TimeframeKey ?? string.Empty;
+        return $"{timeframeKey}:{string.Join('|', BuildAvailableCurrencyCodes())}";
+    }
+
+    private bool AreAllCurrenciesSelected(IReadOnlyList<string> availableCurrencyCodes)
+    {
+        return availableCurrencyCodes.Count > 0 &&
+            _selectedCurrencyCodes.Count == availableCurrencyCodes.Count &&
+            availableCurrencyCodes.All(currencyCode => _selectedCurrencyCodes.Contains(currencyCode));
+    }
+
+    private bool IsCurrencySelected(string currencyCode)
+    {
+        return _selectedCurrencyCodes.Count == 0 || _selectedCurrencyCodes.Contains(currencyCode);
+    }
+
+    private static string NormalizeCurrencyCode(string currencyCode)
+    {
+        return currencyCode.Trim().ToUpperInvariant();
     }
 
     private static void GetChartScale(

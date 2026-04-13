@@ -11,12 +11,15 @@
     {
         <MudStack Spacing="2">
             <div class="cot-net-position-legend">
-                @foreach (var series in ChartSeries)
+                @foreach (var filter in CurrencyFilters)
                 {
-                    <div class="cot-net-position-legend-item">
-                        <span class="cot-net-position-swatch" style="@($"background:{series.Color};")"></span>
-                        <span>@series.CurrencyCode</span>
-                    </div>
+                    <button type="button"
+                            class="@GetCurrencyFilterClass(filter)"
+                            aria-pressed="@filter.IsSelected.ToString().ToLowerInvariant()"
+                            @onclick="@(() => OnCurrencyFilterClicked(filter.CurrencyCode))">
+                        <span class="cot-net-position-swatch" style="@($"background:{filter.Color};")"></span>
+                        <span>@filter.CurrencyCode</span>
+                    </button>
                 }
             </div>
 

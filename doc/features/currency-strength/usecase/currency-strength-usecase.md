@@ -20,3 +20,12 @@
 2. Collector fetches each configured URL.
 3. Collector validates the JSON shape.
 4. Collector writes `latest.json` and a timestamped snapshot file.
+
+## UC4: Filter Visible Currencies
+
+1. User opens the Currency Strength chart.
+2. UI marks all available currency legend chips as selected by default.
+3. User selects a currency chip.
+4. UI renders only the selected currency series.
+5. User selects additional currency chips.
+6. UI renders the selected currency series together.
