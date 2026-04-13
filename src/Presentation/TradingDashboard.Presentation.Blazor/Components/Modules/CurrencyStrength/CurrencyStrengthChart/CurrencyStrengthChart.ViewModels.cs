@@ -13,4 +13,9 @@ public sealed record CurrencyStrengthChartSeriesViewModel(
     string Path,
     IReadOnlyList<CurrencyStrengthChartPointViewModel> Points);
 
+public sealed record CurrencyStrengthCurrencyFilterViewModel(
+    string CurrencyCode,
+    string Color,
+    bool IsSelected);
+
 public sealed record CurrencyStrengthAxisLabelViewModel(decimal Position, string Text);

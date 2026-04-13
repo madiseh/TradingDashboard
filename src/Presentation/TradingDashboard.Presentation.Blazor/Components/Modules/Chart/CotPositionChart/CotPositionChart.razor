@@ -51,43 +51,6 @@
                         <MudPaper Outlined="true" Class="pa-4 cot-position-filter-panel">
                             <MudStack Spacing="2">
                                 <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
-                                    <MudText Typo="Typo.h6">Participant Groups</MudText>
-                                    <MudIcon Icon="@Icons.Material.Filled.ExpandLess" Color="Color.Default" />
-                                </MudStack>
-
-                                <MudStack Spacing="1" Class="cot-position-filter-actions">
-                                    <MudButton Variant="Variant.Outlined"
-                                               Size="Size.Small"
-                                               Class="cot-position-filter-action"
-                                               OnClick="SelectAllAsync">
-                                        Select All
-                                    </MudButton>
-                                    <MudButton Variant="Variant.Text"
-                                               Size="Size.Small"
-                                               Class="cot-position-filter-action"
-                                               OnClick="ClearSelection">
-                                        Clear
-                                    </MudButton>
-                                </MudStack>
-
-                                <div class="cot-position-filter-group-list">
-                                    @foreach (var group in _groupSelections)
-                                    {
-                                        <MudCheckBox T="bool"
-                                                     Value="@group.IsSelected"
-                                                     ValueChanged="@(value => OnGroupSelectionChangedAsync(group.Key, value))"
-                                                     Label="@group.Label"
-                                                     Dense="true"
-                                                     Color="Color.Primary"
-                                                     Class="cot-position-filter-checkbox" />
-                                    }
-                                </div>
-                            </MudStack>
-                        </MudPaper>
-
-                        <MudPaper Outlined="true" Class="pa-4 cot-position-filter-panel">
-                            <MudStack Spacing="2">
-                                <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
                                     <MudText Typo="Typo.h6">Date Range</MudText>
                                     <MudIcon Icon="@Icons.Material.Filled.ExpandLess" Color="Color.Default" />
                                 </MudStack>
@@ -115,6 +78,23 @@
                 </MudItem>
 
                 <MudItem xs="12" lg="9">
+                    <div class="cot-net-position-legend">
+                        @foreach (var group in _groupSelections)
+                        {
+                            <button type="button"
+                                    class="@GetGroupToggleClass(group)"
+                                    style="@($"--group-color:{group.Color};")"
+                                    aria-pressed="@group.IsSelected"
+                                    @onclick="@(() => ToggleGroupSelectionAsync(group.Key))">
+                                <span class="cot-net-position-swatch"></span>
+                                <span class="cot-net-position-legend-label">@group.Label</span>
+                                <span class="@GetGroupLatestValueClass(group)">
+                                    @GetGroupLatestValueLabel(group)
+                                </span>
+                            </button>
+                        }
+                    </div>
+
                     @if (ChartSeries.Count == 0)
                     {
                         <MudAlert Severity="Severity.Info" Dense="true">
@@ -123,23 +103,6 @@
                     }
                     else
                     {
-                        <div class="cot-net-position-legend">
-                            @foreach (var series in ChartSeries)
-                            {
-                                <div class="cot-net-position-legend-item">
-                                    <span class="cot-net-position-swatch" style="@($"background:{series.Color};")"></span>
-                                    <span>@series.Label</span>
-                                    <MudChip T="string"
-                                             Variant="Variant.Outlined"
-                                             Size="Size.Small"
-                                             Color="@GetValueColor(series.LatestValue)"
-                                             Value="@FormatNumber(series.LatestValue)">
-                                        @FormatNumber(series.LatestValue)
-                                    </MudChip>
-                                </div>
-                            }
-                        </div>
-
                         <div class="cot-net-position-chart">
                             <svg viewBox="0 0 960 420" role="img" aria-label="@GetChartAriaLabel()">
                                 <rect x="@PlotLeft" y="@PlotTop" width="@(SvgWidth - PlotLeft - PlotRight)" height="@(SvgHeight - PlotTop - PlotBottom)" class="cot-net-position-plot"></rect>

@@ -18,8 +18,8 @@ Render the selectable multi-tab position chart card for a COT instrument.
 
 - Loads `available-dates` from the COT API and initializes the date range from the most recent 52 report weeks.
 - Renders three tabs: `Net Position`, `Long`, and `Short`.
-- Renders participant-group filters inside an accordion section and keeps all groups selected by default.
-- Renders `from` and `to` date pickers inside an accordion section and restricts selection to available report dates only.
+- Renders participant-group toggle cards above the chart and keeps all groups selected by default.
+- Renders `from` and `to` date pickers inside a filter panel and restricts selection to available report dates only.
 - Calls the `series` endpoint per selected group and reuses the same chart module to plot `netPosition`, `long`, or `short` values based on the active tab.
 - Does not render any `prices` dataset.
 

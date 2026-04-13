@@ -9,14 +9,38 @@
     margin-bottom: 1rem;
 }
 
-.cot-net-position-legend-item {
+.cot-net-position-legend-button {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     padding: 0.55rem 0.75rem;
     border: 1px solid #d8dee6;
-    border-radius: 0.9rem;
+    border-radius: 8px;
     background: #fbfdff;
+    color: #334155;
+    cursor: pointer;
+    font: inherit;
+    line-height: 1.2;
+    transition: border-color 160ms ease, box-shadow 160ms ease, opacity 160ms ease, background-color 160ms ease;
+}
+
+.cot-net-position-legend-button.is-selected {
+    border-color: #94a3b8;
+    background: #ffffff;
+    box-shadow: inset 0 0 0 1px #cbd5e1;
+    color: #0f172a;
+}
+
+.cot-net-position-legend-button:not(.is-selected) {
+    opacity: 0.45;
+}
+
+.cot-net-position-legend-button:hover,
+.cot-net-position-legend-button:focus-visible {
+    opacity: 1;
+    border-color: #94a3b8;
+    box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.24);
+    outline: none;
 }
 
 .cot-net-position-swatch {
@@ -73,7 +97,7 @@
         min-width: 900px;
     }
 
-    .cot-net-position-legend-item {
+    .cot-net-position-legend-button {
         width: 100%;
         justify-content: space-between;
     }
@@ -89,7 +113,7 @@
         margin-bottom: 0.75rem;
     }
 
-    .cot-net-position-legend-item {
+    .cot-net-position-legend-button {
         padding: 0.45rem 0.6rem;
         font-size: 0.9rem;
     }

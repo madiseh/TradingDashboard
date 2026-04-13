@@ -255,26 +255,15 @@ public partial class CotPositionChart
         await LoadSeriesAsync();
     }
 
-    private async Task SelectAllAsync()
+    private async Task ToggleGroupSelectionAsync(string groupKey)
     {
-        foreach (var group in _groupSelections)
+        var group = _groupSelections.FirstOrDefault(x => string.Equals(x.Key, groupKey, StringComparison.OrdinalIgnoreCase));
+        if (group is null)
         {
-            group.IsSelected = true;
+            return;
         }
 
-        _errorMessage = null;
-        await LoadSeriesAsync();
-    }
-
-    private void ClearSelection()
-    {
-        foreach (var group in _groupSelections)
-        {
-            group.IsSelected = false;
-        }
-
-        _errorMessage = null;
-        _seriesByGroup.Clear();
+        await OnGroupSelectionChangedAsync(groupKey, !group.IsSelected);
     }
 
     private async Task OnFromDateChangedAsync(DateTime? value)
@@ -599,23 +588,6 @@ public partial class CotPositionChart
         return value.ToString("N0", CultureInfo.InvariantCulture);
     }
 
-    private Color GetValueColor(int value)
-    {
-        if (SelectedMetric.Type == PositionMetricType.NetPosition)
-        {
-            return value switch
-            {
-                > 0 => Color.Success,
-                < 0 => Color.Error,
-                _ => Color.Default
-            };
-        }
-
-        return value > 0
-            ? SelectedMetric.AccentColor
-            : Color.Default;
-    }
-
     private string GetChartAriaLabel()
     {
         return $"{SelectedMetric.Title} chart";
@@ -624,6 +596,59 @@ public partial class CotPositionChart
     private Color GetSelectedMetricAccentColor()
     {
         return SelectedMetric.AccentColor;
+    }
+
+    private string GetGroupToggleClass(GroupSelectionViewModel group)
+    {
+        return group.IsSelected
+            ? "cot-net-position-legend-item is-selected"
+            : "cot-net-position-legend-item is-muted";
+    }
+
+    private string GetGroupLatestValueLabel(GroupSelectionViewModel group)
+    {
+        return group.IsSelected
+            ? FormatNumber(GetGroupLatestMetricValue(group))
+            : "Off";
+    }
+
+    private string GetGroupLatestValueClass(GroupSelectionViewModel group)
+    {
+        if (!group.IsSelected)
+        {
+            return "cot-net-position-value is-off";
+        }
+
+        var latestValue = GetGroupLatestMetricValue(group);
+        if (latestValue is null)
+        {
+            return "cot-net-position-value is-neutral";
+        }
+
+        if (SelectedMetric.Type != PositionMetricType.NetPosition)
+        {
+            return "cot-net-position-value is-accent";
+        }
+
+        return latestValue.Value switch
+        {
+            > 0 => "cot-net-position-value is-positive",
+            < 0 => "cot-net-position-value is-negative",
+            _ => "cot-net-position-value is-neutral"
+        };
+    }
+
+    private int? GetGroupLatestMetricValue(GroupSelectionViewModel group)
+    {
+        if (!_seriesByGroup.TryGetValue(group.Key, out var response))
+        {
+            return null;
+        }
+
+        return response.Items
+            .OrderBy(x => x.ReportDate)
+            .Select(GetSelectedMetricValue)
+            .LastOrDefault(x => x is not null);
     }
 
     private static MarkupString BuildSvgText(decimal x, decimal y, string text, bool isDate, string anchor)
