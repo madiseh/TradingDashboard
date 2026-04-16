@@ -15,8 +15,8 @@ Create resources per component. Do not use a shared resource file for UI text.
 
 Examples:
 
-- `src/Presentation/Common/TradingDashboard.Presentation.Common/Resources/Components/Layout/MainLayout/MainLayoutResource.resx`
-- `src/Presentation/Common/TradingDashboard.Presentation.Common/Resources/Components/Layout/MainLayout/MainLayoutResource.fa.resx`
+- `src/Presentation/Common/TradingDashboard.Presentation.Common/Resources/Components/Layout/WorkspaceLayout/WorkspaceLayoutResource.resx`
+- `src/Presentation/Common/TradingDashboard.Presentation.Common/Resources/Components/Layout/WorkspaceLayout/WorkspaceLayoutResource.fa.resx`
 - `src/Presentation/Common/TradingDashboard.Presentation.Common/Resources/Components/Layout/NavMenu/NavMenuResource.resx`
 - `src/Presentation/Common/TradingDashboard.Presentation.Common/Resources/Components/Layout/NavMenu/NavMenuResource.tr.resx`
 

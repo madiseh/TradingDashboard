@@ -2,7 +2,7 @@ using Microsoft.Extensions.Localization;
 using TradingDashboard.Presentation.Blazor.Services;
 using TradingDashboard.Presentation.Common.Resources.Components.Layout.TradingPanelLayout;
 
-namespace TradingDashboard.Presentation.Blazor.Components.Layout;
+namespace TradingDashboard.Presentation.Blazor.Components.Pages.TradingPanel._Layout;
 
 public partial class TradingPanelLayout
 {

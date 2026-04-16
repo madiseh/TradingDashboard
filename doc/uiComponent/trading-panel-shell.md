@@ -4,6 +4,8 @@
 
 - Layout: `TradingPanelLayout`
 - Page: `TradingPanelDashboard`
+- Layout source: `src/Presentation/TradingDashboard.Presentation.Blazor/Components/Pages/TradingPanel/_Layout/TradingPanelLayout.razor`
+- Dashboard source: `src/Presentation/TradingDashboard.Presentation.Blazor/Components/Pages/TradingPanel/_Dashboard/TradingPanelDashboard.razor`
 - Resource markers:
   - `TradingPanelLayoutResource`
   - `TradingPanelDashboardResource`

@@ -15,7 +15,7 @@ Keep the public release history consistent between the Blazor UI, the running ap
 1. Find the commit range that starts immediately after the previous shipped version.
 2. Group the commits into 3 to 5 release highlights.
 3. Update `src/Presentation/Common/TradingDashboard.Presentation.Common/Constants/ApplicationVersions.cs`.
-4. Add the new release entry at the top of `src/Presentation/TradingDashboard.Presentation.Blazor/Components/Pages/Releases/Releases.razor.cs`.
+4. Add the new release entry at the top of `src/Presentation/TradingDashboard.Presentation.Blazor/Components/Pages/Workspace/Releases/Releases.razor.cs`.
 5. Add or update the matching resource keys in:
    - `src/Presentation/Common/TradingDashboard.Presentation.Common/Resources/Components/Pages/Releases/Releases/ReleasesResource.resx`
    - Any localized `.resx` file that overrides release page copy and dates.

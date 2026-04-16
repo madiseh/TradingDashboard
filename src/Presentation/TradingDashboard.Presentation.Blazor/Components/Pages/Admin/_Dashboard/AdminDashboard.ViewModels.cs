@@ -1,4 +1,4 @@
-namespace TradingDashboard.Presentation.Blazor.Components.Pages.Admin.Dashboard;
+namespace TradingDashboard.Presentation.Blazor.Components.Pages.Admin._Dashboard;
 
 public partial class AdminDashboard
 {

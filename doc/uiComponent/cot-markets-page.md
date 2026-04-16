@@ -3,7 +3,7 @@
 ## Component
 
 - Name: `Markets`
-- Source: `src/Presentation/TradingDashboard.Presentation.Blazor/Components/Pages/Markets/Markets.razor`
+- Source: `src/Presentation/TradingDashboard.Presentation.Blazor/Components/Pages/Workspace/Markets/Markets.razor`
 
 ## Purpose
 

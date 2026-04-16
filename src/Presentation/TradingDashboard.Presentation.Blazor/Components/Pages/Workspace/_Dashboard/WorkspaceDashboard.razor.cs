@@ -1,14 +1,14 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using TradingDashboard.Presentation.Common.Constants;
-using TradingDashboard.Presentation.Common.Resources.Components.Pages.Index;
+using TradingDashboard.Presentation.Common.Resources.Components.Pages.Workspace.Dashboard;
 
-namespace TradingDashboard.Presentation.Blazor.Components.Pages;
+namespace TradingDashboard.Presentation.Blazor.Components.Pages.Workspace._Dashboard;
 
-public partial class Index
+public partial class WorkspaceDashboard
 {
     [Inject]
-    private IStringLocalizer<IndexPageResource> L { get; set; } = default!;
+    private IStringLocalizer<WorkspaceDashboardResource> L { get; set; } = default!;
 
     private string HomeSeoTitle => T("Seo.Title");
 

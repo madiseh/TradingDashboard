@@ -38,6 +38,30 @@ TradingDashboard/
 - Blazor presentation stack uses `MudBlazor`.
 - MAUI Hybrid presentation stack uses `BlazorWebView` with `MudBlazor`.
 - Blazor modules/pages must keep view models in sibling files named `<Component>.ViewModels.cs` next to `<Component>.razor` and `<Component>.razor.cs`.
+- Blazor page sections under `TradingDashboard.Presentation.Blazor/Components/Pages` must follow this section shell structure:
+
+```text
+Components/
+`-- Pages/
+    |-- Admin/
+    |   |-- _Layout/
+    |   |   `-- AdminLayout.razor
+    |   `-- _Dashboard/
+    |       `-- AdminDashboard.razor
+    |-- TradingPanel/
+    |   |-- _Layout/
+    |   |   `-- TradingPanelLayout.razor
+    |   `-- _Dashboard/
+    |       `-- TradingPanelDashboard.razor
+    `-- Workspace/
+        |-- _Layout/
+        |   `-- WorkspaceLayout.razor
+        `-- _Dashboard/
+            `-- WorkspaceDashboard.razor
+```
+
+- Existing section layouts must be moved into their owning `_Layout` folder; new section layouts must not be added under `Components/Layout`.
+- Section landing pages must be named `<SectionName>Dashboard` and live under `_Dashboard`; do not introduce `Home` folders for section dashboards.
 - `TradingDashboard.Domain.Abstraction` is a dedicated project for shared base domain types.
 - Persistence is split into `Infrastructure.Persistence.Common` and `Infrastructure.Persistence.Implementation`.
 - `Infrastructure.Persistence.SimulatedData` contains fake/json-backed repositories for development and local simulation.

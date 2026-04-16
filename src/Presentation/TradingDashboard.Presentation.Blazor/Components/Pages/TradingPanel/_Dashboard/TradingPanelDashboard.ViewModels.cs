@@ -1,4 +1,4 @@
-namespace TradingDashboard.Presentation.Blazor.Components.Pages.TradingPanel.Dashboard;
+namespace TradingDashboard.Presentation.Blazor.Components.Pages.TradingPanel._Dashboard;
 
 public partial class TradingPanelDashboard
 {

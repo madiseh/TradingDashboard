@@ -4,6 +4,8 @@
 
 - Layout: `AdminLayout`
 - Page: `AdminDashboard`
+- Layout source: `src/Presentation/TradingDashboard.Presentation.Blazor/Components/Pages/Admin/_Layout/AdminLayout.razor`
+- Dashboard source: `src/Presentation/TradingDashboard.Presentation.Blazor/Components/Pages/Admin/_Dashboard/AdminDashboard.razor`
 - Resource markers:
   - `AdminLayoutResource`
   - `AdminDashboardResource`

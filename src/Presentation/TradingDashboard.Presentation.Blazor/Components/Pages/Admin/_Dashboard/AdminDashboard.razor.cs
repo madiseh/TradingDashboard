@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Localization;
 using TradingDashboard.Presentation.Common.Resources.Components.Pages.Admin.Dashboard;
 
-namespace TradingDashboard.Presentation.Blazor.Components.Pages.Admin.Dashboard;
+namespace TradingDashboard.Presentation.Blazor.Components.Pages.Admin._Dashboard;
 
 public partial class AdminDashboard
 {

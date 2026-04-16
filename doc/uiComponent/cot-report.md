@@ -3,7 +3,7 @@
 ## Component
 
 - Name: `CotReport`
-- Source: `src/Presentation/TradingDashboard.Presentation.Blazor/Components/Pages/Cot/Report/CotReport.razor`
+- Source: `src/Presentation/TradingDashboard.Presentation.Blazor/Components/Pages/Workspace/Cot/Report/CotReport.razor`
 
 ## Purpose
 

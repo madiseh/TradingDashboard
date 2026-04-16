@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
-using TradingDashboard.Presentation.Common.Resources.Components.Pages.Cot.Home;
+using TradingDashboard.Presentation.Common.Resources.Components.Pages.Cot.Dashboard;
 
-namespace TradingDashboard.Presentation.Blazor.Components.Pages.Workspace.Cot.Home;
+namespace TradingDashboard.Presentation.Blazor.Components.Pages.Workspace.Cot._Dashboard;
 
-public partial class Home
+public partial class CotDashboard
 {
     private static readonly string[] BothModels =
     [
@@ -14,10 +14,10 @@ public partial class Home
 
     private bool _isLoading = true;
     private string? _errorMessage;
-    private List<HomeGroupViewModel> _groups = [];
+    private List<CotDashboardGroupViewModel> _groups = [];
 
     [Inject]
-    private IStringLocalizer<HomeResource> L { get; set; } = default!;
+    private IStringLocalizer<CotDashboardResource> L { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
@@ -49,10 +49,10 @@ public partial class Home
             }
 
             _groups = payload
-                .Select(group => new HomeGroupViewModel(
+                .Select(group => new CotDashboardGroupViewModel(
                     group.Group ?? string.Empty,
                     (group.Items ?? [])
-                        .Select(item => new HomeItemViewModel(
+                        .Select(item => new CotDashboardItemViewModel(
                             item.InstrumentName ?? string.Empty,
                             item.InstrumentSlug ?? string.Empty,
                             [.. BothModels]))
@@ -70,7 +70,7 @@ public partial class Home
         }
     }
 
-    private static bool HasModel(HomeItemViewModel item, CotReportModel model)
+    private static bool HasModel(CotDashboardItemViewModel item, CotReportModel model)
     {
         return item.AvailableModels.Contains(model.ToContractValue(), StringComparer.OrdinalIgnoreCase);
     }

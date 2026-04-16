@@ -5,7 +5,7 @@ using MudBlazor;
 using TradingDashboard.Presentation.Blazor.Services;
 using UserManagementContracts = TradingDashboard.Presentation.Blazor.Contracts.UserManagement.Generated;
 
-namespace TradingDashboard.Presentation.Blazor.Components.Pages;
+namespace TradingDashboard.Presentation.Blazor.Components.Pages.Workspace.Login;
 
 public partial class Login
 {

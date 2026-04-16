@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace TradingDashboard.Presentation.Blazor.Components.Pages;
+namespace TradingDashboard.Presentation.Blazor.Components.Pages.Workspace.Login;
 
 public partial class Login
 {
