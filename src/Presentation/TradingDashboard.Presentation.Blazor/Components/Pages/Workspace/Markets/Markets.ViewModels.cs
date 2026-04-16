@@ -1,4 +1,4 @@
-namespace TradingDashboard.Presentation.Blazor.Components.Pages.Markets;
+namespace TradingDashboard.Presentation.Blazor.Components.Pages.Workspace.Markets;
 
 public partial class Markets
 {

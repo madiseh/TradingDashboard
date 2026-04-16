@@ -2,8 +2,9 @@ using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using TradingDashboard.Presentation.Common.Resources.Components.Pages.CurrencyStrength.Dashboard;
+using TradingDashboard.Presentation.Blazor.Components.Pages.Workspace.CurrencyStrength.Dashboard;
 
-namespace TradingDashboard.Presentation.Blazor.Components.Pages.CurrencyStrength.Dashboard;
+namespace TradingDashboard.Presentation.Blazor.Components.Pages.Workspace.CurrencyStrength.Dashboard;
 
 public partial class CurrencyStrengthDashboard
     : IAsyncDisposable

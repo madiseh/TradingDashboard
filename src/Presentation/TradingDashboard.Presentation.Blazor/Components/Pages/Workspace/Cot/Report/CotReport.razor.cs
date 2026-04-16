@@ -2,7 +2,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
-namespace TradingDashboard.Presentation.Blazor.Components.Pages.Cot.Report;
+namespace TradingDashboard.Presentation.Blazor.Components.Pages.Workspace.Cot.Report;
 
 public partial class CotReport
 {

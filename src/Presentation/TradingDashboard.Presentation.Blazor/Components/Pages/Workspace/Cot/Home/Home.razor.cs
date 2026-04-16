@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using TradingDashboard.Presentation.Common.Resources.Components.Pages.Cot.Home;
 
-namespace TradingDashboard.Presentation.Blazor.Components.Pages.Cot.Home;
+namespace TradingDashboard.Presentation.Blazor.Components.Pages.Workspace.Cot.Home;
 
 public partial class Home
 {

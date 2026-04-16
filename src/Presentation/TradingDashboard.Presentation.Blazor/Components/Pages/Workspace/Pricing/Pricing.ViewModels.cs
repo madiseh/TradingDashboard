@@ -1,4 +1,4 @@
-namespace TradingDashboard.Presentation.Blazor.Components.Pages.Pricing;
+namespace TradingDashboard.Presentation.Blazor.Components.Pages.Workspace.Pricing;
 
 public partial class Pricing
 {

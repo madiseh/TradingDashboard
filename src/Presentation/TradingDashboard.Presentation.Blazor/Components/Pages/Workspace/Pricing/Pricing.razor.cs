@@ -6,7 +6,7 @@ using TradingDashboard.Presentation.Blazor.Services;
 using TradingDashboard.Presentation.Common.Resources.Components.Pages.Pricing.Pricing;
 using UserManagementApiErrorResponse = TradingDashboard.Presentation.Blazor.Contracts.UserManagement.Generated.ApiErrorResponse;
 
-namespace TradingDashboard.Presentation.Blazor.Components.Pages.Pricing;
+namespace TradingDashboard.Presentation.Blazor.Components.Pages.Workspace.Pricing;
 
 public partial class Pricing
 {

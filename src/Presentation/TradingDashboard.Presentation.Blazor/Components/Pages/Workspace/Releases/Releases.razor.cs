@@ -1,9 +1,10 @@
 using System.Globalization;
 using Microsoft.Extensions.Localization;
+using TradingDashboard.Presentation.Blazor.Components.Pages.Workspace.Releases;
 using TradingDashboard.Presentation.Common.Constants;
 using TradingDashboard.Presentation.Common.Resources.Components.Pages.Releases.Releases;
 
-namespace TradingDashboard.Presentation.Blazor.Components.Pages.Releases;
+namespace TradingDashboard.Presentation.Blazor.Components.Pages.Workspace.Releases;
 
 public partial class Releases
 {

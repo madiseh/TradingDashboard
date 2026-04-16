@@ -1,4 +1,4 @@
-namespace TradingDashboard.Presentation.Blazor.Components.Pages.Releases;
+namespace TradingDashboard.Presentation.Blazor.Components.Pages.Workspace.Releases;
 
 public sealed record ReleaseEntryViewModel(
     string VersionLabel,

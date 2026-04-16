@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using TradingDashboard.Presentation.Common.Resources.Components.Pages.Markets.Markets;
 
-namespace TradingDashboard.Presentation.Blazor.Components.Pages.Markets;
+namespace TradingDashboard.Presentation.Blazor.Components.Pages.Workspace.Markets;
 
 public partial class Markets
 {
