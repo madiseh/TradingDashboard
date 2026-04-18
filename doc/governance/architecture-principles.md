@@ -146,6 +146,11 @@ Application/
 
 - Every Blazor component must use split files: `<Component>.razor` and `<Component>.razor.cs`.
 - Every Blazor page/module component must have a dedicated sibling view-model file: `<Component>.ViewModels.cs` in the same folder.
+- Every first-level folder under `TradingDashboard.Presentation.Blazor/Components/Pages/<SectionName>/` must contain:
+  - `_Layout/<SectionName>Layout.razor`
+  - `_Dashboard/<SectionName>Dashboard.razor`
+- Section layouts must live in their owning page section folder, not under the shared `Components/Layout` folder.
+- Section dashboard pages must use the `Dashboard` naming convention. Do not name section landing pages `Home` or keep them in a `Home` folder.
 - UI markup must stay in `.razor`.
 - Parameters, state, and methods must stay in `.razor.cs`.
 - View model records/classes must stay in `<Component>.ViewModels.cs`.

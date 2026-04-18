@@ -1,0 +1,38 @@
+@page "/trading-panel"
+@layout TradingDashboard.Presentation.Blazor.Components.Pages.TradingPanel._Layout.TradingPanelLayout
+@inherits PageComponentBase
+@using TradingDashboard.Presentation.Common.Resources.Components.Pages.TradingPanel.Dashboard
+
+<PageTitle>@L["Page.Title"]</PageTitle>
+
+<section class="td-portal-dashboard">
+    <div class="td-portal-dashboard__hero">
+        <MudChip T="string" Color="Color.Warning" Variant="Variant.Outlined">@L["Hero.Badge"]</MudChip>
+        <MudText Typo="Typo.h4" Class="mt-4">@L["Hero.Title"]</MudText>
+        <MudText Typo="Typo.body1" Class="mt-2">@L["Hero.Description"]</MudText>
+    </div>
+
+    <div class="td-portal-dashboard__grid">
+        @foreach (var card in Metrics)
+        {
+            <MudPaper Class="pa-4 td-portal-dashboard__card td-portal-dashboard__card--trading" Elevation="0">
+                <MudText Typo="Typo.subtitle2">@card.Label</MudText>
+                <MudText Typo="Typo.h4" Class="mt-2">@card.Value</MudText>
+                <MudText Typo="Typo.body2" Class="mt-2">@card.Caption</MudText>
+            </MudPaper>
+        }
+    </div>
+
+    <MudPaper Class="pa-4 mt-4 td-portal-dashboard__card td-portal-dashboard__card--trading" Elevation="0">
+        <MudText Typo="Typo.h6">@L["Focus.Title"]</MudText>
+        <div class="td-portal-dashboard__queue mt-3">
+            @foreach (var item in FocusItems)
+            {
+                <div class="td-portal-dashboard__queue-item">
+                    <MudText Typo="Typo.subtitle2">@item.Title</MudText>
+                    <MudText Typo="Typo.body2" Class="mt-1">@item.Description</MudText>
+                </div>
+            }
+        </div>
+    </MudPaper>
+</section>
