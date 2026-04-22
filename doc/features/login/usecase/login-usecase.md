@@ -4,8 +4,10 @@
 
 1. User enters username/email and password in Blazor Login page.
 2. UI calls `POST /api/v1/login/signin`.
-3. API validates credentials and returns JWT.
-4. UI stores token in `AuthSession` and loads `/me`.
+3. API validates credentials.
+4. If local account email is not verified, API returns `EMAIL_NOT_VERIFIED`.
+5. If sign-in succeeds, API returns JWT.
+6. UI stores token in `AuthSession` and loads `/me`.
 
 ## Local Sign-Up
 
@@ -16,6 +18,25 @@
 5. Created user attributes:
    - `SignupAppPlatform = Local`
    - `IsEmailVerified = false`
+6. System sends an activation email notification after local account creation.
+
+## Forgot Password
+
+1. User enters username/email in Login page.
+2. User clicks `Forgot Password`.
+3. UI calls `POST /api/v1/login/forgot-password`.
+4. If a verified active local account matches the identity, system sends password reset email notification.
+5. UI shows success snackbar using API response message.
+
+## Resend Activation Email
+
+1. User attempts local sign-in with an unverified local account.
+2. API returns `EMAIL_NOT_VERIFIED`.
+3. UI reveals `Send Activation Email`.
+4. User clicks `Send Activation Email`.
+5. UI calls `POST /api/v1/login/resend-activation-email`.
+6. If the matched local account is still unverified, system sends activation email notification.
+7. UI shows success snackbar using API response message.
 
 ## Google Sign-In (Step by Step)
 

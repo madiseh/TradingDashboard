@@ -27,6 +27,26 @@
   - `identity` (string: username or email)
   - `password` (string)
 - Response `200`: same shape as sign-up.
+- Response `400`:
+  - `errorCode = EMAIL_NOT_VERIFIED` when local account email has not been activated.
+
+### `POST /api/v1/login/forgot-password`
+
+- Description: Requests password reset for a local account.
+- Request body:
+  - `identity` (string: username or email)
+- Response `200`:
+  - `message`
+- Response `400`:
+  - `errorCode = EMAIL_NOT_VERIFIED` when local account email has not been activated yet.
+
+### `POST /api/v1/login/resend-activation-email`
+
+- Description: Requests a new activation email for a local account that is not verified.
+- Request body:
+  - `identity` (string: username or email)
+- Response `200`:
+  - `message`
 
 ### `GET /api/v1/login/me`
 

@@ -22,6 +22,9 @@
 5. Local sign-up creates user with `SignupAppPlatform = Local` and `IsEmailVerified = false`.
 6. Google sign-in creates user with `IsEmailVerified = true`.
 7. Every successful sign-in updates `LastLoginAtUtc`.
+8. Local credential sign-in is allowed only when `IsEmailVerified = true`.
+9. Password reset email is sent only for verified local accounts.
+10. Activation email resend is relevant only for local accounts with `IsEmailVerified = false`.
 
 ## Identity Mapping
 
