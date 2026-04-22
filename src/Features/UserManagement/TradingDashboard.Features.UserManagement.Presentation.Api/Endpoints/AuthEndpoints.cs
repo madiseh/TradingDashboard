@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.WebUtilities;
 using MediatR;
 using TradingDashboard.Application.Common.Security;
+using TradingDashboard.Application.Features.Auth.Commands.ForgotPassword;
+using TradingDashboard.Application.Features.Auth.Commands.ResendActivationEmail;
 using TradingDashboard.Application.Features.Auth.Commands.SignIn;
 using TradingDashboard.Application.Features.Auth.Commands.SignUp;
 using TradingDashboard.Application.Features.Auth;
@@ -12,6 +14,8 @@ using TradingDashboard.Domain.Enums;
 using TradingDashboard.Presentation.Api.UserManagement.Contracts;
 using TradingDashboard.Presentation.Api.UserManagement.Services;
 using TradingDashboard.Presentation.Common.Contracts;
+using ApiAuthActionResponse = TradingDashboard.Presentation.Api.UserManagement.Contracts.AuthActionResponse;
+using ApplicationAuthUserResponse = TradingDashboard.Application.Features.Auth.AuthUserResponse;
 
 namespace TradingDashboard.Presentation.Api.UserManagement.Endpoints;
 
@@ -32,6 +36,18 @@ public static class AuthEndpoints
             .WithName("AuthSignIn")
             .WithSummary("Sign in with username/email and password")
             .Produces<AuthTokenResult>(StatusCodes.Status200OK)
+            .Produces<ApiErrorResponse>(StatusCodes.Status400BadRequest);
+
+        group.MapPost("forgot-password", ForgotPasswordAsync)
+            .WithName("AuthForgotPassword")
+            .WithSummary("Request password reset email for a local account")
+            .Produces<ApiAuthActionResponse>(StatusCodes.Status200OK)
+            .Produces<ApiErrorResponse>(StatusCodes.Status400BadRequest);
+
+        group.MapPost("resend-activation-email", ResendActivationEmailAsync)
+            .WithName("AuthResendActivationEmail")
+            .WithSummary("Request another activation email for an unverified local account")
+            .Produces<ApiAuthActionResponse>(StatusCodes.Status200OK)
             .Produces<ApiErrorResponse>(StatusCodes.Status400BadRequest);
 
         group.MapGet("me", GetCurrentUser)
@@ -112,6 +128,40 @@ public static class AuthEndpoints
                     [ex.Message]),
                 statusCode: StatusCodes.Status500InternalServerError);
         }
+    }
+
+    private static async Task<IResult> ForgotPasswordAsync(
+        ForgotPasswordRequest request,
+        IMediator mediator,
+        CancellationToken cancellationToken)
+    {
+        var result = await mediator.Send(
+            new ForgotPasswordCommand(request.Identity),
+            cancellationToken);
+
+        if (!result.IsSuccess || result.Data is null)
+        {
+            return TypedResults.BadRequest(new ApiErrorResponse(result.Message, result.ErrorCode, result.Errors));
+        }
+
+        return TypedResults.Ok(new ApiAuthActionResponse(result.Data.Message));
+    }
+
+    private static async Task<IResult> ResendActivationEmailAsync(
+        ResendActivationEmailRequest request,
+        IMediator mediator,
+        CancellationToken cancellationToken)
+    {
+        var result = await mediator.Send(
+            new ResendActivationEmailCommand(request.Identity),
+            cancellationToken);
+
+        if (!result.IsSuccess || result.Data is null)
+        {
+            return TypedResults.BadRequest(new ApiErrorResponse(result.Message, result.ErrorCode, result.Errors));
+        }
+
+        return TypedResults.Ok(new ApiAuthActionResponse(result.Data.Message));
     }
 
     private static IResult GetCurrentUser(ClaimsPrincipal user)
@@ -227,7 +277,7 @@ public static class AuthEndpoints
 
         await httpContext.SignOutAsync("External");
 
-        var tokenResult = jwtTokenService.GenerateToken(new AuthUserResponse(user.Id, user.Username, user.Email.Value, user.Role));
+        var tokenResult = jwtTokenService.GenerateToken(new ApplicationAuthUserResponse(user.Id, user.Username, user.Email.Value, user.Role));
         var redirectUrl = QueryHelpers.AddQueryString(normalizedReturnUrl, new Dictionary<string, string?>
         {
             ["accessToken"] = tokenResult.AccessToken,

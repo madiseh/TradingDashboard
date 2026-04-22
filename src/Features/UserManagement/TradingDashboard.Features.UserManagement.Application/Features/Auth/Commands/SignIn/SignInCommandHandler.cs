@@ -44,6 +44,14 @@ public sealed class SignInCommandHandler(
                     "This account is disabled and cannot sign in.");
             }
 
+            if (!user.IsEmailVerified && user.SignupAppPlatform == SignupAppPlatform.Local)
+            {
+                return OperationalResult<AuthUserResponse>.Fail(
+                    "Email activation required",
+                    "EMAIL_NOT_VERIFIED",
+                    "Your email is not activated yet. Send a new activation email and try again.");
+            }
+
             var isPasswordValid = passwordHashingService.Verify(request.Password, user.PasswordHash, user.PasswordSalt);
             if (!isPasswordValid)
             {

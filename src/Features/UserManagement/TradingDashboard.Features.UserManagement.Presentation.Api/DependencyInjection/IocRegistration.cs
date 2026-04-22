@@ -1,4 +1,5 @@
 using FluentValidation;
+using TradingDashboard.Application.Common.Notifications;
 using TradingDashboard.Application.Common.Security;
 using TradingDashboard.Application.Features.Auth.Commands.SignIn;
 using TradingDashboard.Infrastructure.Persistence.Implementation.Context;
@@ -32,6 +33,7 @@ public static class IocRegistration
 
         services.AddSingleton<IPasswordHashingService, PasswordHashingService>();
         services.AddSingleton<IJwtTokenService, JwtTokenService>();
+        services.AddSingleton<IAuthNotificationService, LoggingAuthNotificationService>();
 
         services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName));
 

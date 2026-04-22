@@ -1,5 +1,6 @@
 using FluentValidation;
 using MediatR;
+using TradingDashboard.Application.Common.Notifications;
 using TradingDashboard.Application.Common.Results;
 using TradingDashboard.Application.Common.Security;
 using TradingDashboard.Application.Repository.Auth;
@@ -11,6 +12,7 @@ namespace TradingDashboard.Application.Features.Auth.Commands.SignUp;
 public sealed class SignUpCommandHandler(
     IAppUserQueryRepository userQueryRepository,
     IAppUserCommandRepository userCommandRepository,
+    IAuthNotificationService authNotificationService,
     IPasswordHashingService passwordHashingService,
     IValidator<SignUpCommand> validator)
     : IRequestHandler<SignUpCommand, OperationalResult<AuthUserResponse>>
@@ -62,6 +64,7 @@ public sealed class SignUpCommandHandler(
 
             userCommandRepository.Create(user);
             userCommandRepository.SaveChanges();
+            await authNotificationService.SendActivationEmailAsync(user, cancellationToken);
 
             return OperationalResult<AuthUserResponse>.Success(
                 new AuthUserResponse(user.Id, user.Username, user.Email.Value, user.Role),
