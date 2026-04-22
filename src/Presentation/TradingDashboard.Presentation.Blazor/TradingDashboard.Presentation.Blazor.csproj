@@ -35,8 +35,8 @@
     <MakeDir Directories="$(MSBuildProjectDirectory)\Contracts\UserManagement\Generated" />
     <MakeDir Directories="$(MSBuildProjectDirectory)\Contracts\Cot\Owned" />
 
-    <Exec Command="dotnet build &quot;$(CotApiProjectPath)&quot; -c $(Configuration) --nologo --verbosity:minimal" />
-    <Exec Command="dotnet build &quot;$(UserManagementApiProjectPath)&quot; -c $(Configuration) --nologo --verbosity:minimal" />
+    <Exec Command="dotnet build &quot;$(CotApiProjectPath)&quot; -c $(Configuration) -m:1 --nologo --verbosity:minimal" />
+    <Exec Command="dotnet build &quot;$(UserManagementApiProjectPath)&quot; -c $(Configuration) -m:1 --nologo --verbosity:minimal" />
     <Exec Command="$(NSwagExe_Net90) aspnetcore2openapi /project:&quot;$(CotApiProjectPath)&quot; /documentName:v1 /configuration:$(Configuration) /targetFramework:net9.0 /noBuild:true /aspNetCoreEnvironment:Development /output:&quot;$(CotOpenApiPath)&quot; /verbose:true" EnvironmentVariables="TD_SKIP_DB_INIT=true" />
     <Exec Command="$(NSwagExe_Net90) aspnetcore2openapi /project:&quot;$(UserManagementApiProjectPath)&quot; /documentName:v1 /configuration:$(Configuration) /targetFramework:net9.0 /noBuild:true /aspNetCoreEnvironment:Development /output:&quot;$(UserManagementOpenApiPath)&quot; /verbose:true" EnvironmentVariables="TD_SKIP_DB_INIT=true" />
 
