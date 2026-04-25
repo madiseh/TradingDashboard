@@ -11,7 +11,7 @@ public static class IocRegistration
         services.AddHttpClient(HttpClientNames.ApiCot, (sp, client) =>
         {
             var configuration = sp.GetRequiredService<IConfiguration>();
-            var baseUrl = configuration[$"{HttpClientNames.ApiCot}:BaseUrl"] ?? "https://localhost:7116";
+            var baseUrl = configuration[$"{HttpClientNames.ApiCot}:BaseUrl"] ?? "http://localhost:5002";
             client.BaseAddress = new Uri(baseUrl);
         });
 
