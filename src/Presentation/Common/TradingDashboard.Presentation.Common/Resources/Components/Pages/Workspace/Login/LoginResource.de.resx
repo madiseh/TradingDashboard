@@ -4,34 +4,46 @@
   <resheader name="version"><value>2.0</value></resheader>
   <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
   <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
-  <data name="PageTitle" xml:space="preserve"><value>Login</value></data>
-  <data name="Heading.Title" xml:space="preserve"><value>Authentication</value></data>
-  <data name="Heading.Description" xml:space="preserve"><value>Sign in or create a new account to continue.</value></data>
-  <data name="Tabs.SignIn" xml:space="preserve"><value>Sign In</value></data>
-  <data name="Tabs.SignUp" xml:space="preserve"><value>Sign Up</value></data>
-  <data name="Fields.Identity" xml:space="preserve"><value>Username or Email</value></data>
-  <data name="Fields.Username" xml:space="preserve"><value>Username</value></data>
-  <data name="Fields.Email" xml:space="preserve"><value>Email</value></data>
-  <data name="Fields.Password" xml:space="preserve"><value>Password</value></data>
-  <data name="Actions.SignIn" xml:space="preserve"><value>Sign In</value></data>
-  <data name="Actions.SignUp" xml:space="preserve"><value>Sign Up</value></data>
-  <data name="Actions.ForgotPassword" xml:space="preserve"><value>Forgot Password</value></data>
-  <data name="Actions.SendActivationEmail" xml:space="preserve"><value>Send Activation Email</value></data>
-  <data name="Validation.IdentityRequired" xml:space="preserve"><value>Username or email is required.</value></data>
-  <data name="Validation.UsernameRequired" xml:space="preserve"><value>Username is required.</value></data>
-  <data name="Validation.EmailRequired" xml:space="preserve"><value>Email is required.</value></data>
-  <data name="Validation.PasswordRequired" xml:space="preserve"><value>Password is required.</value></data>
-  <data name="Validation.IdentityRequiredForAction" xml:space="preserve"><value>Enter your username or email first.</value></data>
-  <data name="States.EmailActivationRequired" xml:space="preserve"><value>Email activation required</value></data>
-  <data name="States.EmailActivationRequiredDescription" xml:space="preserve"><value>This local account cannot sign in until the email address is activated.</value></data>
-  <data name="Errors.MissingAccessToken" xml:space="preserve"><value>Authentication response does not contain an access token.</value></data>
-  <data name="Errors.AuthenticationFailedWithMessage" xml:space="preserve"><value>Authentication request failed. {0}</value></data>
-  <data name="Errors.ActionFailedWithMessage" xml:space="preserve"><value>Request failed. {0}</value></data>
-  <data name="Errors.RequestFailedWithStatus" xml:space="preserve"><value>Request failed with status {0}.</value></data>
-  <data name="Errors.EmptySuccessPayloadWithStatus" xml:space="preserve"><value>Authentication response is empty (status {0}).</value></data>
-  <data name="Errors.InvalidSuccessPayload" xml:space="preserve"><value>Authentication response is not valid JSON.</value></data>
-  <data name="Errors.InvalidSuccessPayloadWithMediaType" xml:space="preserve"><value>Authentication response is not valid JSON (content-type: {0}).</value></data>
-  <data name="Messages.AuthenticationSucceeded" xml:space="preserve"><value>Authentication succeeded.</value></data>
-  <data name="Messages.ForgotPasswordSubmitted" xml:space="preserve"><value>If your account is eligible, a password reset email has been sent.</value></data>
-  <data name="Messages.ActivationEmailSubmitted" xml:space="preserve"><value>If your account still needs activation, a new activation email has been sent.</value></data>
+  <data name="PageTitle" xml:space="preserve"><value>Anmeldung</value></data>
+  <data name="PageTitleAuthenticated" xml:space="preserve"><value>Abmeldung</value></data>
+  <data name="Heading.Title" xml:space="preserve"><value>Authentifizierung</value></data>
+  <data name="Heading.Description" xml:space="preserve"><value>Melden Sie sich an oder erstellen Sie ein neues Konto, um fortzufahren.</value></data>
+  <data name="Tabs.SignIn" xml:space="preserve"><value>Anmelden</value></data>
+  <data name="Tabs.SignUp" xml:space="preserve"><value>Registrieren</value></data>
+  <data name="Fields.Identity" xml:space="preserve"><value>Benutzername oder E-Mail</value></data>
+  <data name="Fields.Username" xml:space="preserve"><value>Benutzername</value></data>
+  <data name="Fields.Email" xml:space="preserve"><value>E-Mail</value></data>
+  <data name="Fields.Password" xml:space="preserve"><value>Passwort</value></data>
+  <data name="Actions.SignIn" xml:space="preserve"><value>Anmelden</value></data>
+  <data name="Actions.SignUp" xml:space="preserve"><value>Registrieren</value></data>
+  <data name="Actions.ForgotPassword" xml:space="preserve"><value>Passwort vergessen</value></data>
+  <data name="Actions.SendActivationEmail" xml:space="preserve"><value>Aktivierungs-E-Mail senden</value></data>
+  <data name="Actions.Logout" xml:space="preserve"><value>Abmelden</value></data>
+  <data name="Actions.OpenAdminDashboard" xml:space="preserve"><value>Admin-Dashboard oeffnen</value></data>
+  <data name="Actions.OpenTradingDashboard" xml:space="preserve"><value>Trading-Dashboard oeffnen</value></data>
+  <data name="Validation.IdentityRequired" xml:space="preserve"><value>Benutzername oder E-Mail ist erforderlich.</value></data>
+  <data name="Validation.UsernameRequired" xml:space="preserve"><value>Benutzername ist erforderlich.</value></data>
+  <data name="Validation.EmailRequired" xml:space="preserve"><value>E-Mail ist erforderlich.</value></data>
+  <data name="Validation.PasswordRequired" xml:space="preserve"><value>Passwort ist erforderlich.</value></data>
+  <data name="Validation.IdentityRequiredForAction" xml:space="preserve"><value>Geben Sie zuerst Ihren Benutzernamen oder Ihre E-Mail ein.</value></data>
+  <data name="States.EmailActivationRequired" xml:space="preserve"><value>E-Mail-Aktivierung erforderlich</value></data>
+  <data name="States.EmailActivationRequiredDescription" xml:space="preserve"><value>Dieses lokale Konto kann sich erst anmelden, wenn die E-Mail-Adresse aktiviert wurde.</value></data>
+  <data name="States.LoadingSession" xml:space="preserve"><value>Ihre Sitzung wird geprueft...</value></data>
+  <data name="Authenticated.Title" xml:space="preserve"><value>Konto</value></data>
+  <data name="Authenticated.Description" xml:space="preserve"><value>Sie sind als {0} angemeldet.</value></data>
+  <data name="Authenticated.UsernameLabel" xml:space="preserve"><value>Benutzername</value></data>
+  <data name="Authenticated.EmailLabel" xml:space="preserve"><value>E-Mail</value></data>
+  <data name="Authenticated.RoleLabel" xml:space="preserve"><value>Rolle</value></data>
+  <data name="Authenticated.FallbackUser" xml:space="preserve"><value>Benutzer</value></data>
+  <data name="Authenticated.EmptyValue" xml:space="preserve"><value>-</value></data>
+  <data name="Errors.MissingAccessToken" xml:space="preserve"><value>Die Authentifizierungsantwort enthaelt kein Access Token.</value></data>
+  <data name="Errors.AuthenticationFailedWithMessage" xml:space="preserve"><value>Authentifizierungsanfrage fehlgeschlagen. {0}</value></data>
+  <data name="Errors.ActionFailedWithMessage" xml:space="preserve"><value>Anfrage fehlgeschlagen. {0}</value></data>
+  <data name="Errors.RequestFailedWithStatus" xml:space="preserve"><value>Anfrage mit Status {0} fehlgeschlagen.</value></data>
+  <data name="Errors.EmptySuccessPayloadWithStatus" xml:space="preserve"><value>Authentifizierungsantwort ist leer (Status {0}).</value></data>
+  <data name="Errors.InvalidSuccessPayload" xml:space="preserve"><value>Authentifizierungsantwort ist kein gueltiges JSON.</value></data>
+  <data name="Errors.InvalidSuccessPayloadWithMediaType" xml:space="preserve"><value>Authentifizierungsantwort ist kein gueltiges JSON (Content-Type: {0}).</value></data>
+  <data name="Messages.AuthenticationSucceeded" xml:space="preserve"><value>Authentifizierung erfolgreich.</value></data>
+  <data name="Messages.ForgotPasswordSubmitted" xml:space="preserve"><value>Wenn Ihr Konto berechtigt ist, wurde eine E-Mail zum Zuruecksetzen des Passworts gesendet.</value></data>
+  <data name="Messages.ActivationEmailSubmitted" xml:space="preserve"><value>Wenn Ihr Konto noch aktiviert werden muss, wurde eine neue Aktivierungs-E-Mail gesendet.</value></data>
 </root>

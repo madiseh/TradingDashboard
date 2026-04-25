@@ -6,6 +6,7 @@ public static class SiteBranding
     public const string Domain = "terminalprime.com";
     public const string BaseUrl = "https://terminalprime.com";
     public const string SupportEmail = "support@terminalprime.com";
+    public const string GoogleSiteVerificationToken = "Fzq4bY3rBfibL1NWV6gns2WnnRGOHPlY6gi2SgiHAbU";
     public const int CopyrightYear = 2026;
 
     public const string AssetBasePath = "/images/terminalprime";

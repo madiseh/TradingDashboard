@@ -9,7 +9,7 @@ using UserManagementContracts = TradingDashboard.Presentation.Blazor.Contracts.U
 
 namespace TradingDashboard.Presentation.Blazor.Components.Pages.Workspace.Login;
 
-public partial class Login
+public partial class Login : IDisposable
 {
     private const string EmailNotVerifiedErrorCode = "EMAIL_NOT_VERIFIED";
 
@@ -50,6 +50,27 @@ public partial class Login
     private UserManagementContracts.MeResponse? _meResult;
     private bool _canSendActivationEmail;
 
+    private string AuthenticatedDisplayName =>
+        _meResult?.Username
+        ?? AuthSession.Username
+        ?? _meResult?.Email
+        ?? AuthSession.Email
+        ?? L["Authenticated.FallbackUser"].Value;
+
+    private string AuthenticatedEmail =>
+        _meResult?.Email
+        ?? AuthSession.Email
+        ?? L["Authenticated.EmptyValue"].Value;
+
+    private string AuthenticatedRole =>
+        _meResult?.Role
+        ?? AuthSession.Role
+        ?? L["Authenticated.EmptyValue"].Value;
+
+    private bool CanOpenAdminDashboard => PortalNavigation.CanAccessAdmin(_meResult?.Role ?? AuthSession.Role);
+
+    private bool CanOpenTradingDashboard => PortalNavigation.CanAccessTradingPanel(_meResult?.Role ?? AuthSession.Role);
+
     private bool IsSignInDisabled =>
         _isSubmitting
         || string.IsNullOrWhiteSpace(_signInModel.Identity)
@@ -63,6 +84,11 @@ public partial class Login
 
     private bool IsIdentityActionDisabled =>
         _isSubmitting || string.IsNullOrWhiteSpace(_signInModel.Identity);
+
+    protected override void OnInitialized()
+    {
+        AuthSession.Changed += OnAuthSessionChanged;
+    }
 
     protected override void OnParametersSet()
     {
@@ -157,7 +183,6 @@ public partial class Login
 
             Snackbar.Add(L["Messages.AuthenticationSucceeded"].Value, Severity.Success);
             await LoadCurrentUserAsync();
-            NavigateToAuthorizedPortal();
         }
         catch (Exception ex)
         {
@@ -191,6 +216,17 @@ public partial class Login
         }
 
         _meResult = await response.Content.ReadFromJsonAsync<UserManagementContracts.MeResponse>();
+    }
+
+    private Task LogoutAsync()
+    {
+        _authResult = null;
+        _meResult = null;
+        _errorMessage = null;
+        _canSendActivationEmail = false;
+        _activeTabIndex = 0;
+        AuthSession.Clear();
+        return Task.CompletedTask;
     }
 
     private async Task ForgotPasswordAsync()
@@ -308,15 +344,30 @@ public partial class Login
             : L["Errors.InvalidSuccessPayloadWithMediaType", mediaType].Value;
     }
 
-    private void NavigateToAuthorizedPortal()
-    {
-        var role = _meResult?.Role ?? _authResult?.Role ?? AuthSession.Role;
-        var targetRoute = PortalNavigation.ResolvePostLoginRoute(ReturnUrl, role);
-        NavigationManager.NavigateTo(targetRoute);
-    }
-
     private string GetTrimmedIdentity()
     {
         return _signInModel.Identity.Trim();
+    }
+
+    private void OnAuthSessionChanged()
+    {
+        _ = InvokeAsync(async () =>
+        {
+            if (AuthSession.IsAuthenticated && AuthSession.IsHydrated)
+            {
+                await LoadCurrentUserAsync();
+            }
+            else if (!AuthSession.IsAuthenticated)
+            {
+                _meResult = null;
+            }
+
+            StateHasChanged();
+        });
+    }
+
+    public void Dispose()
+    {
+        AuthSession.Changed -= OnAuthSessionChanged;
     }
 }

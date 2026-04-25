@@ -5,6 +5,7 @@
   <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
   <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
   <data name="PageTitle" xml:space="preserve"><value>Login</value></data>
+  <data name="PageTitleAuthenticated" xml:space="preserve"><value>Logout</value></data>
   <data name="Heading.Title" xml:space="preserve"><value>Authentication</value></data>
   <data name="Heading.Description" xml:space="preserve"><value>Sign in or create a new account to continue.</value></data>
   <data name="Tabs.SignIn" xml:space="preserve"><value>Sign In</value></data>
@@ -17,6 +18,9 @@
   <data name="Actions.SignUp" xml:space="preserve"><value>Sign Up</value></data>
   <data name="Actions.ForgotPassword" xml:space="preserve"><value>Forgot Password</value></data>
   <data name="Actions.SendActivationEmail" xml:space="preserve"><value>Send Activation Email</value></data>
+  <data name="Actions.Logout" xml:space="preserve"><value>Logout</value></data>
+  <data name="Actions.OpenAdminDashboard" xml:space="preserve"><value>Open Admin Dashboard</value></data>
+  <data name="Actions.OpenTradingDashboard" xml:space="preserve"><value>Open Trading Dashboard</value></data>
   <data name="Validation.IdentityRequired" xml:space="preserve"><value>Username or email is required.</value></data>
   <data name="Validation.UsernameRequired" xml:space="preserve"><value>Username is required.</value></data>
   <data name="Validation.EmailRequired" xml:space="preserve"><value>Email is required.</value></data>
@@ -24,6 +28,14 @@
   <data name="Validation.IdentityRequiredForAction" xml:space="preserve"><value>Enter your username or email first.</value></data>
   <data name="States.EmailActivationRequired" xml:space="preserve"><value>Email activation required</value></data>
   <data name="States.EmailActivationRequiredDescription" xml:space="preserve"><value>This local account cannot sign in until the email address is activated.</value></data>
+  <data name="States.LoadingSession" xml:space="preserve"><value>Checking your session...</value></data>
+  <data name="Authenticated.Title" xml:space="preserve"><value>Account</value></data>
+  <data name="Authenticated.Description" xml:space="preserve"><value>You are signed in as {0}.</value></data>
+  <data name="Authenticated.UsernameLabel" xml:space="preserve"><value>Username</value></data>
+  <data name="Authenticated.EmailLabel" xml:space="preserve"><value>Email</value></data>
+  <data name="Authenticated.RoleLabel" xml:space="preserve"><value>Role</value></data>
+  <data name="Authenticated.FallbackUser" xml:space="preserve"><value>User</value></data>
+  <data name="Authenticated.EmptyValue" xml:space="preserve"><value>-</value></data>
   <data name="Errors.MissingAccessToken" xml:space="preserve"><value>Authentication response does not contain an access token.</value></data>
   <data name="Errors.AuthenticationFailedWithMessage" xml:space="preserve"><value>Authentication request failed. {0}</value></data>
   <data name="Errors.ActionFailedWithMessage" xml:space="preserve"><value>Request failed. {0}</value></data>

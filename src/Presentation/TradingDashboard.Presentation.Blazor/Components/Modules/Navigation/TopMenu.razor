@@ -56,14 +56,53 @@
                                         <i class="bi bi-search"></i>
                                         <span></span>
                                     </a>
-                                    <div class="td-auth-actions">
-                                        @foreach (var action in AuthActions)
-                                        {
-                                            <a href="@action.Href" class="@action.CssClass">
-                                                @action.Label <i class="bi bi-arrow-up-right"></i><span></span>
-                                            </a>
-                                        }
-                                    </div>
+                                    @if (AuthSession.IsAuthenticated)
+                                    {
+                                        <MudMenu Class="td-user-menu"
+                                                 AnchorOrigin="Origin.BottomCenter"
+                                                 TransformOrigin="Origin.TopCenter"
+                                                 Dense="true">
+                                            <ActivatorContent>
+                                                <button type="button"
+                                                        class="td-user-menu__trigger"
+                                                        aria-label="@L["Profile.MenuAriaLabel"]">
+                                                    <span class="td-user-menu__welcome">@L["Profile.WelcomeUser", AuthenticatedDisplayName]</span>
+                                                    <i class="bi bi-chevron-down td-user-menu__chevron" aria-hidden="true"></i>
+                                                </button>
+                                            </ActivatorContent>
+                                            <ChildContent>
+                                                @if (CanOpenAdminDashboard)
+                                                {
+                                                    <MudMenuItem Icon="@Icons.Material.Filled.AdminPanelSettings"
+                                                                 Href="@RoutePaths.Ui.Admin">
+                                                        @L["Menu.AdminDashboard"]
+                                                    </MudMenuItem>
+                                                }
+                                                @if (CanOpenTradingDashboard)
+                                                {
+                                                    <MudMenuItem Icon="@Icons.Material.Filled.SpaceDashboard"
+                                                                 Href="@RoutePaths.Ui.TradingPanel">
+                                                        @L["Menu.TradingDashboard"]
+                                                    </MudMenuItem>
+                                                }
+                                                <MudMenuItem Icon="@Icons.Material.Filled.Logout"
+                                                             OnClick="Logout">
+                                                    @L["Actions.Logout"]
+                                                </MudMenuItem>
+                                            </ChildContent>
+                                        </MudMenu>
+                                    }
+                                    else
+                                    {
+                                        <div class="td-auth-actions">
+                                            @foreach (var action in AuthActions)
+                                            {
+                                                <a href="@action.Href" class="@action.CssClass">
+                                                    @action.Label <i class="bi bi-arrow-up-right"></i><span></span>
+                                                </a>
+                                            }
+                                        </div>
+                                    }
                                 </div>
                                 <div class="nav-right__search-inner">
                                     <div class="nav-search-inner__form">

@@ -7,7 +7,7 @@ using TradingDashboard.Presentation.Common.Resources.Components.Modules.Navigati
 
 namespace TradingDashboard.Presentation.Blazor.Components.Modules.Navigation;
 
-public partial class TopMenu
+public partial class TopMenu : IDisposable
 {
     private string _selectedCulture = "en";
 
@@ -19,12 +19,18 @@ public partial class TopMenu
         new("de", "Language.Name.de", "Language.Short.de")
     ];
 
-    private IReadOnlyList<NavigationItem> NavigationItems =>
-    [
-        new("Menu.Home", RoutePaths.Ui.Home),
-        new("Menu.Cot", RoutePaths.Ui.CotHome),
-        new("Menu.CurrencyStrength", RoutePaths.Ui.CurrencyStrength)
-    ];
+    private IReadOnlyList<NavigationItem> NavigationItems
+    {
+        get
+        {
+            return
+            [
+                new NavigationItem("Menu.Home", RoutePaths.Ui.Home),
+                new NavigationItem("Menu.Cot", RoutePaths.Ui.CotHome),
+                new NavigationItem("Menu.CurrencyStrength", RoutePaths.Ui.CurrencyStrength)
+            ];
+        }
+    }
 
     [Inject]
     private NavigationManager NavigationManager { get; set; } = default!;
@@ -38,6 +44,16 @@ public partial class TopMenu
     [Inject]
     private PortalNavigationService PortalNavigation { get; set; } = default!;
 
+    [Inject]
+    private AuthSession AuthSession { get; set; } = default!;
+
+    private string AuthenticatedDisplayName =>
+        ResolveAuthenticatedDisplayName();
+
+    private bool CanOpenAdminDashboard => PortalNavigation.CanAccessAdmin(AuthSession.Role);
+
+    private bool CanOpenTradingDashboard => PortalNavigation.CanAccessTradingPanel(AuthSession.Role);
+
     private IReadOnlyList<AuthActionItem> AuthActions =>
     [
         new(L["Actions.Login"], PortalNavigation.BuildLoginUrl(), "btn_theme td-auth-action td-auth-action--secondary"),
@@ -47,6 +63,7 @@ public partial class TopMenu
     protected override void OnInitialized()
     {
         _selectedCulture = NormalizeCulture(CultureInfo.CurrentUICulture.Name);
+        AuthSession.Changed += OnAuthSessionChanged;
     }
 
     private string GetLanguageLabel(LanguageOption language)
@@ -80,6 +97,37 @@ public partial class TopMenu
 
         var currentUri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
         NavigationManager.NavigateTo(currentUri.PathAndQuery, forceLoad: true);
+    }
+
+    private void Logout()
+    {
+        AuthSession.Clear();
+        NavigationManager.NavigateTo(RoutePaths.Ui.Home);
+    }
+
+    private string ResolveAuthenticatedDisplayName()
+    {
+        if (!string.IsNullOrWhiteSpace(AuthSession.Username))
+        {
+            return AuthSession.Username;
+        }
+
+        if (!string.IsNullOrWhiteSpace(AuthSession.Email))
+        {
+            return AuthSession.Email.Split('@', StringSplitOptions.RemoveEmptyEntries)[0];
+        }
+
+        return L["Profile.UserFallback"];
+    }
+
+    private void OnAuthSessionChanged()
+    {
+        _ = InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        AuthSession.Changed -= OnAuthSessionChanged;
     }
 
     private static string NormalizeCulture(string? culture)

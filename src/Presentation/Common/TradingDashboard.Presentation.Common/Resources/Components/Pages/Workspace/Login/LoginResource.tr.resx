@@ -4,34 +4,46 @@
   <resheader name="version"><value>2.0</value></resheader>
   <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
   <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
-  <data name="PageTitle" xml:space="preserve"><value>Login</value></data>
-  <data name="Heading.Title" xml:space="preserve"><value>Authentication</value></data>
-  <data name="Heading.Description" xml:space="preserve"><value>Sign in or create a new account to continue.</value></data>
-  <data name="Tabs.SignIn" xml:space="preserve"><value>Sign In</value></data>
-  <data name="Tabs.SignUp" xml:space="preserve"><value>Sign Up</value></data>
-  <data name="Fields.Identity" xml:space="preserve"><value>Username or Email</value></data>
-  <data name="Fields.Username" xml:space="preserve"><value>Username</value></data>
-  <data name="Fields.Email" xml:space="preserve"><value>Email</value></data>
-  <data name="Fields.Password" xml:space="preserve"><value>Password</value></data>
-  <data name="Actions.SignIn" xml:space="preserve"><value>Sign In</value></data>
-  <data name="Actions.SignUp" xml:space="preserve"><value>Sign Up</value></data>
-  <data name="Actions.ForgotPassword" xml:space="preserve"><value>Forgot Password</value></data>
-  <data name="Actions.SendActivationEmail" xml:space="preserve"><value>Send Activation Email</value></data>
-  <data name="Validation.IdentityRequired" xml:space="preserve"><value>Username or email is required.</value></data>
-  <data name="Validation.UsernameRequired" xml:space="preserve"><value>Username is required.</value></data>
-  <data name="Validation.EmailRequired" xml:space="preserve"><value>Email is required.</value></data>
-  <data name="Validation.PasswordRequired" xml:space="preserve"><value>Password is required.</value></data>
-  <data name="Validation.IdentityRequiredForAction" xml:space="preserve"><value>Enter your username or email first.</value></data>
-  <data name="States.EmailActivationRequired" xml:space="preserve"><value>Email activation required</value></data>
-  <data name="States.EmailActivationRequiredDescription" xml:space="preserve"><value>This local account cannot sign in until the email address is activated.</value></data>
-  <data name="Errors.MissingAccessToken" xml:space="preserve"><value>Authentication response does not contain an access token.</value></data>
-  <data name="Errors.AuthenticationFailedWithMessage" xml:space="preserve"><value>Authentication request failed. {0}</value></data>
-  <data name="Errors.ActionFailedWithMessage" xml:space="preserve"><value>Request failed. {0}</value></data>
-  <data name="Errors.RequestFailedWithStatus" xml:space="preserve"><value>Request failed with status {0}.</value></data>
-  <data name="Errors.EmptySuccessPayloadWithStatus" xml:space="preserve"><value>Authentication response is empty (status {0}).</value></data>
-  <data name="Errors.InvalidSuccessPayload" xml:space="preserve"><value>Authentication response is not valid JSON.</value></data>
-  <data name="Errors.InvalidSuccessPayloadWithMediaType" xml:space="preserve"><value>Authentication response is not valid JSON (content-type: {0}).</value></data>
-  <data name="Messages.AuthenticationSucceeded" xml:space="preserve"><value>Authentication succeeded.</value></data>
-  <data name="Messages.ForgotPasswordSubmitted" xml:space="preserve"><value>If your account is eligible, a password reset email has been sent.</value></data>
-  <data name="Messages.ActivationEmailSubmitted" xml:space="preserve"><value>If your account still needs activation, a new activation email has been sent.</value></data>
+  <data name="PageTitle" xml:space="preserve"><value>Giris</value></data>
+  <data name="PageTitleAuthenticated" xml:space="preserve"><value>Cikis</value></data>
+  <data name="Heading.Title" xml:space="preserve"><value>Kimlik dogrulama</value></data>
+  <data name="Heading.Description" xml:space="preserve"><value>Devam etmek icin giris yapin veya yeni hesap olusturun.</value></data>
+  <data name="Tabs.SignIn" xml:space="preserve"><value>Giris yap</value></data>
+  <data name="Tabs.SignUp" xml:space="preserve"><value>Kayit ol</value></data>
+  <data name="Fields.Identity" xml:space="preserve"><value>Kullanici adi veya e-posta</value></data>
+  <data name="Fields.Username" xml:space="preserve"><value>Kullanici adi</value></data>
+  <data name="Fields.Email" xml:space="preserve"><value>E-posta</value></data>
+  <data name="Fields.Password" xml:space="preserve"><value>Sifre</value></data>
+  <data name="Actions.SignIn" xml:space="preserve"><value>Giris yap</value></data>
+  <data name="Actions.SignUp" xml:space="preserve"><value>Kayit ol</value></data>
+  <data name="Actions.ForgotPassword" xml:space="preserve"><value>Sifremi unuttum</value></data>
+  <data name="Actions.SendActivationEmail" xml:space="preserve"><value>Aktivasyon e-postasi gonder</value></data>
+  <data name="Actions.Logout" xml:space="preserve"><value>Cikis yap</value></data>
+  <data name="Actions.OpenAdminDashboard" xml:space="preserve"><value>Admin panelini ac</value></data>
+  <data name="Actions.OpenTradingDashboard" xml:space="preserve"><value>Trading panelini ac</value></data>
+  <data name="Validation.IdentityRequired" xml:space="preserve"><value>Kullanici adi veya e-posta zorunludur.</value></data>
+  <data name="Validation.UsernameRequired" xml:space="preserve"><value>Kullanici adi zorunludur.</value></data>
+  <data name="Validation.EmailRequired" xml:space="preserve"><value>E-posta zorunludur.</value></data>
+  <data name="Validation.PasswordRequired" xml:space="preserve"><value>Sifre zorunludur.</value></data>
+  <data name="Validation.IdentityRequiredForAction" xml:space="preserve"><value>Once kullanici adi veya e-posta girin.</value></data>
+  <data name="States.EmailActivationRequired" xml:space="preserve"><value>E-posta aktivasyonu gerekli</value></data>
+  <data name="States.EmailActivationRequiredDescription" xml:space="preserve"><value>Bu yerel hesap, e-posta etkinlestirilmeden giris yapamaz.</value></data>
+  <data name="States.LoadingSession" xml:space="preserve"><value>Oturumunuz kontrol ediliyor...</value></data>
+  <data name="Authenticated.Title" xml:space="preserve"><value>Hesap</value></data>
+  <data name="Authenticated.Description" xml:space="preserve"><value>{0} olarak giris yaptiniz.</value></data>
+  <data name="Authenticated.UsernameLabel" xml:space="preserve"><value>Kullanici adi</value></data>
+  <data name="Authenticated.EmailLabel" xml:space="preserve"><value>E-posta</value></data>
+  <data name="Authenticated.RoleLabel" xml:space="preserve"><value>Rol</value></data>
+  <data name="Authenticated.FallbackUser" xml:space="preserve"><value>Kullanici</value></data>
+  <data name="Authenticated.EmptyValue" xml:space="preserve"><value>-</value></data>
+  <data name="Errors.MissingAccessToken" xml:space="preserve"><value>Kimlik dogrulama yaniti access token icermiyor.</value></data>
+  <data name="Errors.AuthenticationFailedWithMessage" xml:space="preserve"><value>Kimlik dogrulama istegi basarisiz oldu. {0}</value></data>
+  <data name="Errors.ActionFailedWithMessage" xml:space="preserve"><value>Istek basarisiz oldu. {0}</value></data>
+  <data name="Errors.RequestFailedWithStatus" xml:space="preserve"><value>Istek {0} durum kodu ile basarisiz oldu.</value></data>
+  <data name="Errors.EmptySuccessPayloadWithStatus" xml:space="preserve"><value>Kimlik dogrulama yaniti bos (durum {0}).</value></data>
+  <data name="Errors.InvalidSuccessPayload" xml:space="preserve"><value>Kimlik dogrulama yaniti gecerli JSON degil.</value></data>
+  <data name="Errors.InvalidSuccessPayloadWithMediaType" xml:space="preserve"><value>Kimlik dogrulama yaniti gecerli JSON degil (icerik tipi: {0}).</value></data>
+  <data name="Messages.AuthenticationSucceeded" xml:space="preserve"><value>Kimlik dogrulama basarili.</value></data>
+  <data name="Messages.ForgotPasswordSubmitted" xml:space="preserve"><value>Hesabiniz uygunsa sifre sifirlama e-postasi gonderildi.</value></data>
+  <data name="Messages.ActivationEmailSubmitted" xml:space="preserve"><value>Hesabiniz hala aktivasyon bekliyorsa yeni bir aktivasyon e-postasi gonderildi.</value></data>
 </root>
