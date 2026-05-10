@@ -4,7 +4,7 @@ stages:
   - deploy
 
 variables:
-  DOTNET_VERSION: "9.0"
+  DOTNET_VERSION: "10.0"
   DOTNET_CLI_TELEMETRY_OPTOUT: "1"
   DOTNET_NOLOGO: "true"
 
@@ -13,7 +13,7 @@ default:
 
 unit-tests:
   stage: test
-  image: mcr.microsoft.com/dotnet/sdk:9.0
+  image: mcr.microsoft.com/dotnet/sdk:10.0
   script:
     - dotnet restore test/TradingDashboard.UnitTests/TradingDashboard.UnitTests.csproj
     - dotnet test test/TradingDashboard.UnitTests/TradingDashboard.UnitTests.csproj -c Release --no-restore
@@ -22,7 +22,7 @@ unit-tests:
 
 build-release:
   stage: build
-  image: mcr.microsoft.com/dotnet/sdk:9.0
+  image: mcr.microsoft.com/dotnet/sdk:10.0
   script:
     - apt-get update && apt-get install -y zip
     # Restoring the whole solution pulls in the MAUI host, which needs workloads
@@ -64,15 +64,15 @@ deploy-production:
     - mkdir -p ~/.ssh
     - echo "$VPS_SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
-    - ssh-keyscan -H "$VPS_HOST" >> ~/.ssh/known_hosts
+    - ssh-keyscan -p "${VPS_SSH_PORT:-22}" -H "$VPS_HOST" >> ~/.ssh/known_hosts
   script:
-    - scp out/cot.zip "$VPS_USER@$VPS_HOST:/tmp/terminalprime-cot.zip"
-    - scp out/currency-strength.zip "$VPS_USER@$VPS_HOST:/tmp/terminalprime-currency-strength.zip"
-    - scp out/login.zip "$VPS_USER@$VPS_HOST:/tmp/terminalprime-login.zip"
-    - scp out/backgroundjobs.zip "$VPS_USER@$VPS_HOST:/tmp/terminalprime-backgroundjobs.zip"
-    - scp out/blazor.zip "$VPS_USER@$VPS_HOST:/tmp/terminalprime-blazor.zip"
+    - scp -P "${VPS_SSH_PORT:-22}" out/cot.zip "$VPS_USER@$VPS_HOST:/tmp/terminalprime-cot.zip"
+    - scp -P "${VPS_SSH_PORT:-22}" out/currency-strength.zip "$VPS_USER@$VPS_HOST:/tmp/terminalprime-currency-strength.zip"
+    - scp -P "${VPS_SSH_PORT:-22}" out/login.zip "$VPS_USER@$VPS_HOST:/tmp/terminalprime-login.zip"
+    - scp -P "${VPS_SSH_PORT:-22}" out/backgroundjobs.zip "$VPS_USER@$VPS_HOST:/tmp/terminalprime-backgroundjobs.zip"
+    - scp -P "${VPS_SSH_PORT:-22}" out/blazor.zip "$VPS_USER@$VPS_HOST:/tmp/terminalprime-blazor.zip"
     - |
-      ssh "$VPS_USER@$VPS_HOST" '
+      ssh -p "${VPS_SSH_PORT:-22}" "$VPS_USER@$VPS_HOST" '
       set -e
       sudo systemctl stop terminalprime-cot-collect || true
       sudo systemctl stop terminalprime-cot
