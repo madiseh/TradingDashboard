@@ -20,7 +20,10 @@ public sealed class GetCotReportSeriesHandler(
             ["asset-manager"] = new("asset-manager", "asset_mgr_positions_long", "asset_mgr_positions_short", "asset_mgr_positions_spread"),
             ["leveraged-money"] = new("leveraged-money", "lev_money_positions_long", "lev_money_positions_short", "lev_money_positions_spread"),
             ["other-reportables"] = new("other-reportables", "other_rept_positions_long", "other_rept_positions_short", "other_rept_positions_spread"),
-            ["nonreportable"] = new("nonreportable", "nonrept_positions_long_all", "nonrept_positions_short_all", null)
+            ["nonreportable"] = new("nonreportable", "nonrept_positions_long_all", "nonrept_positions_short_all", null),
+            ["producer-merchant"] = new("producer-merchant", "prod_merc_positions_long", "prod_merc_positions_short", null),
+            ["swap-dealers"] = new("swap-dealers", "swap_positions_long_all", "swap__positions_short_all", "swap__positions_spread_all"),
+            ["managed-money"] = new("managed-money", "m_money_positions_long_all", "m_money_positions_short_all", "m_money_positions_spread")
         };
 
     private static readonly IReadOnlyDictionary<string, ParticipantGroupDefinition> LegacyGroups =

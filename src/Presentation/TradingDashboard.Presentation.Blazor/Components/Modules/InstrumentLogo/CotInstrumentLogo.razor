@@ -1,0 +1,11 @@
+<span class="td-cot-instrument-logo @GetAssetClass()" title="@Name">
+    @if (!string.IsNullOrWhiteSpace(LogoUrl))
+    {
+        <img src="@LogoUrl"
+             alt="@AltText"
+             loading="lazy"
+             decoding="async"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex';" />
+    }
+    <span class="td-cot-instrument-logo-fallback">@FallbackText</span>
+</span>

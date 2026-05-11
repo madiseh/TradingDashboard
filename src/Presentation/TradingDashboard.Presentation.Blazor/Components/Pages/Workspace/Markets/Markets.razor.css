@@ -1,0 +1,10 @@
+.td-markets-instrument {
+    font-weight: 600;
+}
+
+.td-markets-instrument-cell {
+    min-width: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+}

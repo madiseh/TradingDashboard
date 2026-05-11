@@ -22,6 +22,15 @@ public partial class CotPositionChart
         new() { Key = "nonreportable", Label = "Non-Reportable", Color = "#be123c", IsSelected = true }
     ];
 
+    private static readonly IReadOnlyList<GroupSelectionViewModel> DisaggregatedGroups =
+    [
+        new() { Key = "producer-merchant", Label = "Producer/Merchant", Color = "#006d77", IsSelected = true },
+        new() { Key = "swap-dealers", Label = "Swap Dealers", Color = "#1d4ed8", IsSelected = true },
+        new() { Key = "managed-money", Label = "Managed Money", Color = "#b45309", IsSelected = true },
+        new() { Key = "other-reportables", Label = "Other Reportables", Color = "#7c3aed", IsSelected = true },
+        new() { Key = "nonreportable", Label = "Non-Reportable", Color = "#be123c", IsSelected = true }
+    ];
+
     private static readonly IReadOnlyList<GroupSelectionViewModel> LegacyGroups =
     [
         new() { Key = "non-commercial", Label = "Non-Commercial", Color = "#006d77", IsSelected = true },
@@ -64,6 +73,7 @@ public partial class CotPositionChart
     private List<GroupSelectionViewModel> _groupSelections = [];
     private List<DateOnly> _availableDates = [];
     private Dictionary<string, CotReportSeriesResponse> _seriesByGroup = new(StringComparer.OrdinalIgnoreCase);
+    private string? _instrumentType;
     private DateTime? _fromDate;
     private DateTime? _toDate;
 
@@ -119,10 +129,12 @@ public partial class CotPositionChart
         _activeMetricTabIndex = 0;
         _seriesByGroup.Clear();
         _availableDates.Clear();
-        _groupSelections = CreateDefaultGroupSelections();
+        _instrumentType = null;
 
         try
         {
+            await LoadInstrumentAsync();
+            _groupSelections = CreateDefaultGroupSelections();
             await LoadAvailableDatesAsync();
             SetDefaultRange();
             await LoadSeriesAsync();
@@ -135,7 +147,12 @@ public partial class CotPositionChart
 
     private List<GroupSelectionViewModel> CreateDefaultGroupSelections()
     {
-        var source = Model == CotReportModel.CotLegacy ? LegacyGroups : StandardGroups;
+        var source = Model == CotReportModel.CotLegacy
+            ? LegacyGroups
+            : IsDisaggregatedInstrumentType(_instrumentType)
+                ? DisaggregatedGroups
+                : StandardGroups;
+
         return source
             .Select(x => new GroupSelectionViewModel
             {
@@ -145,6 +162,33 @@ public partial class CotPositionChart
                 IsSelected = true
             })
             .ToList();
+    }
+
+    private async Task LoadInstrumentAsync()
+    {
+        if (Model == CotReportModel.CotLegacy)
+        {
+            return;
+        }
+
+        var client = HttpClientFactory.CreateClient(HttpClientNames.ApiCot);
+        var response = await client.GetAsync(BuildInstrumentUri());
+        if (!response.IsSuccessStatusCode)
+        {
+            return;
+        }
+
+        var payload = await response.Content.ReadFromJsonAsync<GetCotInstrumentBySlugResponse>();
+        _instrumentType = payload?.Type;
+    }
+
+    private static bool IsDisaggregatedInstrumentType(string? instrumentType)
+    {
+        return string.Equals(instrumentType, "Energies", StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(instrumentType, "Grains", StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(instrumentType, "Livestock & Dairy", StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(instrumentType, "Metals", StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(instrumentType, "Softs", StringComparison.OrdinalIgnoreCase);
     }
 
     private async Task LoadAvailableDatesAsync()
@@ -547,6 +591,12 @@ public partial class CotPositionChart
             .Replace("{instrumentSlug}", Uri.EscapeDataString(InstrumentSlug), StringComparison.Ordinal);
 
         return $"{route}?model={Uri.EscapeDataString(Model.ToContractValue())}";
+    }
+
+    private string BuildInstrumentUri()
+    {
+        return RoutePaths.Api.Cot.CotInstrumentBySlug
+            .Replace("{instrumentSlug}", Uri.EscapeDataString(InstrumentSlug), StringComparison.Ordinal);
     }
 
     private string BuildSeriesUri(string groupKey)

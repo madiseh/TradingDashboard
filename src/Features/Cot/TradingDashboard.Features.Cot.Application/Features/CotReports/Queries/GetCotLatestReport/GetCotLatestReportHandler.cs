@@ -96,6 +96,13 @@ public sealed class GetCotLatestReportHandler(
     private static IReadOnlyList<GetCotLatestReportCategoryResponse> BuildStandardCategories(
         IReadOnlyDictionary<string, string?> fields)
     {
+        if (fields.ContainsKey("prod_merc_positions_long") ||
+            fields.ContainsKey("m_money_positions_long_all") ||
+            fields.ContainsKey("swap_positions_long_all"))
+        {
+            return BuildDisaggregatedCategories(fields);
+        }
+
         return
         [
             new(
@@ -116,6 +123,44 @@ public sealed class GetCotLatestReportHandler(
                 BuildMetric(fields, "lev_money_positions_long", "pct_of_oi_lev_money_long", "traders_lev_money_long_all", "change_in_lev_money_long"),
                 BuildMetric(fields, "lev_money_positions_short", "pct_of_oi_lev_money_short", "traders_lev_money_short_all", "change_in_lev_money_short"),
                 BuildMetric(fields, "lev_money_positions_spread", "pct_of_oi_lev_money_spread", "traders_lev_money_spread", "change_in_lev_money_spread")),
+            new(
+                "other-reportables",
+                "Other Reportables",
+                BuildMetric(fields, "other_rept_positions_long", "pct_of_oi_other_rept_long", "traders_other_rept_long_all", "change_in_other_rept_long"),
+                BuildMetric(fields, "other_rept_positions_short", "pct_of_oi_other_rept_short", "traders_other_rept_short", "change_in_other_rept_short"),
+                BuildMetric(fields, "other_rept_positions_spread", "pct_of_oi_other_rept_spread", "traders_other_rept_spread", "change_in_other_rept_spread")),
+            new(
+                "nonreportable",
+                "Nonreportable Positions",
+                BuildMetric(fields, "nonrept_positions_long_all", "pct_of_oi_nonrept_long_all", null, "change_in_nonrept_long_all"),
+                BuildMetric(fields, "nonrept_positions_short_all", "pct_of_oi_nonrept_short_all", null, "change_in_nonrept_short_all"),
+                null)
+        ];
+    }
+
+    private static IReadOnlyList<GetCotLatestReportCategoryResponse> BuildDisaggregatedCategories(
+        IReadOnlyDictionary<string, string?> fields)
+    {
+        return
+        [
+            new(
+                "producer-merchant",
+                "Producer/Merchant",
+                BuildMetric(fields, "prod_merc_positions_long", "pct_of_oi_prod_merc_long", "traders_prod_merc_long_all", "change_in_prod_merc_long"),
+                BuildMetric(fields, "prod_merc_positions_short", "pct_of_oi_prod_merc_short", "traders_prod_merc_short_all", "change_in_prod_merc_short"),
+                null),
+            new(
+                "swap-dealers",
+                "Swap Dealers",
+                BuildMetric(fields, "swap_positions_long_all", "pct_of_oi_swap_long_all", "traders_swap_long_all", "change_in_swap_long_all"),
+                BuildMetric(fields, "swap__positions_short_all", "pct_of_oi_swap_short_all", "traders_swap_short_all", "change_in_swap_short_all"),
+                BuildMetric(fields, "swap__positions_spread_all", "pct_of_oi_swap_spread_all", "traders_swap_spread_all", "change_in_swap_spread_all")),
+            new(
+                "managed-money",
+                "Managed Money",
+                BuildMetric(fields, "m_money_positions_long_all", "pct_of_oi_m_money_long_all", "traders_m_money_long_all", "change_in_m_money_long_all"),
+                BuildMetric(fields, "m_money_positions_short_all", "pct_of_oi_m_money_short_all", "traders_m_money_short_all", "change_in_m_money_short_all"),
+                BuildMetric(fields, "m_money_positions_spread", "pct_of_oi_m_money_spread", "traders_m_money_spread_all", "change_in_m_money_spread")),
             new(
                 "other-reportables",
                 "Other Reportables",
