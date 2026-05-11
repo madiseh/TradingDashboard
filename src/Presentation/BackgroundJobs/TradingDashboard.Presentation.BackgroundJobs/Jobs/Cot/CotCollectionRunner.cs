@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using TradingDashboard.Application.Common.Models;
 using TradingDashboard.Domain.Entities;
+using TradingDashboard.Domain.Enums;
 using TradingDashboard.Infrastructure.Persistence.Implementation.Context;
 using TradingDashboard.Infrastructure.Persistence.Implementation.Seed;
 
@@ -67,13 +68,14 @@ public sealed class CotCollectionRunner
                     continue;
                 }
 
-                if (_options.Normal.Enabled && profile.IsNormalEnabled)
+                var normalOptions = ResolveNormalModeOptions(profile.Instrument.Type);
+                if (normalOptions.Enabled && profile.IsNormalEnabled)
                 {
                     var result = await CollectReportsAsync(
                         httpClient,
                         profile,
                         profile.NormalMarketAndExchangeName,
-                        _options.Normal,
+                        normalOptions,
                         CotReportModel.Cot,
                         storageRoot,
                         includeHistoricalBackfill,
@@ -295,6 +297,25 @@ public sealed class CotCollectionRunner
         }
 
         return aliases.ToArray();
+    }
+
+    private CotCollectorModeOptions ResolveNormalModeOptions(CotInstrumentType instrumentType)
+    {
+        if (IsTffInstrumentType(instrumentType) || string.IsNullOrWhiteSpace(_options.Disaggregated.Dataset))
+        {
+            return _options.Normal;
+        }
+
+        return _options.Disaggregated;
+    }
+
+    private static bool IsTffInstrumentType(CotInstrumentType instrumentType)
+    {
+        return instrumentType is
+            CotInstrumentType.Currencies or
+            CotInstrumentType.Cryptocurrencies or
+            CotInstrumentType.Indexes or
+            CotInstrumentType.TreasuriesAndRates;
     }
 
     private async Task<string?> TryResolveContractCodeAsync(

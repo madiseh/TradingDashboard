@@ -16,6 +16,9 @@ public partial class CotLongShortChart
         "dealer",
         "asset-manager",
         "leveraged-money",
+        "producer-merchant",
+        "swap-dealers",
+        "managed-money",
         "other-reportables",
         "nonreportable"
     ];
@@ -85,6 +88,9 @@ public partial class CotLongShortChart
             "dealer" => "Dealer",
             "asset-manager" => "Asset Manager",
             "leveraged-money" => "Leveraged Funds",
+            "producer-merchant" => "Producer/Merchant",
+            "swap-dealers" => "Swap Dealers",
+            "managed-money" => "Managed Money",
             "other-reportables" => "Other Reportables",
             "nonreportable" => "Non-Reportable",
             _ => category.Label

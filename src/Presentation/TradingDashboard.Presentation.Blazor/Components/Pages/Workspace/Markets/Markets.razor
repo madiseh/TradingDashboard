@@ -86,7 +86,12 @@
                                     @foreach (var item in _group.Items)
                                     {
                                         <tr>
-                                            <td>@item.Name</td>
+                                            <td class="td-markets-instrument">
+                                                <span class="td-markets-instrument-cell">
+                                                    <CotInstrumentLogo Slug="@item.Slug" Name="@item.Name" />
+                                                    <span>@item.Name</span>
+                                                </span>
+                                            </td>
                                             <td class="text-center">
                                                 <MudLink Href="@BuildCotLink(item.Slug)">@GetSelectedModelLabel()</MudLink>
                                             </td>
