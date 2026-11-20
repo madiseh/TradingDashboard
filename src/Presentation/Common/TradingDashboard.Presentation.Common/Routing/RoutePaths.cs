@@ -51,6 +51,8 @@ public static class RoutePaths
             public const string LoginBase = $"{ApiCommon.ApiVersionPrefix}/login";
             public const string SignUp = $"{LoginBase}/signup";
             public const string SignIn = $"{LoginBase}/signin";
+            public const string ForgotPassword = $"{LoginBase}/forgot-password";
+            public const string ResendActivationEmail = $"{LoginBase}/resend-activation-email";
             public const string Me = $"{LoginBase}/me";
             public const string GoogleStart = $"{LoginBase}/google/start";
             public const string GoogleCallback = $"{LoginBase}/google/callback";

@@ -1,0 +1,75 @@
+@using TradingDashboard.Presentation.Blazor.Services
+@implements IDisposable
+
+@code {
+    [Inject]
+    private AuthSession AuthSession { get; set; } = default!;
+
+    [Inject]
+    private IJSRuntime JSRuntime { get; set; } = default!;
+
+    private bool _hasRendered;
+    private bool _isRestoring;
+
+    protected override void OnInitialized()
+    {
+        AuthSession.Changed += OnAuthSessionChanged;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+        {
+            return;
+        }
+
+        _hasRendered = true;
+        _isRestoring = true;
+
+        try
+        {
+            var session = await JSRuntime.InvokeAsync<AuthSession.PersistedAuthSession?>("tradingDashboardAuth.get");
+            AuthSession.Restore(session);
+
+            if (!AuthSession.IsAuthenticated)
+            {
+                await JSRuntime.InvokeVoidAsync("tradingDashboardAuth.clear");
+            }
+        }
+        catch
+        {
+            AuthSession.MarkHydrated();
+        }
+        finally
+        {
+            _isRestoring = false;
+        }
+    }
+
+    private void OnAuthSessionChanged()
+    {
+        if (!_hasRendered || _isRestoring)
+        {
+            return;
+        }
+
+        _ = InvokeAsync(SyncBrowserStorageAsync);
+    }
+
+    private async Task SyncBrowserStorageAsync()
+    {
+        var session = AuthSession.Export();
+        if (session is null)
+        {
+            await JSRuntime.InvokeVoidAsync("tradingDashboardAuth.clear");
+            return;
+        }
+
+        await JSRuntime.InvokeVoidAsync("tradingDashboardAuth.set", session);
+    }
+
+    public void Dispose()
+    {
+        AuthSession.Changed -= OnAuthSessionChanged;
+    }
+}

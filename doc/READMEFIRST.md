@@ -17,6 +17,10 @@ This `doc` directory contains three main documentation groups:
 - Follow the documented governance process exactly.
 - After governance is clear, move on to `features/*`.
 - For features, use the `_template.md` file as the exact structure for new feature documentation.
+- Unit tests are mandatory for every feature change. No feature is complete unless it has unit test coverage.
+- Before implementing or finishing any feature work, always review `test/TradingDashboard.UnitTests/*` and verify whether coverage already exists for the related feature behavior.
+- For any change under `src/Features/*/*Application/Features/*`, add or update the matching test under `test/TradingDashboard.UnitTests/Features/*`.
+- If the required feature project is not referenced by `test/TradingDashboard.UnitTests/TradingDashboard.UnitTests.csproj`, add the needed `ProjectReference` first and then add the unit tests.
 - Everything must proceed step-by-step, and if required documentation is missing, do not make assumptions.
 
 

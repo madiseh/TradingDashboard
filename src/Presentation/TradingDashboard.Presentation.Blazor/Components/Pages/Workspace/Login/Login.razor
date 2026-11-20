@@ -1,83 +1,156 @@
 @page "/login"
 @inherits PageComponentBase
+@using TradingDashboard.Presentation.Common.Resources.Components.Pages.Workspace.Login
 
-<PageTitle>Login</PageTitle>
+<PageTitle>@(AuthSession.IsAuthenticated ? L["PageTitleAuthenticated"] : L["PageTitle"])</PageTitle>
 
 <MudContainer MaxWidth="MaxWidth.Large" Class="py-12">
     <MudGrid Spacing="4" Justify="Justify.Center">
         <MudItem xs="12" md="10" lg="8">
             <MudPaper Class="pa-6 mx-auto td-login-panel" Elevation="1">
-                <MudText Typo="Typo.h4">Authentication</MudText>
-                <MudText Typo="Typo.body2" Class="mt-1 mb-4">Sign in or create a new account to continue.</MudText>
-
-                <MudTabs Rounded="true" Elevation="0" @bind-ActivePanelIndex="_activeTabIndex">
-                    <MudTabPanel Text="Sign In">
-                        <MudForm @ref="_signInForm" Model="_signInModel">
-                            <MudTextField T="string"
-                                          @bind-Value="_signInModel.Identity"
-                                          For="@(() => _signInModel.Identity)"
-                                          Label="Username or Email"
-                                          Variant="Variant.Outlined"
-                                          Required="true"
-                                          RequiredError="Username or email is required."
-                                          Immediate="true" />
-                            <MudTextField T="string"
-                                          @bind-Value="_signInModel.Password"
-                                          For="@(() => _signInModel.Password)"
-                                          Label="Password"
-                                          Variant="Variant.Outlined"
-                                          Required="true"
-                                          RequiredError="Password is required."
-                                          InputType="InputType.Password"
-                                          Immediate="true"
-                                          Class="mt-2" />
-                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SignInAsync" Disabled="IsSignInDisabled" Class="mt-4">
-                                Sign In
-                            </MudButton>
-                        </MudForm>
-                    </MudTabPanel>
-
-                    <MudTabPanel Text="Sign Up">
-                        <MudForm @ref="_signUpForm" Model="_signUpModel">
-                            <MudTextField T="string"
-                                          @bind-Value="_signUpModel.Username"
-                                          For="@(() => _signUpModel.Username)"
-                                          Label="Username"
-                                          Variant="Variant.Outlined"
-                                          Required="true"
-                                          RequiredError="Username is required."
-                                          Immediate="true" />
-                            <MudTextField T="string"
-                                          @bind-Value="_signUpModel.Email"
-                                          For="@(() => _signUpModel.Email)"
-                                          Label="Email"
-                                          Variant="Variant.Outlined"
-                                          Required="true"
-                                          RequiredError="Email is required."
-                                          Immediate="true"
-                                          Class="mt-2" />
-                            <MudTextField T="string"
-                                          @bind-Value="_signUpModel.Password"
-                                          For="@(() => _signUpModel.Password)"
-                                          Label="Password"
-                                          Variant="Variant.Outlined"
-                                          Required="true"
-                                          RequiredError="Password is required."
-                                          InputType="InputType.Password"
-                                          Immediate="true"
-                                          Class="mt-2" />
-                            <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="SignUpAsync" Disabled="IsSignUpDisabled" Class="mt-4">
-                                Sign Up
-                            </MudButton>
-                        </MudForm>
-                    </MudTabPanel>
-                </MudTabs>
-
-                @if (!string.IsNullOrWhiteSpace(_errorMessage))
+                @if (!AuthSession.IsHydrated)
                 {
-                    <MudAlert Severity="Severity.Error" Variant="Variant.Outlined" Dense="true" Class="mt-4">
-                        @_errorMessage
-                    </MudAlert>
+                    <div class="text-center py-8">
+                        <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+                        <MudText Typo="Typo.body2" Class="mt-4">@L["States.LoadingSession"]</MudText>
+                    </div>
+                }
+                else if (AuthSession.IsAuthenticated)
+                {
+                    <MudText Typo="Typo.h4">@L["Authenticated.Title"]</MudText>
+                    <MudText Typo="Typo.body2" Class="mt-1 mb-4">@L["Authenticated.Description", AuthenticatedDisplayName]</MudText>
+
+                    <MudPaper Class="pa-4 td-login-panel__summary" Variant="Variant.Outlined">
+                        <MudText Typo="Typo.subtitle2">@L["Authenticated.UsernameLabel"]</MudText>
+                        <MudText Typo="Typo.body1" Class="mb-3">@AuthenticatedDisplayName</MudText>
+
+                        <MudText Typo="Typo.subtitle2">@L["Authenticated.EmailLabel"]</MudText>
+                        <MudText Typo="Typo.body1" Class="mb-3">@AuthenticatedEmail</MudText>
+
+                        <MudText Typo="Typo.subtitle2">@L["Authenticated.RoleLabel"]</MudText>
+                        <MudText Typo="Typo.body1">@AuthenticatedRole</MudText>
+                    </MudPaper>
+
+                    <div class="td-login-panel__actions mt-4">
+                        @if (CanOpenAdminDashboard)
+                        {
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="@RoutePaths.Ui.Admin">
+                                @L["Actions.OpenAdminDashboard"]
+                            </MudButton>
+                        }
+
+                        @if (CanOpenTradingDashboard)
+                        {
+                            <MudButton Variant="Variant.Outlined" Color="Color.Primary" Href="@RoutePaths.Ui.TradingPanel">
+                                @L["Actions.OpenTradingDashboard"]
+                            </MudButton>
+                        }
+
+                        <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="LogoutAsync">
+                            @L["Actions.Logout"]
+                        </MudButton>
+                    </div>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h4">@L["Heading.Title"]</MudText>
+                    <MudText Typo="Typo.body2" Class="mt-1 mb-4">@L["Heading.Description"]</MudText>
+
+                    <MudTabs Rounded="true" Elevation="0" @bind-ActivePanelIndex="_activeTabIndex">
+                        <MudTabPanel Text="@L["Tabs.SignIn"]">
+                            <MudForm @ref="_signInForm" Model="_signInModel">
+                                <MudTextField T="string"
+                                              @bind-Value="_signInModel.Identity"
+                                              For="@(() => _signInModel.Identity)"
+                                              Label="@L["Fields.Identity"]"
+                                              ShrinkLabel="true"
+                                              Variant="Variant.Outlined"
+                                              Required="true"
+                                              RequiredError="@L["Validation.IdentityRequired"]"
+                                              Immediate="true" />
+                                <MudTextField T="string"
+                                              @bind-Value="_signInModel.Password"
+                                              For="@(() => _signInModel.Password)"
+                                              Label="@L["Fields.Password"]"
+                                              ShrinkLabel="true"
+                                              Variant="Variant.Outlined"
+                                              Required="true"
+                                              RequiredError="@L["Validation.PasswordRequired"]"
+                                              InputType="InputType.Password"
+                                              Immediate="true"
+                                              Class="mt-2" />
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SignInAsync" Disabled="IsSignInDisabled" Class="mt-4">
+                                    @L["Actions.SignIn"]
+                                </MudButton>
+
+                                <div class="mt-2">
+                                    <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="ForgotPasswordAsync" Disabled="IsIdentityActionDisabled">
+                                        @L["Actions.ForgotPassword"]
+                                    </MudButton>
+
+                                    @if (_canSendActivationEmail)
+                                    {
+                                        <MudButton Variant="Variant.Text" Color="Color.Secondary" OnClick="SendActivationEmailAsync" Disabled="IsIdentityActionDisabled" Class="ml-2">
+                                            @L["Actions.SendActivationEmail"]
+                                        </MudButton>
+                                    }
+                                </div>
+                            </MudForm>
+
+                            @if (_canSendActivationEmail)
+                            {
+                                <MudAlert Severity="Severity.Warning" Variant="Variant.Outlined" Dense="true" Class="mt-4">
+                                    <strong>@L["States.EmailActivationRequired"]</strong>
+                                    <div>@L["States.EmailActivationRequiredDescription"]</div>
+                                </MudAlert>
+                            }
+                        </MudTabPanel>
+
+                        <MudTabPanel Text="@L["Tabs.SignUp"]">
+                            <MudForm @ref="_signUpForm" Model="_signUpModel">
+                                <MudTextField T="string"
+                                              @bind-Value="_signUpModel.Username"
+                                              For="@(() => _signUpModel.Username)"
+                                              Label="@L["Fields.Username"]"
+                                              ShrinkLabel="true"
+                                              Variant="Variant.Outlined"
+                                              Required="true"
+                                              RequiredError="@L["Validation.UsernameRequired"]"
+                                              Immediate="true" />
+                                <MudTextField T="string"
+                                              @bind-Value="_signUpModel.Email"
+                                              For="@(() => _signUpModel.Email)"
+                                              Label="@L["Fields.Email"]"
+                                              ShrinkLabel="true"
+                                              Variant="Variant.Outlined"
+                                              Required="true"
+                                              RequiredError="@L["Validation.EmailRequired"]"
+                                              Immediate="true"
+                                              Class="mt-2" />
+                                <MudTextField T="string"
+                                              @bind-Value="_signUpModel.Password"
+                                              For="@(() => _signUpModel.Password)"
+                                              Label="@L["Fields.Password"]"
+                                              ShrinkLabel="true"
+                                              Variant="Variant.Outlined"
+                                              Required="true"
+                                              RequiredError="@L["Validation.PasswordRequired"]"
+                                              InputType="InputType.Password"
+                                              Immediate="true"
+                                              Class="mt-2" />
+                                <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="SignUpAsync" Disabled="IsSignUpDisabled" Class="mt-4">
+                                    @L["Actions.SignUp"]
+                                </MudButton>
+                            </MudForm>
+                        </MudTabPanel>
+                    </MudTabs>
+
+                    @if (!string.IsNullOrWhiteSpace(_errorMessage))
+                    {
+                        <MudAlert Severity="Severity.Error" Variant="Variant.Outlined" Dense="true" Class="mt-4">
+                            @_errorMessage
+                        </MudAlert>
+                    }
                 }
             </MudPaper>
         </MudItem>

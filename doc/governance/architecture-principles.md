@@ -23,6 +23,7 @@
 4. Presentation
 - API or UI endpoints.
 - Depends on Application contracts only.
+- The API host composition root may reference Infrastructure only to configure dependency injection and startup migrations; endpoint handlers must not reference Infrastructure.
 - Blazor UI must use MudBlazor as the component library.
 - Shared presentation contracts (e.g., route constants) must live in `TradingDashboard.Presentation.Common`.
 - Controllers/endpoints must delegate use-case execution to Application via MediatR; no business logic in controllers.
@@ -94,6 +95,8 @@ Application/
 ## Microservice Readiness
 
 - Keep feature modules cohesive.
+- COT, CurrencyStrength, Login, and UserManagement share one project per Domain, Application, Infrastructure, and API layer. Keep their source folders, namespaces, and endpoint groups separated by feature.
+- Login authentication and admin-user use cases belong to the UserManagement domain and persistence boundary where they share user identity data.
 - Avoid shared mutable state across modules.
 - Define explicit contracts per module.
 - Use integration boundaries that can be extracted later.

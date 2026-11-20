@@ -88,7 +88,12 @@
                                             @foreach (var item in group.Items)
                                             {
                                                 <tr>
-                                                    <td class="td-cot-directory-instrument">@item.Name</td>
+                                                    <td class="td-cot-directory-instrument">
+                                                        <span class="td-cot-directory-instrument-cell">
+                                                            <CotInstrumentLogo Slug="@item.Slug" Name="@item.Name" />
+                                                            <span>@item.Name</span>
+                                                        </span>
+                                                    </td>
                                                     <td class="text-center">
                                                         @if (HasModel(item, CotReportModel.CotLegacy))
                                                         {

@@ -1,4 +1,4 @@
-# Project Structure (Planned)
+# Project Structure
 
 ```text
 TradingDashboard/
@@ -7,12 +7,15 @@ TradingDashboard/
 |-- src/
 |   |-- Domain/
 |   |   |-- TradingDashboard.Domain.Abstraction/
-|   |   `-- TradingDashboard.Domain/
+|   |   |-- TradingDashboard.Domain.Common/
+|   |   `-- TradingDashboard.Features.Domain/
 |   |-- Application/
-|   |   `-- TradingDashboard.Application/
+|   |   |-- TradingDashboard.Application/
+|   |   `-- TradingDashboard.Features.Application/
 |   |-- Infrastructure/
 |   |   |-- Implementation/
-|   |   |   `-- TradingDashboard.Infrastructure/
+|   |   |   |-- TradingDashboard.Infrastructure/
+|   |   |   `-- TradingDashboard.Features.Infrastructure/
 |   |   `-- Persistence/
 |   |       |-- TradingDashboard.Infrastructure.Persistence.Common/
 |   |       |-- TradingDashboard.Infrastructure.Persistence.Implementation/
@@ -29,9 +32,11 @@ TradingDashboard/
 
 ## Notes
 
-- Project folders under `src` and `test` are placeholders for now.
+- `TradingDashboard.Features.Domain`, `TradingDashboard.Features.Application`, and `TradingDashboard.Features.Infrastructure` each contain the COT, CurrencyStrength, Login, and UserManagement feature folders.
+- The feature folders and namespaces remain separate inside these shared layer projects.
+- Login authentication and admin-user use cases use the UserManagement domain and infrastructure; their API endpoints remain grouped under the Login and UserManagement feature folders.
+- `TradingDashboard.Presentation.Api` is the single API host and maps the endpoint groups for COT, CurrencyStrength, Login, and UserManagement.
 - Documentation folders under `doc` are organized into `governance`, `features`, and `uiComponent`.
-- No implementation project is created yet.
 - Naming follows `TradingDashboard.<Layer>` convention.
 - Blazor UI consumes data from `TradingDashboard.Presentation.Api` only.
 - MAUI Hybrid host consumes the same API surface through named `HttpClient` registrations.

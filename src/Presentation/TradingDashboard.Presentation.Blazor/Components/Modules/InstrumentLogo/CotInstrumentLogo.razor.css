@@ -1,0 +1,47 @@
+.td-cot-instrument-logo {
+    width: 2rem;
+    height: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 2rem;
+    overflow: hidden;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid rgba(34, 38, 46, 0.12);
+    box-shadow: 0 4px 12px rgba(34, 38, 46, 0.08);
+}
+
+.td-cot-instrument-logo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.td-cot-instrument-logo--crypto img {
+    width: 78%;
+    height: 78%;
+    object-fit: contain;
+}
+
+.td-cot-instrument-logo--symbol img {
+    object-fit: contain;
+}
+
+.td-cot-instrument-logo-fallback {
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: #4f46e5;
+    font-size: 0.625rem;
+    font-weight: 800;
+    line-height: 1;
+    background: #f4f3ff;
+}
+
+.td-cot-instrument-logo--fallback .td-cot-instrument-logo-fallback {
+    display: inline-flex;
+}

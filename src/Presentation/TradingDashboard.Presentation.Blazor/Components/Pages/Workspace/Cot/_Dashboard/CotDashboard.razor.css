@@ -37,6 +37,13 @@
     font-weight: 600;
 }
 
+.td-cot-directory-instrument-cell {
+    min-width: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+}
+
 .td-cot-directory-icon-action {
     border-radius: 14px;
 }

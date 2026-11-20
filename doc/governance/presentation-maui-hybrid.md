@@ -31,7 +31,7 @@ Add a new Presentation host for `.NET MAUI Blazor Hybrid` alongside the existing
 ## Initial Implementation Plan
 
 1. Create `TradingDashboard.Presentation.MauiHybrid` under `src/Presentation/`.
-2. Enable `net9.0-android`, `net9.0-ios`, and `net9.0-windows10.0.19041.0`.
+2. Enable `net10.0-android`, `net10.0-ios`, and `net10.0-windows10.0.19041.0`.
 3. Add a Blazor Hybrid shell with a reusable root component and routing entry.
 4. Reuse presentation contracts/resources where compatibility is already available.
 5. Keep the first iteration focused on a stable host shell and API connectivity.

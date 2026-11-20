@@ -18,6 +18,9 @@
   <data name="Actions.Login" xml:space="preserve">
     <value>ورود</value>
   </data>
+  <data name="Actions.Logout" xml:space="preserve">
+    <value>خروج</value>
+  </data>
   <data name="Actions.Search" xml:space="preserve">
     <value>جستجو</value>
   </data>
@@ -84,6 +87,9 @@
   <data name="Menu.CurrencyStrength" xml:space="preserve">
     <value>قدرت ارزها</value>
   </data>
+  <data name="Menu.AdminDashboard" xml:space="preserve">
+    <value>داشبورد ادمین</value>
+  </data>
   <data name="Menu.Educate" xml:space="preserve">
     <value>آموزش</value>
   </data>
@@ -99,6 +105,15 @@
   <data name="Menu.Pricing" xml:space="preserve">
     <value>قیمت‌گذاری</value>
   </data>
+  <data name="Profile.MenuAriaLabel" xml:space="preserve">
+    <value>باز کردن منوی کاربر</value>
+  </data>
+  <data name="Profile.UserFallback" xml:space="preserve">
+    <value>کاربر</value>
+  </data>
+  <data name="Profile.WelcomeUser" xml:space="preserve">
+    <value>خوش آمدی {0}</value>
+  </data>
   <data name="Menu.Serve" xml:space="preserve">
     <value>خدمات</value>
   </data>
@@ -107,6 +122,9 @@
   </data>
   <data name="Menu.SignUp" xml:space="preserve">
     <value>ثبت نام</value>
+  </data>
+  <data name="Menu.TradingDashboard" xml:space="preserve">
+    <value>داشبورد تریدینگ</value>
   </data>
   <data name="Menu.WeeklyReview" xml:space="preserve">
     <value>مرور هفتگی</value>

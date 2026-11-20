@@ -48,7 +48,7 @@ Published app files are deployed under:
 /var/www/terminalprime/
 ```
 
-The current CI/CD pipeline deploys application files into these folders:
+The deployment pipeline keeps these application folders; the legacy API folders are retained for rollback during cutover:
 
 - `/var/www/terminalprime/backgroundjobs`
 - `/var/www/terminalprime/blazor`
@@ -56,15 +56,15 @@ The current CI/CD pipeline deploys application files into these folders:
 - `/var/www/terminalprime/currency-strength`
 - `/var/www/terminalprime/login`
 
-## Known Service Mapping
+## Target Service Mapping After Shared API Cutover
 
 | Service unit | Deploy folder | Env file | Status |
 | --- | --- | --- | --- |
 | `terminalprime-backgroundjobs.service` | `/var/www/terminalprime/backgroundjobs` | `/etc/terminalprime/backgroundjobs.env` | Deploy folder confirmed by CI, env filename confirmed on server, exact unit reference should be checked inside the unit file when editing. |
 | `terminalprime-blazor.service` | `/var/www/terminalprime/blazor` | `/etc/terminalprime/blazor.env` | Deploy folder confirmed by CI, env filename confirmed on server, exact unit reference should be checked inside the unit file when editing. |
-| `terminalprime-cot.service` | `/var/www/terminalprime/cot` | `/etc/terminalprime/cot.env` | Deploy folder confirmed by CI, env filename confirmed on server, exact unit reference should be checked inside the unit file when editing. |
-| `terminalprime-currency-strength.service` | `/var/www/terminalprime/currency-strength` | `/etc/terminalprime/currency-strength.env` | Deploy folder confirmed by CI, env filename confirmed on server, exact unit reference should be checked inside the unit file when editing. |
-| `terminalprime-login.service` | `/var/www/terminalprime/login` | `/etc/terminalprime/login.env` | Fully confirmed by server screenshot. |
+| `terminalprime-cot.service` | `/var/www/terminalprime/cot` | `/etc/terminalprime/cot.env` | Legacy API service; stop after the shared API cutover. |
+| `terminalprime-currency-strength.service` | `/var/www/terminalprime/currency-strength` | `/etc/terminalprime/currency-strength.env` | Legacy API service; stop after the shared API cutover. |
+| `terminalprime-login.service` | `/var/www/terminalprime/login` | `/etc/terminalprime/login.env` | Runs the shared API after cutover; the published assembly keeps the current DLL entry point. |
 
 ## Confirmed Login Service Example
 
@@ -79,6 +79,18 @@ User=terminalprime
 Group=terminalprime
 ```
 
+Before running the manual production deployment job, update `/etc/terminalprime/login.env` to include the settings formerly supplied by the COT and CurrencyStrength services:
+
+- `ConnectionStrings__CotDatabase`
+- `ConnectionStrings__UserManagementDatabase`
+- `Jwt__Issuer`, `Jwt__Audience`, and `Jwt__SigningKey`
+- `Authentication__Google__ClientId` and `Authentication__Google__ClientSecret` when Google sign-in is enabled
+- `CotRawStorage__Root` and `CurrencyStrengthStorage__Root` pointing to the existing data directories
+
+Point the COT and CurrencyStrength reverse-proxy hosts at the shared API service, then stop the legacy COT and CurrencyStrength API units. Keep the old environment files and deployment folders until the cutover is verified.
+
+The shared API continues to serve the current route prefixes (`/api/v1/cot`, `/api/v1/currency-strength`, and `/api/v1/login`).
+
 This confirms:
 
 1. The deployed binaries live under `/var/www/terminalprime/login`.
@@ -89,15 +101,11 @@ This confirms:
 
 The repository deployment pipeline in `.gitlab-ci.yml` currently:
 
-1. Publishes five deployable apps: `cot`, `currency-strength`, `login`, `backgroundjobs`, and `blazor`.
+1. Publishes three deployable apps: the shared API, `backgroundjobs`, and `blazor`.
 2. Uploads zip files to `/tmp/terminalprime-*.zip` on the VPS.
-3. Unzips each artifact into `/var/www/terminalprime/<app-name>`.
-4. Restarts the main production services:
-   - `terminalprime-cot`
-   - `terminalprime-backgroundjobs`
-   - `terminalprime-currency-strength`
-   - `terminalprime-login`
-   - `terminalprime-blazor`
+3. Unzips the shared API into `/var/www/terminalprime/login`; the existing login unit name and DLL entry point are retained.
+4. Keeps the production deployment job manual until the shared API environment and reverse-proxy cutover prerequisites above are complete.
+5. Restarts `terminalprime-backgroundjobs`, `terminalprime-login`, and `terminalprime-blazor`, and stops the legacy COT and CurrencyStrength API units.
 
 ## Legacy / Transitional Note
 

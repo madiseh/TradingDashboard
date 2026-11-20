@@ -29,6 +29,12 @@ if (!document.RootElement.TryGetProperty("components", out var components) ||
 }
 
 var schemaNames = schemas.EnumerateObject().Select(x => x.Name).OrderBy(x => x, StringComparer.Ordinal).ToArray();
+if (options.Tags.Length > 0)
+{
+    var referencedSchemas = FindSchemasForTags(document.RootElement, options.Tags);
+    schemaNames = schemaNames.Where(referencedSchemas.Contains).ToArray();
+}
+
 foreach (var schemaName in schemaNames)
 {
     var schema = schemas.GetProperty(schemaName);
@@ -101,12 +107,13 @@ foreach (var schemaName in schemaNames)
 
 return;
 
-static (string OpenApiPath, string OutputDirectory, string Namespace, string[] PreserveFiles) ParseArgs(string[] args)
+static (string OpenApiPath, string OutputDirectory, string Namespace, string[] PreserveFiles, string[] Tags) ParseArgs(string[] args)
 {
     string? openApiPath = null;
     string? outputDirectory = null;
     string? ns = null;
     var preserve = new List<string>();
+    var tags = new List<string>();
 
     for (var i = 0; i < args.Length; i++)
     {
@@ -134,6 +141,12 @@ static (string OpenApiPath, string OutputDirectory, string Namespace, string[] P
                     preserve.Add(value);
                 }
                 break;
+            case "--tag":
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    tags.Add(value);
+                }
+                break;
         }
     }
 
@@ -144,7 +157,77 @@ static (string OpenApiPath, string OutputDirectory, string Namespace, string[] P
         throw new ArgumentException("Required arguments: --openapi <path> --output <dir> --namespace <name>");
     }
 
-    return (Path.GetFullPath(openApiPath), Path.GetFullPath(outputDirectory), ns, preserve.ToArray());
+    return (Path.GetFullPath(openApiPath), Path.GetFullPath(outputDirectory), ns, preserve.ToArray(), tags.ToArray());
+}
+
+static HashSet<string> FindSchemasForTags(JsonElement document, string[] tags)
+{
+    var schemaNames = new HashSet<string>(StringComparer.Ordinal);
+    if (!document.TryGetProperty("paths", out var paths) || paths.ValueKind != JsonValueKind.Object)
+    {
+        return schemaNames;
+    }
+
+    var pendingReferences = new Queue<string>();
+    var wantedTags = new HashSet<string>(tags, StringComparer.OrdinalIgnoreCase);
+    foreach (var path in paths.EnumerateObject())
+    {
+        foreach (var operation in path.Value.EnumerateObject())
+        {
+            if (operation.Value.ValueKind != JsonValueKind.Object ||
+                !operation.Value.TryGetProperty("tags", out var operationTags) ||
+                operationTags.ValueKind != JsonValueKind.Array ||
+                !operationTags.EnumerateArray().Any(tag => wantedTags.Contains(tag.GetString() ?? string.Empty)))
+            {
+                continue;
+            }
+
+            CollectReferences(operation.Value, pendingReferences);
+        }
+    }
+
+    if (!document.TryGetProperty("components", out var components) ||
+        !components.TryGetProperty("schemas", out var schemas))
+    {
+        return schemaNames;
+    }
+
+    while (pendingReferences.Count > 0)
+    {
+        var reference = pendingReferences.Dequeue();
+        var schemaName = reference.Split('/').LastOrDefault() ?? string.Empty;
+        if (string.IsNullOrEmpty(schemaName) || !schemaNames.Add(schemaName) || !schemas.TryGetProperty(schemaName, out var schema))
+        {
+            continue;
+        }
+
+        CollectReferences(schema, pendingReferences);
+    }
+
+    return schemaNames;
+}
+
+static void CollectReferences(JsonElement element, Queue<string> references)
+{
+    if (element.ValueKind == JsonValueKind.Object)
+    {
+        if (element.TryGetProperty("$ref", out var reference) && reference.ValueKind == JsonValueKind.String)
+        {
+            references.Enqueue(reference.GetString() ?? string.Empty);
+        }
+
+        foreach (var property in element.EnumerateObject())
+        {
+            CollectReferences(property.Value, references);
+        }
+    }
+    else if (element.ValueKind == JsonValueKind.Array)
+    {
+        foreach (var item in element.EnumerateArray())
+        {
+            CollectReferences(item, references);
+        }
+    }
 }
 
 static IEnumerable<string> BuildPropertyLines(string jsonName, JsonElement schema, HashSet<string> required)

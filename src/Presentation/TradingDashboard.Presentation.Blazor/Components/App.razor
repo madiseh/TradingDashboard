@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="application-name" content="@SiteBranding.BrandName" />
     <meta name="apple-mobile-web-app-title" content="@SiteBranding.BrandName" />
+    <meta name="google-site-verification" content="@SiteBranding.GoogleSiteVerificationToken" />
     <meta name="theme-color" content="#122C57" />
     <base href="/" />
     <link rel="icon" type="image/svg+xml" href="@SiteBranding.Image("logo/favicon.svg")" />
@@ -23,8 +24,29 @@
 </head>
 
 <body>
+    <AuthSessionPersistence @rendermode="InteractiveServer" />
     <Routes @rendermode="InteractiveServer" />
     <script>
+        window.tradingDashboardAuth = {
+            get: function () {
+                const raw = window.localStorage.getItem("td.auth.session");
+                return raw ? JSON.parse(raw) : null;
+            },
+
+            set: function (session) {
+                if (!session) {
+                    window.localStorage.removeItem("td.auth.session");
+                    return;
+                }
+
+                window.localStorage.setItem("td.auth.session", JSON.stringify(session));
+            },
+
+            clear: function () {
+                window.localStorage.removeItem("td.auth.session");
+            }
+        };
+
         window.tradingDashboardCulture = {
             set: function (culture) {
                 document.cookie = ".AspNetCore.Culture=c=" + culture + "|uic=" + culture + "; path=/; max-age=31536000; samesite=lax";

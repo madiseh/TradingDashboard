@@ -4,7 +4,7 @@ using TradingDashboard.Presentation.Common.Resources.Components.Layout.AdminLayo
 
 namespace TradingDashboard.Presentation.Blazor.Components.Pages.Admin._Layout;
 
-public partial class AdminLayout
+public partial class AdminLayout : IDisposable
 {
     [Inject]
     private NavigationManager NavigationManager { get; set; } = default!;
@@ -28,6 +28,11 @@ public partial class AdminLayout
         new(L["Nav.Analytics"], null, "bi bi-bar-chart-fill", false)
     ];
 
+    protected override void OnInitialized()
+    {
+        AuthSession.Changed += OnAuthSessionChanged;
+    }
+
     protected override void OnParametersSet()
     {
         _canRender = EnsureAuthorized();
@@ -35,6 +40,11 @@ public partial class AdminLayout
 
     private bool EnsureAuthorized()
     {
+        if (!AuthSession.IsHydrated)
+        {
+            return false;
+        }
+
         if (!AuthSession.IsAuthenticated)
         {
             var currentPath = NavigationManager.ToAbsoluteUri(NavigationManager.Uri).PathAndQuery;
@@ -55,6 +65,16 @@ public partial class AdminLayout
     {
         AuthSession.Clear();
         NavigationManager.NavigateTo(RoutePaths.Ui.Home);
+    }
+
+    private void OnAuthSessionChanged()
+    {
+        _ = InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        AuthSession.Changed -= OnAuthSessionChanged;
     }
 
     private sealed record PortalNavigationItem(string Label, string? Href, string Icon, bool IsEnabled);

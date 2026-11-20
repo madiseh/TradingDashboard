@@ -18,6 +18,9 @@
   <data name="Actions.Login" xml:space="preserve">
     <value>Giris yap</value>
   </data>
+  <data name="Actions.Logout" xml:space="preserve">
+    <value>Cikis yap</value>
+  </data>
   <data name="Actions.Search" xml:space="preserve">
     <value>Ara</value>
   </data>
@@ -84,6 +87,9 @@
   <data name="Menu.CurrencyStrength" xml:space="preserve">
     <value>Para birimi gucu</value>
   </data>
+  <data name="Menu.AdminDashboard" xml:space="preserve">
+    <value>Admin Paneli</value>
+  </data>
   <data name="Menu.Educate" xml:space="preserve">
     <value>Egitim</value>
   </data>
@@ -99,6 +105,15 @@
   <data name="Menu.Pricing" xml:space="preserve">
     <value>Fiyatlandirma</value>
   </data>
+  <data name="Profile.MenuAriaLabel" xml:space="preserve">
+    <value>Kullanici menusunu ac</value>
+  </data>
+  <data name="Profile.UserFallback" xml:space="preserve">
+    <value>Kullanici</value>
+  </data>
+  <data name="Profile.WelcomeUser" xml:space="preserve">
+    <value>Hos geldin {0}</value>
+  </data>
   <data name="Menu.Serve" xml:space="preserve">
     <value>Hizmetler</value>
   </data>
@@ -107,6 +122,9 @@
   </data>
   <data name="Menu.SignUp" xml:space="preserve">
     <value>Kayit ol</value>
+  </data>
+  <data name="Menu.TradingDashboard" xml:space="preserve">
+    <value>Trading Paneli</value>
   </data>
   <data name="Menu.WeeklyReview" xml:space="preserve">
     <value>Haftalik inceleme</value>

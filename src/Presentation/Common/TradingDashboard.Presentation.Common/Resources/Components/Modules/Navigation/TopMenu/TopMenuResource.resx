@@ -18,6 +18,9 @@
   <data name="Actions.Login" xml:space="preserve">
     <value>Login</value>
   </data>
+  <data name="Actions.Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
   <data name="Actions.Search" xml:space="preserve">
     <value>Search</value>
   </data>
@@ -84,6 +87,9 @@
   <data name="Menu.CurrencyStrength" xml:space="preserve">
     <value>Currency Strength</value>
   </data>
+  <data name="Menu.AdminDashboard" xml:space="preserve">
+    <value>Admin Dashboard</value>
+  </data>
   <data name="Menu.Educate" xml:space="preserve">
     <value>Educate</value>
   </data>
@@ -99,6 +105,15 @@
   <data name="Menu.Pricing" xml:space="preserve">
     <value>Pricing</value>
   </data>
+  <data name="Profile.MenuAriaLabel" xml:space="preserve">
+    <value>Open user menu</value>
+  </data>
+  <data name="Profile.UserFallback" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="Profile.WelcomeUser" xml:space="preserve">
+    <value>Welcome {0}</value>
+  </data>
   <data name="Menu.Serve" xml:space="preserve">
     <value>Serve</value>
   </data>
@@ -107,6 +122,9 @@
   </data>
   <data name="Menu.SignUp" xml:space="preserve">
     <value>Sign Up</value>
+  </data>
+  <data name="Menu.TradingDashboard" xml:space="preserve">
+    <value>Trading Dashboard</value>
   </data>
   <data name="Menu.WeeklyReview" xml:space="preserve">
     <value>Weekly Review</value>

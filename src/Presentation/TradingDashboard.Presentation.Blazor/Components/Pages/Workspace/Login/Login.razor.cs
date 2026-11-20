@@ -1,14 +1,18 @@
 using System.Net.Http.Json;
 using System.Text.Json;
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Localization;
 using MudBlazor;
 using TradingDashboard.Presentation.Blazor.Services;
+using TradingDashboard.Presentation.Common.Resources.Components.Pages.Workspace.Login;
 using UserManagementContracts = TradingDashboard.Presentation.Blazor.Contracts.UserManagement.Generated;
 
 namespace TradingDashboard.Presentation.Blazor.Components.Pages.Workspace.Login;
 
-public partial class Login
+public partial class Login : IDisposable
 {
+    private const string EmailNotVerifiedErrorCode = "EMAIL_NOT_VERIFIED";
+
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         PropertyNameCaseInsensitive = true
@@ -32,6 +36,9 @@ public partial class Login
     [Inject]
     private PortalNavigationService PortalNavigation { get; set; } = default!;
 
+    [Inject]
+    private IStringLocalizer<LoginResource> L { get; set; } = default!;
+
     private readonly SignInFormModel _signInModel = new();
     private readonly SignUpFormModel _signUpModel = new();
     private MudForm? _signInForm;
@@ -41,6 +48,28 @@ public partial class Login
     private string? _errorMessage;
     private UserManagementContracts.AuthTokenResult? _authResult;
     private UserManagementContracts.MeResponse? _meResult;
+    private bool _canSendActivationEmail;
+
+    private string AuthenticatedDisplayName =>
+        _meResult?.Username
+        ?? AuthSession.Username
+        ?? _meResult?.Email
+        ?? AuthSession.Email
+        ?? L["Authenticated.FallbackUser"].Value;
+
+    private string AuthenticatedEmail =>
+        _meResult?.Email
+        ?? AuthSession.Email
+        ?? L["Authenticated.EmptyValue"].Value;
+
+    private string AuthenticatedRole =>
+        _meResult?.Role
+        ?? AuthSession.Role
+        ?? L["Authenticated.EmptyValue"].Value;
+
+    private bool CanOpenAdminDashboard => PortalNavigation.CanAccessAdmin(_meResult?.Role ?? AuthSession.Role);
+
+    private bool CanOpenTradingDashboard => PortalNavigation.CanAccessTradingPanel(_meResult?.Role ?? AuthSession.Role);
 
     private bool IsSignInDisabled =>
         _isSubmitting
@@ -52,6 +81,14 @@ public partial class Login
         || string.IsNullOrWhiteSpace(_signUpModel.Username)
         || string.IsNullOrWhiteSpace(_signUpModel.Email)
         || string.IsNullOrWhiteSpace(_signUpModel.Password);
+
+    private bool IsIdentityActionDisabled =>
+        _isSubmitting || string.IsNullOrWhiteSpace(_signInModel.Identity);
+
+    protected override void OnInitialized()
+    {
+        AuthSession.Changed += OnAuthSessionChanged;
+    }
 
     protected override void OnParametersSet()
     {
@@ -104,6 +141,7 @@ public partial class Login
         _isSubmitting = true;
         _errorMessage = null;
         _meResult = null;
+        _canSendActivationEmail = false;
 
         try
         {
@@ -113,7 +151,8 @@ public partial class Login
 
             if (!response.IsSuccessStatusCode)
             {
-                _errorMessage = ExtractError(response, content);
+                _errorMessage = ExtractError(response, content, out var errorCode);
+                _canSendActivationEmail = string.Equals(errorCode, EmailNotVerifiedErrorCode, StringComparison.OrdinalIgnoreCase);
                 Snackbar.Add(_errorMessage, Severity.Error);
                 _authResult = null;
                 AuthSession.Clear();
@@ -133,7 +172,7 @@ public partial class Login
             _authResult = authResult;
             if (string.IsNullOrWhiteSpace(authResult.AccessToken))
             {
-                _errorMessage = "Authentication response does not contain access token.";
+                _errorMessage = L["Errors.MissingAccessToken"].Value;
                 Snackbar.Add(_errorMessage, Severity.Error);
                 _authResult = null;
                 AuthSession.Clear();
@@ -142,13 +181,12 @@ public partial class Login
 
             AuthSession.SetAuthenticatedUser(authResult);
 
-            Snackbar.Add("Authentication succeeded.", Severity.Success);
+            Snackbar.Add(L["Messages.AuthenticationSucceeded"].Value, Severity.Success);
             await LoadCurrentUserAsync();
-            NavigateToAuthorizedPortal();
         }
         catch (Exception ex)
         {
-            _errorMessage = $"Authentication request failed. {ex.Message}";
+            _errorMessage = L["Errors.AuthenticationFailedWithMessage", ex.Message].Value;
             Snackbar.Add(_errorMessage, Severity.Error);
             _authResult = null;
             AuthSession.Clear();
@@ -180,19 +218,100 @@ public partial class Login
         _meResult = await response.Content.ReadFromJsonAsync<UserManagementContracts.MeResponse>();
     }
 
-    private static string ExtractError(HttpResponseMessage response, string content)
+    private Task LogoutAsync()
+    {
+        _authResult = null;
+        _meResult = null;
+        _errorMessage = null;
+        _canSendActivationEmail = false;
+        _activeTabIndex = 0;
+        AuthSession.Clear();
+        return Task.CompletedTask;
+    }
+
+    private async Task ForgotPasswordAsync()
+    {
+        await SubmitIdentityActionAsync(
+            RoutePaths.Api.Login.ForgotPassword,
+            new UserManagementContracts.ForgotPasswordRequest
+            {
+                Identity = GetTrimmedIdentity()
+            },
+            L["Messages.ForgotPasswordSubmitted"].Value);
+    }
+
+    private async Task SendActivationEmailAsync()
+    {
+        var succeeded = await SubmitIdentityActionAsync(
+            RoutePaths.Api.Login.ResendActivationEmail,
+            new UserManagementContracts.ResendActivationEmailRequest
+            {
+                Identity = GetTrimmedIdentity()
+            },
+            L["Messages.ActivationEmailSubmitted"].Value);
+
+        if (succeeded)
+        {
+            _canSendActivationEmail = false;
+        }
+    }
+
+    private async Task<bool> SubmitIdentityActionAsync(string route, object payload, string fallbackSuccessMessage)
+    {
+        if (string.IsNullOrWhiteSpace(GetTrimmedIdentity()))
+        {
+            Snackbar.Add(L["Validation.IdentityRequiredForAction"].Value, Severity.Warning);
+            return false;
+        }
+
+        _activeTabIndex = 0;
+        _isSubmitting = true;
+
+        try
+        {
+            var client = HttpClientFactory.CreateClient(HttpClientNames.ApiLogin);
+            var response = await client.PostAsJsonAsync(route, payload);
+            var content = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                _errorMessage = ExtractError(response, content, out var errorCode);
+                _canSendActivationEmail = string.Equals(errorCode, EmailNotVerifiedErrorCode, StringComparison.OrdinalIgnoreCase);
+                Snackbar.Add(_errorMessage, Severity.Error);
+                return false;
+            }
+
+            _errorMessage = null;
+            var actionResponse = DeserializeJson<UserManagementContracts.AuthActionResponse>(content);
+            Snackbar.Add(actionResponse?.Message ?? fallbackSuccessMessage, Severity.Success);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = L["Errors.ActionFailedWithMessage", ex.Message].Value;
+            Snackbar.Add(_errorMessage, Severity.Error);
+            return false;
+        }
+        finally
+        {
+            _isSubmitting = false;
+        }
+    }
+
+    private string ExtractError(HttpResponseMessage response, string content, out string? errorCode)
     {
         var payload = DeserializeJson<UserManagementContracts.ApiErrorResponse>(content);
         if (payload is null)
         {
-            return string.IsNullOrWhiteSpace(content)
-                ? $"Request failed with status {(int)response.StatusCode}."
-                : $"Request failed with status {(int)response.StatusCode}.";
+            errorCode = null;
+            return L["Errors.RequestFailedWithStatus", (int)response.StatusCode].Value;
         }
+
+        errorCode = payload.ErrorCode;
 
         return payload.Errors is { Count: > 0 }
             ? string.Join(" | ", payload.Errors)
-            : payload.Message ?? $"Request failed with status {(int)response.StatusCode}.";
+            : payload.Message ?? L["Errors.RequestFailedWithStatus", (int)response.StatusCode].Value;
     }
 
     private static T? DeserializeJson<T>(string content)
@@ -212,23 +331,43 @@ public partial class Login
         }
     }
 
-    private static string BuildInvalidSuccessPayloadMessage(HttpResponseMessage response, string content)
+    private string BuildInvalidSuccessPayloadMessage(HttpResponseMessage response, string content)
     {
         if (string.IsNullOrWhiteSpace(content))
         {
-            return $"Authentication response is empty (status {(int)response.StatusCode}).";
+            return L["Errors.EmptySuccessPayloadWithStatus", (int)response.StatusCode].Value;
         }
 
         var mediaType = response.Content.Headers.ContentType?.MediaType;
         return string.IsNullOrWhiteSpace(mediaType)
-            ? "Authentication response is not valid JSON."
-            : $"Authentication response is not valid JSON (content-type: {mediaType}).";
+            ? L["Errors.InvalidSuccessPayload"].Value
+            : L["Errors.InvalidSuccessPayloadWithMediaType", mediaType].Value;
     }
 
-    private void NavigateToAuthorizedPortal()
+    private string GetTrimmedIdentity()
     {
-        var role = _meResult?.Role ?? _authResult?.Role ?? AuthSession.Role;
-        var targetRoute = PortalNavigation.ResolvePostLoginRoute(ReturnUrl, role);
-        NavigationManager.NavigateTo(targetRoute);
+        return _signInModel.Identity.Trim();
+    }
+
+    private void OnAuthSessionChanged()
+    {
+        _ = InvokeAsync(async () =>
+        {
+            if (AuthSession.IsAuthenticated && AuthSession.IsHydrated)
+            {
+                await LoadCurrentUserAsync();
+            }
+            else if (!AuthSession.IsAuthenticated)
+            {
+                _meResult = null;
+            }
+
+            StateHasChanged();
+        });
+    }
+
+    public void Dispose()
+    {
+        AuthSession.Changed -= OnAuthSessionChanged;
     }
 }

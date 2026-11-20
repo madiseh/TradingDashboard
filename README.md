@@ -15,7 +15,7 @@ Trading Dashboard is a multi-layered application following Clean Architecture pr
 
 ### Prerequisites
 
-- [.NET 9.0 SDK](https://dotnet.microsoft.com/download) or later
+- [.NET 10.0 SDK](https://dotnet.microsoft.com/download) or later
 - [Visual Studio 2022](https://visualstudio.microsoft.com/) or [Visual Studio Code](https://code.visualstudio.com/)
 - .NET MAUI workloads for `android`, `ios`, and `maui-windows`
 - Redis (for caching)
@@ -45,7 +45,7 @@ Trading Dashboard is a multi-layered application following Clean Architecture pr
 
 5. **Run the MAUI Hybrid App**
    ```bash
-   dotnet build src/Presentation/TradingDashboard.Presentation.MauiHybrid -f net9.0-windows10.0.19041.0
+   dotnet build src/Presentation/TradingDashboard.Presentation.MauiHybrid -f net10.0-windows10.0.19041.0
    ```
 
    For Android emulator usage, the MAUI host reads `AndroidEmulatorBaseUrl` values from `src/Presentation/TradingDashboard.Presentation.MauiHybrid/appsettings.json`.

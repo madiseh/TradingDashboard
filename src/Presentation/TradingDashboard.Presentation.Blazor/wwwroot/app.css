@@ -575,6 +575,55 @@ html[lang^="fa"] .td-navbar-brand__name {
     background-color: #1d4f97;
 }
 
+.td-user-menu {
+    display: inline-flex;
+}
+
+.td-user-menu__trigger {
+    display: inline-flex;
+    align-items: center;
+    min-width: 220px;
+    min-height: 56px;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 20px;
+    border: 1px solid #3c72c4;
+    border-radius: 28px;
+    color: #15305a;
+    background: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.td-user-menu__trigger:hover,
+.td-user-menu__trigger:focus {
+    color: #15305a;
+    background: #fff;
+    border-color: #2660b5;
+    box-shadow: 0 0 0 3px rgba(38, 96, 181, 0.08);
+}
+
+.td-user-menu__trigger .td-user-menu__welcome,
+.td-user-menu__trigger .td-user-menu__chevron {
+    color: #15305a;
+    font-weight: 600;
+}
+
+.td-user-menu__welcome {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+}
+
+.td-user-menu__chevron {
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.td-user-menu .mud-menu-item {
+    font-weight: 600;
+}
+
 .td-login-overview {
     border-radius: 28px;
     background: linear-gradient(145deg, #0f2642 0%, #1c416e 100%);
@@ -583,6 +632,17 @@ html[lang^="fa"] .td-navbar-brand__name {
 
 .td-login-panel {
     border-radius: 28px;
+}
+
+.td-login-panel__summary {
+    border-radius: 22px;
+    background: linear-gradient(180deg, #f9fbff 0%, #f2f7ff 100%);
+}
+
+.td-login-panel__actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 .td-login-role-grid {
@@ -651,6 +711,14 @@ html[lang^="fa"] .td-navbar-brand__name {
 
     .td-auth-actions {
         display: none;
+    }
+
+    .td-user-menu {
+        display: none;
+    }
+
+    .td-login-panel__actions > * {
+        width: 100%;
     }
 
     .td-cot-panel {

@@ -12,6 +12,7 @@ public sealed class CotCollectorOptions
     public bool RunOnStartup { get; set; } = true;
     public int IntervalMinutes { get; set; } = 10;
     public CotCollectorModeOptions Normal { get; set; } = new();
+    public CotCollectorModeOptions Disaggregated { get; set; } = new();
     public CotCollectorModeOptions Legacy { get; set; } = new();
 }
 
