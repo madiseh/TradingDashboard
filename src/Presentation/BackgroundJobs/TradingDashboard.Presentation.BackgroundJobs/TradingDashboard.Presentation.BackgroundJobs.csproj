@@ -17,6 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Features\Cot\TradingDashboard.Features.Cot.Infrastructure\TradingDashboard.Features.Cot.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Implementation\TradingDashboard.Features.Infrastructure\TradingDashboard.Features.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

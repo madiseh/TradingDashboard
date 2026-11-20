@@ -19,12 +19,10 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <CotApiProjectPath>$(MSBuildProjectDirectory)\..\..\Features\Cot\TradingDashboard.Features.Cot.Presentation.Api\TradingDashboard.Features.Cot.Presentation.Api.csproj</CotApiProjectPath>
-    <CotApiAssemblyPath>$(MSBuildProjectDirectory)\..\..\Features\Cot\TradingDashboard.Features.Cot.Presentation.Api\bin\$(Configuration)\$(TradingDashboardTargetFramework)\TradingDashboard.Features.Cot.Presentation.Api.dll</CotApiAssemblyPath>
+    <ApiProjectPath>$(MSBuildProjectDirectory)\..\TradingDashboard.Presentation.Api\TradingDashboard.Presentation.Api.csproj</ApiProjectPath>
+    <ApiAssemblyPath>$(MSBuildProjectDirectory)\..\TradingDashboard.Presentation.Api\bin\$(Configuration)\$(TradingDashboardTargetFramework)\TradingDashboard.Features.UserManagement.Presentation.Api.dll</ApiAssemblyPath>
     <CotOpenApiPath>$(MSBuildProjectDirectory)\OpenApi\cot.v1.json</CotOpenApiPath>
 
-    <UserManagementApiProjectPath>$(MSBuildProjectDirectory)\..\..\Features\UserManagement\TradingDashboard.Features.UserManagement.Presentation.Api\TradingDashboard.Features.UserManagement.Presentation.Api.csproj</UserManagementApiProjectPath>
-    <UserManagementApiAssemblyPath>$(MSBuildProjectDirectory)\..\..\Features\UserManagement\TradingDashboard.Features.UserManagement.Presentation.Api\bin\$(Configuration)\$(TradingDashboardTargetFramework)\TradingDashboard.Features.UserManagement.Presentation.Api.dll</UserManagementApiAssemblyPath>
     <UserManagementOpenApiPath>$(MSBuildProjectDirectory)\OpenApi\user-management.v1.json</UserManagementOpenApiPath>
     <ContractsGeneratorProjectPath>$(MSBuildProjectDirectory)\..\..\Tools\TradingDashboard.Tools.OpenApiContractsGenerator\TradingDashboard.Tools.OpenApiContractsGenerator.csproj</ContractsGeneratorProjectPath>
   </PropertyGroup>
@@ -35,13 +33,19 @@
     <MakeDir Directories="$(MSBuildProjectDirectory)\Contracts\UserManagement\Generated" />
     <MakeDir Directories="$(MSBuildProjectDirectory)\Contracts\Cot\Owned" />
 
-    <Exec Command="dotnet build &quot;$(CotApiProjectPath)&quot; -c $(Configuration) -m:1 --nologo --verbosity:minimal" />
-    <Exec Command="dotnet build &quot;$(UserManagementApiProjectPath)&quot; -c $(Configuration) -m:1 --nologo --verbosity:minimal" />
-    <Exec Command="$(NSwagExe_Net100) aspnetcore2openapi /project:&quot;$(CotApiProjectPath)&quot; /documentName:v1 /configuration:$(Configuration) /targetFramework:$(TradingDashboardTargetFramework) /noBuild:true /aspNetCoreEnvironment:Development /output:&quot;$(CotOpenApiPath)&quot; /verbose:true" EnvironmentVariables="TD_SKIP_DB_INIT=true" />
-    <Exec Command="$(NSwagExe_Net100) aspnetcore2openapi /project:&quot;$(UserManagementApiProjectPath)&quot; /documentName:v1 /configuration:$(Configuration) /targetFramework:$(TradingDashboardTargetFramework) /noBuild:true /aspNetCoreEnvironment:Development /output:&quot;$(UserManagementOpenApiPath)&quot; /verbose:true" EnvironmentVariables="TD_SKIP_DB_INIT=true" />
+    <Exec Command="dotnet build &quot;$(ApiProjectPath)&quot; -c $(Configuration) -m:1 --nologo --verbosity:minimal" />
+    <Exec Command="$(NSwagExe_Net100) aspnetcore2openapi /project:&quot;$(ApiProjectPath)&quot; /documentName:v1 /configuration:$(Configuration) /targetFramework:$(TradingDashboardTargetFramework) /noBuild:true /aspNetCoreEnvironment:Development /output:&quot;$(CotOpenApiPath)&quot; /verbose:true" EnvironmentVariables="TD_SKIP_DB_INIT=true" />
+    <Copy SourceFiles="$(CotOpenApiPath)" DestinationFiles="$(UserManagementOpenApiPath)" />
 
-    <Exec Command="dotnet run --project &quot;$(ContractsGeneratorProjectPath)&quot; -- --openapi &quot;$(CotOpenApiPath)&quot; --output &quot;$(MSBuildProjectDirectory)\Contracts\Cot\Generated&quot; --namespace &quot;TradingDashboard.Presentation.Blazor.Contracts.Cot.Generated&quot;" />
-    <Exec Command="dotnet run --project &quot;$(ContractsGeneratorProjectPath)&quot; -- --openapi &quot;$(UserManagementOpenApiPath)&quot; --output &quot;$(MSBuildProjectDirectory)\Contracts\UserManagement\Generated&quot; --namespace &quot;TradingDashboard.Presentation.Blazor.Contracts.UserManagement.Generated&quot;" />
+    <Exec Command="dotnet run --project &quot;$(ContractsGeneratorProjectPath)&quot; -- --openapi &quot;$(CotOpenApiPath)&quot; --output &quot;$(MSBuildProjectDirectory)\Contracts\Cot\Generated&quot; --namespace &quot;TradingDashboard.Presentation.Blazor.Contracts.Cot.Generated&quot; --tag CotInstruments" />
+    <Exec Command="dotnet run --project &quot;$(ContractsGeneratorProjectPath)&quot; -- --openapi &quot;$(UserManagementOpenApiPath)&quot; --output &quot;$(MSBuildProjectDirectory)\Contracts\UserManagement\Generated&quot; --namespace &quot;TradingDashboard.Presentation.Blazor.Contracts.UserManagement.Generated&quot; --tag Auth --tag &quot;Admin Users&quot; --tag Subscriptions" />
+
+    <ItemGroup>
+      <Compile Remove="$(MSBuildProjectDirectory)\Contracts\Cot\Generated\**\*.cs" />
+      <Compile Remove="$(MSBuildProjectDirectory)\Contracts\UserManagement\Generated\**\*.cs" />
+      <Compile Include="$(MSBuildProjectDirectory)\Contracts\Cot\Generated\**\*.cs" />
+      <Compile Include="$(MSBuildProjectDirectory)\Contracts\UserManagement\Generated\**\*.cs" />
+    </ItemGroup>
   </Target>
 
 </Project>

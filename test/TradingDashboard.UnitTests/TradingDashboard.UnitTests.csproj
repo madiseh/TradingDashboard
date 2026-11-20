@@ -19,12 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Features\Cot\TradingDashboard.Features.Cot.Application\TradingDashboard.Features.Cot.Application.csproj" />
-    <ProjectReference Include="..\..\src\Features\Cot\TradingDashboard.Features.Cot.Domain\TradingDashboard.Features.Cot.Domain.csproj" />
-    <ProjectReference Include="..\..\src\Features\Cot\TradingDashboard.Features.Cot.Infrastructure\TradingDashboard.Features.Cot.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\src\Features\UserManagement\TradingDashboard.Features.UserManagement.Application\TradingDashboard.Features.UserManagement.Application.csproj" />
-    <ProjectReference Include="..\..\src\Features\UserManagement\TradingDashboard.Features.UserManagement.Domain\TradingDashboard.Features.UserManagement.Domain.csproj" />
-    <ProjectReference Include="..\..\src\Features\UserManagement\TradingDashboard.Features.UserManagement.Infrastructure\TradingDashboard.Features.UserManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Application\TradingDashboard.Features.Application\TradingDashboard.Features.Application.csproj" />
+    <ProjectReference Include="..\..\src\Domain\TradingDashboard.Features.Domain\TradingDashboard.Features.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Infrastructure\Implementation\TradingDashboard.Features.Infrastructure\TradingDashboard.Features.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

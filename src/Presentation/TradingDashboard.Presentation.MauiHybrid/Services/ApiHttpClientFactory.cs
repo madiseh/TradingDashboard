@@ -30,7 +30,17 @@ public sealed class ApiHttpClientFactory
             ? $"{clientName}:AndroidEmulatorBaseUrl"
             : $"{clientName}:BaseUrl";
 
-        var configuredUrl = _configuration[platformSpecificKey]
+        var sharedPlatformSpecificKey = DeviceInfo.Platform == DevicePlatform.Android
+            ? "Api:AndroidEmulatorBaseUrl"
+            : "Api:BaseUrl";
+        var loginPlatformSpecificKey = DeviceInfo.Platform == DevicePlatform.Android
+            ? $"{HttpClientNames.ApiLogin}:AndroidEmulatorBaseUrl"
+            : $"{HttpClientNames.ApiLogin}:BaseUrl";
+        var sharedUrl = _configuration[sharedPlatformSpecificKey]
+            ?? _configuration[loginPlatformSpecificKey];
+
+        var configuredUrl = sharedUrl
+            ?? _configuration[platformSpecificKey]
             ?? _configuration[$"{clientName}:BaseUrl"]
             ?? fallbackUrl;
 
